@@ -4,23 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/BOOKKEEPING.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/1_Test_Login.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configReader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="my code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,21 +33,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor": "Run",
-    "Python tests.Python tests in 1_Test_Login.py.executor": "Run",
-    "Python tests.Python tests in 2_Test_ClientSell.py.executor": "Run",
-    "Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor": "Run",
-    "Python.Client_SellPage.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 1_Test_Login.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\Test" />
@@ -67,7 +60,22 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit">
+  <component name="RunManager">
+    <configuration name="Python tests for 2_Test_ClientSell.Login" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="BOOKKEEPING" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;2_Test_ClientSell.Login&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -83,7 +91,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,11 +102,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_05_Add_New_Credit&quot;" />
+      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_05_Add_New_Invoice&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_Select_Bookkeeping.Login.test_01_Select_Bookkeeping_Process" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,15 +117,32 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_Select_Bookkeeping.Login.test_01_Select_Bookkeeping_Process&quot;" />
+      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_07_Add_New_Estimates&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="BOOKKEEPING" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_08_Add_New_Receipts&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit" />
         <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell" />
-        <item itemvalue="Python tests.Python tests for 2_Test_Select_Bookkeeping.Login.test_01_Select_Bookkeeping_Process" />
+        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice" />
+        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login" />
+        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts" />
+        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates" />
       </list>
     </recent_temporary>
   </component>
@@ -136,6 +161,19 @@
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
     </task>
+    <task id="LOCAL-00001" summary="my code">
+      <option name="closed" value="true" />
+      <created>1761921053978</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761921053978</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="my code" />
+    <option name="LAST_COMMIT_MESSAGE" value="my code" />
   </component>
 </project>

@@ -16,7 +16,7 @@ class loginPage:
         self.password_input = (By.ID, "Input_Password")
         self.sign_in_button = (By.ID, "login-submit")
 
-        self.click_on_menu = (By.XPATH, "(//button[@id='btn-menus-callout'])[1]")
+        self.click_on_menu = (By.XPATH, "//button[contains(@class,'Header-button') and @title='Modules']//i[@data-icon-name='Waffle']")
         self.click_bookkeeping_section = (By.XPATH, "(//span[normalize-space()='Bookkeeping'])[1]")
 
 
@@ -65,7 +65,7 @@ class loginPage:
             )
             click_bookkeeping.click()
             time.sleep(.2)
-            print("Test_3 :: click on bookkeeping section successfully.....!")
+            print("Test_3 : click on bookkeeping section successfully.....!")
             time.sleep(.2)
 
         except Exception as e:

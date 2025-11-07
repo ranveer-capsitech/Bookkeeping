@@ -1,6 +1,7 @@
 import py
 import pyautogui
 import self
+import random
 from faker import Faker
 import time
 from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
@@ -36,16 +37,16 @@ class ClientSell:
 
 #------------------------ WebElements of admin for Client sell.---------------------------------------------------------
 
-        self.click_for_go_to_client_section = (By.XPATH, "(//div[@class='ms-NavItemName navItemNameColumn-431'])[1]")
-        self.select_client = (By.XPATH, "(//a[normalize-space()='WEMBLEY LTD'])[1]")
-        self.click_input = (By.XPATH, "(//div[@class='ms-NavItemName navItemNameColumn-457'])[1]")
+
+        self.select_business_name = (By.XPATH, "(//a[normalize-space()='WEMBLEY LTD'])[1]")
+        self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
 
 #---------------------------------------------invoice-------------- ----------------------------------------------------
 
         self.invoice = (By.XPATH, "(//span[contains(text(),'Invoice')])[1]")
         self.select_customer = (By.XPATH, "//div[contains(text(),'Contact name')]")
-        self.select_item = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
+        self.click_item_for_invoice = (By.XPATH, "//div[contains(@class,'rs-placeholder') and normalize-space()='Select item']")
         self.table = (By.XPATH," (//div[contains(text(),'Tables')])[1]")
         self.loc_save_button = (By.XPATH,"//div[contains(@class,'modal-footer')]//button[.//span[normalize-space()='Save']]")
 
@@ -61,10 +62,33 @@ class ClientSell:
 
 #-------------------------------------------Estimates-------------------------------------------------------------------
 
-        self.estimates = (By.XPATH, "(//span[@class='ms-Pivot-text text-735'][normalize-space()='Estimates'])[1]")
+        self.estimates = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[3]/span[1]/span[1]/span[1]")
         self.add_estimates = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Estimate']")
         self.customer = (By.XPATH, "(//div[@id='react-select-2-placeholder'])[1]")
-        self.select_item = (By.XPATH, "(//div[@id='react-select-6-placeholder'])[1]")
+        self.select_item_estimate= (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
+        self.clicks_save_estimate = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+
+#-------------------------------------------------Receipts---------------------------------------------------------------
+
+        self.receipts = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[4]/span[1]/span[1]/span[1]")
+        self.add_receipts = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Receipt']")
+        self.select_receive_from = (By.XPATH, "//label[normalize-space()='Received from']/following::div[contains(@class,'rs-input-container')][1]")
+        self.select_amount = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
+        self.enter_amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@placeholder='amount'][1]")
+        self.save_receipts = (By.XPATH, "//button[.//span[normalize-space()='Save'] and not(contains(.,'Save & New'))]")
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,39 +98,26 @@ class ClientSell:
 
 #-----------------------------------------Methods-----------------------------------------------------------------------
 
-    def Go_for_client_section(self):
-            try:
-                WebDriverWait(self.driver, 10).until(
-                    EC.visibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
-                )
-                client_section = WebDriverWait(self.driver, 10).until(
-                    EC.visibility_of_element_located(self.click_for_go_to_client_section)
-                )
-                client_section.click()
-                time.sleep(.2)
-                print("Click on Client Section successfully....!!")
-            except Exception as e:
-                print(f"Error on click: {e}")
 
 
-    def Select_Client(self):
+    def Select_Business(self):
         try:
-            client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_client))
+            client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_business_name))
             time.sleep(.2)
             client.click()
             time.sleep(.2)
-            print("Click for select client  successfully....!!")
+            print("Select a business name successfully..... ")
         except Exception as e:
             print(f"Error on click:{e}")
 
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input))
+            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
-            print("Click on input successfully....!!")
+            print("Input drop down open successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
 
@@ -120,6 +131,8 @@ class ClientSell:
             print("Click on Sales successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
+
+
 
 #---------------------------------------methods for invoice ------------------------------------------------------------
 
@@ -154,11 +167,11 @@ class ClientSell:
 
 
 
-    def Select_item(self, value="test"):
+    def Select_item_sale(self, value="test"):
         d = self.driver
         w = self.wait
         container_el = w.until(
-            EC.visibility_of_element_located(self.select_item)
+            EC.visibility_of_element_located(self.click_item_for_invoice)
         )
         time.sleep(.4)
         container_el.click()
@@ -384,6 +397,188 @@ class ClientSell:
 
 
 #-----------------------------------------------Estimates---------------------------------------------------------------
+
+    def Select_Estimates(self):
+        try:
+            estimate = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.estimates))
+            time.sleep(.2)
+            estimate.click()
+            time.sleep(.2)
+            print("Click for select estimate  successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Add_Estimates(self):
+
+        try:
+            add_estimate = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.add_estimates))
+            time.sleep(.2)
+            add_estimate.click()
+            time.sleep(.2)
+
+            print("Click for add_estimates  successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Select_Customer_for_Estimate(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 15)
+
+            #  Click on the dropdown field
+            field = wait.until(EC.element_to_be_clickable((
+                By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
+            )))
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", field)
+            field.click()
+            time.sleep(0.5)
+
+            # Use keyboard to select first option
+            active = driver.switch_to.active_element
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.3)
+            active.send_keys(Keys.ENTER)
+            time.sleep(1)
+
+            print(" Customer selected successfully for Estimate!")
+
+        except Exception as e:
+            print(f" Could not select customer: {e}")
+
+
+
+    def Select_item(self, value="test"):
+        d = self.driver
+        w = self.wait
+        item = w.until(
+            EC.visibility_of_element_located(self.select_item_estimate)
+        )
+        time.sleep(.4)
+        item.click()
+        time.sleep(.4)
+
+        def focused_input():
+            return d.switch_to.active_element
+
+        for _ in range(2):
+            try:
+                focused_input().send_keys(Keys.ARROW_DOWN)
+                break
+            except (StaleElementReferenceException, ElementNotInteractableException):
+                time.sleep(0.2)
+
+        for _ in range(2):
+            try:
+                focused_input().send_keys(Keys.ENTER)
+                break
+            except (StaleElementReferenceException, ElementNotInteractableException):
+                time.sleep(0.4)
+
+
+    def Click_Save_Estimation(self):
+
+
+            wait = WebDriverWait(self.driver, 20)
+
+            try:
+
+                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+            except:
+                pass
+
+            save_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Save']/ancestor::button"))
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.4)
+            save_button.click()
+            time.sleep(0.4)
+            print(" Test case pass - Save estimate successfully.....!!")
+
+#---------------------------------------------------Receipts------------------------------------------------------
+
+
+    def Receipts(self):
+        try:
+            click_receipts = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.receipts))
+            time.sleep(.2)
+            click_receipts.click()
+            time.sleep(.2)
+            print("click on credit section successfully......!!")
+        except Exception as e:
+             print(f"Error on click:{e}")
+
+    def Add_Receipts(self):
+        #try:
+            add_receipts = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.select_receive_from))
+            time.sleep(.2)
+            add_receipts.click()
+            time.sleep(.2)
+            print("click for add new receipts successfully.....!! ")
+        # except Exception as e:
+        #     print(f"Error on click:{e}")
+
+    def Select_Amount(self):
+        #try:
+            amount = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_amount))
+            time.sleep(.2)
+            amount.click()
+            time.sleep(.2)
+            amount.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            print("Customer selected successfully....!!")
+
+        # except Exception as e:
+        #     print(f"Error on Click : {e}")
+
+
+    def Enter_Amount(self):
+        #try:
+            enter_a_amount = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_amount))
+            time.sleep(.2)
+            random_price = round(random.uniform(50, 999), 2)
+
+            #  Clear the field
+            enter_a_amount.send_keys(Keys.CONTROL, 'a')
+            enter_a_amount.send_keys(Keys.BACKSPACE)
+
+            #  Enter the random amount
+            enter_a_amount.send_keys(str(random_price))
+            enter_a_amount.send_keys(Keys.TAB)  # to trigger React blur event
+
+            print(f" Entered random price: £{random_price}")
+            time.sleep(0.5)
+        # except Exception as e:
+        #     print(f"Error on Click : {e}")
+
+
+
+    def Save_Receipt(self):
+
+
+            wait = WebDriverWait(self.driver, 20)
+
+            try:
+
+                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+            except:
+                pass
+
+            save_button = wait.until(
+            EC.element_to_be_clickable(self.save_receipts)
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.4)
+            save_button.click()
+            time.sleep(0.4)
+            print(" Test case pass - Save receipt successfully.....!!")
+
+
+
 
 
 
