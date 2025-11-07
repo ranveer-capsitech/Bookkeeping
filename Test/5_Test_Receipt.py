@@ -2,6 +2,8 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from Pages.Receipts_Page import Receipts
 from configReader import ConfigReader
 from Pages.Client_SellPage import ClientSell
 from Pages.LoginPage import loginPage
@@ -59,13 +61,12 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> Receipts")
 
 
-    def test_04_Go_Client_Sell(self):
-        client_section = ClientSell(driver=self.driver)
-        time.sleep(.2)
 
+    def test_08_Add_New_Receipts(self):
+        client_section = Receipts(driver=self.driver)
         client_section.Select_Business()
         time.sleep(5)
         client_section.Click_Input()
@@ -73,22 +74,19 @@ class Login(unittest.TestCase):
         client_section.Click_Sales()
         time.sleep(.2)
 
-
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice")
-
-    def test_05_Add_New_Invoice(self):
-        client_section = ClientSell(driver=self.driver)
-        client_section.Add_Invoice()
+        client_section.Click_Input()
         time.sleep(.2)
-        client_section.Select_Customer()
+        client_section.Click_Sales()
         time.sleep(.2)
-
-        client_section.Select_item_sale()
-        time.sleep(.5)
-
-        client_section.Click_Save()
-        time.sleep(2)
-        #client_section.Save_Invoice()
-        #time.sleep(.2)
-
-
+        client_section.Receipts()
+        time.sleep(.2)
+        client_section.Add_Receipts()
+        time.sleep(.2)
+        client_section.Select_Receipts_from()
+        time.sleep(.2)
+        # client_section.Select_Amount()
+        # time.sleep(.2)
+        client_section.Enter_Amount()
+        time.sleep(.2)
+        client_section.Save_Receipt()
+        time.sleep(.2)
