@@ -72,7 +72,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Sales()
         time.sleep(.2)
-        print("okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk--------------------------------1")
+
 
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice")
 
@@ -82,46 +82,20 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Customer()
         time.sleep(.2)
-        print("okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk--------------------------------2")
+
         client_section.Select_item_sale()
         time.sleep(.5)
-        print("okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk--------------------------------3")
 
         client_section.Click_Save()
-        time.sleep(.2)
-        client_section.Save_Invoice()
-        time.sleep(.2)
+        time.sleep(2)
+        #client_section.Save_Invoice()
+        #time.sleep(.2)
 
 
-    # @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice >> Credit Notes")
-    #
-    # def test_06_Add_New_Credit(self):
-    #     client_section = ClientSell(driver=self.driver)
-    #     client_section.Select_Client()
-    #     time.sleep(5)
-    #     client_section.Click_Input()
-    #     time.sleep(.2)
-    #     client_section.Click_Sales()
-    #     time.sleep(.2)
-    #     client_section.Click_Credit_Notes()
-    #     time.sleep(.2)
-    #     client_section.Add_Credit_Note()
-    #     time.sleep(.2)
-    #     client_section.Select_Customer_for_Credit_Note()
-    #     time.sleep(.2)
-    #     client_section.Invoice_ref()
-    #     time.sleep(.2)
-    #     client_section.Save_Credit_Notes()
-    #     time.sleep(.2)
-    #     client_section.Paid_From()
-    #     time.sleep(.2)
-    #     client_section.Save_Credit_Notes()
-    #     time.sleep(.2)
-    #     client_section.Paid_From()
-    #     time.sleep(.2)
-    #     client_section.Click_Save_Button()
-    #     time.sleep(.2)
-    #
+
+
+
+
     # @pytest.mark.description( f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice >> Estimates")
     #
     # def test_07_Add_New_Estimates(self):
