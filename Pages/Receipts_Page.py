@@ -15,7 +15,7 @@ random_last_name = fake.last_name()
 full_name = f"{random_first_name} {random_last_name}"
 date_time_value = datetime.now().strftime('%d/%m/%Y %I:%M %p')
 tomorrow_date = datetime.today() + timedelta(days=1)
-formatted_date = tomorrow_date.strftime("%d-%m-%y")  # Adjust format as needed
+formatted_date = tomorrow_date.strftime("%d-%m-%y")
 
 random_email = fake.email()
 random_email1 = fake.email()
@@ -127,7 +127,7 @@ class Receipts:
             print(f" Could not select customer: {e}")
 
     def Select_Amount(self):
-        #try:
+        try:
             amount = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_amount))
             time.sleep(.2)
             amount.click()
@@ -136,8 +136,8 @@ class Receipts:
             time.sleep(.2)
             print("Customer selected successfully....!!")
 
-        # except Exception as e:
-        #     print(f"Error on Click : {e}")
+        except Exception as e:
+            print(f"Error on Click : {e}")
 
 
     def Enter_Amount(self):
