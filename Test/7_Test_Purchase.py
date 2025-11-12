@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from Pages.PurchasePage import ClientPurchase
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+
 from Pages.LoginPage import loginPage
 import pytest
 
