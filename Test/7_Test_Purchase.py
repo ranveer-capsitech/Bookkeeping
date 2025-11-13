@@ -129,3 +129,30 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Save_PO()
         time.sleep(.2)
+
+    def test_10_Go_Payments(self):
+        client_section = ClientPurchase(driver=self.driver)
+        time.sleep(.2)
+        client_section.Select_Business()
+        time.sleep(3)
+        client_section.Click_Input()
+        time.sleep(.2)
+        client_section.Click_Purchases()
+        time.sleep(.5)
+        time.sleep(.2)
+
+        client_section.Payment_Section()
+        time.sleep(.2)
+        client_section.Click_Payment()
+        time.sleep(.2)
+        client_section.Paid_To_Supplier()
+        time.sleep(.2)
+        client_section.Select_Account()
+        time.sleep(.2)
+        client_section.Enter_Amount()
+        time.sleep(.2)
+        client_section.Save_payment()
+        time.sleep(.2)
+
+
+

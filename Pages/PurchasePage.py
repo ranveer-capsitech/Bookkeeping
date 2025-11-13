@@ -38,7 +38,7 @@ class ClientPurchase:
         self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_purchases = (By.XPATH, "(//div[contains(text(),'Purchases')])[1]")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------invoice-------------------------------------------------------------
 
         self.invoice = (By.XPATH, "//button[@aria-label='btnInvoice']")
         self.select_customer = (By.XPATH, "//div[contains(text(),'Contact name')]")
@@ -50,7 +50,7 @@ class ClientPurchase:
 
         self.loc_save_button = (By.XPATH, "//div[contains(@class,'modal')]//span[normalize-space(text())='Save']")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------Credit notes--------------------------------------------------------------
 
         self.click_credit_notes = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[2]/span[1]")
         self.credit_notes = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Credit note']")
@@ -61,7 +61,7 @@ class ClientPurchase:
 
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------PO---------------------------------------------------------------------
 
         self.purchase_orders = (By.XPATH, "//div[@role='tablist']//button[.//span[normalize-space()='Purchase orders']]")
         self.click_purchase_order = (By.XPATH, "//span[normalize-space(text())='Purchase order']")
@@ -70,9 +70,25 @@ class ClientPurchase:
                                        "(//table[contains(@class,'table')]//tr[1]//div[contains(@class,'rs-input-container')]//input)[1]")
         self.save_po = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
 
+#--------------------------------------------Pyments--------------------------------------------------------------------
+
+        self.payment = (By.XPATH,"//button[@role='tab' and .//span[normalize-space()='Payments']]")
+        self.click_payment = (By.XPATH, "//button[.//span[normalize-space()='Payment']]")
+
+        self.paid_to_supplier = (By.XPATH, "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-control')][1]")
+        self.account = (By.XPATH, "//label[normalize-space(text())='Account']/following::div[contains(@class,'rs-input-container')]//input")
+        #self.method = (By.XPATH, "//div[@id='react-select-17-placeholder']")
+        self.enter_amount = (By.XPATH, "//input[@name='availableAmount']")
+        self.save_payment = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
+
+#---------------------------------------------------------------------------------------------------------------
 
 
-    #--------------------------------------Method---------------------------------------------------------------------------
+
+
+    #--------------------------------------Method-----------------------------------------------------------------------
+
+
 
 
 
@@ -225,7 +241,7 @@ class ClientPurchase:
 
 
 
-    #-------------------------------------------------------------------------------------------------------------------
+    #--------------------------------------Credit_Notes---------------------------------------------------------------------
 
     def Click_Credit_Notes(self):
         try:
@@ -364,7 +380,7 @@ class ClientPurchase:
         time.sleep(1)
         print(" Clicked on save button for add credit note successfully!")
 
-#------------------------------------------Method PO --------------------------------------------------------------------
+#------------------------------------------Method of PO --------------------------------------------------------------------
 
 
     def Purchase_Order(self):
@@ -393,7 +409,7 @@ class ClientPurchase:
         d = self.driver
         w = WebDriverWait(d, 20)
 
-        # 1) Click the control container (opens/activates react-select)
+
         control = w.until(EC.element_to_be_clickable(
             self.select_contact_name # outer control
         ))
@@ -403,11 +419,11 @@ class ClientPurchase:
         except ElementClickInterceptedException:
             d.execute_script("arguments[0].click();", control)
 
-        # 2) Now focus the ACTUAL input (NOT the placeholder)
+
         rs_input = w.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "div.rs-input-container input")
         ))
-        # Sometimes element_to_be_clickable fails on zero-size input, but sending keys works.
+
         d.execute_script("arguments[0].scrollIntoView({block:'center'});", rs_input)
         try:
             rs_input.click()
@@ -415,8 +431,7 @@ class ClientPurchase:
             # Fallback: JS focus instead of click
             d.execute_script("arguments[0].focus();", rs_input)
 
-        # 3) Drive the menu with keyboard
-        #    ARROW_DOWN twice => 2nd option; adjust as needed
+
         time.sleep(0.2)
         rs_input.send_keys(Keys.ARROW_DOWN)
         time.sleep(0.2)
@@ -424,43 +439,23 @@ class ClientPurchase:
         time.sleep(0.2)
         rs_input.send_keys(Keys.ENTER)
 
-        # 4) Optional: assert a value is selected (react-select shows a single-value div)
+
         try:
             w.until(EC.visibility_of_element_located(
                 (By.CSS_SELECTOR, "div.rs-value-container .rs-single-value")
             ))
         except TimeoutException:
-            # Not fatal, but useful to see why selection didn’t stick
+
             d.save_screenshot("contact_select_debug.png")
             raise
 
         print("Customer selected successfully for PO")
 
-            # d = self.driver
-            # w = WebDriverWait(d, 20)
-            #
-            # # 1) Focus the react-select input (NOT the placeholder div)
-            # rs_input = w.until(EC.element_to_be_clickable(
-            #     self.select_contact_name
-            # ))
-            # d.execute_script("arguments[0].scrollIntoView({block:'center'});", rs_input)
-            # rs_input.click()
-            # time.sleep(0.5)
-            #
-            # rs_input.send_keys(Keys.ARROW_DOWN)
-            # time.sleep(0.5)
-            # rs_input.send_keys(Keys.ARROW_DOWN)
-            # time.sleep(0.5)
-            #
-            # rs_input.send_keys(Keys.ENTER)
-            # time.sleep(.2)
-            #
-            # print("Customer selected successfully for Credit Note!")
 
 
     def Click_Item_For_Invoice(self):
 
-            #try:
+            try:
                 driver = self.driver
                 wait = WebDriverWait(driver, 15)
 
@@ -479,8 +474,8 @@ class ClientPurchase:
                 time.sleep(0.5)
 
                 print("Invoice reference selected successfully!")
-            # except Exception as e:
-            #     print(f" Could not select customer: {e}")
+            except Exception as e:
+                print(f" Could not select customer: {e}")
 
     def Save_PO(self):
         driver = self.driver
@@ -498,6 +493,120 @@ class ClientPurchase:
 
         time.sleep(1)
         print(" Clicked on save button for add PO successfully!")
+
+
+#-----------------------------------------Payment-----------------------------------------------------------------------
+
+    def Payment_Section(self):
+
+        try:
+            payment_section = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(self.payment))
+            time.sleep(.2)
+            payment_section.click()
+            time.sleep(.2)
+            print("click on Payment section successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Payment(self):
+        try:
+            payment = WebDriverWait(self.driver, 20).until(
+                EC.visibility_of_element_located(self.click_payment))
+            time.sleep(.2)
+            payment.click()
+            time.sleep(.2)
+
+            print("Click on payment successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Paid_To_Supplier(self):
+        d = self.driver
+        w = WebDriverWait(d, 20)
+
+
+        control = w.until(EC.element_to_be_clickable((
+            By.XPATH,
+            "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-control')][1]"
+        )))
+        d.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
+        control.click()
+        time.sleep(0.2)
+
+
+        rs_input = w.until(EC.element_to_be_clickable((
+            By.XPATH,
+            "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-input-container')]//input"
+        )))
+        rs_input.click()
+        time.sleep(0.2)
+
+
+        rs_input.send_keys(Keys.ARROW_DOWN)
+
+        time.sleep(0.2)
+        rs_input.send_keys(Keys.ENTER)
+        time.sleep(0.5)
+
+        print("Select Supplier successfully!")
+
+
+    def Select_Account(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 15)
+
+
+            supplier_dropdown = wait.until(EC.element_to_be_clickable(self.account))
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", supplier_dropdown )
+            supplier_dropdown.click()
+            time.sleep(0.5)
+            active = driver.switch_to.active_element
+            time.sleep(.2)
+            active.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            print("Select Account type successfully!")
+        except Exception as e:
+            print(f" Could not select Account type: {e}")
+
+
+    def Enter_Amount(self):
+        try:
+            enter_amount = WebDriverWait(self.driver, 20).until(
+                EC.visibility_of_element_located(self.enter_amount))
+            time.sleep(.2)
+            enter_amount.send_keys("100")
+            time.sleep(.2)
+
+            print("Click on payment successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Save_payment(self):
+        try:
+          save_paymt = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.save_payment))
+          time.sleep(.2)
+          save_paymt.click()
+          time.sleep(.2)
+
+          print("Save payment successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
