@@ -81,14 +81,10 @@ class ClientPurchase:
         self.enter_amount = (By.XPATH, "//input[@name='availableAmount']")
         self.save_payment = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
 
-#---------------------------------------------------------------------------------------------------------------
-
 
 
 
     #--------------------------------------Method-----------------------------------------------------------------------
-
-
 
 
 
@@ -139,8 +135,6 @@ class ClientPurchase:
 
         except Exception as e:
             print(f"Error on Click : {e}")
-
-
 
 
 
@@ -278,7 +272,6 @@ class ClientPurchase:
             field.click()
             time.sleep(0.5)
 
-            # Use keyboard to select first option
             active = driver.switch_to.active_element
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.3)
