@@ -15,7 +15,9 @@ random_last_name = fake.last_name()
 full_name = f"{random_first_name} {random_last_name}"
 date_time_value = datetime.now().strftime('%d/%m/%Y %I:%M %p')
 tomorrow_date = datetime.today() + timedelta(days=1)
-formatted_date = tomorrow_date.strftime("%d-%m-%y")  # Adjust format as needed
+formatted_date = tomorrow_date.strftime("%d-%m-%y")
+
+random_item_name = fake.word().capitalize() + " " + fake.word().capitalize()
 
 random_email = fake.email()
 random_email1 = fake.email()
@@ -81,10 +83,19 @@ class ClientPurchase:
         self.enter_amount = (By.XPATH, "//input[@name='availableAmount']")
         self.save_payment = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
 
+#-------------------------------------------item------------------------------------------------------------------------
+
+        self.item = (By.XPATH, "//button[@role='tab' and .//span[normalize-space()='Items']]")
+        self.click_add_item = (By.XPATH, "//button[.//span[normalize-space()='Item']]")
+        self.enter_name = (By.XPATH, "//label[normalize-space()='Name']/following::input[1]")
+        self.pur_description = (By.XPATH, "//label[normalize-space()='Description']/following::input[1]")
+        self.sell_description = (By.XPATH, "//span[normalize-space()='For sales']/following::input[@type='text'][2]")
+        self.enter_pur_price = (By.XPATH, "//td[normalize-space()='Unit price']/following::input[@type='text'][1]")
+        self.enter_sell_price = (By.XPATH, "//div[@role='dialog']//td[normalize-space()='Unit price']/following::input[@type='text'][2]")
+        self.click_on_create = (By.XPATH, "//span[contains(text(),'Create')]")
 
 
-
-    #--------------------------------------Method-----------------------------------------------------------------------
+#------------------------------------------Method-----------------------------------------------------------------------
 
 
 
@@ -152,6 +163,8 @@ class ClientPurchase:
             time.sleep(0.5)
             dropdown_input.send_keys(Keys.ARROW_DOWN)  # second option
             time.sleep(0.5)
+            dropdown_input.send_keys(Keys.ARROW_DOWN)  # second option
+            time.sleep(0.5)
             dropdown_input.send_keys(Keys.ENTER)  # select it
             time.sleep(0.5)
 
@@ -201,6 +214,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on Click : {e}")
 
+
     def Save_Services(self):
         wait = WebDriverWait(self.driver, 20)
 
@@ -235,7 +249,7 @@ class ClientPurchase:
 
 
 
-    #--------------------------------------Credit_Notes---------------------------------------------------------------------
+    #--------------------------------------Credit_Notes-----------------------------------------------------------------
 
     def Click_Credit_Notes(self):
         try:
@@ -243,21 +257,23 @@ class ClientPurchase:
                 EC.element_to_be_clickable(self.click_credit_notes))
             time.sleep(.2)
             click_credit_notes.click()
-            time.sleep(.2)
+            time.sleep(.3)
             print("click on credit section successfully......!!")
         except Exception as e:
             print(f"Error on click:{e}")
+            time.sleep(.3)
 
     def Add_Credit_Note(self):
         try:
             credit = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.credit_notes))
-            time.sleep(.2)
+            time.sleep(.3)
             credit.click()
-            time.sleep(.2)
+            time.sleep(.3)
 
             print("Click for add credit  successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+            time.sleep(.3)
 
     def Select_Suppiler_for_Credit_Note(self):
         driver = self.driver
@@ -275,6 +291,8 @@ class ClientPurchase:
             active = driver.switch_to.active_element
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.3)
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(.3)
             active.send_keys(Keys.ENTER)
             time.sleep(1)
 
@@ -373,7 +391,7 @@ class ClientPurchase:
         time.sleep(1)
         print(" Clicked on save button for add credit note successfully!")
 
-#------------------------------------------Method of PO --------------------------------------------------------------------
+#------------------------------------------Method of PO ----------------------------------------------------------------
 
 
     def Purchase_Order(self):
@@ -411,7 +429,6 @@ class ClientPurchase:
             control.click()
         except ElementClickInterceptedException:
             d.execute_script("arguments[0].click();", control)
-
 
         rs_input = w.until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "div.rs-input-container input")
@@ -452,7 +469,7 @@ class ClientPurchase:
                 driver = self.driver
                 wait = WebDriverWait(driver, 15)
 
-                #  Click on the Invoice Ref dropdown
+
                 dropdown = wait.until(EC.element_to_be_clickable(self.click_item_for_invoice_po))
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
                 dropdown.click()
@@ -514,6 +531,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
     def Paid_To_Supplier(self):
         d = self.driver
         w = WebDriverWait(d, 20)
@@ -534,14 +552,11 @@ class ClientPurchase:
         )))
         rs_input.click()
         time.sleep(0.2)
-
-
         rs_input.send_keys(Keys.ARROW_DOWN)
 
         time.sleep(0.2)
         rs_input.send_keys(Keys.ENTER)
         time.sleep(0.5)
-
         print("Select Supplier successfully!")
 
 
@@ -585,10 +600,127 @@ class ClientPurchase:
 
           print("Save payment successfully....!!")
         except Exception as e:
-            print(f"Error on click:{e}")
+          print(f"Error on click:{e}")
 
 
 #-----------------------------------------------------------------------------------------------------------------------
+
+    def Item_Section(self):
+
+        try:
+            item_section = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(self.item))
+            time.sleep(.2)
+            item_section.click()
+            time.sleep(.2)
+            print("click on item section successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_on_item(self):
+        try:
+            click_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.click_add_item))
+            time.sleep(.2)
+            click_item.click()
+            time.sleep(.2)
+            print("Click on add item successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Enter_Name(self):
+        try:
+            name_el = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(self.enter_name)
+            )
+
+            # Create random name
+            random_item_name = fake.word().capitalize() + " " + fake.word().capitalize()
+
+            # Step 1: Clear using JS
+            self.driver.execute_script("arguments[0].value='';", name_el)
+            time.sleep(0.2)
+
+            # Step 2: Slow typing to avoid React override
+            for ch in random_item_name:
+                name_el.send_keys(ch)
+                time.sleep(0.1)
+
+            print(f"Enter name successfully: {random_item_name}")
+
+        except Exception as e:
+            print(f"Error on entering name: {e}")
+
+
+
+    def Enter_Description_For_Purchases(self):
+        try:
+            pur_des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.pur_description))
+            time.sleep(.2)
+            pur_des.send_keys("Only for testing")
+            time.sleep(.2)
+            print("Enter Description for purchases successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Enter_Description_For_Sell(self):
+        try:
+            pur_des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.sell_description))
+            time.sleep(.2)
+            pur_des.send_keys("Only for testing")
+            time.sleep(.2)
+            print("Enter Description for sell successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Enter_Unit_Price_Purchases(self):
+        try:
+            pur_price = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_pur_price))
+            time.sleep(.2)
+            pur_price.send_keys("100")
+            time.sleep(.2)
+            print("Enter Unit price for purchases successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Enter_Unit_Price_Sell(self):
+        try:
+            sell_price = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_sell_price))
+            time.sleep(.2)
+            sell_price.send_keys("100")
+            time.sleep(.2)
+            print("Enter Unit price for Sell successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Create_Item(self):
+        try:
+            item = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_on_create))
+            time.sleep(.2)
+            item.click()
+            time.sleep(.2)
+
+
+            update_message = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located(
+                    (By.XPATH, "//*[contains(text(),'Items created successfully')]"))
+            )
+
+            # Assert the presence of the success message
+            assert update_message, "Items created successfully"
+
+            print("Test Case  - Pass: Items created successfully.")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+
+
+
+
 
 
 
