@@ -162,7 +162,7 @@ class Login(unittest.TestCase):
         client_section.Save_payment()
         time.sleep(.2)
 
-    def test_10_Create_New_Item(self):
+    def test_11_Create_New_Item(self):
             client_section = ClientPurchase(driver=self.driver)
             time.sleep(.2)
             client_section.Select_Business()
