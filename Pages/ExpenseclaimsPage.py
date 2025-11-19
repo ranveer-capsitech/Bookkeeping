@@ -65,7 +65,7 @@ class Expenseclaims:
         self.enter_description_mileage = (By.XPATH,
                                   "//table[.//th[normalize-space()='Description']]   /tbody/tr[1]/td[     count(preceding-sibling::td) =     count(//th[normalize-space()='Description']/preceding-sibling::th)   ]//input[@type='text']")
         self.mileage = (By.XPATH, "//th[normalize-space()='Mileage (miles)']/following::input[@type='number'][1]")
-        self.rate = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[3]/table[1]/tbody[1]/tr[1]/td[5]/div[1]/div[1]/div[1]/div[1]/div[1]")
+        self.rate = (By.XPATH, "//th[normalize-space()='Rate']/following::div[contains(@class,'rs-input-container')][2]//input")
         self.save_mileages = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
 
 #------------------------------------------------------------------------------------------------------------------------
@@ -478,30 +478,7 @@ class Expenseclaims:
                 print(f"Error on click: {e}")
 
 
-        # driver = self.driver
-        #
-        # try:
-        #     wait = WebDriverWait(self.driver, 15)
-        #
-        #     type = wait.until(EC.element_to_be_clickable(self.engine_type))
-        #
-        #     self.driver.execute_script(
-        #         "arguments[0].scrollIntoView({block:'center'});", type
-        #     )
-        #     time.sleep(0.2)
-        #
-        #     type.click()
-        #     time.sleep(0.2)
-        #
-        #     active = driver.switch_to.active_element
-        #     active.send_keys(Keys.ARROW_DOWN)
-        #     time.sleep(0.2)
-        #     active.send_keys(Keys.ENTER)
-        #     time.sleep(0.2)
-        #
-        #     print("Engine type entered successfully....!!")
-        # except Exception as e:
-        #     print(f"Error on click:{e}")
+
 
 
     def Enter_Description_Mileage(self):
@@ -528,6 +505,8 @@ class Expenseclaims:
 
 
     def Select_Rate(self):
+        driver = self.driver
+
         try:
             wait = WebDriverWait(self.driver, 15)
 
@@ -541,15 +520,21 @@ class Expenseclaims:
             select_rate.click()
             time.sleep(0.2)
 
-            select_rate.send_keys(Keys.CONTROL, "a")
+            active = driver.switch_to.active_element
+            active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.2)
-            select_rate.send_keys(Keys.BACK_SPACE)
-            time.sleep(0.5)
-
-            select_rate.send_keys("100")
+            active.send_keys(Keys.ENTER)
             time.sleep(0.2)
 
-            print("Engine type entered successfully....!!")
+            # select_rate.send_keys(Keys.CONTROL, "a")
+            # time.sleep(0.2)
+            # select_rate.send_keys(Keys.BACK_SPACE)
+            # time.sleep(0.5)
+            #
+            # select_rate.send_keys("100")
+            # time.sleep(0.2)
+
+            print("Rate entered successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
 
