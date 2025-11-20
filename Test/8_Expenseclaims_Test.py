@@ -101,14 +101,14 @@ class Login(unittest.TestCase):
     def test_13_Mileage(self):
         client_section = Expenseclaims(driver=self.driver)
         time.sleep(.2)
-        client_section.Select_Business()
-        time.sleep(3)
-        client_section.Click_Input()
-        time.sleep(.2)
+        # client_section.Select_Business()
+        # time.sleep(3)
+        # client_section.Click_Input()
+        # time.sleep(.2)
 
-        client_section.Click_Expense_Claims()
-        time.sleep(.5)
-        time.sleep(.2)
+        # client_section.Click_Expense_Claims()
+        # time.sleep(.5)
+        # time.sleep(.2)
 
 
         client_section.Mileages_Section()

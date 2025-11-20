@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="my code">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="mileages_section">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Estimates_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Estimates_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/PurchasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/PurchasePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Receipts_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Receipts_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/1_Test_Login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/1_Login_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/3_Test_Credit_Notes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/4_Test_Estimates.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/5_Test_Receipt.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/6_Test_Item.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/6_Item_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/7_Test_Purchase.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/7_Purchase_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/8_Test_Expenseclaims.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/8_Expenseclaims_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,30 +41,58 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="34ByUCU6wV95l3jXp11hqaz9RyO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 1_Test_Login.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_06_Add_New_Credit.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_07_Go_Client_Purchase.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_09_Go_Purchase_PO.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor": "Run",
+    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor": "Run",
+    "Python tests.Python tests in 1_Login_Test.py.executor": "Run",
+    "Python tests.Python tests in 1_Test_Login.py.executor": "Run",
+    "Python tests.Python tests in 2_ClientSell_Test.py.executor": "Run",
+    "Python tests.Python tests in 2_Test_ClientSell.py.executor": "Run",
+    "Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor": "Run",
+    "Python tests.Python tests in 3_Credit_Notes_Test.py.executor": "Run",
+    "Python tests.Python tests in 3_Test_Credit_Notes.py.executor": "Run",
+    "Python tests.Python tests in 4_Estimates_Test.py.executor": "Run",
+    "Python tests.Python tests in 4_Test_Estimates.py.executor": "Run",
+    "Python tests.Python tests in 5_Receipt_Test.py.executor": "Run",
+    "Python tests.Python tests in 5_Test_Receipt.py.executor": "Run",
+    "Python tests.Python tests in 6_Test_Item.py.executor": "Run",
+    "Python tests.Python tests in 7_Purchase_Test.py.executor": "Run",
+    "Python tests.Python tests in 7_Test_Purchase.py.executor": "Run",
+    "Python.Client_SellPage.executor": "Run",
+    "Python.Item_Page.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\Test" />
@@ -61,7 +101,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Python tests for 2_Test_ClientSell.Login" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,11 +112,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login&quot;" />
+      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,11 +127,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_04_Go_Client_Sell&quot;" />
+      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_09_Go_Purchase_PO&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 7_Purchase_Test.Login.test_10_Go_Payments" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -102,11 +142,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_05_Add_New_Invoice&quot;" />
+      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_10_Go_Payments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -117,11 +157,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_07_Add_New_Estimates&quot;" />
+      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_11_Create_New_Item&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,17 +172,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;2_Test_ClientSell.Login.test_08_Add_New_Receipts&quot;" />
+      <option name="_new_target" value="&quot;8_Test_Expenseclaims.Login.test_13_Mileage&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell" />
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice" />
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login" />
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts" />
-        <item itemvalue="Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates" />
+        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote" />
+        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO" />
+        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item" />
+        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments" />
+        <item itemvalue="Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage" />
       </list>
     </recent_temporary>
   </component>
@@ -169,11 +209,124 @@
       <option name="project" value="LOCAL" />
       <updated>1761921053978</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1762496170025</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762496170025</updated>
+    </task>
+    <task id="LOCAL-00003" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1762496286476</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762496286476</updated>
+    </task>
+    <task id="LOCAL-00004" summary="When change UAT to Demo">
+      <option name="closed" value="true" />
+      <created>1762513169447</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762513169447</updated>
+    </task>
+    <task id="LOCAL-00005" summary="When change UAT to Demo">
+      <option name="closed" value="true" />
+      <created>1762517230376</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762517230376</updated>
+    </task>
+    <task id="LOCAL-00006" summary="When change UAT to Demo">
+      <option name="closed" value="true" />
+      <created>1762942231159</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942231159</updated>
+    </task>
+    <task id="LOCAL-00007" summary="When change UAT to Demo">
+      <option name="closed" value="true" />
+      <created>1762942271771</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1762942271771</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Automation of PO and CreditNote">
+      <option name="closed" value="true" />
+      <created>1762953213075</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1762953213075</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Automation of payment and item module">
+      <option name="closed" value="true" />
+      <created>1763033836911</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763033836911</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Automation of payment and item module">
+      <option name="closed" value="true" />
+      <created>1763034063083</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763034063083</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Automation of payment and item module">
+      <option name="closed" value="true" />
+      <created>1763454019883</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1763454019883</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Expense claims module">
+      <option name="closed" value="true" />
+      <created>1763557227619</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1763557227619</updated>
+    </task>
+    <task id="LOCAL-00013" summary="mileages_section">
+      <option name="closed" value="true" />
+      <created>1763559557958</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1763559557958</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="my code" />
-    <option name="LAST_COMMIT_MESSAGE" value="my code" />
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="When change UAT to Demo" />
+    <MESSAGE value="Automation of PO and CreditNote" />
+    <MESSAGE value="Automation of payment and item module" />
+    <MESSAGE value="Expense claims module" />
+    <MESSAGE value="mileages_section" />
+    <option name="LAST_COMMIT_MESSAGE" value="mileages_section" />
   </component>
 </project>

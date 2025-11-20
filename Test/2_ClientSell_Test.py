@@ -88,7 +88,7 @@ class Login(unittest.TestCase):
 
         client_section.Click_Save()
         time.sleep(2)
-        #client_section.Save_Invoice()
-        #time.sleep(.2)
+        client_section.Save_Invoice()
+        time.sleep(.2)
 
 

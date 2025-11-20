@@ -48,7 +48,7 @@ class loginPage:
             )
             click_menu.click()
             time.sleep(.2)
-            print("Test_2 :: click an active employee section successfully.....!")
+            print("Test case - 2: Pass: Click an active employee section successfully.....!")
             time.sleep(.2)
 
         except Exception as e:
@@ -65,7 +65,7 @@ class loginPage:
             )
             click_bookkeeping.click()
             time.sleep(.2)
-            print("Test_3 : click on bookkeeping section successfully.....!")
+            print("Test case - 3: Pass: Click an active employee section successfully.....!")
             time.sleep(.2)
 
         except Exception as e:

@@ -41,7 +41,7 @@ class Login(unittest.TestCase):
         time.sleep(1)
         loginpage.click_sign_in_button()
         time.sleep(1)
-        print("Login successfully....!!")
+        print("Test case - 1: Pass: Login successfully....!!")
         time.sleep(10)
 
 

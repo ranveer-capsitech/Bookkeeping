@@ -43,7 +43,10 @@ class ClientSell:
         self.select_customer = (By.XPATH, "//div[contains(text(),'Contact name')]")
         self.click_item_for_invoice = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
         self.table = (By.XPATH," (//div[contains(text(),'Tables')])[1]")
-        self.loc_save_button = (By.XPATH,"//span[normalize-space(text())='Save' and not(contains(text(),'&'))]")
+
+        self.save_invoice = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+
+        self.allocate_save_button = (By.XPATH,"//div[@role='dialog']//button[.//span[normalize-space()='Save']]")
 
 
 
@@ -165,7 +168,7 @@ class ClientSell:
                 pass
 
             save_button = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Save']/ancestor::button"))
+            EC.element_to_be_clickable(self.save_invoice)
             )
 
             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
@@ -180,7 +183,7 @@ class ClientSell:
         w = WebDriverWait(d, 20)
 
         save_btn = w.until(
-            EC.element_to_be_clickable(self.loc_save_button)
+            EC.element_to_be_clickable(self.allocate_save_button)
         )
 
         for attempt in range(2):
@@ -190,7 +193,7 @@ class ClientSell:
             except (ElementClickInterceptedException, StaleElementReferenceException):
                 time.sleep(0.3)
                 save_btn = w.until(
-                    EC.element_to_be_clickable(self.loc_save_button)
+                    EC.element_to_be_clickable(self.allocate_save_button)
                 )
 
         time.sleep(0.2)
@@ -207,7 +210,7 @@ class ClientSell:
             )
 
         assert update_message.is_displayed(), "Invoice created successfully"
-        print("Test Case - Pass: Invoice created successfully.")
+        print("Test Case -4 :  Pass: Invoice created successfully.")
 
 
 

@@ -90,9 +90,12 @@ class Login(unittest.TestCase):
         client_section.Save_Services()
         time.sleep(.2)
 
+
     def test_08_Go_Purchase_CreditNote(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
+
+
         # client_section.Select_Business()
         # time.sleep(3)
         # client_section.Click_Input()
@@ -115,14 +118,21 @@ class Login(unittest.TestCase):
         client_section.Click_Save_Button()
         time.sleep(.2)
 
+
+
     def test_09_Go_Purchase_PO(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
+
+
+
         # client_section.Select_Business()
         # time.sleep(3)
         # client_section.Click_Input()
         # time.sleep(.2)
         # client_section.Click_Purchases()
+
+
 
         time.sleep(.5)
         time.sleep(.2)
@@ -140,11 +150,14 @@ class Login(unittest.TestCase):
     def test_10_Go_Payments(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
+
+
         # client_section.Select_Business()
         # time.sleep(3)
         # client_section.Click_Input()
         # time.sleep(.2)
         # client_section.Click_Purchases()
+
 
         time.sleep(.5)
         time.sleep(.2)
@@ -162,15 +175,18 @@ class Login(unittest.TestCase):
         client_section.Save_payment()
         time.sleep(.2)
 
+
     def test_11_Create_New_Item(self):
             client_section = ClientPurchase(driver=self.driver)
             time.sleep(.2)
-            client_section.Select_Business()
-            time.sleep(3)
-            client_section.Click_Input()
-            time.sleep(.2)
-            client_section.Click_Purchases()
-            time.sleep(.2)
+
+            # client_section.Select_Business()
+            # time.sleep(3)
+            # client_section.Click_Input()
+            # time.sleep(.2)
+            # client_section.Click_Purchases()
+            # time.sleep(.2)
+
             time.sleep(.5)
             time.sleep(.2)
 

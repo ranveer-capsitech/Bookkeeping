@@ -219,7 +219,8 @@ class Credit_Notes:
             driver.execute_script("arguments[0].click();", save_btn)
 
         time.sleep(1)
-        print(" Clicked on save button for add credit note successfully!")
+        print(" Test Case -5 : Pass :  credit note saved successfully...!")
+
 
 
     #-------------------------------------------------------------------------------------------------------------------

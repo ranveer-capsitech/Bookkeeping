@@ -181,7 +181,7 @@ class Estimates:
             time.sleep(0.4)
             save_button.click()
             time.sleep(0.4)
-            print(" Test case pass - Save estimate successfully.....!!")
+            print(" Test Case -6 :  Pass: -  Estimate  saved successfully.....!!")
 
 
 

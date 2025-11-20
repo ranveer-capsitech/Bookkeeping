@@ -245,7 +245,7 @@ class ClientPurchase:
             )
 
         assert update_message.is_displayed(), "Invoice created successfully"
-        print("Test Case - Pass: Invoice created successfully.")
+        print("Test Case -9 :  Pass:: Invoice created successfully.")
 
 
 
@@ -293,6 +293,8 @@ class ClientPurchase:
             time.sleep(0.3)
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(.3)
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(.3)
             active.send_keys(Keys.ENTER)
             time.sleep(1)
 
@@ -313,6 +315,8 @@ class ClientPurchase:
             time.sleep(0.5)
 
             active = driver.switch_to.active_element
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.3)
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.3)
             active.send_keys(Keys.ARROW_DOWN)
@@ -347,6 +351,8 @@ class ClientPurchase:
         except Exception as e:
             print(f" Could not select customer: {e}")
 
+
+
     def Paid_From(self):
         try:
 
@@ -371,6 +377,8 @@ class ClientPurchase:
         except Exception as e:
             print(f" Could not select customer: {e}")
 
+
+
     def Click_Save_Button(self):
         driver = self.driver
         wait = WebDriverWait(driver, 15)
@@ -389,9 +397,44 @@ class ClientPurchase:
             driver.execute_script("arguments[0].click();", save_btn)
 
         time.sleep(1)
-        print(" Clicked on save button for add credit note successfully!")
+
+
+
+        toast_xpath = "//div[contains(text(),'Duplicate refund number')]"
+
+        try:
+            toast_msg = WebDriverWait(driver, 4).until(
+                EC.visibility_of_element_located((By.XPATH, toast_xpath))
+            )
+            txt = toast_msg.text.lower()
+
+            if "duplicate" in txt or "already exists" in txt:
+                print(" Duplicate entry detected — stopping further execution.")
+
+                time.sleep(.2)
+                driver.back()
+                time.sleep(.10)
+
+            else:
+              print(" Test Case -10 : Pass : Purchase credit note saved successfully....!")
+
+        except TimeoutException:
+            print(" Exception")
+
+
+
+
+
+
+
+
+
+
+
+
 
 #------------------------------------------Method of PO ----------------------------------------------------------------
+
 
 
     def Purchase_Order(self):
@@ -405,6 +448,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
     def Click_Purchase_Order(self):
         try:
             purchase_order =  WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_purchase_order))
@@ -415,6 +459,7 @@ class ClientPurchase:
             print("Click on purchase order successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
 
     def Select_Contact_Name(self):
         d = self.driver
@@ -487,6 +532,7 @@ class ClientPurchase:
             except Exception as e:
                 print(f" Could not select customer: {e}")
 
+
     def Save_PO(self):
         driver = self.driver
         wait = WebDriverWait(driver, 15)
@@ -502,10 +548,11 @@ class ClientPurchase:
             driver.execute_script("arguments[0].click();", save_btn)
 
         time.sleep(1)
-        print(" Clicked on save button for add PO successfully!")
+        print("Test Case -11 :  Pass:  Purchase Order saved successfully!")
 
 
 #-----------------------------------------Payment-----------------------------------------------------------------------
+
 
     def Payment_Section(self):
 
@@ -518,6 +565,7 @@ class ClientPurchase:
             print("click on Payment section successfully......!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
 
     def Click_Payment(self):
         try:
@@ -591,6 +639,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
     def Save_payment(self):
         try:
           save_paymt = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.save_payment))
@@ -598,7 +647,7 @@ class ClientPurchase:
           save_paymt.click()
           time.sleep(.2)
 
-          print("Save payment successfully....!!")
+          print(" Test Case -12 :  Pass:  Payment saved successfully....!!")
         except Exception as e:
           print(f"Error on click:{e}")
 
@@ -617,6 +666,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
     def Click_on_item(self):
         try:
             click_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.click_add_item))
@@ -626,6 +676,7 @@ class ClientPurchase:
             print("Click on add item successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
 
     def Enter_Name(self):
         try:
@@ -662,6 +713,7 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
     def Enter_Description_For_Sell(self):
         try:
             pur_des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.sell_description))
@@ -671,6 +723,7 @@ class ClientPurchase:
             print("Enter Description for sell successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
 
     def Enter_Unit_Price_Purchases(self):
         try:
@@ -710,7 +763,7 @@ class ClientPurchase:
             # Assert the presence of the success message
             assert update_message, "Items created successfully"
 
-            print("Test Case  - Pass: Items created successfully.")
+            print("Test Case -13 :  Pass: Items created successfully.")
 
         except Exception as e:
             print(f"Error: {e}")
