@@ -95,8 +95,10 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Vat()
         time.sleep(10)
-        client_section.Save_Expenseclaims()
+        client_section.Save_Expense()
         time.sleep(.2)
+
+        #client_section.Save()
 
     def test_13_Mileage(self):
         client_section = Expenseclaims(driver=self.driver)
@@ -129,3 +131,63 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Save_Mileage()
         time.sleep(.2)
+
+    def test_14_Reimbursement(self):
+        client_section = Expenseclaims(driver=self.driver)
+        time.sleep(.2)
+
+        # client_section.Select_Business()
+        # time.sleep(3)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        #
+        # client_section.Click_Expense_Claims()
+        # time.sleep(.5)
+        # time.sleep(.2)
+
+        client_section.Reimbursed_Section()
+        time.sleep(.2)
+        client_section.Click_Reimbursed()
+        time.sleep(.2)
+        client_section.Reimbursed_to()
+        time.sleep(.2)
+        client_section. Reimbursed_Account()
+        time.sleep(.2)
+        client_section. Enter_Amount()
+        time.sleep(.2)
+        client_section.Enter_Notes()
+        time.sleep(.2)
+        client_section.Save_Reimbursement()
+        time.sleep(.2)
+
+
+    def test_15_Refunds(self):
+        client_section = Expenseclaims(driver=self.driver)
+        time.sleep(.2)
+
+        # client_section.Select_Business()
+        # time.sleep(3)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        #
+        # client_section.Click_Expense_Claims()
+        # time.sleep(.5)
+        # time.sleep(.2)
+
+
+        client_section.Refunds_Section()
+        time.sleep(.2)
+        client_section.Click_Refunds()
+        time.sleep(.2)
+        client_section.Refund_from()
+        time.sleep(.2)
+        client_section.Select_Account()
+        time.sleep(.2)
+        client_section.Save_Refund()
+        time.sleep(.2)
+
+
+
+
+
+
