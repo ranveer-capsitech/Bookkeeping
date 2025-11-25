@@ -65,7 +65,7 @@ class loginPage:
             )
             click_bookkeeping.click()
             time.sleep(.2)
-            print("Test case - 3: Pass: Click an active employee section successfully.....!")
+            print("Test case - 3: Pass: Click an Bookkeeping section successfully.....!")
             time.sleep(.2)
 
         except Exception as e:
