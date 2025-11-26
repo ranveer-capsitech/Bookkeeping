@@ -239,7 +239,7 @@ class Asset:
 
                 # update_message = WebDriverWait(self.driver, 10).until(
                 #     EC.visibility_of_element_located(
-                #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
+                #         (By.XPATH, "//*[contains(normalize-space(), 'Asset saved successfully with number')]"))
                 # )
                 #
                 # # Assert the presence of the success message

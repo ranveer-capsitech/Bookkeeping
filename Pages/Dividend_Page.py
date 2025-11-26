@@ -67,6 +67,8 @@ class Dividend:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
+
     def Click_Input(self):
         try:
             input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
@@ -77,6 +79,8 @@ class Dividend:
             print("Input drop down open successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
+
 
     def Dividends_Section(self):
         try:
@@ -89,6 +93,8 @@ class Dividend:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
     def Click_Dividends(self):
         try:
             click_div = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_dividends))
@@ -99,8 +105,6 @@ class Dividend:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
-
-
 
 
     def Authorised_director(self):
@@ -209,6 +213,8 @@ class Dividend:
         except Exception as e:
             print(f"Error on Click Account: {e}")
 
+
+
     def Dividend_Per_Share(self, value="100"):
 
             try:
@@ -233,6 +239,8 @@ class Dividend:
             except Exception as e:
                 print(f"Error on Enter_Value: {e}")
                 time.sleep(0.2)
+
+
 
     def Enter_Payment_Date(self):
         driver = self.driver
