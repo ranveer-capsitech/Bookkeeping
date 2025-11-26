@@ -2,6 +2,8 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from Pages.Dividend_Page import Dividend
 from Pages.Journals_Page import Journals
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
@@ -57,39 +59,32 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Journals")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Dividend")
 
 
     def test_13_Expense_claims(self):
-        client_section = Journals(driver=self.driver)
+        client_section = Dividend(driver=self.driver)
         time.sleep(.2)
 
         client_section.Select_Business()
         time.sleep(3)
         client_section.Click_Input()
         time.sleep(.2)
-        client_section.Click_Journals()
-        time.sleep(.2)
-        client_section.Click_Journals_Button()
-        time.sleep(.2)
-        client_section.Journal_Reference()
-        time.sleep(.2)
-        client_section.Click_Journals_Button()
-        time.sleep(.3)
-        client_section.Select_Account()
-        time.sleep(.5)
-        client_section.Enter_Value_IN_Debit()
-        time.sleep(.5)
-        client_section.Select_Account()
+
+        client_section.Dividends_Section()
         time.sleep(.2)
 
-        client_section.Enter_Value_IN_Credit()
-        time.sleep(.3)
-        client_section.Save_Journal()
-        time.sleep(.3)
-
-
-
-
-
-
+        client_section.Click_Dividends()
+        time.sleep(.2)
+        client_section.Authorised_director()
+        time.sleep(.2)
+        client_section.Select_Type()
+        time.sleep(.2)
+        #client_section.Select_Class()
+        time.sleep(.2)
+        client_section.Dividend_Per_Share()
+        time.sleep(.2)
+        client_section.Enter_Payment_Date()
+        time.sleep(.2)
+        client_section.Save_Asset()
+        time.sleep(.2)

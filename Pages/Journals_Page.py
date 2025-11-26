@@ -1,7 +1,6 @@
 from faker import Faker
 import time
-from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
-    ElementClickInterceptedException
+
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -88,6 +87,7 @@ class Journals:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Click_Journals_Button(self):
         try:
             click_journal_btn = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_journal))
@@ -98,6 +98,7 @@ class Journals:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Journal_Reference(self):
         try:
@@ -154,10 +155,8 @@ class Journals:
                 EC.element_to_be_clickable(self.debit)
             )
 
-
             debit_input.click()
             time.sleep(0.3)
-
 
             debit_input.send_keys(Keys.CONTROL, "a")
             time.sleep(0.1)
@@ -175,8 +174,6 @@ class Journals:
             time.sleep(0.2)
 
 
-
-
     def Enter_Value_IN_Credit(self, value="100"):
         try:
 
@@ -184,16 +181,13 @@ class Journals:
                 EC.element_to_be_clickable(self.credit)
             )
 
-
             credit_input.click()
             time.sleep(0.3)
-
 
             credit_input.send_keys(Keys.CONTROL, "a")
             time.sleep(0.1)
             credit_input.send_keys(Keys.BACK_SPACE)  # or Keys.DELETE
             time.sleep(0.3)
-
 
             credit_input.send_keys(str(value))
             time.sleep(0.3)
@@ -204,16 +198,14 @@ class Journals:
             print(f"Error on Enter_Value_IN_Debit: {e}")
             time.sleep(0.2)
 
-    def Save_Journal(self):
 
+    def Save_Journal(self):
 
             try:
                 journal = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_journal))
                 time.sleep(.2)
                 journal.click()
                 time.sleep(.2)
-
-
 
                 print("Test Case  - Pass: Journal saved successfully.")
 
