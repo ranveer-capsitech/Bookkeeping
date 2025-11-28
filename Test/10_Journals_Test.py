@@ -60,7 +60,7 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Journals")
 
 
-    def test_13_Expense_claims(self):
+    def test_21_Expense_claims(self):
         client_section = Journals(driver=self.driver)
         time.sleep(.2)
 

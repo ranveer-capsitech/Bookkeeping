@@ -60,7 +60,7 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Asset")
 
 
-    def test_13_Expense_claims(self):
+    def test_19_Expense_claims(self):
         client_section = Asset(driver=self.driver)
         time.sleep(.2)
 
@@ -88,7 +88,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-    def test_14_Add_Disposed_asset(self):
+    def test_20_Add_Disposed_asset(self):
         client_section = Asset(driver=self.driver)
         time.sleep(.2)
 

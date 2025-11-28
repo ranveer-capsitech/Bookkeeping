@@ -65,7 +65,7 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on purchase")
 
 
-    def test_07_Go_Client_Purchase(self):
+    def test_10_Go_Client_Purchase(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
         client_section.Select_Business()
@@ -91,7 +91,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-    def test_08_Go_Purchase_CreditNote(self):
+    def test_11_Go_Purchase_CreditNote(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
 
@@ -120,7 +120,7 @@ class Login(unittest.TestCase):
 
 
 
-    def test_09_Go_Purchase_PO(self):
+    def test_12_Go_Purchase_PO(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
 
@@ -147,7 +147,7 @@ class Login(unittest.TestCase):
         client_section.Save_PO()
         time.sleep(.2)
 
-    def test_10_Go_Payments(self):
+    def test_13_Go_Payments(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
 
@@ -176,7 +176,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-    def test_11_Create_New_Item(self):
+    def test_14_Create_New_Item(self):
             client_section = ClientPurchase(driver=self.driver)
             time.sleep(.2)
 

@@ -136,7 +136,7 @@ class Credit_Notes:
             driver = self.driver
             wait = WebDriverWait(driver, 15)
 
-            #  Click on the Invoice Ref dropdown
+
             dropdown = wait.until(EC.element_to_be_clickable((self.invoice_ref_no)))
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
             dropdown.click()
@@ -197,7 +197,7 @@ class Credit_Notes:
             time.sleep(0.3)
             active.send_keys(Keys.ENTER)
 
-            print(" 'Paid from' selected successfully!")
+            print(" 'Paid from' selected successfully.....!")
         except Exception as e:
             print(f" Could not select customer: {e}")
 
@@ -205,7 +205,7 @@ class Credit_Notes:
         driver = self.driver
         wait = WebDriverWait(driver, 15)
 
-        #  This targets ONLY the Save button inside the modal (popup)
+
         save_btn = wait.until(EC.element_to_be_clickable((
             By.XPATH, "//div[@role='dialog']//button[@title='Save' and .//span[normalize-space()='Save']]"
         )))

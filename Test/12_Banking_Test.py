@@ -3,6 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+from Pages.BankingPage import Banking
 from Pages.Dividend_Page import Dividend
 from Pages.Journals_Page import Journals
 from configReader import ConfigReader
@@ -59,11 +60,11 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Dividend")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking")
 
 
-    def test_22_Expense_claims(self):
-        client_section = Dividend(driver=self.driver)
+    def test_23_Expense_claims(self):
+        client_section = Banking(driver=self.driver)
         time.sleep(.2)
 
         client_section.Select_Business()
@@ -71,20 +72,19 @@ class Login(unittest.TestCase):
         client_section.Click_Input()
         time.sleep(.2)
 
-        client_section.Dividends_Section()
+        client_section.Banking_Section()
+        time.sleep(.2)
+        client_section.Account()
         time.sleep(.2)
 
-        client_section.Click_Dividends()
+        client_section.Select_Bank()
         time.sleep(.2)
-        client_section.Authorised_director()
+
+        client_section.Enter_Account_no()
         time.sleep(.2)
-        client_section.Select_Type()
+        client_section.Sort_Code()
         time.sleep(.2)
-        #client_section.Select_Class()
+        client_section.Enter_IBAN()
         time.sleep(.2)
-        client_section.Dividend_Per_Share()
-        time.sleep(.2)
-        client_section.Enter_Payment_Date()
-        time.sleep(.2)
-        client_section.Save_Asset()
+        client_section.Save_Banking()
         time.sleep(.2)

@@ -66,7 +66,7 @@ class Login(unittest.TestCase):
 
 
 
-    def test_08_Add_New_Item(self):
+    def test_09_Add_New_Item(self):
         client_section = Items(driver=self.driver)
         client_section.Select_Business()
         time.sleep(.5)
