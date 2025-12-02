@@ -1,0 +1,8 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on  vat return section successfully....!!
+Click on  vat return section successfully....!!
+Select Obligation successfully...!!
+Test Case  - Pass: Vat saved successfully.

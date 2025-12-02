@@ -1,0 +1,9 @@
+Click on Mileages Section successfully....!!
+Click on Mileages successfully....!!
+Select directors successfully....!!
+Enter remark for mileage successfully....!!
+Engine type entered successfully....!!
+Enter Description successfully....!!
+Enter mileage successfully....!!
+Rate entered successfully....!!
+Test Case  - Pass: Mileage saved successfully.

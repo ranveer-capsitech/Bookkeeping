@@ -1,0 +1,14 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on item successfully....!!
+Click on add item icon successfully.....!!
+ Entered Name: Donna
+Enter name successfully.....!!
+Enter description successfully.....!!
+Enter description successfully.....!!
+Enter Unit Price Successfully......!!
+Enter Unit Price Successfully.....!!
+Test Case -8 :  Pass: Items created successfully.

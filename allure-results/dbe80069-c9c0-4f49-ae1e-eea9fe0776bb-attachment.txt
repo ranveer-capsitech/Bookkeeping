@@ -1,0 +1,8 @@
+click on item section successfully......!!
+Click on add item successfully....!!
+Enter name successfully: High Black
+Enter Description for purchases successfully....!!
+Enter Description for sell successfully....!!
+Enter Unit price for purchases successfully....!!
+Enter Unit price for Sell successfully....!!
+Test Case -13 :  Pass: Items created successfully.

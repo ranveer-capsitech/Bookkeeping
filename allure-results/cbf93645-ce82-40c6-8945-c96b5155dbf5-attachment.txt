@@ -1,0 +1,36 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on item successfully....!!
+Click on add item icon successfully.....!!
+ Entered Name: Laura
+Enter name successfully.....!!
+Enter description successfully.....!!
+Enter description successfully.....!!
+Enter Unit Price Successfully......!!
+Enter Unit Price Successfully.....!!
+Error: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7e74da235
+	0x7ff7e7232630
+	0x7ff7e6fc16dd
+	0x7ff7e701a27e
+	0x7ff7e701a58c
+	0x7ff7e706ed77
+	0x7ff7e706baba
+	0x7ff7e700b0ed
+	0x7ff7e700bf63
+	0x7ff7e7505d60
+	0x7ff7e74ffe8a
+	0x7ff7e7521005
+	0x7ff7e724d71e
+	0x7ff7e7254e1f
+	0x7ff7e723b7c4
+	0x7ff7e723b97f
+	0x7ff7e72218e8
+	0x7ff831c8e8d7
+	0x7ff832bac53c
+

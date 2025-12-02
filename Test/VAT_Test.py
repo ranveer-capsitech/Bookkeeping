@@ -78,5 +78,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Obligations()
         time.sleep(.2)
+
+
+
         client_section.Save_Vat()
         time.sleep(.2)

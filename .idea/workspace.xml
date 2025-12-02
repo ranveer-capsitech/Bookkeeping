@@ -4,23 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="mileages_section">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="VAT-Return">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Estimates_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Estimates_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/PurchasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/PurchasePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Receipts_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Receipts_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/1_Test_Login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/1_Login_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/2_Test_ClientSell.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/3_Test_Credit_Notes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/4_Test_Estimates.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/5_Test_Receipt.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/6_Test_Item.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/6_Item_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/7_Test_Purchase.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/7_Purchase_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/8_Test_Expenseclaims.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/8_Expenseclaims_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/VAT_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/VAT_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ranveer-capsitech&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ranveer-capsitech/Bookkeeping.git&quot;,
+    &quot;accountId&quot;: &quot;24f5fcc9-6c7e-4cfa-95fb-09bf1ec21a11&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -51,6 +51,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor": "Run",
     "Python tests.Python tests for 2_Test_ClientSell.Login.executor": "Run",
     "Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor": "Run",
     "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor": "Run",
@@ -68,8 +69,16 @@
     "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor": "Run",
     "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor": "Run",
     "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_12_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_14_Reimbursement.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds.executor": "Run",
     "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor": "Run",
     "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor": "Run",
+    "Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset.executor": "Run",
+    "Python tests.Python tests in 10_Journals_Test.py.executor": "Run",
+    "Python tests.Python tests in 11_Dividend_Test.py.executor": "Run",
+    "Python tests.Python tests in 12_Banking_Test.py.executor": "Run",
     "Python tests.Python tests in 1_Login_Test.py.executor": "Run",
     "Python tests.Python tests in 1_Test_Login.py.executor": "Run",
     "Python tests.Python tests in 2_ClientSell_Test.py.executor": "Run",
@@ -81,9 +90,13 @@
     "Python tests.Python tests in 4_Test_Estimates.py.executor": "Run",
     "Python tests.Python tests in 5_Receipt_Test.py.executor": "Run",
     "Python tests.Python tests in 5_Test_Receipt.py.executor": "Run",
+    "Python tests.Python tests in 6_Item_Test.py.executor": "Run",
     "Python tests.Python tests in 6_Test_Item.py.executor": "Run",
     "Python tests.Python tests in 7_Purchase_Test.py.executor": "Run",
     "Python tests.Python tests in 7_Test_Purchase.py.executor": "Run",
+    "Python tests.Python tests in 8_Expenseclaims_Test.py.executor": "Run",
+    "Python tests.Python tests in 9_Asset_Test.py.executor": "Run",
+    "Python tests.Python tests in VAT_Test.py.executor": "Run",
     "Python.Client_SellPage.executor": "Run",
     "Python.Item_Page.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -101,7 +114,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 10_Journals_Test.Login.test_13_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,11 +125,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote&quot;" />
+      <option name="_new_target" value="&quot;10_Journals_Test.Login.test_13_Expense_claims&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,11 +140,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_09_Go_Purchase_PO&quot;" />
+      <option name="_new_target" value="&quot;11_Dividend_Test.Login.test_13_Expense_claims&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 7_Purchase_Test.Login.test_10_Go_Payments" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -142,11 +155,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_10_Go_Payments&quot;" />
+      <option name="_new_target" value="&quot;8_Expenseclaims_Test.Login.test_15_Refunds&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 9_Asset_Test.Login.test_13_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -157,11 +170,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;7_Purchase_Test.Login.test_11_Create_New_Item&quot;" />
+      <option name="_new_target" value="&quot;9_Asset_Test.Login.test_13_Expense_claims&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -172,17 +185,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;8_Test_Expenseclaims.Login.test_13_Mileage&quot;" />
+      <option name="_new_target" value="&quot;9_Asset_Test.Login.test_14_Add_Disposed_asset&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote" />
-        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO" />
-        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item" />
-        <item itemvalue="Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments" />
-        <item itemvalue="Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage" />
+        <item itemvalue="Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" />
+        <item itemvalue="Python tests.Python tests for 10_Journals_Test.Login.test_13_Expense_claims" />
+        <item itemvalue="Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset" />
+        <item itemvalue="Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims" />
+        <item itemvalue="Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds" />
       </list>
     </recent_temporary>
   </component>
@@ -305,7 +318,55 @@
       <option name="project" value="LOCAL" />
       <updated>1763559557958</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="mileages_section">
+      <option name="closed" value="true" />
+      <created>1763631580754</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1763631580754</updated>
+    </task>
+    <task id="LOCAL-00015" summary="mileages_section">
+      <option name="closed" value="true" />
+      <created>1763712395222</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1763712395222</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Journals">
+      <option name="closed" value="true" />
+      <created>1764068169717</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1764068169717</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Dividend">
+      <option name="closed" value="true" />
+      <created>1764155922292</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1764155922292</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Dividend">
+      <option name="closed" value="true" />
+      <created>1764156179687</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1764156179687</updated>
+    </task>
+    <task id="LOCAL-00019" summary="VAT-Return">
+      <option name="closed" value="true" />
+      <created>1764316199251</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1764316199251</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,6 +388,9 @@
     <MESSAGE value="Automation of payment and item module" />
     <MESSAGE value="Expense claims module" />
     <MESSAGE value="mileages_section" />
-    <option name="LAST_COMMIT_MESSAGE" value="mileages_section" />
+    <MESSAGE value="Journals" />
+    <MESSAGE value="Dividend" />
+    <MESSAGE value="VAT-Return" />
+    <option name="LAST_COMMIT_MESSAGE" value="VAT-Return" />
   </component>
 </project>

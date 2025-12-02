@@ -1,0 +1,16 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Expense Claims successfully....!!
+Select directors successfully....!!
+Enter remark successfully..... 
+Enter bill number successfully..... 
+Enter Description successfully....!!
+Select account successfully..... 
+Base amount entered successfully....!!
+VAT selected successfully!
+Save button clicked!
+No popup detected → Checking for success message...
+Test Case - Pass: Expense saved successfully.

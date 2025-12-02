@@ -1,0 +1,36 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an active employee section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Expense Claims successfully....!!
+Select directors successfully....!!
+Enter remark successfully..... 
+Enter bill number successfully..... 
+Enter Description successfully....!!
+Select account successfully..... 
+Base amount entered successfully....!!
+VAT selected successfully!
+Error: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6c52fa235
+	0x7ff6c5052630
+	0x7ff6c4de16dd
+	0x7ff6c4e3a27e
+	0x7ff6c4e3a58c
+	0x7ff6c4e8ed77
+	0x7ff6c4e8baba
+	0x7ff6c4e2b0ed
+	0x7ff6c4e2bf63
+	0x7ff6c5325d60
+	0x7ff6c531fe8a
+	0x7ff6c5341005
+	0x7ff6c506d71e
+	0x7ff6c5074e1f
+	0x7ff6c505b7c4
+	0x7ff6c505b97f
+	0x7ff6c50418e8
+	0x7ffa4405e8d7
+	0x7ffa453ec53c
+

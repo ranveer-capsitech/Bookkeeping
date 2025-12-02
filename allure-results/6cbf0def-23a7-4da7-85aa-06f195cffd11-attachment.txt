@@ -1,0 +1,6 @@
+click on Payment section successfully......!!
+Click on payment successfully....!!
+Select Supplier successfully!
+Select Account type successfully!
+Click on payment successfully....!!
+ Test Case -12 :  Pass:  Payment saved successfully....!!

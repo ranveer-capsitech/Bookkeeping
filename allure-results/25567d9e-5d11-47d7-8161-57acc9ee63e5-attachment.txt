@@ -1,0 +1,42 @@
+Error on Click:Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff72ca1a235
+	0x7ff72c772630
+	0x7ff72c5014e5
+	0x7ff72c54a151
+	0x7ff72c582a12
+	0x7ff72c57d27c
+	0x7ff72c57c46a
+	0x7ff72c4cacb5
+	0x7ff72ca45d60
+	0x7ff72ca3fe8a
+	0x7ff72ca61005
+	0x7ff72c78d71e
+	0x7ff72c794e1f
+	0x7ff72c4c977b
+	0x7ff72cb945f8
+	0x7ff85b37e8d7
+	0x7ff85bbec53c
+
+Error on Click:Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff72ca1a235
+	0x7ff72c772630
+	0x7ff72c5014e5
+	0x7ff72c54a151
+	0x7ff72c582a12
+	0x7ff72c57d27c
+	0x7ff72c57c46a
+	0x7ff72c4cacb5
+	0x7ff72ca45d60
+	0x7ff72ca3fe8a
+	0x7ff72ca61005
+	0x7ff72c78d71e
+	0x7ff72c794e1f
+	0x7ff72c4c977b
+	0x7ff72cb945f8
+	0x7ff85b37e8d7
+	0x7ff85bbec53c
+

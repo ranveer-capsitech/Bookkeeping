@@ -1,0 +1,5 @@
+click on Purchase order section successfully......!!
+Click on purchase order successfully....!!
+Customer selected successfully for PO
+Invoice reference selected successfully!
+Test Case -11 :  Pass:  Purchase Order saved successfully!

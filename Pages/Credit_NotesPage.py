@@ -132,27 +132,73 @@ class Credit_Notes:
             print(f" Could not select customer: {e}")
 
     def Invoice_ref(self):
-        try:
-            driver = self.driver
-            wait = WebDriverWait(driver, 15)
+        driver = self.driver
+        wait = WebDriverWait(driver, 15)
+
+        retries = 3  # maximum attempts
+
+        for attempt in range(retries):
+            try:
+                # Locate dropdown
+                dropdown = wait.until(EC.element_to_be_clickable(self.invoice_ref_no))
+                driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
+                dropdown.click()
+                time.sleep(0.4)
+
+                # Select next option
+                active = driver.switch_to.active_element
+                active.send_keys(Keys.ARROW_DOWN)
+                time.sleep(0.2)
+                active.send_keys(Keys.ARROW_DOWN)
+                time.sleep(0.2)
+                active.send_keys(Keys.ENTER)
+                time.sleep(0.5)
+
+                # ✔ CHECK SAVE BUTTON ENABLED OR NOT
+                save_button = wait.until(EC.presence_of_element_located(self.clicks_save))
+
+                is_enabled = save_button.is_enabled()
+
+                if is_enabled:
+                    print("Invoice reference selected successfully…!!")
+                    return True
+
+                else:
+                    print(f"Save button still disabled… retrying ({attempt + 1}/{retries})")
+                    time.sleep(1)
+
+            except Exception as e:
+                print(f"Error selecting invoice reference (attempt {attempt + 1}): {e}")
+                time.sleep(1)
+
+        print("❌ Failed: Save button not enabled after retries!")
+        return False
+
+    # def Invoice_ref(self):
+    #     try:
+    #         driver = self.driver
+    #         wait = WebDriverWait(driver, 15)
+    #
+    #
+    #         dropdown = wait.until(EC.element_to_be_clickable((self.invoice_ref_no)))
+    #         driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
+    #         dropdown.click()
+    #         time.sleep(0.5)
+    #
+    #         active = driver.switch_to.active_element
+    #         active.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.3)
+    #         active.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.3)
+    #         active.send_keys(Keys.ENTER)
+    #         time.sleep(0.5)
+    #
+    #         print("Invoice reference selected successfully!")
+    #     except Exception as e:
+    #         print(f" Could not select customer: {e}")
 
 
-            dropdown = wait.until(EC.element_to_be_clickable((self.invoice_ref_no)))
-            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
-            dropdown.click()
-            time.sleep(0.5)
 
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.3)
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.3)
-            active.send_keys(Keys.ENTER)
-            time.sleep(0.5)
-
-            print("Invoice reference selected successfully!")
-        except Exception as e:
-            print(f" Could not select customer: {e}")
 
     def Save_Credit_Notes(self):
         try:
@@ -177,6 +223,8 @@ class Credit_Notes:
         except Exception as e:
             print(f" Could not select customer: {e}")
 
+
+
     def Paid_From(self):
         try:
 
@@ -200,6 +248,8 @@ class Credit_Notes:
             print(" 'Paid from' selected successfully.....!")
         except Exception as e:
             print(f" Could not select customer: {e}")
+
+
 
     def Click_Save_Button(self):
         driver = self.driver

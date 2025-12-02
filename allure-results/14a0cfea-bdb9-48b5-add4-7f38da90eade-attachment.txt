@@ -1,0 +1,3 @@
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Invoice created successfully
