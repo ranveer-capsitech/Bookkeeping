@@ -1,11 +1,7 @@
-import py
-import pyautogui
-import self
-import random
+
 from faker import Faker
 import time
-from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
-    ElementClickInterceptedException
+
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait

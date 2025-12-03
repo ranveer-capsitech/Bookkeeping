@@ -15,8 +15,6 @@ class Login(unittest.TestCase):
         cls.driver.maximize_window()
         cls.driver.implicitly_wait(3)
 
-
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -49,8 +47,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         loginpage.Click_Bookkeeping()
         time.sleep(.2)
-
-
 
 
 

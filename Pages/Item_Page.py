@@ -1,7 +1,5 @@
 
-import random
 from faker import Faker
-import time
 import platform, time
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By

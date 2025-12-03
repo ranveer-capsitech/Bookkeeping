@@ -1,4 +1,4 @@
-import pyautogui
+
 from faker import Faker
 import time
 from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \

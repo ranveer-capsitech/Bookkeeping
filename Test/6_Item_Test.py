@@ -4,9 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from Pages.Item_Page import Items
-from Pages.Receipts_Page import Receipts
+
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+
 from Pages.LoginPage import loginPage
 import pytest
 

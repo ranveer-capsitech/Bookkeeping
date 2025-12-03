@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="VAT-Return">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Allure Report">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/11_Dividend_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/11_Dividend_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/1_Login_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/1_Login_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/VAT_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/VAT_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/6_Item_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/6_Item_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,64 +52,64 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_06_Add_New_Credit.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor": "Run",
-    "Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor": "Run",
-    "Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
-    "Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO.executor": "Run",
-    "Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments.executor": "Run",
-    "Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_07_Go_Client_Purchase.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_09_Go_Purchase_PO.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor": "Run",
-    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor": "Run",
-    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_12_Expense_claims.executor": "Run",
-    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_14_Reimbursement.executor": "Run",
-    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds.executor": "Run",
-    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor": "Run",
-    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor": "Run",
-    "Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims.executor": "Run",
-    "Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset.executor": "Run",
-    "Python tests.Python tests in 10_Journals_Test.py.executor": "Run",
-    "Python tests.Python tests in 11_Dividend_Test.py.executor": "Run",
-    "Python tests.Python tests in 12_Banking_Test.py.executor": "Run",
-    "Python tests.Python tests in 1_Login_Test.py.executor": "Run",
-    "Python tests.Python tests in 1_Test_Login.py.executor": "Run",
-    "Python tests.Python tests in 2_ClientSell_Test.py.executor": "Run",
-    "Python tests.Python tests in 2_Test_ClientSell.py.executor": "Run",
-    "Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor": "Run",
-    "Python tests.Python tests in 3_Credit_Notes_Test.py.executor": "Run",
-    "Python tests.Python tests in 3_Test_Credit_Notes.py.executor": "Run",
-    "Python tests.Python tests in 4_Estimates_Test.py.executor": "Run",
-    "Python tests.Python tests in 4_Test_Estimates.py.executor": "Run",
-    "Python tests.Python tests in 5_Receipt_Test.py.executor": "Run",
-    "Python tests.Python tests in 5_Test_Receipt.py.executor": "Run",
-    "Python tests.Python tests in 6_Item_Test.py.executor": "Run",
-    "Python tests.Python tests in 6_Test_Item.py.executor": "Run",
-    "Python tests.Python tests in 7_Purchase_Test.py.executor": "Run",
-    "Python tests.Python tests in 7_Test_Purchase.py.executor": "Run",
-    "Python tests.Python tests in 8_Expenseclaims_Test.py.executor": "Run",
-    "Python tests.Python tests in 9_Asset_Test.py.executor": "Run",
-    "Python tests.Python tests in VAT_Test.py.executor": "Run",
-    "Python.Client_SellPage.executor": "Run",
-    "Python.Item_Page.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_06_Add_New_Credit.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_07_Go_Client_Purchase.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_08_Go_Purchase_CreditNote.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_09_Go_Purchase_PO.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_12_Expense_claims.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_14_Reimbursement.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 10_Journals_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 11_Dividend_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 12_Banking_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 1_Login_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 1_Test_Login.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 2_ClientSell_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 3_Credit_Notes_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 3_Test_Credit_Notes.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 4_Estimates_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 4_Test_Estimates.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 5_Receipt_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 5_Test_Receipt.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 6_Item_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 6_Test_Item.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 7_Purchase_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 7_Test_Purchase.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 8_Expenseclaims_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 9_Asset_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in VAT_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Item_Page.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/CT_USER/PycharmProjects/BOOKKEEPING/Test&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\Test" />
@@ -366,7 +370,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764316199251</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Allure Report">
+      <option name="closed" value="true" />
+      <created>1764683696454</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1764683696454</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Allure Report">
+      <option name="closed" value="true" />
+      <created>1764756827975</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1764756827975</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -391,6 +411,7 @@
     <MESSAGE value="Journals" />
     <MESSAGE value="Dividend" />
     <MESSAGE value="VAT-Return" />
-    <option name="LAST_COMMIT_MESSAGE" value="VAT-Return" />
+    <MESSAGE value="Allure Report" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allure Report" />
   </component>
 </project>
