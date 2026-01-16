@@ -2,8 +2,12 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from Pages.ExpenseclaimsPage import Expenseclaims
+from Pages.PurchasePage import ClientPurchase
+from Pages.Refund_Page import Refund
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+
 from Pages.LoginPage import loginPage
 import pytest
 
@@ -24,6 +28,7 @@ class Login(unittest.TestCase):
 
         # Call login once setup is done
         cls.login()
+
 
     @classmethod
     def tearDownClass(cls):
@@ -50,49 +55,47 @@ class Login(unittest.TestCase):
 
         # Menu navigation
         loginpage.Click_On_Menu()
-        time.sleep(0.5)
+        time.sleep(2)
         loginpage.Click_Bookkeeping()
-        time.sleep(0.5)
+        time.sleep(2)
 
 
         if __name__ == "__main__":
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> refund")
 
 
-    def test_04_Go_Client_Sell(self):
-        client_section = ClientSell(driver=self.driver)
+
+    def test_18_Refunds(self):
+        client_section = Refund(driver=self.driver)
         time.sleep(.2)
 
         client_section.Select_Business()
-        time.sleep(5)
+        time.sleep(3)
         client_section.Click_Input()
         time.sleep(.2)
-        client_section.Click_Sales()
-        time.sleep(.2)
 
-
-
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice")
-
-    def test_05_Add_New_Invoice(self):
-
-        client_section = ClientSell(driver=self.driver)
-
-        client_section.Add_Invoice()
-        time.sleep(.2)
-        client_section.Select_Customer_Keyboard()
-        time.sleep(.2)
-
-        client_section.Select_item_sale()
+        client_section.Click_Expense_Claims()
         time.sleep(.5)
+        time.sleep(.2)
 
-        client_section.Click_Save()
-        time.sleep(2)
 
-        # client_section.Save_Invoice()
-        # time.sleep(.2)
+        client_section.Refunds_Section()
+        time.sleep(.2)
+        client_section.Click_Refunds()
+        time.sleep(.2)
+        client_section.Refund_from()
+        time.sleep(.2)
+        client_section.Select_Account()
+        time.sleep(.2)
+        client_section.Save_Refund()
+        time.sleep(.2)
+
+
+
+
+
 
 

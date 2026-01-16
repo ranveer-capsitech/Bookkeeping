@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 
 fake = Faker()
 random_first_name = fake.first_name()
@@ -61,6 +62,7 @@ class ClientSell:
 
 
 
+
     def Select_Business(self):
         try:
             client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_business_name))
@@ -92,6 +94,7 @@ class ClientSell:
             print("Click on Sales successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
+            time.sleep(.2)
 
 
 
@@ -107,24 +110,83 @@ class ClientSell:
         except Exception as e:
             print(f"Error on Click : {e}")
 
-    def Select_Customer(self):
+
+
+
+    def Select_Customer_Keyboard(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        control = wait.until(EC.element_to_be_clickable((
+            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-control')][1]"
+        )))
+        control.click()
+
+        input_el = wait.until(EC.presence_of_element_located((
+            By.XPATH,
+            "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-input-container')][1]//input"
+        )))
+        ActionChains(driver).move_to_element(input_el).click(input_el).perform()
+
+        # ensure menu open
+        wait.until(EC.visibility_of_element_located((
+            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
+        )))
+
         try:
-            wait = WebDriverWait(self.driver, 20)
+            input_el.send_keys(Keys.ARROW_DOWN)
+            time.sleep(.2)
+            input_el.send_keys(Keys.ARROW_DOWN)
+            time.sleep(.2)
+            input_el.send_keys(Keys.ENTER)
+        except ElementNotInteractableException:
+            # fallback click first option if keyboard fails
+            first_option = wait.until(EC.element_to_be_clickable((
+                By.XPATH,
+                "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
+                "//div[contains(@class,'rs-option')][1]"
+            )))
+            first_option.click()
 
-            dropdown_input = wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input[id^='react-select-'][id$='-input']"))
-            )
-            time.sleep(.2)
-            dropdown_input.click()
-            time.sleep(.2)
+        selected = wait.until(EC.visibility_of_element_located((
+            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-single-value')][1]"
+        ))).text.strip()
+        print("Customer selected successfully....!!")
 
-            time.sleep(.2)
-            dropdown_input.send_keys(Keys.ENTER)
-            time.sleep(.2)
-            print("Customer selected successfully....!!")
+        print("Selected Customer is :", selected)
+        return selected
 
-        except Exception as e:
-            print(f"Error on Click : {e}")
+
+
+
+
+    # def Select_Customer(self):
+    #         driver = self.driver
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #     #try:
+    #
+    #         control = wait.until(EC.element_to_be_clickable(
+    #         (By.XPATH, "//div[contains(@class,'rs-control') and .//*[contains(text(),'Contact name')]]")
+    #         ))
+    #         control.click()
+    #
+    #         input_el = wait.until(EC.element_to_be_clickable(
+    #         (By.XPATH, "//div[contains(@class,'rs-input-container')]//input")
+    #         ))
+    #
+    #         input_el.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.3)
+    #         input_el.send_keys(Keys.ENTER)
+    #         time.sleep(1)
+    #         print("Customer selected successfully....!!")
+    #     # except Exception as e:
+    #     #     print(f"Error on Click : {e}")
+
+
+
+
+
 
 
     def Select_item_sale(self, value="test"):
@@ -177,40 +239,60 @@ class ClientSell:
             time.sleep(0.4)
             print("Invoice created successfully")
 
-
-    def Save_Invoice(self):
-        d = self.driver
-        w = WebDriverWait(d, 20)
-
-        save_btn = w.until(
-            EC.element_to_be_clickable(self.allocate_save_button)
-        )
-
-        for attempt in range(2):
-            try:
-                save_btn.click()
-                break
-            except (ElementClickInterceptedException, StaleElementReferenceException):
-                time.sleep(0.3)
-                save_btn = w.until(
-                    EC.element_to_be_clickable(self.allocate_save_button)
+            update_message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+            (By.XPATH, "//*[contains(normalize-space(), 'Invoice created successfully')]"))
                 )
 
-        time.sleep(0.2)
+            # Assert the presence of the success message
+            assert update_message, "Invoice created successfully"
 
-        try:
-            update_message = WebDriverWait(d, 10).until(
-                EC.visibility_of_element_located(
-                    (By.XPATH, "//*[contains(text(),'Invoice created successfully')]")
-                )
-            )
-        except TimeoutException:
-            raise AssertionError(
-                "Expected 'Invoice created successfully' toast but did not see it."
-            )
+            print("Test Case  - Pass: Invoice created successfully")
 
-        assert update_message.is_displayed(), "Invoice created successfully"
-        print("Test Case -4 :  Pass: Invoice created successfully.")
+
+            time.sleep(2)
+
+
+
+    # def Save_Invoice(self):
+    #     d = self.driver
+    #     w = WebDriverWait(d, 20)
+    #
+    #     save_btn = w.until(
+    #         EC.element_to_be_clickable(self.allocate_save_button)
+    #     )
+    #
+    #     for attempt in range(2):
+    #         try:
+    #             save_btn.click()
+    #             break
+    #         except (ElementClickInterceptedException, StaleElementReferenceException):
+    #             time.sleep(0.3)
+    #             save_btn = w.until(
+    #                 EC.element_to_be_clickable(self.allocate_save_button)
+    #             )
+    #
+    #     time.sleep(0.2)
+    #
+    #     try:
+    #         update_message = WebDriverWait(d, 10).until(
+    #             EC.visibility_of_element_located(
+    #                 (By.XPATH, "//*[contains(text(),'Invoice created successfully')]")
+    #             )
+    #         )
+    #     except TimeoutException:
+    #         raise AssertionError(
+    #             "Expected 'Invoice created successfully' toast but did not see it."
+    #         )
+    #
+    #     assert update_message.is_displayed(), "Invoice created successfully"
+    #     print("Test Case -4 :  Pass: Invoice created successfully.")
+
+
+
+
+
+
 
 
 

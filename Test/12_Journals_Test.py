@@ -74,8 +74,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Journal_Reference()
         time.sleep(.2)
-        client_section.Click_Journals_Button()
-        time.sleep(.3)
+
         client_section.Select_Account()
         time.sleep(.5)
         client_section.Enter_Value_IN_Debit()

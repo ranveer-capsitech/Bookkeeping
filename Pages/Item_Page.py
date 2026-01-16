@@ -154,7 +154,7 @@ class Items:
 
             enter_pur.send_keys("100")
             time.sleep(.2)
-            print("Enter Unit Price Successfully.....!!")
+            print("Enter Unit Price Sell Successfully.....!!")
         except Exception as e:
             print(f"Error on click:{e}")
 
@@ -164,7 +164,7 @@ class Items:
             time.sleep(.2)
             enter_description.send_keys("Only for testing")
             time.sleep(.2)
-            print("Enter description successfully.....!!")
+            print("Enter purchases description successfully.....!!")
         except Exception as e:
             print(f"Error on click:{e}")
 
@@ -174,21 +174,21 @@ class Items:
             time.sleep(.2)
             enter_description_for_sale.send_keys("Only for testing")
             time.sleep(.2)
-            print("Enter description successfully.....!!")
+            print("Enter sale description successfully.....!!")
 
         except Exception as e:
             print(f"Error on click:{e}")
 
     def Create(self):
-        try:
-            create_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.create))
+       # try:
+            create_item = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.create))
             time.sleep(.2)
             create_item.click()
             time.sleep(.2)
 
             update_message = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located(
-                    (By.XPATH, "//*[contains(text(),'Items created successfully')]"))
+                    (By.XPATH, "//*[contains(text(),'Item created successfully')]"))
             )
 
             # Assert the presence of the success message
@@ -196,10 +196,10 @@ class Items:
 
             print("Test Case -8 :  Pass: Items created successfully.")
 
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
+        # except Exception as e:
+        #     print(f"Error: {e}")
+        #
+        #     time.sleep(2)
 
 
 

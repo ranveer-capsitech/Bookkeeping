@@ -57,39 +57,39 @@ class Expenseclaims:
         self.save_expense_click = (By.XPATH, "//div[@role='dialog']//button[@title='Claim expense with reimbursement']//span[normalize-space()='Save']")
 
 #-----------------------------------------------------mileages----------------------------------------------------------
-
-        self.mileages_section = (By.XPATH,"//button[@name='Mileage claims']")
-        self.click_add_mileages = (By.XPATH,"//button[@aria-label='btnAddMileageClaim']")
-        self.select_directors_mileages = (By.XPATH, "//label[normalize-space()='User']/following::div[contains(@class,'rs-placeholder')][1]")
-        self.enter_remark_mileages = (By.XPATH, "//label[normalize-space()='Remarks']/following::input[1]")
-        self.engine_type = (By.XPATH, "//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[3]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[2]")
-        self.enter_description_mileage = (By.XPATH,
-                                  "//table[.//th[normalize-space()='Description']]   /tbody/tr[1]/td[     count(preceding-sibling::td) =     count(//th[normalize-space()='Description']/preceding-sibling::th)   ]//input[@type='text']")
-        self.mileage = (By.XPATH, "//th[normalize-space()='Mileage (miles)']/following::input[@type='number'][1]")
-        self.rate = (By.XPATH, "//th[normalize-space()='Rate']/following::div[contains(@class,'rs-input-container')][2]//input")
-        self.save_mileages = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
+        #
+        # self.mileages_section = (By.XPATH,"//button[@name='Mileage claims']")
+        # self.click_add_mileages = (By.XPATH,"//button[@aria-label='btnAddMileageClaim']")
+        # self.select_directors_mileages = (By.XPATH, "//label[normalize-space()='User']/following::div[contains(@class,'rs-placeholder')][1]")
+        # self.enter_remark_mileages = (By.XPATH, "//label[normalize-space()='Remarks']/following::input[1]")
+        # self.engine_type = (By.XPATH, "//body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[3]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[2]")
+        # self.enter_description_mileage = (By.XPATH,
+        #                           "//table[.//th[normalize-space()='Description']]   /tbody/tr[1]/td[     count(preceding-sibling::td) =     count(//th[normalize-space()='Description']/preceding-sibling::th)   ]//input[@type='text']")
+        # self.mileage = (By.XPATH, "//th[normalize-space()='Mileage (miles)']/following::input[@type='number'][1]")
+        # self.rate = (By.XPATH, "//th[normalize-space()='Rate']/following::div[contains(@class,'rs-input-container')][2]//input")
+        # self.save_mileages = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
 
 #-----------------------------------------------------Reimbursements----------------------------------------------------
-
-        self.reimbursements_section = (By.XPATH, "//button[.//span[normalize-space()='Reimbursements']]")
-        self.click_reimbursements = (By.XPATH, "//button[.//span[normalize-space()='Reimbursement']]")
-        self.reimbursed_to = (By.XPATH, "//div[contains(@class,'placeholder') and normalize-space()='User name']")
-        self.reimbursed_account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
-        #self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'rs-placeholder')][1]")
-        self.reimbursed_amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@type='text'][1]")
-        self.enter_notes = (By.XPATH, "//label[normalize-space()='Note :']/following::input[@name='notes'][1]")
-        self.save_reimbursement = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+        #
+        # self.reimbursements_section = (By.XPATH, "//button[.//span[normalize-space()='Reimbursements']]")
+        # self.click_reimbursements = (By.XPATH, "//button[.//span[normalize-space()='Reimbursement']]")
+        # self.reimbursed_to = (By.XPATH, "//div[contains(@class,'placeholder') and normalize-space()='User name']")
+        # self.reimbursed_account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
+        # #self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'rs-placeholder')][1]")
+        # self.reimbursed_amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@type='text'][1]")
+        # self.enter_notes = (By.XPATH, "//label[normalize-space()='Note :']/following::input[@name='notes'][1]")
+        # self.save_reimbursement = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
 
 #------------------------------------------------Refund-----------------------------------------------------------------
 
-        self.refunds_section = (By.XPATH, "//button[.//span[normalize-space()='Refunds']]")
-        self.click_refunds = (By.XPATH, "//button[.//span[normalize-space()='Refund']]")
-        self.refund_from = (By.XPATH, "//label[normalize-space()='Refund from']/following::div[contains(@class,'rs-input-container')][1]")
-        self.refund_account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
-        # self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'singleValue')][1]")
-        self.amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@type='text'][1]")
-        self.enter_notes_for_refund = (By.XPATH, "//label[normalize-space()='Note :']/following::input[@name='notes'][1]")
-        self.save_refund = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+        # self.refunds_section = (By.XPATH, "//button[.//span[normalize-space()='Refunds']]")
+        # self.click_refunds = (By.XPATH, "//button[.//span[normalize-space()='Refund']]")
+        # self.refund_from = (By.XPATH, "//label[normalize-space()='Refund from']/following::div[contains(@class,'rs-input-container')][1]")
+        # self.refund_account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
+        # # self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'singleValue')][1]")
+        # self.amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@type='text'][1]")
+        # self.enter_notes_for_refund = (By.XPATH, "//label[normalize-space()='Note :']/following::input[@name='notes'][1]")
+        # self.save_refund = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
 
 
 
@@ -394,233 +394,233 @@ class Expenseclaims:
 
 
 #-------------------------------------------------mileages_section------------------------------------------------------
-
-    def Mileages_Section(self):
-        try:
-            mileages_sec = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.mileages_section))
-            time.sleep(.2)
-            mileages_sec.click()
-            time.sleep(.2)
-            print("Click on Mileages Section successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-
-    def Click_Mileages(self):
-            try:
-                click_mileages = WebDriverWait(self.driver, 10).until(
-                    EC.visibility_of_element_located(self.click_add_mileages))
-                time.sleep(.2)
-                click_mileages.click()
-                time.sleep(.2)
-                print("Click on Mileages successfully....!!")
-            except Exception as e:
-                print(f"Error on Click:{e}")
-
-    def Select_Directors(self):
-
-
-            driver = self.driver
-            wait = WebDriverWait(driver, 15)
-
-
-            for _ in range(3):
-                try:
-                    container = wait.until(
-                        EC.element_to_be_clickable(self.select_directors_mileages)
-                    )
-                    driver.execute_script(
-                        "arguments[0].scrollIntoView({block:'center'});", container
-                    )
-                    try:
-                        container.click()
-                    except ElementClickInterceptedException:
-
-                        driver.execute_script("arguments[0].click();", container)
-                    break
-                except StaleElementReferenceException:
-                    continue
-            else:
-                raise TimeoutException("Could not click Director / Other dropdown")
-
-
-            for _ in range(3):
-                try:
-                    active = driver.switch_to.active_element
-
-
-                    active.send_keys(Keys.ARROW_DOWN)
-                    time.sleep(.2)
-
-                    active.send_keys(Keys.ENTER)
-                    time.sleep(.2)
-
-                    print("Select directors successfully....!!")
-                    return
-                except StaleElementReferenceException:
-
-                    continue
-
-            raise TimeoutException("Could not select a director from dropdown")
-
-    def Enter_Remark_Mileages(self):
-        try:
-            wait = WebDriverWait(self.driver, 20)
-
-
-            remark = wait.until(EC.element_to_be_clickable(self.enter_remark_mileages))
-
-
-            self.driver.execute_script(
-            "arguments[0].scrollIntoView({block: 'center'});", remark
-            )
-
-            time.sleep(0.3)
-
-            remark.click()
-            time.sleep(0.2)
-            remark.send_keys(Keys.CONTROL, "a")
-            time.sleep(0.1)
-            remark.send_keys(Keys.BACK_SPACE)
-            time.sleep(0.1)
-            remark.send_keys("Mileage remark auto-test")
-            time.sleep(0.2)
-
-            print("Enter remark for mileage successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
-
-    def Engine_Type(self):
-
-            driver = self.driver
-            try:
-                wait = WebDriverWait(driver, 15)
-
-
-                container = wait.until(EC.element_to_be_clickable(self.engine_type))
-
-
-                driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center'});", container
-                )
-                time.sleep(0.2)
-
-
-                try:
-                    container.click()
-                except ElementClickInterceptedException:
-                    driver.execute_script("arguments[0].click();", container)
-
-                time.sleep(0.2)
-
-
-                active = driver.switch_to.active_element
-                active.send_keys(Keys.ARROW_DOWN)
-                time.sleep(0.2)
-                active.send_keys(Keys.ENTER)
-                time.sleep(0.2)
-
-                print("Engine type entered successfully....!!")
-
-            except Exception as e:
-                print(f"Error on click: {e}")
-
-
-
-    def Enter_Description_Mileage(self):
-
-        try:
-                des = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.enter_description_mileage))
-                time.sleep(.2)
-                des.send_keys("Only for testing")
-                time.sleep(.2)
-                print("Enter Description successfully....!!")
-        except Exception as e:
-                print(f"Error on click:{e}")
-
-
-    def Mileage(self):
-        try:
-            select = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.mileage))
-            time.sleep(.2)
-            select.send_keys("5")
-            time.sleep(.2)
-            print("Enter mileage successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
-
-
-    def Select_Rate(self):
-        driver = self.driver
-
-        try:
-            wait = WebDriverWait(self.driver, 15)
-
-            select_rate = wait.until(EC.element_to_be_clickable(self.rate))
-
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});", select_rate
-            )
-            time.sleep(0.2)
-
-            select_rate.click()
-            time.sleep(0.2)
-
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            active.send_keys(Keys.ENTER)
-            time.sleep(0.2)
-
-            # select_rate.send_keys(Keys.CONTROL, "a")
-            # time.sleep(0.2)
-            # select_rate.send_keys(Keys.BACK_SPACE)
-            # time.sleep(0.5)
-            #
-            # select_rate.send_keys("100")
-            # time.sleep(0.2)
-
-            print("Rate entered successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
-
-    def Save_Mileage(self):
-
-        try:
-
-            save_btn = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable(self.save_mileages)
-            )
-            save_btn.click()
-            time.sleep(2)
-
-            print("Save button clicked!")
-
-
-            try:
-                popup = WebDriverWait(self.driver, 2).until(
-                    EC.visibility_of_element_located(self.save_expense_click)
-                )
-                popup.click()
-                print("Popup detected → Saved using popup button!")
-                time.sleep(3)
-
-            except Exception:
-                print("No popup detected → Checking for success message...")
-
-
-                update_message = WebDriverWait(self.driver, 10).until(
-                    EC.visibility_of_element_located(
-                        (By.XPATH, "//*[contains(normalize-space(), 'Mileage saved successfully with number')]")
-                    )
-                )
-
-                assert update_message, "Mileage saved successfully"
-                print("Test Case - Pass: Mileage saved successfully.")
-
-        except Exception as e:
-            print(f"Error in Save_Expense: {e}")
+    #
+    # def Mileages_Section(self):
+    #     try:
+    #         mileages_sec = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.mileages_section))
+    #         time.sleep(.2)
+    #         mileages_sec.click()
+    #         time.sleep(.2)
+    #         print("Click on Mileages Section successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    #
+    # def Click_Mileages(self):
+    #         try:
+    #             click_mileages = WebDriverWait(self.driver, 10).until(
+    #                 EC.visibility_of_element_located(self.click_add_mileages))
+    #             time.sleep(.2)
+    #             click_mileages.click()
+    #             time.sleep(.2)
+    #             print("Click on Mileages successfully....!!")
+    #         except Exception as e:
+    #             print(f"Error on Click:{e}")
+    #
+    # def Select_Directors(self):
+    #
+    #
+    #         driver = self.driver
+    #         wait = WebDriverWait(driver, 15)
+    #
+    #
+    #         for _ in range(3):
+    #             try:
+    #                 container = wait.until(
+    #                     EC.element_to_be_clickable(self.select_directors_mileages)
+    #                 )
+    #                 driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center'});", container
+    #                 )
+    #                 try:
+    #                     container.click()
+    #                 except ElementClickInterceptedException:
+    #
+    #                     driver.execute_script("arguments[0].click();", container)
+    #                 break
+    #             except StaleElementReferenceException:
+    #                 continue
+    #         else:
+    #             raise TimeoutException("Could not click Director / Other dropdown")
+    #
+    #
+    #         for _ in range(3):
+    #             try:
+    #                 active = driver.switch_to.active_element
+    #
+    #
+    #                 active.send_keys(Keys.ARROW_DOWN)
+    #                 time.sleep(.2)
+    #
+    #                 active.send_keys(Keys.ENTER)
+    #                 time.sleep(.2)
+    #
+    #                 print("Select directors successfully....!!")
+    #                 return
+    #             except StaleElementReferenceException:
+    #
+    #                 continue
+    #
+    #         raise TimeoutException("Could not select a director from dropdown")
+    #
+    # def Enter_Remark_Mileages(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 20)
+    #
+    #
+    #         remark = wait.until(EC.element_to_be_clickable(self.enter_remark_mileages))
+    #
+    #
+    #         self.driver.execute_script(
+    #         "arguments[0].scrollIntoView({block: 'center'});", remark
+    #         )
+    #
+    #         time.sleep(0.3)
+    #
+    #         remark.click()
+    #         time.sleep(0.2)
+    #         remark.send_keys(Keys.CONTROL, "a")
+    #         time.sleep(0.1)
+    #         remark.send_keys(Keys.BACK_SPACE)
+    #         time.sleep(0.1)
+    #         remark.send_keys("Mileage remark auto-test")
+    #         time.sleep(0.2)
+    #
+    #         print("Enter remark for mileage successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    # def Engine_Type(self):
+    #
+    #         driver = self.driver
+    #         try:
+    #             wait = WebDriverWait(driver, 15)
+    #
+    #
+    #             container = wait.until(EC.element_to_be_clickable(self.engine_type))
+    #
+    #
+    #             driver.execute_script(
+    #                 "arguments[0].scrollIntoView({block:'center'});", container
+    #             )
+    #             time.sleep(0.2)
+    #
+    #
+    #             try:
+    #                 container.click()
+    #             except ElementClickInterceptedException:
+    #                 driver.execute_script("arguments[0].click();", container)
+    #
+    #             time.sleep(0.2)
+    #
+    #
+    #             active = driver.switch_to.active_element
+    #             active.send_keys(Keys.ARROW_DOWN)
+    #             time.sleep(0.2)
+    #             active.send_keys(Keys.ENTER)
+    #             time.sleep(0.2)
+    #
+    #             print("Engine type entered successfully....!!")
+    #
+    #         except Exception as e:
+    #             print(f"Error on click: {e}")
+    #
+    #
+    #
+    # def Enter_Description_Mileage(self):
+    #
+    #     try:
+    #             des = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.enter_description_mileage))
+    #             time.sleep(.2)
+    #             des.send_keys("Only for testing")
+    #             time.sleep(.2)
+    #             print("Enter Description successfully....!!")
+    #     except Exception as e:
+    #             print(f"Error on click:{e}")
+    #
+    #
+    # def Mileage(self):
+    #     try:
+    #         select = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.mileage))
+    #         time.sleep(.2)
+    #         select.send_keys("5")
+    #         time.sleep(.2)
+    #         print("Enter mileage successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    #
+    # def Select_Rate(self):
+    #     driver = self.driver
+    #
+    #     try:
+    #         wait = WebDriverWait(self.driver, 15)
+    #
+    #         select_rate = wait.until(EC.element_to_be_clickable(self.rate))
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});", select_rate
+    #         )
+    #         time.sleep(0.2)
+    #
+    #         select_rate.click()
+    #         time.sleep(0.2)
+    #
+    #         active = driver.switch_to.active_element
+    #         active.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.2)
+    #         active.send_keys(Keys.ENTER)
+    #         time.sleep(0.2)
+    #
+    #         # select_rate.send_keys(Keys.CONTROL, "a")
+    #         # time.sleep(0.2)
+    #         # select_rate.send_keys(Keys.BACK_SPACE)
+    #         # time.sleep(0.5)
+    #         #
+    #         # select_rate.send_keys("100")
+    #         # time.sleep(0.2)
+    #
+    #         print("Rate entered successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    # def Save_Mileage(self):
+    #
+    #     try:
+    #
+    #         save_btn = WebDriverWait(self.driver, 10).until(
+    #             EC.element_to_be_clickable(self.save_mileages)
+    #         )
+    #         save_btn.click()
+    #         time.sleep(2)
+    #
+    #         print("Save button clicked!")
+    #
+    #
+    #         try:
+    #             popup = WebDriverWait(self.driver, 2).until(
+    #                 EC.visibility_of_element_located(self.save_expense_click)
+    #             )
+    #             popup.click()
+    #             print("Popup detected → Saved using popup button!")
+    #             time.sleep(3)
+    #
+    #         except Exception:
+    #             print("No popup detected → Checking for success message...")
+    #
+    #
+    #             update_message = WebDriverWait(self.driver, 10).until(
+    #                 EC.visibility_of_element_located(
+    #                     (By.XPATH, "//*[contains(normalize-space(), 'Mileage saved successfully with number')]")
+    #                 )
+    #             )
+    #
+    #             assert update_message, "Mileage saved successfully"
+    #             print("Test Case - Pass: Mileage saved successfully.")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Save_Expense: {e}")
 
 
 
@@ -628,294 +628,294 @@ class Expenseclaims:
 
 
 
-    def Reimbursed_Section(self):
-        try:
-            reimbursed_sec = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.reimbursements_section))
-            time.sleep(.2)
-            reimbursed_sec.click()
-            time.sleep(.2)
-            print("Click on reimbursed Section successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-    def Click_Reimbursed(self):
-        try:
-            click_reimbursed = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.click_reimbursements))
-            time.sleep(.2)
-            click_reimbursed.click()
-            time.sleep(.2)
-            print("Click on reimbursed successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-    def Reimbursed_to(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 15)
-
-        for _ in range(3):
-            try:
-                container = wait.until(
-                    EC.element_to_be_clickable(self.reimbursed_to)
-                )
-                driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center'});", container
-                )
-                try:
-                    container.click()
-                except ElementClickInterceptedException:
-
-                    driver.execute_script("arguments[0].click();", container)
-                break
-            except StaleElementReferenceException:
-                continue
-        else:
-            raise TimeoutException("Could not click Director / Other dropdown")
-
-        for _ in range(3):
-            try:
-                active = driver.switch_to.active_element
-
-                active.send_keys(Keys.ARROW_DOWN)
-                time.sleep(.2)
-
-                active.send_keys(Keys.ENTER)
-                time.sleep(.2)
-
-                print("Select Reimbursed To successfully....!!")
-                return
-            except StaleElementReferenceException:
-
-                continue
-
-        raise TimeoutException("Could not select a director from dropdown")
-
-
-
-
-    def Reimbursed_Account(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 15)
-
-        try:
-
-            account = wait.until(
-                EC.element_to_be_clickable(self.reimbursed_account)
-            )
-
-
-            driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                account
-            )
-            time.sleep(0.2)
-
-
-            try:
-                account.click()
-            except Exception:
-                driver.execute_script("arguments[0].click();", account)
-
-            time.sleep(0.2)
-
-
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            active.send_keys(Keys.ENTER)
-            time.sleep(0.2)
-
-            print("Reimbursed account selected successfully....!!")
-        except Exception as e:
-            print(f"Error on Click reimbursed account: {e}")
-
-    def Enter_Amount(self):
-        try:
-            amount = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.reimbursed_amount))
-            time.sleep(.3)
-            amount.click()
-
-            time.sleep(0.2)
-            amount.send_keys(Keys.CONTROL, "a")
-            time.sleep(0.2)
-            amount.send_keys(Keys.BACK_SPACE)
-            time.sleep(0.2)
-            amount.send_keys("100")
-            time.sleep(.3)
-            print("Click on reimbursed amount successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-    def Enter_Notes(self):
-        try:
-            notes = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.enter_notes))
-            time.sleep(.2)
-            notes.send_keys("only for testing")
-            time.sleep(.2)
-            print("Enter notes successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-
-    def Save_Reimbursement(self):
-        try:
-            save_reb = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_reimbursement))
-            time.sleep(.2)
-            save_reb .click()
-            time.sleep(.2)
-
-            # update_message = WebDriverWait(self.driver, 10).until(
-            #     EC.visibility_of_element_located(
-            #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
-            # )
-            #
-            # # Assert the presence of the success message
-            # assert update_message, "Reimbursement saved successfully"
-
-            print("Test Case  - Pass: Reimbursement saved successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
+    # def Reimbursed_Section(self):
+    #     try:
+    #         reimbursed_sec = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.reimbursements_section))
+    #         time.sleep(.2)
+    #         reimbursed_sec.click()
+    #         time.sleep(.2)
+    #         print("Click on reimbursed Section successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    # def Click_Reimbursed(self):
+    #     try:
+    #         click_reimbursed = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.click_reimbursements))
+    #         time.sleep(.2)
+    #         click_reimbursed.click()
+    #         time.sleep(.2)
+    #         print("Click on reimbursed successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    # def Reimbursed_to(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 15)
+    #
+    #     for _ in range(3):
+    #         try:
+    #             container = wait.until(
+    #                 EC.element_to_be_clickable(self.reimbursed_to)
+    #             )
+    #             driver.execute_script(
+    #                 "arguments[0].scrollIntoView({block:'center'});", container
+    #             )
+    #             try:
+    #                 container.click()
+    #             except ElementClickInterceptedException:
+    #
+    #                 driver.execute_script("arguments[0].click();", container)
+    #             break
+    #         except StaleElementReferenceException:
+    #             continue
+    #     else:
+    #         raise TimeoutException("Could not click Director / Other dropdown")
+    #
+    #     for _ in range(3):
+    #         try:
+    #             active = driver.switch_to.active_element
+    #
+    #             active.send_keys(Keys.ARROW_DOWN)
+    #             time.sleep(.2)
+    #
+    #             active.send_keys(Keys.ENTER)
+    #             time.sleep(.2)
+    #
+    #             print("Select Reimbursed To successfully....!!")
+    #             return
+    #         except StaleElementReferenceException:
+    #
+    #             continue
+    #
+    #     raise TimeoutException("Could not select a director from dropdown")
+    #
+    #
+    #
+    #
+    # def Reimbursed_Account(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 15)
+    #
+    #     try:
+    #
+    #         account = wait.until(
+    #             EC.element_to_be_clickable(self.reimbursed_account)
+    #         )
+    #
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             account
+    #         )
+    #         time.sleep(0.2)
+    #
+    #
+    #         try:
+    #             account.click()
+    #         except Exception:
+    #             driver.execute_script("arguments[0].click();", account)
+    #
+    #         time.sleep(0.2)
+    #
+    #
+    #         active = driver.switch_to.active_element
+    #         active.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.2)
+    #         active.send_keys(Keys.ENTER)
+    #         time.sleep(0.2)
+    #
+    #         print("Reimbursed account selected successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click reimbursed account: {e}")
+    #
+    # def Enter_Amount(self):
+    #     try:
+    #         amount = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.reimbursed_amount))
+    #         time.sleep(.3)
+    #         amount.click()
+    #
+    #         time.sleep(0.2)
+    #         amount.send_keys(Keys.CONTROL, "a")
+    #         time.sleep(0.2)
+    #         amount.send_keys(Keys.BACK_SPACE)
+    #         time.sleep(0.2)
+    #         amount.send_keys("100")
+    #         time.sleep(.3)
+    #         print("Click on reimbursed amount successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    # def Enter_Notes(self):
+    #     try:
+    #         notes = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.enter_notes))
+    #         time.sleep(.2)
+    #         notes.send_keys("only for testing")
+    #         time.sleep(.2)
+    #         print("Enter notes successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    #
+    # def Save_Reimbursement(self):
+    #     try:
+    #         save_reb = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_reimbursement))
+    #         time.sleep(.2)
+    #         save_reb .click()
+    #         time.sleep(.2)
+    #
+    #         # update_message = WebDriverWait(self.driver, 10).until(
+    #         #     EC.visibility_of_element_located(
+    #         #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
+    #         # )
+    #         #
+    #         # # Assert the presence of the success message
+    #         # assert update_message, "Reimbursement saved successfully"
+    #
+    #         print("Test Case  - Pass: Reimbursement saved successfully.")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #
+    #         time.sleep(2)
 
 
     #------------------------------------------------Refund-------------------------------------------------------------
 
-
-    def Refunds_Section(self):
-        try:
-            refunds_sec = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(self.refunds_section))
-            time.sleep(.2)
-            refunds_sec.click()
-            time.sleep(.2)
-            print("Click on Refunds Section successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-
-
-    def Click_Refunds(self):
-        try:
-                refunds = WebDriverWait(self.driver, 10).until(
-                    EC.visibility_of_element_located(self.click_refunds))
-                time.sleep(.2)
-                refunds.click()
-                time.sleep(.2)
-                print("Click on Refunds successfully....!!")
-                time.sleep(10)
-        except Exception as e:
-                print(f"Error on Click:{e}")
-
-
-
-    def Refund_from(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 15)
-
-
-        for _ in range(3):
-            try:
-                container = wait.until(
-                    EC.element_to_be_clickable(self.refund_from)
-                )
-
-                driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center'});", container
-                )
-
-                try:
-                    container.click()
-                except ElementClickInterceptedException:
-                    driver.execute_script("arguments[0].click();", container)
-
-                break
-            except StaleElementReferenceException:
-
-                continue
-            except TimeoutException:
-
-                raise TimeoutException("Refund from dropdown clickable ")
-
-
-        for _ in range(3):
-            try:
-                active = driver.switch_to.active_element
-
-                active.send_keys(Keys.ARROW_DOWN)
-                time.sleep(0.2)
-
-                active.send_keys(Keys.ENTER)
-                time.sleep(0.2)
-
-                print("Select Refund from successfully....!!")
-                return
-            except StaleElementReferenceException:
-
-                time.sleep(0.2)
-                continue
-
-        raise TimeoutException("Refund from dropdown se option select")
-
-
-    def Select_Account(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 15)
-
-        try:
-
-            account = wait.until(
-                EC.element_to_be_clickable(self.refund_account)
-            )
-
-            driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                account
-            )
-            time.sleep(0.2)
-
-            try:
-                account.click()
-            except Exception:
-                driver.execute_script("arguments[0].click();", account)
-
-            time.sleep(0.2)
-
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            active.send_keys(Keys.ENTER)
-            time.sleep(0.2)
-
-            print("Refund account selected successfully....!!")
-        except Exception as e:
-            print(f"Error on Click Refund account: {e}")
-
-
-    def Save_Refund(self):
-        try:
-            save_ref = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_refund))
-            time.sleep(.2)
-            save_ref .click()
-            time.sleep(.2)
-
-            # update_message = WebDriverWait(self.driver, 10).until(
-            #     EC.visibility_of_element_located(
-            #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
-            # )
-            #
-            # # Assert the presence of the success message
-            # assert update_message, "Reimbursement saved successfully"
-
-            print("Test Case  - Pass: Refund saved successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
+    #
+    # def Refunds_Section(self):
+    #     try:
+    #         refunds_sec = WebDriverWait(self.driver, 10).until(
+    #             EC.visibility_of_element_located(self.refunds_section))
+    #         time.sleep(.2)
+    #         refunds_sec.click()
+    #         time.sleep(.2)
+    #         print("Click on Refunds Section successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #
+    #
+    # def Click_Refunds(self):
+    #     try:
+    #             refunds = WebDriverWait(self.driver, 10).until(
+    #                 EC.visibility_of_element_located(self.click_refunds))
+    #             time.sleep(.2)
+    #             refunds.click()
+    #             time.sleep(.2)
+    #             print("Click on Refunds successfully....!!")
+    #             time.sleep(10)
+    #     except Exception as e:
+    #             print(f"Error on Click:{e}")
+    #
+    #
+    #
+    # def Refund_from(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 15)
+    #
+    #
+    #     for _ in range(3):
+    #         try:
+    #             container = wait.until(
+    #                 EC.element_to_be_clickable(self.refund_from)
+    #             )
+    #
+    #             driver.execute_script(
+    #                 "arguments[0].scrollIntoView({block:'center'});", container
+    #             )
+    #
+    #             try:
+    #                 container.click()
+    #             except ElementClickInterceptedException:
+    #                 driver.execute_script("arguments[0].click();", container)
+    #
+    #             break
+    #         except StaleElementReferenceException:
+    #
+    #             continue
+    #         except TimeoutException:
+    #
+    #             raise TimeoutException("Refund from dropdown clickable ")
+    #
+    #
+    #     for _ in range(3):
+    #         try:
+    #             active = driver.switch_to.active_element
+    #
+    #             active.send_keys(Keys.ARROW_DOWN)
+    #             time.sleep(0.2)
+    #
+    #             active.send_keys(Keys.ENTER)
+    #             time.sleep(0.2)
+    #
+    #             print("Select Refund from successfully....!!")
+    #             return
+    #         except StaleElementReferenceException:
+    #
+    #             time.sleep(0.2)
+    #             continue
+    #
+    #     raise TimeoutException("Refund from dropdown se option select")
+    #
+    #
+    # def Select_Account(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 15)
+    #
+    #     try:
+    #
+    #         account = wait.until(
+    #             EC.element_to_be_clickable(self.refund_account)
+    #         )
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             account
+    #         )
+    #         time.sleep(0.2)
+    #
+    #         try:
+    #             account.click()
+    #         except Exception:
+    #             driver.execute_script("arguments[0].click();", account)
+    #
+    #         time.sleep(0.2)
+    #
+    #         active = driver.switch_to.active_element
+    #         active.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.2)
+    #         active.send_keys(Keys.ENTER)
+    #         time.sleep(0.2)
+    #
+    #         print("Refund account selected successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click Refund account: {e}")
+    #
+    #
+    # def Save_Refund(self):
+    #     try:
+    #         save_ref = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_refund))
+    #         time.sleep(.2)
+    #         save_ref .click()
+    #         time.sleep(.2)
+    #
+    #         # update_message = WebDriverWait(self.driver, 10).until(
+    #         #     EC.visibility_of_element_located(
+    #         #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
+    #         # )
+    #         #
+    #         # # Assert the presence of the success message
+    #         # assert update_message, "Reimbursement saved successfully"
+    #
+    #         print("Test Case  - Pass: Refund saved successfully.")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #
+    #         time.sleep(2)
 
 
 

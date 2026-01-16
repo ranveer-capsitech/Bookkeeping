@@ -176,36 +176,36 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-    def test_14_Create_New_Item(self):
-            client_section = ClientPurchase(driver=self.driver)
-            time.sleep(.2)
-
-            # client_section.Select_Business()
-            # time.sleep(3)
-            # client_section.Click_Input()
-            # time.sleep(.2)
-            # client_section.Click_Purchases()
-            # time.sleep(.2)
-
-            time.sleep(.5)
-            time.sleep(.2)
-
-            client_section.Item_Section()
-            time.sleep(.5)
-            client_section.Click_on_item()
-            time.sleep(.2)
-            client_section.Enter_Name()
-            time.sleep(.2)
-            client_section.Enter_Description_For_Purchases()
-            time.sleep(.2)
-            client_section.Enter_Description_For_Sell()
-            time.sleep(.2)
-            client_section.Enter_Unit_Price_Purchases()
-            time.sleep(.2)
-            client_section.Enter_Unit_Price_Sell()
-            time.sleep(.2)
-            client_section.Create_Item()
-            time.sleep(.2)
+    # def test_14_Create_New_Item(self):
+    #         client_section = ClientPurchase(driver=self.driver)
+    #         time.sleep(.2)
+    #
+    #         # client_section.Select_Business()
+    #         # time.sleep(3)
+    #         # client_section.Click_Input()
+    #         # time.sleep(.2)
+    #         # client_section.Click_Purchases()
+    #         # time.sleep(.2)
+    #
+    #         time.sleep(.5)
+    #         time.sleep(.2)
+    #
+    #         client_section.Item_Section()
+    #         time.sleep(.5)
+    #         client_section.Click_on_item()
+    #         time.sleep(.2)
+    #         client_section.Enter_Name()
+    #         time.sleep(.2)
+    #         client_section.Enter_Description_For_Purchases()
+    #         time.sleep(.2)
+    #         client_section.Enter_Description_For_Sell()
+    #         time.sleep(.2)
+    #         client_section.Enter_Unit_Price_Purchases()
+    #         time.sleep(.2)
+    #         client_section.Enter_Unit_Price_Sell()
+    #         time.sleep(.2)
+    #         client_section.Create_Item()
+    #         time.sleep(.2)
 
 
 

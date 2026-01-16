@@ -119,6 +119,8 @@ class Credit_Notes:
             active = driver.switch_to.active_element
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.3)
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.3)
             active.send_keys(Keys.ENTER)
             time.sleep(1)
 
