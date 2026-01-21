@@ -245,7 +245,7 @@ class Asset:
                 # # Assert the presence of the success message
                 # assert update_message, "Reimbursement saved successfully"
 
-                print("Test Case  - Pass: Asset saved successfully.")
+                print("Test Case 16 - Pass: Asset saved successfully.")
 
             except Exception as e:
                 print(f"Error: {e}")
@@ -382,7 +382,7 @@ class Asset:
             # # Assert the presence of the success message
             # assert update_message, "Reimbursement saved successfully"
 
-            print("Test Case  - Pass: Disposed saved successfully.")
+            print("Test Case  17 - Pass: Disposed saved successfully.")
 
         except Exception as e:
             print(f"Error: {e}")

@@ -247,7 +247,7 @@ class ClientSell:
             # Assert the presence of the success message
             assert update_message, "Invoice created successfully"
 
-            print("Test Case  - Pass: Invoice created successfully")
+            print("Test Case 2 - Pass: Invoice created successfully")
 
 
             time.sleep(2)

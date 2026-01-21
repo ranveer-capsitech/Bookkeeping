@@ -159,13 +159,13 @@ class ClientPurchase:
             time.sleep(.2)
             dropdown_input.click()
             time.sleep(.2)
-            dropdown_input.send_keys(Keys.ARROW_DOWN)  # first option
+            dropdown_input.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.5)
-            dropdown_input.send_keys(Keys.ARROW_DOWN)  # second option
+            dropdown_input.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.5)
-            dropdown_input.send_keys(Keys.ARROW_DOWN)  # second option
+            dropdown_input.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.5)
-            dropdown_input.send_keys(Keys.ENTER)  # select it
+            dropdown_input.send_keys(Keys.ENTER)
             time.sleep(0.5)
 
             time.sleep(.2)
@@ -245,7 +245,7 @@ class ClientPurchase:
             )
 
         assert update_message.is_displayed(), "Invoice created successfully"
-        print("Test Case -9 :  Pass:: Invoice created successfully.")
+        print("Test Case -7 :  Pass:: Invoice created successfully.")
 
 
 

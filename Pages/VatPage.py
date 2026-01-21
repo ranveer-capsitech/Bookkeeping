@@ -155,7 +155,7 @@ class Vat:
             # # Assert the presence of the success message
             # assert update_message, "Dividends created successfully"
             #
-            print("Test Case  - Pass: Vat saved successfully.")
+            print("Test Case 20 - Pass: Vat saved successfully.")
 
         except Exception as e:
             print(f"Error: {e}")

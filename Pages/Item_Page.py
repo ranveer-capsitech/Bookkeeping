@@ -194,7 +194,7 @@ class Items:
             # Assert the presence of the success message
             assert update_message, "Items created successfully"
 
-            print("Test Case -8 :  Pass: Items created successfully.")
+            print("Test Case -6 :  Pass: Items created successfully.")
 
         # except Exception as e:
         #     print(f"Error: {e}")

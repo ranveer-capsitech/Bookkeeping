@@ -65,7 +65,40 @@ class Mileage:
 
 
 
-        # -------------------------------------------------mileages_section------------------------------------------------------
+        # -------------------------------------------------mileages_section---------------------------------------------
+
+
+
+    def Select_Business(self):
+        try:
+            client = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.select_business_name))
+            time.sleep(.2)
+            client.click()
+            time.sleep(.2)
+            print("Select a business name successfully..... ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Input(self):
+        try:
+            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            time.sleep(.2)
+            input.click()
+            time.sleep(.2)
+            print("Input drop down open successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Expense_Claims(self):
+        try:
+            claims = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_expense_claims))
+            time.sleep(.2)
+            claims.click()
+            time.sleep(.2)
+            print("Click on Expense claims successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+
 
     def Mileages_Section(self):
             try:
@@ -273,7 +306,7 @@ class Mileage:
                     )
 
                     assert update_message, "Mileage saved successfully"
-                    print("Test Case - Pass: Mileage saved successfully.")
+                    print("Test Case : 12 - Pass: Mileage saved successfully.")
 
             except Exception as e:
                 print(f"Error in Save_Expense: {e}")

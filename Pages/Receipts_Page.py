@@ -180,7 +180,7 @@ class Receipts:
             time.sleep(0.4)
             save_button.click()
             time.sleep(0.4)
-            print(" Test Case -7 :  Pass: -  Receipt saved successfully.....!!")
+            print(" Test Case -5 :  Pass: -  Receipt saved successfully.....!!")
 
 
 

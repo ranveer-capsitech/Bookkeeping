@@ -207,7 +207,7 @@ class Journals:
                 journal.click()
                 time.sleep(.2)
 
-                print("Test Case  - Pass: Journal saved successfully.")
+                print("Test Case 15 - Pass: Journal saved successfully.")
 
             except Exception as e:
                 print(f"Error: {e}")

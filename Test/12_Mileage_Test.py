@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from Pages.ExpenseclaimsPage import Expenseclaims
+from Pages.Mileage_Page import Mileage
 from Pages.PurchasePage import ClientPurchase
 from configReader import ConfigReader
 
@@ -68,7 +69,7 @@ class Login(unittest.TestCase):
 
 
     def test_16_Mileage(self):
-        client_section = Expenseclaims(driver=self.driver)
+        client_section = Mileage(driver=self.driver)
         time.sleep(.2)
         client_section.Select_Business()
         time.sleep(3)

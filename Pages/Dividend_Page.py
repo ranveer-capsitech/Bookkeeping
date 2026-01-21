@@ -306,7 +306,7 @@ class Dividend:
                 # Assert the presence of the success message
                 assert update_message, "Dividends created successfully"
 
-                print("Test Case  - Pass: Dividends created successfully.")
+                print("Test Case 18 - Pass: Dividends created successfully.")
 
             except Exception as e:
                 print(f"Error: {e}")
