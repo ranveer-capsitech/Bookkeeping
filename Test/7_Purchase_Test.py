@@ -68,7 +68,12 @@ class Login(unittest.TestCase):
     def test_10_Go_Client_Purchase(self):
         client_section = ClientPurchase(driver=self.driver)
         time.sleep(.2)
-        client_section.Select_Business()
+        client_section.Select_Search()
+        time.sleep(5)
+        client_section.Enter_Company()
+        time.sleep(.2)
+        client_section.Click_Company()
+        time.sleep(.2)
         time.sleep(3)
         client_section.Click_Input()
         time.sleep(.2)

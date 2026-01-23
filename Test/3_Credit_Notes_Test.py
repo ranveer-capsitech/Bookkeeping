@@ -65,8 +65,15 @@ class Login(unittest.TestCase):
     def test_04_Go_Client_Sell(self):
         credit_notes_section = Credit_Notes(driver=self.driver)
         time.sleep(.2)
-        credit_notes_section.Select_Business()
+
+        credit_notes_section.Select_Search()
         time.sleep(5)
+        credit_notes_section.Enter_Company()
+        time.sleep(.2)
+        credit_notes_section.Click_Company()
+        time.sleep(.2)
+
+
         credit_notes_section.Click_Input()
         time.sleep(.2)
         credit_notes_section.Click_Sales()
