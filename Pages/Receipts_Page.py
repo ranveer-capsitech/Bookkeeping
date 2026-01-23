@@ -58,7 +58,7 @@ class Receipts:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -66,7 +66,7 @@ class Receipts:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -118,7 +118,7 @@ class Receipts:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver, 10).until(
+            click_on_selected_company = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
@@ -133,7 +133,7 @@ class Receipts:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -144,7 +144,7 @@ class Receipts:
 
     def Click_Sales(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_sales))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -155,7 +155,7 @@ class Receipts:
 
     def Receipts(self):
         try:
-            click_receipts = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.receipts))
+            click_receipts = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.receipts))
             time.sleep(.2)
             click_receipts.click()
             time.sleep(.2)
@@ -165,7 +165,7 @@ class Receipts:
 
     def Add_Receipts(self):
         try:
-            add_receipts = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable(self.add_receipts))
+            add_receipts = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.add_receipts))
             time.sleep(.2)
             add_receipts.click()
             time.sleep(.2)
@@ -177,7 +177,7 @@ class Receipts:
     def Select_Receipts_from(self):
         driver = self.driver
         try:
-            receipts = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_receive_from))
+            receipts = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.select_receive_from))
             time.sleep(.2)
             receipts.click()
             time.sleep(.2)
@@ -194,7 +194,7 @@ class Receipts:
 
     def Select_Amount(self):
         try:
-            amount = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.select_amount))
+            amount = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.select_amount))
             time.sleep(.2)
             amount.click()
             time.sleep(.2)
@@ -208,7 +208,7 @@ class Receipts:
 
     def Enter_Amount(self):
         try:
-            enter_a_amount = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_amount))
+            enter_a_amount = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_amount))
             time.sleep(.2)
             random_price = round(random.uniform(50, 999), 2)
 
@@ -230,7 +230,7 @@ class Receipts:
     def Save_Receipt(self):
 
 
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             try:
 

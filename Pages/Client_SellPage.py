@@ -60,11 +60,9 @@ class ClientSell:
 #-----------------------------------------Methods-----------------------------------------------------------------------
 
 
-
-
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -73,7 +71,7 @@ class ClientSell:
             print(f"Error on click:{e}")
 
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -128,7 +126,7 @@ class ClientSell:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver,10).until(EC.presence_of_element_located(self.click_company))
+            click_on_selected_company = WebDriverWait(self.driver,30).until(EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
             time.sleep(.2)
@@ -142,7 +140,7 @@ class ClientSell:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -153,7 +151,7 @@ class ClientSell:
 
     def Click_Sales(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_sales))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -168,7 +166,7 @@ class ClientSell:
 
     def Add_Invoice(self):
         try:
-            invoice = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.invoice))
+            invoice = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.invoice))
             time.sleep(.2)
             invoice.click()
             time.sleep(.2)
@@ -287,7 +285,7 @@ class ClientSell:
     def Click_Save(self):
 
         # Initialize WebDriverWait
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             try:
 

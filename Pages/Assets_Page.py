@@ -75,7 +75,7 @@ class Asset:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -83,7 +83,7 @@ class Asset:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -135,7 +135,7 @@ class Asset:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -149,7 +149,7 @@ class Asset:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -160,7 +160,7 @@ class Asset:
 
     def Click_Asset(self):
         try:
-            claims = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.asset))
+            claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.asset))
             time.sleep(.2)
             claims.click()
             time.sleep(.2)
@@ -174,7 +174,7 @@ class Asset:
     def Click_Add_Assets(self):
 
             try:
-                client = WebDriverWait(self.driver, 20).until(
+                client = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.click_fixed))
                 time.sleep(.2)
                 client.click()
@@ -186,7 +186,7 @@ class Asset:
 
     def Asset_Name(self):
         try:
-            asset = WebDriverWait(self.driver, 20).until(
+            asset = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.asset_name))
             time.sleep(.2)
             asset.send_keys("Onpy for testing")
@@ -199,7 +199,7 @@ class Asset:
     def Purchase(self):
        driver = self.driver
        try:
-            pur = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.purchase_price))
+            pur = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.purchase_price))
             time.sleep(.2)
             pur.click()
             actions = ActionChains(driver)
@@ -219,7 +219,7 @@ class Asset:
     def Select_Account(self):
 
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             try:
 
@@ -252,7 +252,7 @@ class Asset:
 
     def Select_Supplier(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -285,7 +285,7 @@ class Asset:
 
     def Enter_Rate(self):
         try:
-            enter_rate = WebDriverWait(self.driver, 20).until(
+            enter_rate = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.rate))
             time.sleep(.2)
             enter_rate.send_keys("2")
@@ -299,7 +299,7 @@ class Asset:
     def Save_Asset(self):
 
             try:
-                save_ref = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_asset))
+                save_ref = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_asset))
                 time.sleep(.2)
                 save_ref.click()
                 time.sleep(.2)
@@ -327,7 +327,7 @@ class Asset:
 
     def Disposed(self):
         try:
-            disposed = WebDriverWait(self.driver, 20).until(
+            disposed = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.dispose_section))
             time.sleep(.2)
             disposed.click()
@@ -342,7 +342,7 @@ class Asset:
 
     def Add_Disposed(self):
         try:
-            add_dis = WebDriverWait(self.driver, 20).until(
+            add_dis = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.add_dispose))
             time.sleep(.2)
             add_dis.click()
@@ -356,7 +356,7 @@ class Asset:
     def Select_Asset(self):
         driver = self.driver
         try:
-            select = WebDriverWait(self.driver,10).until(
+            select = WebDriverWait(self.driver,30).until(
                 EC.visibility_of_element_located(self.select_asset)
             )
             time.sleep(.2)
@@ -377,7 +377,7 @@ class Asset:
 
     def Sales_proceeds(self):
         try:
-            sales_proceeds = WebDriverWait(self.driver, 20).until(
+            sales_proceeds = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.sales_proceeds))
             time.sleep(.2)
             sales_proceeds.send_keys("testing")
@@ -392,7 +392,7 @@ class Asset:
     def Payment_Method(self):
         driver = self.driver
         try:
-            select = WebDriverWait(self.driver, 10).until(
+            select = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.payment_method)
             )
             time.sleep(.2)
@@ -414,7 +414,7 @@ class Asset:
     def Customer(self):
         driver = self.driver
         try:
-            select = WebDriverWait(self.driver, 10).until(
+            select = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.customer)
             )
             time.sleep(.2)
@@ -436,7 +436,7 @@ class Asset:
 
     def Save_Disposed(self):
         try:
-            save_dis = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_disposed))
+            save_dis = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_disposed))
             time.sleep(.2)
             save_dis.click()
             time.sleep(.2)

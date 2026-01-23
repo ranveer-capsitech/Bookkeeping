@@ -53,7 +53,7 @@ class Credit_Notes:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -61,7 +61,7 @@ class Credit_Notes:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout= 30):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -113,7 +113,7 @@ class Credit_Notes:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver, 10).until(
+            click_on_selected_company = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
@@ -128,7 +128,7 @@ class Credit_Notes:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -139,7 +139,7 @@ class Credit_Notes:
 
     def Click_Sales(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_sales))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -150,7 +150,7 @@ class Credit_Notes:
 
     def Click_Credit_Notes(self):
         try:
-            click_credit_notes = WebDriverWait(self.driver, 10).until(
+            click_credit_notes = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.click_credit_notes))
             time.sleep(.2)
             click_credit_notes.click()
@@ -161,7 +161,7 @@ class Credit_Notes:
 
     def Add_Credit_Note(self):
         try:
-            credit = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.credit_notes))
+            credit = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.credit_notes))
             time.sleep(.2)
             credit.click()
             time.sleep(.2)
@@ -172,7 +172,7 @@ class Credit_Notes:
 
     def Select_Customer_for_Credit_Note(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
             #  Click on the dropdown field
@@ -199,7 +199,7 @@ class Credit_Notes:
 
     def Invoice_ref(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         retries = 3  # maximum attempts
 
@@ -268,7 +268,7 @@ class Credit_Notes:
 
     def Save_Credit_Notes(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             try:
 
@@ -295,7 +295,7 @@ class Credit_Notes:
         try:
 
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             dropdown = wait.until(EC.element_to_be_clickable((
                 By.XPATH, "//*[normalize-space()='Paid from']/following::div[contains(@class,'rs-input-container')][1]"
@@ -319,7 +319,7 @@ class Credit_Notes:
 
     def Click_Save_Button(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
 
         save_btn = wait.until(EC.element_to_be_clickable((

@@ -64,7 +64,7 @@ class Dividend:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -72,7 +72,7 @@ class Dividend:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -124,7 +124,7 @@ class Dividend:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -140,7 +140,7 @@ class Dividend:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -153,7 +153,7 @@ class Dividend:
 
     def Dividends_Section(self):
         try:
-            dividends = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.dividends_section))
+            dividends = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.dividends_section))
             time.sleep(.2)
             dividends.click()
             time.sleep(.2)
@@ -166,7 +166,7 @@ class Dividend:
 
     def Click_Dividends(self):
         try:
-            click_div = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_dividends))
+            click_div = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_dividends))
             time.sleep(.2)
             click_div .click()
             time.sleep(.2)
@@ -179,7 +179,7 @@ class Dividend:
     def Authorised_director(self):
 
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -213,7 +213,7 @@ class Dividend:
 
     def Select_Type(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -251,7 +251,7 @@ class Dividend:
     def Select_Class(self):
 
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -288,7 +288,7 @@ class Dividend:
 
             try:
 
-                share = WebDriverWait(self.driver, 20).until(
+                share = WebDriverWait(self.driver, 30).until(
                     EC.element_to_be_clickable(self.dividend_per_share)
                 )
 
@@ -313,7 +313,7 @@ class Dividend:
 
     def Enter_Payment_Date(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 20)
 
         try:
             # Generate today's date
@@ -360,7 +360,7 @@ class Dividend:
     def Save_Asset(self):
 
             try:
-                save_ref = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_dividends))
+                save_ref = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_dividends))
                 time.sleep(.2)
                 save_ref.click()
                 time.sleep(.2)
@@ -385,7 +385,7 @@ class Dividend:
 
     def Save(self):
         try:
-            save = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.save_anyway))
+            save = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.save_anyway))
             time.sleep(.2)
             save.click()
             time.sleep(.2)

@@ -61,7 +61,7 @@ class Reimbursement:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -69,7 +69,7 @@ class Reimbursement:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -121,7 +121,7 @@ class Reimbursement:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -135,7 +135,7 @@ class Reimbursement:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -145,7 +145,7 @@ class Reimbursement:
 
     def Click_Expense_Claims(self):
         try:
-            claims = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_expense_claims))
+            claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
             time.sleep(.2)
             claims.click()
             time.sleep(.2)
@@ -155,7 +155,7 @@ class Reimbursement:
 
     def Reimbursed_Section(self):
         try:
-            reimbursed_sec = WebDriverWait(self.driver, 10).until(
+            reimbursed_sec = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.reimbursements_section))
             time.sleep(.2)
             reimbursed_sec.click()
@@ -166,7 +166,7 @@ class Reimbursement:
 
     def Click_Reimbursed(self):
         try:
-            click_reimbursed = WebDriverWait(self.driver, 10).until(
+            click_reimbursed = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.click_reimbursements))
             time.sleep(.2)
             click_reimbursed.click()
@@ -177,7 +177,7 @@ class Reimbursement:
 
     def Reimbursed_to(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         for _ in range(3):
             try:
@@ -218,7 +218,7 @@ class Reimbursement:
 
     def Reimbursed_Account(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -251,7 +251,7 @@ class Reimbursement:
 
     def Enter_Amount(self):
         try:
-            amount = WebDriverWait(self.driver, 10).until(
+            amount = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.reimbursed_amount))
             time.sleep(.3)
             amount.click()
@@ -269,7 +269,7 @@ class Reimbursement:
 
     def Enter_Notes(self):
         #try:
-            notes = WebDriverWait(self.driver, 10).until(
+            notes = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.enter_notes))
             time.sleep(.2)
             notes.send_keys("only for testing")
@@ -280,7 +280,7 @@ class Reimbursement:
 
     def Save_Reimbursement(self):
         #try:
-            save_reb = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_reimbursement))
+            save_reb = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_reimbursement))
             time.sleep(.2)
             save_reb.click()
             time.sleep(.2)

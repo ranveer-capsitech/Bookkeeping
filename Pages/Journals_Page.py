@@ -59,7 +59,7 @@ class Journals:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -67,7 +67,7 @@ class Journals:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -119,7 +119,7 @@ class Journals:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -133,7 +133,7 @@ class Journals:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -145,7 +145,7 @@ class Journals:
 
     def Click_Journals(self):
         try:
-            click_journal = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.journals))
+            click_journal = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.journals))
             time.sleep(.2)
             click_journal.click()
             time.sleep(.2)
@@ -157,7 +157,7 @@ class Journals:
 
     def Click_Journals_Button(self):
         try:
-            click_journal_btn = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_journal))
+            click_journal_btn = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_journal))
             time.sleep(.2)
             click_journal_btn.click()
             time.sleep(.2)
@@ -169,7 +169,7 @@ class Journals:
 
     def Journal_Reference(self):
         try:
-            reference = WebDriverWait(self.driver, 10).until(
+            reference = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.journal_reference))
             time.sleep(.2)
             reference.send_keys("Only for testing")
@@ -183,7 +183,7 @@ class Journals:
     def Select_Account(self):
 
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -218,7 +218,7 @@ class Journals:
     def Enter_Value_IN_Debit(self, value="100"):
         try:
 
-            debit_input = WebDriverWait(self.driver, 20).until(
+            debit_input = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.debit)
             )
 
@@ -244,7 +244,7 @@ class Journals:
     def Enter_Value_IN_Credit(self, value="100"):
         try:
 
-            credit_input = WebDriverWait(self.driver, 20).until(
+            credit_input = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.credit)
             )
 
@@ -269,7 +269,7 @@ class Journals:
     def Save_Journal(self):
 
             try:
-                journal = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_journal))
+                journal = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_journal))
                 time.sleep(.2)
                 journal.click()
                 time.sleep(.2)

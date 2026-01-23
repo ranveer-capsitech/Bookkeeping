@@ -58,7 +58,7 @@ class Items:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -66,7 +66,7 @@ class Items:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -118,7 +118,7 @@ class Items:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver, 10).until(
+            click_on_selected_company = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
@@ -133,7 +133,7 @@ class Items:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -144,7 +144,7 @@ class Items:
 
     def Click_Sales(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_sales))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -154,7 +154,7 @@ class Items:
 
     def Item(self):
         try:
-            click_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.item))
+            click_item = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.item))
             time.sleep(.2)
             click_item.click()
             time.sleep(.2)
@@ -164,7 +164,7 @@ class Items:
 
     def Add_Item(self):
         try:
-            click_add_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.add_item))
+            click_add_item = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.add_item))
             time.sleep(.2)
             click_add_item.click()
             time.sleep(.2)
@@ -176,7 +176,7 @@ class Items:
 
     def Enter_Name(self):
         try:
-            enter_name = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_name))
+            enter_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_name))
             time.sleep(.2)
             enter_name.clear()
             time.sleep(0.2)
@@ -190,7 +190,7 @@ class Items:
 
     def Enter_Unit_Price_Pur(self):
         try:
-            enter_pur = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.unit_price_pur))
+            enter_pur = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.unit_price_pur))
             time.sleep(0.2)
 
             enter_pur.send_keys(Keys.CONTROL, "a")  # Select all
@@ -211,7 +211,7 @@ class Items:
 
     def Enter_Unit_Price_Sell(self):
         try:
-            enter_pur = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.unit_price_sell))
+            enter_pur = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.unit_price_sell))
             time.sleep(2)
             enter_pur.send_keys(Keys.CONTROL, "a")  # Select all
             time.sleep(0.2)
@@ -227,7 +227,7 @@ class Items:
 
     def Purchases_Description(self):
         try:
-            enter_description = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.purchases_description))
+            enter_description = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.purchases_description))
             time.sleep(.2)
             enter_description.send_keys("Only for testing")
             time.sleep(.2)
@@ -237,7 +237,7 @@ class Items:
 
     def Sales_Description(self):
         try:
-            enter_description_for_sale = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.sales_description))
+            enter_description_for_sale = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.sales_description))
             time.sleep(.2)
             enter_description_for_sale.send_keys("Only for testing")
             time.sleep(.2)

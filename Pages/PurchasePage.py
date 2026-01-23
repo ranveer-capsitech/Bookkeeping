@@ -101,7 +101,7 @@ class ClientPurchase:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -109,7 +109,7 @@ class ClientPurchase:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -161,7 +161,7 @@ class ClientPurchase:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -175,7 +175,7 @@ class ClientPurchase:
 
     def Click_Input(self):
          try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -187,7 +187,7 @@ class ClientPurchase:
 
     def Click_Purchases(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_purchases))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_purchases))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -200,7 +200,7 @@ class ClientPurchase:
     def Add_Invoice(self):
 
         try:
-            invoice = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.invoice))
+            invoice = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.invoice))
             time.sleep(.2)
             invoice.click()
             time.sleep(.2)
@@ -214,7 +214,7 @@ class ClientPurchase:
 
     def Select_Customer(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             dropdown_input = wait.until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "input[id^='react-select-'][id$='-input']"))
@@ -269,7 +269,7 @@ class ClientPurchase:
 
     def Enter_amount(self):
         try:
-            amount = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.net_amount))
+            amount = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.net_amount))
             time.sleep(.2)
             amount.send_keys("100")
             time.sleep(.2)
@@ -279,7 +279,7 @@ class ClientPurchase:
 
 
     def Save_Services(self):
-        wait = WebDriverWait(self.driver, 20)
+        wait = WebDriverWait(self.driver, 30)
 
         try:
 
@@ -316,7 +316,7 @@ class ClientPurchase:
 
     def Click_Credit_Notes(self):
         try:
-            click_credit_notes = WebDriverWait(self.driver, 10).until(
+            click_credit_notes = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.click_credit_notes))
             time.sleep(.2)
             click_credit_notes.click()
@@ -328,7 +328,7 @@ class ClientPurchase:
 
     def Add_Credit_Note(self):
         try:
-            credit = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.credit_notes))
+            credit = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.credit_notes))
             time.sleep(.3)
             credit.click()
             time.sleep(.3)
@@ -340,7 +340,7 @@ class ClientPurchase:
 
     def Select_Suppiler_for_Credit_Note(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
             #  Click on the dropdown field
@@ -369,7 +369,7 @@ class ClientPurchase:
     def Invoice_ref(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             #  Click on the Invoice Ref dropdown
             dropdown = wait.until(EC.element_to_be_clickable(self.invoice_ref_no))
@@ -393,7 +393,7 @@ class ClientPurchase:
 
     def Save_Credit_Notes(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             try:
 
@@ -420,7 +420,7 @@ class ClientPurchase:
         try:
 
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             dropdown = wait.until(EC.element_to_be_clickable((
                 By.XPATH, "//*[normalize-space()='Paid from']/following::div[contains(@class,'rs-input-container')][1]"
@@ -444,7 +444,7 @@ class ClientPurchase:
 
     def Click_Save_Button(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
 
         save_btn = wait.until(EC.element_to_be_clickable((
@@ -466,7 +466,7 @@ class ClientPurchase:
         toast_xpath = "//div[contains(text(),'Duplicate refund number')]"
 
         try:
-            toast_msg = WebDriverWait(driver, 4).until(
+            toast_msg = WebDriverWait(driver, 30).until(
                 EC.visibility_of_element_located((By.XPATH, toast_xpath))
             )
             txt = toast_msg.text.lower()

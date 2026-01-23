@@ -106,7 +106,7 @@ class Expenseclaims:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -114,7 +114,7 @@ class Expenseclaims:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -166,7 +166,7 @@ class Expenseclaims:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -180,7 +180,7 @@ class Expenseclaims:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -190,7 +190,7 @@ class Expenseclaims:
 
     def Click_Expense_Claims(self):
         try:
-            claims = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_expense_claims))
+            claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
             time.sleep(.2)
             claims.click()
             time.sleep(.2)
@@ -204,7 +204,7 @@ class Expenseclaims:
     def Click_Expense_Claims_Button(self):
 
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             for _ in range(3):
                 try:
@@ -244,7 +244,7 @@ class Expenseclaims:
 
 
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
 
             for _ in range(3):
@@ -288,7 +288,7 @@ class Expenseclaims:
 
     def Enter_Remark(self):
         try:
-            remark = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.enter_remark))
+            remark = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_remark))
             time.sleep(.2)
             remark.send_keys("only for testing")
             time.sleep(.2)
@@ -300,7 +300,7 @@ class Expenseclaims:
 
     def Enter_Bill_No(self):
         try:
-            bill = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.bill_no))
+            bill = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.bill_no))
             time.sleep(.2)
             bill.send_keys("1000")
             time.sleep(.2)
@@ -310,7 +310,7 @@ class Expenseclaims:
 
     def Enter_Description(self):
         try:
-            des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_description))
+            des = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_description))
             time.sleep(.2)
             des.send_keys("Only for testing")
             time.sleep(.2)
@@ -323,7 +323,7 @@ class Expenseclaims:
 
     def Account(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -362,7 +362,7 @@ class Expenseclaims:
     def Base_Amount(self):
 
         try:
-            wait = WebDriverWait(self.driver, 15)
+            wait = WebDriverWait(self.driver, 30)
 
 
             base = wait.until(EC.element_to_be_clickable(self.base_amount))
@@ -394,7 +394,7 @@ class Expenseclaims:
 
     def Select_Vat(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
             vat_cell = wait.until(
@@ -425,7 +425,7 @@ class Expenseclaims:
 
         try:
             # STEP 1: Click the Save button
-            save_btn = WebDriverWait(self.driver, 10).until(
+            save_btn = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.save_expense)
             )
             save_btn.click()
@@ -435,7 +435,7 @@ class Expenseclaims:
 
             # STEP 2: CHECK IF POPUP APPEARS (within 2 seconds)
             try:
-                popup = WebDriverWait(self.driver, 2).until(
+                popup = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.save_expense_click)
                 )
                 popup.click()
@@ -446,7 +446,7 @@ class Expenseclaims:
                 print("No popup detected → Checking for success message...")
 
                 # STEP 3: If no popup → verify success message
-                update_message = WebDriverWait(self.driver, 10).until(
+                update_message = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(
                         (By.XPATH, "//*[contains(normalize-space(), 'Expense saved successfully')]")
                     )

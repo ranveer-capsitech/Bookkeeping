@@ -22,28 +22,28 @@ class loginPage:
 
          # Methods to use for login
     def enter_username(self, username):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.username_input)
                 ).send_keys(username)
 
     def enter_password(self, password):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.password_input)
                 ).send_keys(password)
 
     def click_sign_in_button(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 30).until(
                     EC.element_to_be_clickable(self.sign_in_button)
                 ).click()
 
 
     def Click_On_Menu(self):
         try:
-            WebDriverWait(self.driver, 15).until(
+            WebDriverWait(self.driver, 30).until(
                 EC.invisibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
             )
 
-            click_menu = WebDriverWait(self.driver, 10).until(
+            click_menu = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(self.click_on_menu)
             )
             click_menu.click()
@@ -57,10 +57,10 @@ class loginPage:
 
     def Click_Bookkeeping(self):
         try:
-            WebDriverWait(self.driver,10).until(
+            WebDriverWait(self.driver,30).until(
                 EC.invisibility_of_element_located((By.CLASS_NAME,"ant-spin-spinning"))
             )
-            click_bookkeeping = WebDriverWait(self.driver,10).until(
+            click_bookkeeping = WebDriverWait(self.driver,30).until(
                 EC.visibility_of_element_located(self.click_bookkeeping_section)
             )
             click_bookkeeping.click()

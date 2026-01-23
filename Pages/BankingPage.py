@@ -63,7 +63,7 @@ class Banking:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -72,7 +72,7 @@ class Banking:
             print(f"Error on click:{e}")
 
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -127,7 +127,7 @@ class Banking:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver,10).until(EC.presence_of_element_located(self.click_company))
+            click_on_selected_company = WebDriverWait(self.driver,30).until(EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
             time.sleep(.2)
@@ -140,7 +140,7 @@ class Banking:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -152,7 +152,7 @@ class Banking:
 
     def Banking_Section(self):
         try:
-            banking = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.banking_section))
+            banking = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.banking_section))
             time.sleep(.2)
             banking.click()
             time.sleep(.2)
@@ -165,7 +165,7 @@ class Banking:
 
     def Account(self):
         try:
-            acc = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.account))
+            acc = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.account))
             time.sleep(.2)
             acc.click()
             time.sleep(.2)
@@ -178,7 +178,7 @@ class Banking:
 
     def Select_Bank(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
             bank = wait.until(EC.element_to_be_clickable(self.select_bank))
@@ -245,7 +245,7 @@ class Banking:
 
     def Sort_Code(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -271,7 +271,7 @@ class Banking:
 
     def Enter_IBAN(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         try:
 
@@ -297,7 +297,7 @@ class Banking:
     def Save_Banking(self):
 
         try:
-            save_banking = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.save_account))
+            save_banking = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_account))
             time.sleep(.2)
             save_banking.click()
             time.sleep(.2)

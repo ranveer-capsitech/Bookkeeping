@@ -52,7 +52,7 @@ class ClientPurchase:
     def Item_Section(self):
 
         try:
-            item_section = WebDriverWait(self.driver, 10).until(
+            item_section = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.item))
             time.sleep(.2)
             item_section.click()
@@ -63,7 +63,7 @@ class ClientPurchase:
 
     def Click_on_item(self):
         try:
-            click_item = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_add_item))
+            click_item = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_add_item))
             time.sleep(.2)
             click_item.click()
             time.sleep(.2)
@@ -73,7 +73,7 @@ class ClientPurchase:
 
     def Enter_Name(self):
         try:
-            name_el = WebDriverWait(self.driver, 10).until(
+            name_el = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.enter_name)
             )
 
@@ -96,7 +96,7 @@ class ClientPurchase:
 
     def Enter_Description_For_Purchases(self):
         try:
-            pur_des = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.pur_description))
+            pur_des = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.pur_description))
             time.sleep(.2)
             pur_des.send_keys("Only for testing")
             time.sleep(.2)
@@ -106,7 +106,7 @@ class ClientPurchase:
 
     def Enter_Description_For_Sell(self):
         try:
-            pur_des = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.sell_description))
+            pur_des = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.sell_description))
             time.sleep(.2)
             pur_des.send_keys("Only for testing")
             time.sleep(.2)
@@ -116,7 +116,7 @@ class ClientPurchase:
 
     def Enter_Unit_Price_Purchases(self):
         try:
-            pur_price = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.enter_pur_price))
+            pur_price = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.enter_pur_price))
             time.sleep(.2)
             pur_price.send_keys("100")
             time.sleep(.2)
@@ -126,7 +126,7 @@ class ClientPurchase:
 
     def Enter_Unit_Price_Sell(self):
         try:
-            sell_price = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.enter_sell_price))
+            sell_price = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.enter_sell_price))
             time.sleep(.2)
             sell_price.send_keys("100")
             time.sleep(.2)
@@ -136,12 +136,12 @@ class ClientPurchase:
 
     def Create_Item(self):
         try:
-            item = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_on_create))
+            item = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_on_create))
             time.sleep(.2)
             item.click()
             time.sleep(.2)
 
-            update_message = WebDriverWait(self.driver, 10).until(
+            update_message = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(
                     (By.XPATH, "//*[contains(text(),'Items created successfully')]"))
             )

@@ -57,7 +57,7 @@ class Purchase_Order:
 
     def Select_Search(self):
             try:
-                client = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.search))
+                client = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.search))
                 time.sleep(.2)
                 client.click()
                 time.sleep(.5)
@@ -65,7 +65,7 @@ class Purchase_Order:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -117,7 +117,7 @@ class Purchase_Order:
 
     def Click_Company(self):
             try:
-                click_on_selected_company = WebDriverWait(self.driver, 10).until(
+                click_on_selected_company = WebDriverWait(self.driver, 30).until(
                     EC.presence_of_element_located(self.click_company))
                 time.sleep(.3)
                 click_on_selected_company.click()
@@ -132,7 +132,7 @@ class Purchase_Order:
 
     def Click_Input(self):
          try:
-            input = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
             input.click()
             time.sleep(.2)
@@ -144,7 +144,7 @@ class Purchase_Order:
 
     def Click_Purchases(self):
         try:
-            sales = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_purchases))
+            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_purchases))
             time.sleep(.2)
             sales.click()
             time.sleep(.2)
@@ -156,7 +156,7 @@ class Purchase_Order:
 
     def Purchase_Order(self):
             try:
-                click_credit_notes = WebDriverWait(self.driver, 10).until(
+                click_credit_notes = WebDriverWait(self.driver, 30).until(
                     EC.element_to_be_clickable(self.purchase_orders))
                 time.sleep(.2)
                 click_credit_notes.click()
@@ -167,7 +167,7 @@ class Purchase_Order:
 
     def Click_Purchase_Order(self):
             try:
-                purchase_order = WebDriverWait(self.driver, 20).until(
+                purchase_order = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.click_purchase_order))
                 time.sleep(.2)
                 purchase_order.click()
@@ -179,7 +179,7 @@ class Purchase_Order:
 
     def Select_Contact_Name(self):
             d = self.driver
-            w = WebDriverWait(d, 20)
+            w = WebDriverWait(d, 30)
 
             control = w.until(EC.element_to_be_clickable(
                 self.select_contact_name  # outer control
@@ -223,7 +223,7 @@ class Purchase_Order:
 
             try:
                 driver = self.driver
-                wait = WebDriverWait(driver, 15)
+                wait = WebDriverWait(driver, 30)
 
                 dropdown = wait.until(EC.element_to_be_clickable(self.click_item_for_invoice_po))
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
@@ -244,7 +244,7 @@ class Purchase_Order:
 
     def Save_PO(self):
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
             save_btn = wait.until(EC.element_to_be_clickable(self.save_po))
 

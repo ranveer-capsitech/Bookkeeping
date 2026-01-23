@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="update test case.">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Test case convert as new company">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Assets_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Assets_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/BankingPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/BankingPage.py" afterDir="false" />
@@ -15,33 +15,16 @@
       <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Journals_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Journals_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Mileage_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Mileage_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/PurchasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/PurchasePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Purchase_Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Item_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Purchase_PO_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_PO_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Purchase_Payment_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Payment_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Receipts_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Receipts_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Refund_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Refund_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/10_Purchase_Payment_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/10_Purchase_Payment_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/11_Reimbursements_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/11_Reimbursements_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/12_Mileage_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/12_Mileage_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/14_Refund_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/14_Refund_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/15_Journals_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/15_Journals_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/16_Asset_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/16_Asset_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/17_Dividend_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/17_Dividend_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_Banking_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/19_VAT_Test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/4_Estimates_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/5_Receipt_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/6_Item_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/6_Item_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/7_Purchase_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/7_Purchase_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/9_Purchase_PO_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/9_Purchase_PO_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -461,7 +444,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768995269934</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Test case convert as new company">
+      <option name="closed" value="true" />
+      <created>1769148516225</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1769148516225</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -489,6 +480,7 @@
     <MESSAGE value="Allure Report" />
     <MESSAGE value="new set up" />
     <MESSAGE value="update test case." />
-    <option name="LAST_COMMIT_MESSAGE" value="update test case." />
+    <MESSAGE value="Test case convert as new company" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test case convert as new company" />
   </component>
 </project>
