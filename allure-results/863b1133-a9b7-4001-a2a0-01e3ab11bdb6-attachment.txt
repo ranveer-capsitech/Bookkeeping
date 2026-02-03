@@ -1,0 +1,120 @@
+ Error on click: Message: element click intercepted: Element <i data-icon-name="Waffle" aria-hidden="true" class="buttonIcon-482">...</i> is not clickable at point (1660, 20). Other element would receive the click: <div style="position: fixed; inset: 0px;">...</div>
+  (Session info: chrome=144.0.7559.60)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff68a5ea545
+	0x7ff68a5ea5a0
+	0x7ff68a390fed
+	0x7ff68a3f4c55
+	0x7ff68a3f236a
+	0x7ff68a3ef1f5
+	0x7ff68a3ee090
+	0x7ff68a3df2b6
+	0x7ff68a415c9a
+	0x7ff68a3deb36
+	0x7ff68a43a10c
+	0x7ff68a3dcedc
+	0x7ff68a3dde23
+	0x7ff68a8c8bb0
+	0x7ff68a8c2fbd
+	0x7ff68a8e420a
+	0x7ff68a606e15
+	0x7ff68a60f4dc
+	0x7ff68a5f3e54
+	0x7ff68a5f4006
+	0x7ff68a5d9e27
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+ Error on click:: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff68a5ea545
+	0x7ff68a5ea5a0
+	0x7ff68a390fed
+	0x7ff68a3ec6d2
+	0x7ff68a3ec9dc
+	0x7ff68a43d5b7
+	0x7ff68a43a10c
+	0x7ff68a3dcedc
+	0x7ff68a3dde23
+	0x7ff68a8c8bb0
+	0x7ff68a8c2fbd
+	0x7ff68a8e420a
+	0x7ff68a606e15
+	0x7ff68a60f4dc
+	0x7ff68a5f3e54
+	0x7ff68a5f4006
+	0x7ff68a5d9e27
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+Error on click:Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff68a5ea545
+	0x7ff68a5ea5a0
+	0x7ff68a390fed
+	0x7ff68a3ec6d2
+	0x7ff68a3ec9dc
+	0x7ff68a43d5b7
+	0x7ff68a43a10c
+	0x7ff68a3dcedc
+	0x7ff68a3dde23
+	0x7ff68a8c8bb0
+	0x7ff68a8c2fbd
+	0x7ff68a8e420a
+	0x7ff68a606e15
+	0x7ff68a60f4dc
+	0x7ff68a5f3e54
+	0x7ff68a5f4006
+	0x7ff68a5d9e27
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+Error on click:Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff68a5ea545
+	0x7ff68a5ea5a0
+	0x7ff68a390fed
+	0x7ff68a3ec6d2
+	0x7ff68a3ec9dc
+	0x7ff68a43d5b7
+	0x7ff68a43a10c
+	0x7ff68a3dcedc
+	0x7ff68a3dde23
+	0x7ff68a8c8bb0
+	0x7ff68a8c2fbd
+	0x7ff68a8e420a
+	0x7ff68a606e15
+	0x7ff68a60f4dc
+	0x7ff68a5f3e54
+	0x7ff68a5f4006
+	0x7ff68a5d9e27
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+Error on Click:Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff68a5ea545
+	0x7ff68a5ea5a0
+	0x7ff68a390fed
+	0x7ff68a3ec6d2
+	0x7ff68a3ec9dc
+	0x7ff68a43d5b7
+	0x7ff68a43a10c
+	0x7ff68a3dcedc
+	0x7ff68a3dde23
+	0x7ff68a8c8bb0
+	0x7ff68a8c2fbd
+	0x7ff68a8e420a
+	0x7ff68a606e15
+	0x7ff68a60f4dc
+	0x7ff68a5f3e54
+	0x7ff68a5f4006
+	0x7ff68a5d9e27
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+

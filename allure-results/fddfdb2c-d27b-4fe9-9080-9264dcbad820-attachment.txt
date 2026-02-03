@@ -1,0 +1,9 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Click for select estimate  successfully....!!
+Click for add_estimates  successfully....!!
+ Customer selected successfully for Estimate!
+ Test Case -6 :  Pass: -  Estimate  saved successfully.....!!

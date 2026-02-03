@@ -1,0 +1,11 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Select a business name successfully..... 
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on credit section successfully......!!
+Click for add credit  successfully....!!
+ Customer selected successfully for Credit Note!
+Invoice reference selected successfully…!!
+click on save credit note successfully....!!
+ Test Case -5 : Pass :  credit note saved successfully...!

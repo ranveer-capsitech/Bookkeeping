@@ -1,0 +1,4 @@
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Selected Customer is : Sales invoice
+Invoice created successfully

@@ -1,0 +1,6 @@
+click on credit section successfully......!!
+Click for add credit  successfully....!!
+ Customer selected successfully for Credit Note!
+Invoice reference selected successfully!
+click on save credit note successfully....!!
+ Duplicate entry detected — stopping further execution.

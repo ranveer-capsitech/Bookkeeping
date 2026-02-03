@@ -46,7 +46,6 @@ class Reimbursement:
         self.click_expense_claims = (By.XPATH, "(//div[contains(text(),'Expense claims')])[1]")
 
 
-
 #-----------------------------------------------------Reimbursements----------------------------------------------------
 
         self.reimbursements_section = (By.XPATH, "//button[.//span[normalize-space()='Reimbursements']]")
