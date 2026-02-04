@@ -89,9 +89,9 @@ class Login(unittest.TestCase):
         client_section.Click_Save()
         time.sleep(.2)
 
-        client_section.Click_On_Saved_Name()
-        time.sleep(.2)
-
+        # client_section.Click_On_Saved_Name()
+        # time.sleep(.2)
+        #
         client_section.Enter_Amount_First()
         time.sleep(.2)
         client_section. Enter_Amount_Second()

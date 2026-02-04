@@ -376,13 +376,13 @@ class Budget:
             print("Data saved successfully!")
             update_message = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located(
-                    (By.XPATH, "//*[contains(normalize-space(), 'Data saved successfully!')]"))
+                    (By.XPATH, "//*[contains(normalize-space(), 'Budget fields updated successfully.')]"))
             )
 
             # Assert the presence of the success message
-            assert update_message, "Data saved successfully!"
+            assert update_message, "Budget fields updated successfully."
 
-            print("Test Case 21  - Pass: Data saved successfully!")
+            print("Test Case 21  - Pass: Budget fields updated successfully.")
 
         except Exception as e:
             print(f"Enter on click:{e}")

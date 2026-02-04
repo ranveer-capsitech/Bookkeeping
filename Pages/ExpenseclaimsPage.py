@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
+import re
 
 
 fake = Faker()
@@ -423,41 +424,82 @@ class Expenseclaims:
 
     def Save_Expense(self):
 
+        wait = WebDriverWait(self.driver, 30)
+
+        # 1) Click Save
+        save_btn = wait.until(EC.element_to_be_clickable(self.save_expense))
+        save_btn.click()
+        time.sleep(0.5)
+        print("Save button clicked!")
+
+        # 2) Optional popup click
         try:
-            # STEP 1: Click the Save button
-            save_btn = WebDriverWait(self.driver, 30).until(
-                EC.element_to_be_clickable(self.save_expense)
+            popup = WebDriverWait(self.driver, 3).until(
+                EC.element_to_be_clickable(self.save_expense_click)
             )
-            save_btn.click()
-            time.sleep(2)
+            popup.click()
+            print("Popup detected → Saved using popup button!")
+        except Exception:
+            print("No popup detected → continuing...")
 
-            print("Save button clicked!")
+        # 3) Capture ONLY the toast/message (use last match)
+        toast_xpath = "((//*[contains(normalize-space(),'Expense saved successfully with number')])[last()])"
+        toast_el = wait.until(EC.visibility_of_element_located((By.XPATH, toast_xpath)))
 
-            # STEP 2: CHECK IF POPUP APPEARS (within 2 seconds)
-            try:
-                popup = WebDriverWait(self.driver, 30).until(
-                    EC.visibility_of_element_located(self.save_expense_click)
-                )
-                popup.click()
-                print("Popup detected → Saved using popup button!")
-                time.sleep(3)
+        msg_text = toast_el.text.strip()
+        print("Success toast:", msg_text)
 
-            except Exception:
-                print("No popup detected → Checking for success message...")
+        # 4) Assert fixed text
+        assert "Expense saved successfully with number" in msg_text, f"Unexpected message: {msg_text}"
 
-                # STEP 3: If no popup → verify success message
-                update_message = WebDriverWait(self.driver, 30).until(
-                    EC.visibility_of_element_located(
-                        (By.XPATH, "//*[contains(normalize-space(), 'Expense saved successfully')]")
-                    )
-                )
+        # 5) Assert dynamic number (CLM-0009)
+        m = re.search(r"\bCLM-\d+\b", msg_text)
+        assert m, f"CLM number not found in message: {msg_text}"
 
-                assert update_message, "Expense saved successfully"
-                print("Test Case 13 - Pass: Expense saved successfully.")
+        self.claim_number = m.group(0)
+        print("Captured claim number:", self.claim_number)
+        print("Test Case 13 - Pass: Expense saved successfully.")
+        #
+        # except Exception as e:
+        #     print(f"Error in Save_Expense: {e}")
 
-        except Exception as e:
-            print(f"Error in Save_Expense: {e}")
 
+
+        # try:
+        #     # STEP 1: Click the Save button
+        #     save_btn = WebDriverWait(self.driver, 30).until(
+        #         EC.element_to_be_clickable(self.save_expense)
+        #     )
+        #     save_btn.click()
+        #     time.sleep(2)
+        #
+        #     print("Save button clicked!")
+        #
+        #     # STEP 2: CHECK IF POPUP APPEARS (within 2 seconds)
+        #     try:
+        #         popup = WebDriverWait(self.driver, 30).until(
+        #             EC.visibility_of_element_located(self.save_expense_click)
+        #         )
+        #         popup.click()
+        #         print("Popup detected → Saved using popup button!")
+        #         time.sleep(3)
+        #
+        #     except Exception:
+        #         print("No popup detected → Checking for success message...")
+        #
+        #         # STEP 3: If no popup → verify success message
+        #         update_message = WebDriverWait(self.driver, 30).until(
+        #             EC.visibility_of_element_located(
+        #                 (By.XPATH, "//*[contains(normalize-space(), 'Expense saved successfully')]")
+        #             )
+        #         )
+        #
+        #         assert update_message, "Expense saved successfully"
+        #         print("Test Case 13 - Pass: Expense saved successfully.")
+        #
+        # except Exception as e:
+        #     print(f"Error in Save_Expense: {e}")
+        #
 
 
 #-------------------------------------------------mileages_section------------------------------------------------------

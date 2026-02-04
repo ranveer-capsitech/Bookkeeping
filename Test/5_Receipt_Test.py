@@ -67,6 +67,7 @@ class Login(unittest.TestCase):
 
     def test_08_Add_New_Receipts(self):
         client_section = Receipts(driver=self.driver)
+        time.sleep(.2)
         client_section.Select_Search()
         time.sleep(5)
         client_section.Enter_Company()

@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="time increase">
-      <change afterPath="$PROJECT_DIR$/Pages/Budget_manager_Page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" afterDir="false" />
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Test case of Budget manager.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Budget_manager_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Budget_manager_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/5_Receipt_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +127,7 @@
     &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
     &quot;Python.Credit_NotesPage.executor&quot;: &quot;Run&quot;,
     &quot;Python.Dividend_Page.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ExpenseclaimsPage.executor&quot;: &quot;Run&quot;,
     &quot;Python.Item_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.LoginPage.executor&quot;: &quot;Run&quot;,
     &quot;Python.Reimbursements_Page.executor&quot;: &quot;Run&quot;,
@@ -446,7 +449,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769165138107</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Test case of Budget manager.">
+      <option name="closed" value="true" />
+      <created>1770101951504</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1770101951504</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -476,6 +487,7 @@
     <MESSAGE value="update test case." />
     <MESSAGE value="Test case convert as new company" />
     <MESSAGE value="time increase" />
-    <option name="LAST_COMMIT_MESSAGE" value="time increase" />
+    <MESSAGE value="Test case of Budget manager." />
+    <option name="LAST_COMMIT_MESSAGE" value="Test case of Budget manager." />
   </component>
 </project>
