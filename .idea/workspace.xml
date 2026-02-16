@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Test case of Budget manager.">
+      <change beforePath="$PROJECT_DIR$/.idea/BOOKKEEPING.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BOOKKEEPING.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Budget_manager_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Budget_manager_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/5_Receipt_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/1_Login_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/1_Login_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/configReader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,9 +137,17 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/CT_USER/PycharmProjects/Bookkeeping&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
   }
 }</component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="BOOKKEEPING" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="BOOKKEEPING" />
+      </console-settings>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\Test" />
@@ -457,7 +464,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770101951504</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Test case of Budget manager.">
+      <option name="closed" value="true" />
+      <created>1770207928179</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1770207928179</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

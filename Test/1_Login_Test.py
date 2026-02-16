@@ -1,5 +1,6 @@
 import unittest
 from selenium import webdriver
+import Pages
 from Pages.LoginPage import loginPage
 from configReader import ConfigReader
 from selenium.webdriver.common.by import By
@@ -24,22 +25,28 @@ class Login(unittest.TestCase):
         driver = self.driver
 
         # Create instance of ConfigReader
+
         config = ConfigReader(r"C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\config.properties")
+
         # Instance of login_page
+
         loginpage = loginPage(driver)
 
         driver.get(config.get_value("DEFAULT", "URL"))
 
         # Login
+
         loginpage.enter_username(config.get_value("DEFAULT", "USERNAME"))
         time.sleep(1)
         loginpage.enter_password(config.get_value("DEFAULT", "Password"))
         time.sleep(1)
+
        #loginpage.eye_button()
+
         time.sleep(1)
         loginpage.click_sign_in_button()
         time.sleep(1)
-        print("Test case - 1: Pass: Login successfully....!!")
+        print("Test case - 1 : Pass: Login successfully....!!")
         time.sleep(10)
 
 
@@ -51,6 +58,4 @@ class Login(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
 
