@@ -1,0 +1,38 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on asset successfully....!!
+Click on add assets successfully..... 
+Error on click:Message: element not interactable
+  (Session info: chrome=144.0.7559.133); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7e10af3d5
+	0x7ff7e10af430
+	0x7ff7e0e50ea6
+	0x7ff7e0ea58d9
+	0x7ff7e0ea32b4
+	0x7ff7e0ed589a
+	0x7ff7e0e9e766
+	0x7ff7e0ef9d08
+	0x7ff7e0e9cb0c
+	0x7ff7e0e9da53
+	0x7ff7e138b470
+	0x7ff7e138586d
+	0x7ff7e13a621a
+	0x7ff7e10cb235
+	0x7ff7e10d3a5c
+	0x7ff7e10b8844
+	0x7ff7e10b89f6
+	0x7ff7e109eb87
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+Purchase price cleared and 100 entered successfully!
+Account selected successfully....!!
+Supplier selected successfully....!!
+Click on Enter rate successfully..... 
+Test Case 16 - Pass: Asset saved successfully.

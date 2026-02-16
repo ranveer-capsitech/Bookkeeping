@@ -1,0 +1,13 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on purchases successfully....!!
+click on Payment section successfully......!!
+Click on payment successfully....!!
+Select Supplier successfully!
+Select Account type successfully!
+Click on payment successfully....!!
+ Test Case -10 :  Pass:  Payment saved successfully....!!

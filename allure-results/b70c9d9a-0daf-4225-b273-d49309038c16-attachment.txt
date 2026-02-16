@@ -1,0 +1,20 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Expense Claims successfully....!!
+Select directors successfully....!!
+Enter remark successfully..... 
+Enter bill number successfully..... 
+Enter Description successfully....!!
+Select account successfully..... 
+Base amount entered successfully....!!
+VAT selected successfully!
+Save button clicked!
+No popup detected → continuing...
+Success toast: Expense saved successfully with number CLM-0013
+Captured claim number: CLM-0013
+Test Case 13 - Pass: Expense saved successfully.

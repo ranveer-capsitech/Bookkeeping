@@ -1,0 +1,63 @@
+ Error on click: Message: element click intercepted: Element <i data-icon-name="Waffle" aria-hidden="true" class="buttonIcon-482">...</i> is not clickable at point (1659, 20). Other element would receive the click: <div style="position: fixed; inset: 0px;">...</div>
+  (Session info: chrome=144.0.7559.133); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7e10af3d5
+	0x7ff7e10af430
+	0x7ff7e0e510bd
+	0x7ff7e0eb4885
+	0x7ff7e0eb1f9a
+	0x7ff7e0eaee25
+	0x7ff7e0eadcc7
+	0x7ff7e0e9eee6
+	0x7ff7e0ed589a
+	0x7ff7e0e9e766
+	0x7ff7e0ef9d08
+	0x7ff7e0e9cb0c
+	0x7ff7e0e9da53
+	0x7ff7e138b470
+	0x7ff7e138586d
+	0x7ff7e13a621a
+	0x7ff7e10cb235
+	0x7ff7e10d3a5c
+	0x7ff7e10b8844
+	0x7ff7e10b89f6
+	0x7ff7e109eb87
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+ Error on click:: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7e10af3d5
+	0x7ff7e10af430
+	0x7ff7e0e510bd
+	0x7ff7e0eac2fe
+	0x7ff7e0eac60c
+	0x7ff7e0efd187
+	0x7ff7e0ef9d08
+	0x7ff7e0e9cb0c
+	0x7ff7e0e9da53
+	0x7ff7e138b470
+	0x7ff7e138586d
+	0x7ff7e13a621a
+	0x7ff7e10cb235
+	0x7ff7e10d3a5c
+	0x7ff7e10b8844
+	0x7ff7e10b89f6
+	0x7ff7e109eb87
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on credit section successfully......!!
+click for add new receipts successfully.....!! 
+ Customer selected successfully for Estimate!
+ Entered random price: £593.81
+ Test Case -5 :  Pass: -  Receipt saved successfully.....!!

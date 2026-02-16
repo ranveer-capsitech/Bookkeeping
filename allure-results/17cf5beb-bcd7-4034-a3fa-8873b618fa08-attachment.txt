@@ -1,0 +1,15 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Click for add budget successfully.....!!
+Click on new add butten successfully.....!
+Name entered successfully: Nicholas
+Enter budget successfully....!!
+Test Case 20  - Pass: Refund saved successfully.
+Amount typed: 1000 | UI value now: £1,000.00
+Amount typed: 1000 | UI value now: £1,000.00
+Amount typed: 1000 | UI value now: £1,000.00
+Data saved successfully!
+Test Case 21  - Pass: Budget fields updated successfully.

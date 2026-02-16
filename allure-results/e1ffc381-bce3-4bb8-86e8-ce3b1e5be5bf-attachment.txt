@@ -1,0 +1,4 @@
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Selected Customer is : ABC QWERTY
+Invoice created successfully

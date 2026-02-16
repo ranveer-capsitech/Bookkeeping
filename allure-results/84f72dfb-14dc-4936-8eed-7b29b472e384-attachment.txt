@@ -1,0 +1,40 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Mileages Section successfully....!!
+Click on Mileages successfully....!!
+Select directors successfully....!!
+Enter remark for mileage successfully....!!
+Engine type entered successfully....!!
+Enter Description successfully....!!
+Enter mileage successfully....!!
+Rate entered successfully....!!
+Save button clicked!
+No popup detected → Checking for success message...
+Error in Save_Expense: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff7e10af3d5
+	0x7ff7e10af430
+	0x7ff7e0e510bd
+	0x7ff7e0eac2fe
+	0x7ff7e0eac60c
+	0x7ff7e0efd187
+	0x7ff7e0ef9d08
+	0x7ff7e0e9cb0c
+	0x7ff7e0e9da53
+	0x7ff7e138b470
+	0x7ff7e138586d
+	0x7ff7e13a621a
+	0x7ff7e10cb235
+	0x7ff7e10d3a5c
+	0x7ff7e10b8844
+	0x7ff7e10b89f6
+	0x7ff7e109eb87
+	0x7ff91f1fe8d7
+	0x7ff92006c53c
+
