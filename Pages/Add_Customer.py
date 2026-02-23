@@ -70,14 +70,6 @@ class Add_Customer:
         self.save_customer = (By.XPATH, "//button[@type='submit']//span[normalize-space()='Save']")
 
 
-
-
-
-
-
-
-
-
 #-----------------------------------------Methods-----------------------------------------------------------------------
 
     def Select_Search(self):
@@ -420,7 +412,6 @@ class Add_Customer:
             print("Entered discount successfully!")
         except Exception as e:
             print(f"Error on Discount input: {e}")
-
 
 
     def Select_Vat(self):
