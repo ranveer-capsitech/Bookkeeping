@@ -311,6 +311,7 @@ class ClientSell:
             # Assert the presence of the success message
             assert update_message, "Invoice created successfully"
 
+
             print("Test Case 2 - Pass: Invoice created successfully")
 
 
