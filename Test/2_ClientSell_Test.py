@@ -90,8 +90,18 @@ class Login(unittest.TestCase):
         client_section.Select_Customer_Keyboard()
         time.sleep(.2)
 
+        client_section.Add_Attachment()
+        time.sleep(.2)
+
         client_section.Select_item_sale()
         time.sleep(.5)
+
+        client_section.Enter_Discount()
+        time.sleep(.3)
+        client_section.Click_Enter_Notes()
+        time.sleep(.3)
+        client_section.Enter_Notes()
+        time.sleep(.3)
 
         client_section.Click_Save()
         time.sleep(2)

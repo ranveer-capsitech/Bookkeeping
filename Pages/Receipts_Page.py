@@ -49,6 +49,19 @@ class Receipts:
         self.select_amount = (By.XPATH,
                               "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
         self.enter_amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@placeholder='amount'][1]")
+
+        self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'rs-control')][1]")
+
+
+
+        self.click_for_enter_note = (By.XPATH,
+                                     "//label[normalize-space()='Note :']/following::div[contains(@style,'overflow-y')][1]")
+        self.enter_note = (By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]")
+        self.save_note = (By.XPATH,
+                          "//div[contains(@class,'ms-Dialog-main')]//button[.//span[normalize-space()='Save']]")
+
+
+
         self.save_receipts = (By.XPATH, "//button[.//span[normalize-space()='Save'] and not(contains(.,'Save & New'))]")
 
 
@@ -199,7 +212,7 @@ class Receipts:
             amount.click()
             time.sleep(.2)
             amount.send_keys(Keys.ENTER)
-            time.sleep(.2)
+            time.sleep(2)
             print("Customer selected successfully....!!")
 
         except Exception as e:
@@ -211,19 +224,122 @@ class Receipts:
             enter_a_amount = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_amount))
             time.sleep(.2)
             random_price = round(random.uniform(50, 999), 2)
+            time.sleep(.2)
 
 
             enter_a_amount.send_keys(Keys.CONTROL, 'a')
             enter_a_amount.send_keys(Keys.BACKSPACE)
+            time.sleep(.2)
 
 
             enter_a_amount.send_keys(str(random_price))
             enter_a_amount.send_keys(Keys.TAB)
+            time.sleep(.2)
 
             print(f" Entered random price: £{random_price}")
             time.sleep(0.5)
         except Exception as e:
              print(f"Error on Click : {e}")
+
+    # def Select_Method(self):
+    #     # try:
+    #         select_method = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.method))
+    #         time.sleep(.2)
+    #         select_method.click()
+    #         time.sleep(.2)
+    #         select_method.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(.2)
+    #         select_method.send_keys(Keys.ENTER)
+    #         time.sleep(.2)
+    #         print("Method selected successfully....!!")
+    #
+    #     # except Exception as e:
+    #     #     print(f"Error on Click : {e}")
+
+
+    def Select_Method(self, method_text="Bank Transfer"):
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            # 1) click react-select control
+            control = wait.until(EC.element_to_be_clickable(
+                (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'rs-control')][1]")
+            ))
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
+            control.click()
+
+            # 2) type into the combobox input (NOT into div)
+            input_box = wait.until(EC.visibility_of_element_located(
+                (By.XPATH, "//label[normalize-space()='Method']/following::input[@role='combobox'][1]")
+            ))
+            input_box.send_keys(Keys.CONTROL, "a")
+            input_box.send_keys(Keys.BACKSPACE)
+            input_box.send_keys(method_text)
+            time.sleep(0.2)
+            input_box.send_keys(Keys.ENTER)
+
+            print(f"Method selected: {method_text}")
+
+
+    def Add_Attachment(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            # 1) Directly target the file input near the attachment icon (more stable(rv))
+            file_input = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//i[@data-icon-name='Attachment']/ancestor::button/following::input[@type='file'][1]"
+            )))
+
+            # 2) If hidden, force it visible so send_keys works(rv)
+            driver.execute_script(
+                "arguments[0].style.display='block'; arguments[0].style.visibility='visible';",
+                file_input
+            )
+
+            # 3) Upload file (this will NOT open OS dialog(rv))
+            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test.csv")
+
+            print("File uploaded successfully.......!")
+
+        except Exception as e:
+            print(f"Error in upload: {e}")
+
+    def Click_Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+        try:
+
+            click_for_note = wait.until(EC.element_to_be_clickable(self.click_for_enter_note))
+            time.sleep(.2)
+            click_for_note.click()
+            time.sleep(2)
+            print("Click on enter notes  successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+    def Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+        try:
+            enter_notes = wait.until(EC.visibility_of_element_located(self.enter_note))
+
+            enter_notes.click()
+            enter_notes.send_keys(Keys.CONTROL, "a")
+            enter_notes.send_keys(Keys.BACKSPACE)
+
+
+            enter_notes.send_keys("Only for testing....!!")
+
+            click_save_notes = wait.until(EC.element_to_be_clickable(self.save_note))
+            click_save_notes.click()
+
+            print("Notes added successfully....!!")
+        except Exception as e:
+            print(f"Error on Click : {e}")
+
 
 
 

@@ -50,8 +50,15 @@ class ClientSell:
         self.table = (By.XPATH," (//div[contains(text(),'Tables')])[1]")
 
         self.save_invoice = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+        self.add_discount = (By.XPATH, "//input[@name='discount']")
+
+        self.click_for_enter_note = (By.XPATH, "//label[normalize-space()='Note :']/following::div[contains(@style,'overflow-y')][1]")
+        self.enter_note = (By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]")
+        self.save_note = (By.XPATH, "//div[contains(@class,'ms-Dialog-main')]//button[.//span[normalize-space()='Save']]")
 
         self.allocate_save_button = (By.XPATH,"//div[@role='dialog']//button[.//span[normalize-space()='Save']]")
+
+
 
 
 
@@ -222,8 +229,6 @@ class ClientSell:
 
 
 
-
-
     # def Select_Customer(self):
     #         driver = self.driver
     #         wait = WebDriverWait(self.driver, 30)
@@ -247,7 +252,30 @@ class ClientSell:
     #     # except Exception as e:
     #     #     print(f"Error on Click : {e}")
 
+    def Add_Attachment(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
 
+            # 1) Directly target the file input near the attachment icon (more stable(rv))
+            file_input = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//i[@data-icon-name='Attachment']/ancestor::button/following::input[@type='file'][1]"
+            )))
+
+            # 2) If hidden, force it visible so send_keys works(rv)
+            driver.execute_script(
+                "arguments[0].style.display='block'; arguments[0].style.visibility='visible';",
+                file_input
+            )
+
+            # 3) Upload file (this will NOT open OS dialog(rv))
+            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test.csv")
+
+            print("File uploaded successfully.......!")
+
+        except Exception as e:
+            print(f"Error in upload: {e}")
 
 
 
@@ -282,9 +310,61 @@ class ClientSell:
                 time.sleep(0.4)
 
 
+    def Enter_Discount(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+
+        try:
+            control = wait.until(EC.visibility_of_element_located(self.add_discount))
+            time.sleep(.2)
+            control.click()
+            time.sleep(.2)
+            control.send_keys("10")
+            time.sleep(.2)
+            print("Discount added successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+
+    def Click_Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+        try:
+
+            click_for_note = wait.until(EC.element_to_be_clickable(self.click_for_enter_note))
+            time.sleep(.2)
+            click_for_note.click()
+            time.sleep(2)
+            print("Click on enter notes  successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+    def Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+        try:
+            enter_notes = wait.until(EC.visibility_of_element_located(self.enter_note))
+
+            enter_notes.click()
+            enter_notes.send_keys(Keys.CONTROL, "a")
+            enter_notes.send_keys(Keys.BACKSPACE)
+
+
+            enter_notes.send_keys("Only for testing....!!")
+
+            click_save_notes = wait.until(EC.element_to_be_clickable(self.save_note))
+            click_save_notes.click()
+
+            print("Notes added successfully....!!")
+        except Exception as e:
+            print(f"Error on Click : {e}")
+
+
     def Click_Save(self):
 
-        # Initialize WebDriverWait
+
             wait = WebDriverWait(self.driver, 30)
 
             try:
@@ -311,12 +391,9 @@ class ClientSell:
             # Assert the presence of the success message
             assert update_message, "Invoice created successfully"
 
-
             print("Test Case 2 - Pass: Invoice created successfully")
 
-
             time.sleep(2)
-
 
 
     # def Save_Invoice(self):

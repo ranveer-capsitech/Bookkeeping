@@ -49,6 +49,17 @@ class Purchase_Order:
         self.select_contact_name = (By.XPATH, "//div[contains(text(),'Contact name')]")
         self.click_item_for_invoice_po = (By.XPATH,
                                           "(//table[contains(@class,'table')]//tr[1]//div[contains(@class,'rs-input-container')]//input)[1]")
+
+        self.add_discount = (By.XPATH, "//input[@name='discount']")
+
+        self.click_for_enter_note = (By.XPATH,
+                                     "//label[normalize-space()='Note :']/following::div[contains(@style,'overflow-y')][1]")
+        self.enter_note = (By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]")
+
+        self.save_note = (By.XPATH,
+                          "//div[contains(@class,'ms-Dialog-main')]//button[.//span[normalize-space()='Save']]")
+
+
         self.save_po = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
 
 
@@ -219,6 +230,33 @@ class Purchase_Order:
 
             print("Customer selected successfully for PO")
 
+
+    def Add_Attachment(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            # 1) Directly target the file input near the attachment icon (more stable(rv))
+            file_input = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//i[@data-icon-name='Attachment']/ancestor::button/following::input[@type='file'][1]"
+            )))
+
+            # 2) If hidden, force it visible so send_keys works(rv)
+            driver.execute_script(
+                "arguments[0].style.display='block'; arguments[0].style.visibility='visible';",
+                file_input
+            )
+
+            # 3) Upload file (this will NOT open OS dialog(rv))
+            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test.csv")
+
+            print("File uploaded successfully.......!")
+
+        except Exception as e:
+            print(f"Error in upload: {e}")
+
+
     def Click_Item_For_Invoice(self):
 
             try:
@@ -241,6 +279,62 @@ class Purchase_Order:
                 print("Invoice reference selected successfully!")
             except Exception as e:
                 print(f" Could not select customer: {e}")
+
+
+
+    def Enter_Discount(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+
+        try:
+            control = wait.until(EC.visibility_of_element_located(self.add_discount))
+            time.sleep(.2)
+            control.click()
+            time.sleep(.2)
+            control.send_keys("10")
+            time.sleep(.2)
+            print("Discount added successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+
+    def Click_Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+        try:
+
+            click_for_note = wait.until(EC.element_to_be_clickable(self.click_for_enter_note))
+            time.sleep(.2)
+            click_for_note.click()
+            time.sleep(2)
+            print("Click on enter notes  successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+    def Enter_Notes(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+        try:
+            enter_notes = wait.until(EC.visibility_of_element_located(self.enter_note))
+
+            enter_notes.click()
+            enter_notes.send_keys(Keys.CONTROL, "a")
+            enter_notes.send_keys(Keys.BACKSPACE)
+
+
+            enter_notes.send_keys("Only for testing....!!")
+
+            click_save_notes = wait.until(EC.element_to_be_clickable(self.save_note))
+            click_save_notes.click()
+
+            print("Notes added successfully....!!")
+        except Exception as e:
+            print(f"Error on Click : {e}")
+
+
+
 
     def Save_PO(self):
             driver = self.driver

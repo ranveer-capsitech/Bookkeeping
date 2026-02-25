@@ -86,6 +86,16 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Customer()
         time.sleep(.2)
+
+        client_section.Add_Attachment()
+        time.sleep(.2)
+        client_section.Enter_Discount()
+        time.sleep(.2)
+        # client_section.Click_Enter_Notes()
+        # time.sleep(.2)
+        # client_section.Enter_Notes()
+        # time.sleep(.2)
+
         client_section.Select_item_purchase()
         time.sleep(.5)
         client_section.Enter_amount()

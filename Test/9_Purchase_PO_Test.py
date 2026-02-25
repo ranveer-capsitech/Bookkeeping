@@ -82,8 +82,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Purchases()
 
-
-
         time.sleep(.5)
         time.sleep(.2)
         client_section.Purchase_Order()
@@ -92,7 +90,15 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Contact_Name()
         time.sleep(.2)
+        client_section.Add_Attachment()
+        time.sleep(.2)
         client_section.Click_Item_For_Invoice()
+        time.sleep(.2)
+        client_section.Enter_Discount()
+        time.sleep(.2)
+        client_section.Click_Enter_Notes()
+        time.sleep(.2)
+        client_section.Enter_Notes()
         time.sleep(.2)
         client_section.Save_PO()
         time.sleep(.2)

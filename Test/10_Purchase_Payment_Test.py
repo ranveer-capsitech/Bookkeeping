@@ -67,7 +67,6 @@ class Login(unittest.TestCase):
 
 
 
-
     def test_13_Go_Payments(self):
         client_section = Purchase_Payment(driver=self.driver)
         time.sleep(.2)

@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
 
-
 fake = Faker()
 random_first_name = fake.first_name()
 random_last_name = fake.last_name()
@@ -103,7 +102,6 @@ class Purchase_Payment:
                     print(f"Entered '{company_name}' using XPath: {xp}")
                     return True
 
-
                 except Exception as e:
                     last_exc = e
                     continue
@@ -117,6 +115,7 @@ class Purchase_Payment:
 
             print("Enter_Company: FAILED. Last exception:", repr(last_exc))
             return False
+
 
     def Click_Company(self):
             try:
@@ -144,7 +143,6 @@ class Purchase_Payment:
             print(f"Error on click:{e}")
 
 
-
     def Click_Purchases(self):
         try:
             sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_purchases))
@@ -154,8 +152,6 @@ class Purchase_Payment:
             print("Click on purchases successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-
-
 
 
     def Payment_Section(self):
@@ -188,7 +184,6 @@ class Purchase_Payment:
         d = self.driver
         w = WebDriverWait(d, 30)
 
-
         control = w.until(EC.element_to_be_clickable((
             By.XPATH,
             "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-control')][1]"
@@ -196,7 +191,6 @@ class Purchase_Payment:
         d.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
         control.click()
         time.sleep(0.2)
-
 
         rs_input = w.until(EC.element_to_be_clickable((
             By.XPATH,
@@ -216,7 +210,6 @@ class Purchase_Payment:
         try:
             driver = self.driver
             wait = WebDriverWait(driver, 30)
-
 
             supplier_dropdown = wait.until(EC.element_to_be_clickable(self.account))
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", supplier_dropdown )

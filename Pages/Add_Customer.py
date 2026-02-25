@@ -158,6 +158,7 @@ class Add_Customer:
             except Exception as e:
                 print(f"Error on click:{e}")
 
+
     def Click_Sales(self):
             try:
                 sales = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_sales))
@@ -169,7 +170,8 @@ class Add_Customer:
                 print(f"Error on Click:{e}")
                 time.sleep(.2)
 
-# ---------------------------------------methods for Customer ----------------------------------------------------------
+# ---------------------------------------methods for Customer -----------------------------------------------------------
+
 
     def Select_Client_Section(self):
         try:
@@ -493,8 +495,6 @@ class Add_Customer:
 
 
 
-
-
     def Add_Attachment(self):
         try:
             driver = self.driver
@@ -520,6 +520,7 @@ class Add_Customer:
 
         except Exception as e:
             print(f"Error in upload: {e}")
+
         # try:
         #     driver = self.driver
         #     wait = WebDriverWait(driver, 30)
