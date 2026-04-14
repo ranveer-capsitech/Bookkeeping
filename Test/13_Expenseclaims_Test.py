@@ -90,6 +90,10 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Enter_Remark()
         time.sleep(.2)
+        client_section.Add_Attachment()
+        time.sleep(.2)
+
+
         client_section.Enter_Bill_No()
         time.sleep(.2)
         client_section.Enter_Description()

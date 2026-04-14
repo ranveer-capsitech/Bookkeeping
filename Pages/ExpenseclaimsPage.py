@@ -230,9 +230,9 @@ class Expenseclaims:
                     time.sleep(0.3)
                     active.send_keys(Keys.ARROW_DOWN)
                     time.sleep(0.3)
-                    # optional
+
                     active.send_keys(Keys.ENTER)
-                    time.sleep(0.3)  # optional
+                    time.sleep(0.3)
                     print("Click on Expense Claims successfully....!!")
                     return
                 except StaleElementReferenceException:
@@ -240,6 +240,7 @@ class Expenseclaims:
                     continue
 
             raise TimeoutException("Could not select value in Expense Claims dropdown")
+
 
     def Select_Directors(self):
 
@@ -296,6 +297,34 @@ class Expenseclaims:
             print("Enter remark successfully..... ")
         except Exception as e:
             print(f"Error on click:{e}")
+
+
+    def Add_Attachment(self):
+        try:
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            # 1) Directly target the file input near the attachment icon (more stable(rv))
+            file_input = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//i[@data-icon-name='Attachment']/ancestor::button/following::input[@type='file'][1]"
+            )))
+
+            # 2) If hidden, force it visible so send_keys works(rv)
+            driver.execute_script(
+                "arguments[0].style.display='block'; arguments[0].style.visibility='visible';",
+                file_input
+            )
+
+            # 3) Upload file (this will NOT open OS dialog(rv))
+            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test.csv")
+
+            print("File uploaded successfully.......!")
+
+        except Exception as e:
+            print(f"Error in upload: {e}")
+
+
 
 
 
