@@ -233,9 +233,6 @@ class Login(unittest.TestCase):
 
 
 
-
-
-
         #------------------------------------------------------------
 
         # client_section.Click_for_mail_Send()
@@ -248,12 +245,6 @@ class Login(unittest.TestCase):
         # time.sleep(1)
 
         #-------------------------------------------------------
-
-
-
-
-
-
 
 
 
