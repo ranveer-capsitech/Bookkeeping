@@ -64,7 +64,7 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Vat")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Vat and HMRC Authentication")
 
 
     def test_15_Expense_claims(self):
@@ -131,6 +131,8 @@ class Login(unittest.TestCase):
         client_section.Verify_And_Return_To_Expected_Vat_Page()
         time.sleep(.2)
 
+#------------------------------------------------------HMRC completed---------------------------------------------------
+
         client_section.Click_Edit()
         time.sleep(.2)
         client_section.Enter_Vat_Registration_Date(formatted_date)
@@ -139,6 +141,9 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Save()
         time.sleep(1)
+
+#------------------------------edit vat details ----------------------------------------------------------------------------
+
 
         client_section.Click_VAT_return()
         time.sleep(.2)
@@ -151,12 +156,18 @@ class Login(unittest.TestCase):
         client_section.Save_Vat()
         time.sleep(.2)
 
+        client_section.Refresh_Page()
+        time.sleep(2)
+
         client_section.Edit_Vat_Return()
         time.sleep(.2)
+
+
         client_section. Click_Import()
         time.sleep(1)
         client_section.Send_Button()
         time.sleep(.2)
+
         client_section.Enter_Reviewer()
         time.sleep(.2)
 
@@ -182,20 +193,14 @@ class Login(unittest.TestCase):
 
         client_section.Send_mail()
         time.sleep(.2)
-
-        # client_section.Recipient()
-        # time.sleep(.2)
         client_section.Mail_Form()
         time.sleep(.2)
 
-        client_section.Click_Send()
-        time.sleep(1)
-        client_section.Click_Mail_Icon()
-        time.sleep(.2)
-        client_section.Mail_Form()
-        time.sleep(.2)
+
+
         client_section.Click_Review_Mail_New_Tab()
-        time.sleep(.2)
+        time.sleep(4)
+
         client_section.Click_Get_OTP()
         time.sleep(.2)
         client_section.Enter_OTP()
@@ -210,14 +215,58 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Okay_And_Return_To_Previous_Tab()
         time.sleep(1)
-        client_section.Three_dot()
+        client_section.Refresh_Page()
+        time.sleep(2)
+        client_section.Click_Submit()
         time.sleep(.2)
-        client_section.Submit_HMRC()
-        time.sleep(.2)
-        client_section.Submit_VAT_Return()
+        client_section.Click_Submit()
         time.sleep(.2)
         client_section.Click_Yes()
         time.sleep(.2)
-        client_section. Click_Download()
+        client_section.Download_Response()
         time.sleep(.2)
+        client_section. Click_Cancel_Vat_Submission_Pop_up()
+        time.sleep(.2)
+        client_section.Click_Back_Button()
+        time.sleep(.2)
+
+
+
+
+
+
+
+        #------------------------------------------------------------
+
+        # client_section.Click_for_mail_Send()
+        # time.sleep(1)
+        # client_section.Send_Mail_Again_Button()
+        # time.sleep(.2)
+        # client_section.Mail_Form()
+        # time.sleep(.2)
+        # client_section.Click_for_mail_Send()
+        # time.sleep(1)
+
+        #-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+        client_section.Three_dot()
+        time.sleep(.2)
+        client_section.Click_Download_Report()
+        time.sleep(.2)
+        client_section. View_HMRC_Submission()
+        time.sleep(.2)
+
+        # client_section.Click_Yes()
+        # time.sleep(.2)
+        # client_section.Click_Download()
+        # time.sleep(.2)
 

@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Add Supplier test case">
-      <change afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="HMRC Authentication">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -528,7 +525,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772023552661</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="HMRC Authentication">
+      <option name="closed" value="true" />
+      <created>1776172437844</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1776172437844</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -562,6 +567,7 @@
     <MESSAGE value="Test case for Add customer." />
     <MESSAGE value="Add some other test cases like apply discount" />
     <MESSAGE value="Add Supplier test case" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Supplier test case" />
+    <MESSAGE value="HMRC Authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="HMRC Authentication" />
   </component>
 </project>
