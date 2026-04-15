@@ -170,7 +170,7 @@ class Vat:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -233,7 +233,7 @@ class Vat:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver,10).until(EC.presence_of_element_located(self.click_company))
+            click_on_selected_company = WebDriverWait(self.driver,20).until(EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
             time.sleep(.2)
@@ -246,7 +246,7 @@ class Vat:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -258,7 +258,7 @@ class Vat:
 
     def Vat_Return_Section(self):
         try:
-            vat = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.vat_return_section))
+            vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.vat_return_section))
             time.sleep(.2)
             vat.click()
             time.sleep(.2)
@@ -272,7 +272,7 @@ class Vat:
 
     def Click_Enable_MTD(self):
         try:
-            MTD = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_enable_MTD))
+            MTD = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_enable_MTD))
             time.sleep(.2)
             MTD.click()
             time.sleep(.2)
@@ -287,7 +287,7 @@ class Vat:
 
     def Click_Reauthorized(self):
         try:
-            reauthorized = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_reauthorized))
+            reauthorized = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_reauthorized))
             time.sleep(.2)
             reauthorized.click()
             time.sleep(.2)
@@ -326,7 +326,7 @@ class Vat:
 
     def Click_Continue(self):
         try:
-            cont = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_continue))
+            cont = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_continue))
             time.sleep(.2)
             cont.click()
             time.sleep(.2)
@@ -433,7 +433,7 @@ class Vat:
 
     def Click_Create(self):
         try:
-            create = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_create))
+            create = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_create))
             time.sleep(.2)
             create.click()
             time.sleep(.2)
@@ -641,7 +641,7 @@ class Vat:
 
     def Click_SignIn_Button(self):
         try:
-            signIn = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_hmrc_submit))
+            signIn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_hmrc_submit))
             time.sleep(.2)
             signIn.click()
             time.sleep(.2)
@@ -654,7 +654,7 @@ class Vat:
 
     def Give_Permission(self):
         try:
-            permission = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.give_permission))
+            permission = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.give_permission))
             time.sleep(.2)
             permission.click()
             time.sleep(.2)
@@ -721,7 +721,7 @@ class Vat:
 
     def Click_Edit(self):
         try:
-            edit = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_edit))
+            edit = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_edit))
             time.sleep(.2)
             edit.click()
             time.sleep(.2)
@@ -854,7 +854,7 @@ class Vat:
             print(f"Error while entering VAT Registration Number: {e}")
             raise
 
-    # def Clcik_Save(self):
+    # def Click_Save(self):
     #     try:
     #         save = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.save))
     #         time.sleep(.2)
@@ -935,7 +935,7 @@ class Vat:
 
     def Select_Obligations(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 20)
 
         try:
             # Wait until element is clickable
@@ -1024,7 +1024,6 @@ class Vat:
         except Exception as e:
             print(f"Error on Import Click/File Upload: {e}")
             raise
-
 
 
 
@@ -1565,17 +1564,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
-    def View_HMRC_Submission(self):
-        try:
-            hmrc = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.view_hmrc_submission))
-            time.sleep(.2)
-            hmrc.click()
-            time.sleep(.2)
 
-            print("Click on view HMRC submission Button successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
 
     def Click_Download_Report(self):
         try:

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="HMRC Authentication">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Completed HMRC Authentication process">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
@@ -533,7 +533,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776172437844</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Completed HMRC Authentication process">
+      <option name="closed" value="true" />
+      <created>1776253846436</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1776253846436</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Completed HMRC Authentication process">
+      <option name="closed" value="true" />
+      <created>1776254483374</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1776254483374</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -568,6 +584,7 @@
     <MESSAGE value="Add some other test cases like apply discount" />
     <MESSAGE value="Add Supplier test case" />
     <MESSAGE value="HMRC Authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="HMRC Authentication" />
+    <MESSAGE value="Completed HMRC Authentication process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed HMRC Authentication process" />
   </component>
 </project>

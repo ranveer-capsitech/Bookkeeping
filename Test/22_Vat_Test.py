@@ -253,11 +253,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Download_Report()
         time.sleep(.2)
-        client_section. View_HMRC_Submission()
-        time.sleep(.2)
 
-        # client_section.Click_Yes()
-        # time.sleep(.2)
-        # client_section.Click_Download()
-        # time.sleep(.2)
+
+
 
