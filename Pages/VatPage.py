@@ -2,11 +2,11 @@ import pyautogui
 from faker import Faker
 import time
 
-from selenium.common import TimeoutException, ElementClickInterceptedException
+
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC, wait
+from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime, timedelta
 
 
@@ -176,6 +176,26 @@ class Vat:
         self.ero_of_download_report = (By.XPATH, "//span[normalize-space()='Download report']/ancestor::button[1]")
         self.click_vat_return_submit = (By.XPATH, "//button[@id='submit-btn' and .//span[normalize-space()='Submit']]")
 
+        #--------------------go to crm------------------------------------------------------------------------------------
+
+        self.click_on_menu = (By.XPATH,
+                              "//button[contains(@class,'Header-button') and @title='Modules']//i[@data-icon-name='Waffle']")
+        self.select_crm = (By.XPATH, "(//span[normalize-space()='CRM'])[1]")
+        self.click_e_signatures = (By.XPATH, "//a[.//div[normalize-space()='E-signatures']]")
+        self.enter_search = (By.XPATH, "//input[contains(@class,'ms-SearchBox-field') and @placeholder='Search']")
+        self.click_1st_ref_number = (By.XPATH, "(//a[contains(@href,'/admin/digitalsignatures') and contains(text(),'DS/')])[1]")
+        self.click_document = (By.XPATH, "//button[.//span[normalize-space()='Documents']]")
+        self.click_vat_return_folder = (By.XPATH, "//div[@role='gridcell']//button[@title='VAT Returns']")
+        self.click_year_folder = (By.XPATH, "(//div[@role='gridcell']//button[contains(@class,'ms-Link')])[1]")
+        self.click_period_folder = (By.XPATH, "(//div[@role='gridcell']//button[@title])[1]")
+        self.click_first_file = (By.XPATH, "(//div[@data-automationid='DetailsRow']//button[contains(@class,'ms-Link')])[1]")
+        self.click_download_file = (By.XPATH, "//div[contains(@class,'ms-Panel-navigation')]//button[@title='Download']")
+
+
+
+
+
+
 
 
 
@@ -202,6 +222,7 @@ class Vat:
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
+        self.company_name = company_name
 
         xpaths = [
             "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']",
@@ -1035,7 +1056,7 @@ class Vat:
             time.sleep(2)
 
             pyautogui.write(r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx")
-            time.sleep(1)
+            time.sleep(2)
             pyautogui.press("enter")
 
             print("Import VAT return file uploaded successfully....!!")
@@ -1849,6 +1870,192 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
+
+
+
+#-----------------------------------------Go-to_CRM---------------------------------------------------------------------
+
+    def Click_On_Menu(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
+            )
+
+            click_menu = WebDriverWait(self.driver, 30).until(
+            EC.visibility_of_element_located(self.click_on_menu)
+            )
+            click_menu.click()
+            time.sleep(.2)
+            print("Test case - 2: Pass: Click an active employee section successfully.....!")
+            time.sleep(.2)
+
+        except Exception as e:
+            print(f" Error on click: {e}")
+
+    def Select_CRM(self):
+        try:
+            crm = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.select_crm))
+            time.sleep(.2)
+            crm.click()
+            time.sleep(.2)
+
+            print("Click  on CRM Section button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Select_E_Signature(self):
+        try:
+            e_sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_e_signatures))
+            time.sleep(.2)
+            e_sign.click()
+            time.sleep(.2)
+
+            print("Click  on E- Signature button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Enter_in_Search(self):
+        try:
+            if not self.company_name:
+                raise Exception("Company name is not set. Please call Enter_Company() first.")
+
+            e_search = WebDriverWait(self.driver, 20).until(
+                EC.element_to_be_clickable(self.enter_search)
+            )
+            time.sleep(0.2)
+
+            e_search.clear()
+            e_search.send_keys(self.company_name)
+            time.sleep(0.2)
+            e_search.send_keys(Keys.ENTER)
+
+            print(f"Search entered successfully with company name: {self.company_name}")
+
+        except Exception as e:
+            print(f"Error on search: {e}")
+            time.sleep(0.2)
+
+    def Click_1st_Ref(self):
+
+            try:
+                ref = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_1st_ref_number))
+                time.sleep(.2)
+                ref.click()
+                time.sleep(.2)
+
+                print("Click  on 1st ref successfully....!!")
+            except Exception as e:
+                print(f"Error on Click:{e}")
+                time.sleep(.2)
+
+    def Click_Title_Company(self):
+        try:
+            if not self.company_name:
+                raise Exception("Company name is not set. Please call Enter_Company() first.")
+
+            company_xpath = f"//a[@title='{self.company_name}']"
+
+            title = WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((By.XPATH, company_xpath))
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", title)
+            time.sleep(0.2)
+
+            WebDriverWait(self.driver, 20).until(
+                EC.element_to_be_clickable((By.XPATH, company_xpath))
+            )
+
+            try:
+                title.click()
+            except Exception:
+                self.driver.execute_script("arguments[0].click();", title)
+
+            time.sleep(0.2)
+            print(f"Click on company title successfully: {self.company_name}")
+
+        except Exception as e:
+            print(f"Error on Click: {e}")
+            time.sleep(0.2)
+            raise
+
+
+    def Click_Document(self):
+        try:
+            doc = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_document))
+            time.sleep(.2)
+            doc.click()
+            time.sleep(.2)
+
+            print("Click  on document section successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Vat_Return_Folder(self):
+        try:
+            vat_folder = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_vat_return_folder))
+            time.sleep(.2)
+            vat_folder.click()
+            time.sleep(.2)
+
+            print("Click  on vat return folder section successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Year_Folder(self):
+        try:
+            folder = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_year_folder))
+            time.sleep(.2)
+            folder.click()
+            time.sleep(.2)
+
+            print("Click  on Year folder section successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Period_Folder(self):
+        try:
+            period = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_period_folder))
+            time.sleep(.2)
+            period.click()
+            time.sleep(.2)
+
+            print("Click  on period folder section successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_first_file(self):
+        try:
+            first_file = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_first_file))
+            time.sleep(.2)
+            first_file.click()
+            time.sleep(.2)
+
+            print("Click  on first and open file preview successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Download_File(self):
+        try:
+            download_file = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_download_file))
+            time.sleep(.2)
+            download_file.click()
+            time.sleep(.2)
+
+            print("File downloaded successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
 
 
 

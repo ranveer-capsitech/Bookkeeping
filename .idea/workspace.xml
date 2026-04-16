@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Completed HMRC Authentication process">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Completed HMRC with reject condition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest_html_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/pytest_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/pytest_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/report.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -557,7 +561,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776258028159</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Completed HMRC with reject condition">
+      <option name="closed" value="true" />
+      <created>1776335760080</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1776335760080</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -593,6 +605,7 @@
     <MESSAGE value="Add Supplier test case" />
     <MESSAGE value="HMRC Authentication" />
     <MESSAGE value="Completed HMRC Authentication process" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed HMRC Authentication process" />
+    <MESSAGE value="Completed HMRC with reject condition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed HMRC with reject condition" />
   </component>
 </project>

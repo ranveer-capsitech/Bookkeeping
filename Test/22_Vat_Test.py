@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from Pages.ExpenseclaimsPage import Expenseclaims
 from Pages.PurchasePage import ClientPurchase
-from VatPage import Vat
+from Pages.VatPage import Vat
 from configReader import ConfigReader
 
 from Pages.LoginPage import loginPage
@@ -67,7 +67,7 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Vat and HMRC Authentication")
 
 
-    def test_15_Expense_claims(self):
+    def test_15_HMRC_Authentication_for_Vat_Return(self):
         client_section = Vat(driver=self.driver)
         time.sleep(.2)
         client_section.Select_Search()
@@ -292,6 +292,36 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Download_Report()
         time.sleep(.2)
+
+
+#------------------------go - to - CRM ---------------------------------------------------------------------------
+
+        client_section.Click_On_Menu()
+        time.sleep(.2)
+        client_section.Select_CRM()
+        time.sleep(.2)
+        client_section.Select_E_Signature()
+        time.sleep(.2)
+        client_section.Enter_in_Search()
+        time.sleep(1)
+        client_section.Click_1st_Ref()
+        time.sleep(.2)
+        client_section.Click_Title_Company()
+        time.sleep(.2)
+        client_section.Click_Document()
+        time.sleep(.2)
+        client_section.Click_Vat_Return_Folder()
+        time.sleep(.2)
+        client_section.Click_Year_Folder()
+        time.sleep(.2)
+        client_section.Click_Period_Folder()
+        time.sleep(.2)
+        client_section.Click_first_file()
+        time.sleep(.2)
+        client_section.Click_Download_File()
+        time.sleep(.2)
+
+
 
 
 
