@@ -180,6 +180,45 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Review()
         time.sleep(.2)
+
+
+#-----------------------------------------------------------------------------------
+
+
+        client_section.Click_Download_working()
+        time.sleep(.2)
+        client_section.Click_Reject_Button()
+        time.sleep(.2)
+        client_section.Click_Reason_Drop_Down()
+        time.sleep(.2)
+        client_section.Enter_Remark_Text("only for testing")
+        time.sleep(.2)
+        client_section.Click_Reject_Reason()
+        time.sleep(2)
+
+        client_section.Click_Send_Again()
+        time.sleep(.2)
+
+
+
+        client_section.Enter_Reviewer()
+        time.sleep(.2)
+        remarks = "Please review and approve this VAT return."
+        client_section.Enter_Remarks(remarks)
+        time.sleep(.2)
+        client_section.Add_Attachment()
+        time.sleep(.2)
+        client_section.Save_Request()
+        time.sleep(.2)
+        client_section.Click_Review()
+        time.sleep(.2)
+
+
+#----------------------------------------------------------------------------
+
+
+
+
         client_section.Click_Next()
         time.sleep(.2)
         client_section.Click_Approve()
@@ -235,14 +274,14 @@ class Login(unittest.TestCase):
 
         #------------------------------------------------------------
 
-        # client_section.Click_for_mail_Send()
-        # time.sleep(1)
-        # client_section.Send_Mail_Again_Button()
-        # time.sleep(.2)
-        # client_section.Mail_Form()
-        # time.sleep(.2)
-        # client_section.Click_for_mail_Send()
-        # time.sleep(1)
+       # # client_section.Click_for_mail_Send()
+        ## time.sleep(1)
+        ## client_section.Send_Mail_Again_Button()
+       # # time.sleep(.2)
+       # # client_section.Mail_Form()
+       # # time.sleep(.2)
+        ## client_section.Click_for_mail_Send()
+       # # time.sleep(1)
 
         #-------------------------------------------------------
 

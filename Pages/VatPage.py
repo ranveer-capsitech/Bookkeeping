@@ -101,6 +101,25 @@ class Vat:
         self.save_request = (By.XPATH, "//div[contains(@class,'modal-footer')]//button[.//span[normalize-space()='Save']]")
 
         self.click_review = (By.XPATH, "//div[contains(@class,'actions')]//button[.//span[normalize-space()='Review']]")
+
+#---------------------------------------------------------------------------------------------------------------------------------------------
+        self.click_download_workings = (By.XPATH, "//button[.//span[normalize-space()='Download workings']]")
+        self.click_reject_button = (By.XPATH, "//div[contains(@class,'modal-footer')]//button[.//span[normalize-space()='Reject']]")
+
+        self.click_reason_drop_down = (By.XPATH, "//label[normalize-space()='Reason']/following::div[contains(@class,'control')][1]")
+
+
+        self.remark_iframe = (By.XPATH, "//iframe[contains(@title,'Editor')]")
+        self.remark_body = (By.XPATH, "//body")
+
+        self.reject_reason = (By.XPATH, "//label[normalize-space()='Reason']/ancestor::div[1]//following::button[.//span[normalize-space()='Reject']][1]")
+        self.click_send_again = (By.XPATH, "//span[text()='Send again']/ancestor::button")
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
         self.click_next = (By.XPATH, "//div[contains(@class,'modal')]//button[.//span[normalize-space()='Next']]")
         self.click_approve = (By.XPATH, "//div[contains(@class,'modal-footer')]//button[.//span[normalize-space()='Approve']]")
         self.click_yes = (By.XPATH, "//div[contains(@class,'Dialog')]//button[.//span[normalize-space()='Yes']]")
@@ -1039,9 +1058,11 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
     def Enter_Reviewer(self):
         try:
-            review = WebDriverWait(self.driver, 20).until(
+            review = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.enter_reviewer)
             )
             time.sleep(0.2)
@@ -1058,6 +1079,7 @@ class Vat:
             print(f"Error on Enter Reviewer: {e}")
             raise
 
+
     def Enter_Remarks(self, remarks):
         try:
             wait = WebDriverWait(self.driver, 20)
@@ -1065,15 +1087,21 @@ class Vat:
             iframe = wait.until(
                 EC.presence_of_element_located((By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]"))
             )
+            time.sleep(.2)
             self.driver.switch_to.frame(iframe)
+            time.sleep(.2)
 
             body = wait.until(
                 EC.presence_of_element_located((By.XPATH, "//body"))
             )
+            time.sleep(.2)
             body.click()
+            time.sleep(.2)
             body.send_keys(Keys.CONTROL, "a")
             body.send_keys(Keys.DELETE)
+            time.sleep(.2)
             body.send_keys(remarks)
+            time.sleep(.2)
 
             print("Remarks entered successfully....!!")
 
@@ -1119,6 +1147,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Click_Review(self):
         try:
             review = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_review))
@@ -1131,6 +1160,147 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
+
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    def Click_Download_working(self):
+        try:
+            download = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_download_workings))
+            time.sleep(.2)
+            download.click()
+            time.sleep(.2)
+
+            print("Click on download working button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Reject_Button(self):
+        try:
+            reject = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_reject_button))
+            time.sleep(.2)
+            reject.click()
+            time.sleep(.2)
+
+            print("Click on Reject  button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Reason_Drop_Down(self):
+        try:
+            wait = WebDriverWait(self.driver, 20)
+
+            reason_input = wait.until(
+                EC.presence_of_element_located(
+                    (By.XPATH, "//input[contains(@id,'react-select')]")
+                )
+            )
+
+            # scroll + JS click (fix interactable issue)
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", reason_input)
+            self.driver.execute_script("arguments[0].click();", reason_input)
+
+            time.sleep(0.3)
+
+            # select option
+            reason_input.send_keys("Change")
+            reason_input.send_keys(Keys.ENTER)
+
+            print("Reason selected successfully")
+
+        except Exception as e:
+            print(f"Error on Reason dropdown: {e}")
+
+
+
+    def Enter_Remark_Text(self, text="only for testing"):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            # wait editor container first
+            wait.until(EC.presence_of_element_located(
+                (By.XPATH, "//div[contains(@class,'editor')]")
+            ))
+
+            # get iframe dynamically
+            iframe = wait.until(EC.presence_of_element_located(
+                (By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]")
+            ))
+
+            # switch using JS (more stable)
+            self.driver.switch_to.frame(iframe)
+
+            body = wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+
+            body.click()
+            body.clear()
+            body.send_keys(text)
+            time.sleep(.2)
+
+            print(f"Remark entered: {text}")
+
+            self.driver.switch_to.default_content()
+
+        except Exception as e:
+            self.driver.switch_to.default_content()
+            print(f"Error in remark: {e}")
+            raise
+
+
+
+
+
+    def Click_Reject_Reason(self):
+        try:
+            reason = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.reject_reason))
+            time.sleep(.2)
+            reason.click()
+            time.sleep(.2)
+
+            print("Click on Reject  reason button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Send_Again(self):
+        try:
+            send_again = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_send_again))
+            time.sleep(.2)
+            send_again.click()
+            time.sleep(.2)
+
+            print("Click on send again button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Review_Button(self):
+        try:
+            review_btn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_review_button))
+            time.sleep(.2)
+            review_btn .click()
+            time.sleep(.2)
+
+            print("Click on send again button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------------
 
     def Click_Next(self):
         try:
