@@ -67,7 +67,13 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Vat and HMRC Authentication")
 
 
-    def test_15_HMRC_Authentication_for_Vat_Return(self):
+    # def test_15_1_Add_New_Company(self):
+    #     client_section = Vat(driver=self.driver)
+    #     time.sleep(.2)
+
+
+
+    def test_15_2_HMRC_Authentication_for_Vat_Return(self):
         client_section = Vat(driver=self.driver)
         time.sleep(.2)
         client_section.Select_Search()
@@ -79,6 +85,9 @@ class Login(unittest.TestCase):
         time.sleep(3)
         client_section.Click_Input()
         time.sleep(.2)
+
+
+
         client_section. Vat_Return_Section()
         time.sleep(.2)
 
@@ -272,20 +281,6 @@ class Login(unittest.TestCase):
 
 
 
-        #------------------------------------------------------------
-
-       # # client_section.Click_for_mail_Send()
-        ## time.sleep(1)
-        ## client_section.Send_Mail_Again_Button()
-       # # time.sleep(.2)
-       # # client_section.Mail_Form()
-       # # time.sleep(.2)
-        ## client_section.Click_for_mail_Send()
-       # # time.sleep(1)
-
-        #-------------------------------------------------------
-
-
 
 
         client_section.Three_dot()
@@ -299,9 +294,9 @@ class Login(unittest.TestCase):
         client_section.Click_On_Menu()
         time.sleep(.2)
         client_section.Select_CRM()
-        time.sleep(.2)
+        time.sleep(1)
         client_section.Select_E_Signature()
-        time.sleep(.2)
+        time.sleep(1)
         client_section.Enter_in_Search()
         time.sleep(1)
         client_section.Click_1st_Ref()
@@ -319,7 +314,7 @@ class Login(unittest.TestCase):
         client_section.Click_first_file()
         time.sleep(.2)
         client_section.Click_Download_File()
-        time.sleep(.2)
+        time.sleep(2)
 
 
 

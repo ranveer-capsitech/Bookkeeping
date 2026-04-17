@@ -2,7 +2,7 @@ import pyautogui
 from faker import Faker
 import time
 
-
+from selenium.common import StaleElementReferenceException, TimeoutException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -226,7 +226,8 @@ class Vat:
 
         xpaths = [
             "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']",
-            "//input[@id='SearchBox33' and @role='searchbox']"
+            "//input[@id='SearchBox33' and @role='searchbox']",
+
         ]
 
         last_exc = None
@@ -582,7 +583,7 @@ class Vat:
 
     def Switch_Back_And_Enter_User_ID(self, user_id):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             # switch to original tab
             self.driver.switch_to.window(self.parent_window)
@@ -1088,7 +1089,7 @@ class Vat:
             )
             time.sleep(0.2)
 
-            review.send_keys('Domenic torato (vikram.singh@capsitech.com)')
+            review.send_keys('gaurav.modi@actingoffice.co.uk')
             time.sleep(0.5)
 
             review.send_keys(Keys.ENTER)
@@ -1951,6 +1952,75 @@ class Vat:
                 print(f"Error on Click:{e}")
                 time.sleep(.2)
 
+
+
+
+    #
+    # def Click_Title_Company(self):
+    #     try:
+    #         if not self.company_name:
+    #             raise Exception("Company name is not set. Please call Enter_Company() first.")
+    #
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         # wait for detail page to stabilize after Click_1st_Ref()
+    #         wait.until(lambda d: "/admin/clients/business/" in d.current_url)
+    #         time.sleep(1)
+    #
+    #         # try multiple strong locators
+    #         locators = [
+    #             (By.XPATH, f"//a[@title='{self.company_name}']"),
+    #             (By.XPATH, f"//a[normalize-space()='{self.company_name}']"),
+    #             (By.XPATH,
+    #              f"//a[contains(@href,'/admin/clients/business') and contains(normalize-space(),'{self.company_name}')]"),
+    #             (By.XPATH,
+    #              f"//*[contains(@class,'ms-Stack')]//a[contains(@href,'/admin/clients/business') and @title='{self.company_name}']"),
+    #         ]
+    #
+    #         last_error = None
+    #
+    #         for by, locator in locators:
+    #             for _ in range(3):
+    #                 try:
+    #                     element = wait.until(
+    #                         EC.visibility_of_element_located((by, locator))
+    #                     )
+    #
+    #                     self.driver.execute_script(
+    #                         "arguments[0].scrollIntoView({block:'center'});", element
+    #                     )
+    #                     time.sleep(0.3)
+    #
+    #                     try:
+    #                         wait.until(EC.element_to_be_clickable((by, locator)))
+    #                         element.click()
+    #                     except Exception:
+    #                         self.driver.execute_script("arguments[0].click();", element)
+    #
+    #                     print(f"Click on company title successfully: {self.company_name}")
+    #                     return True
+    #
+    #                 except StaleElementReferenceException as e:
+    #                     last_error = e
+    #                     time.sleep(0.5)
+    #                 except TimeoutException as e:
+    #                     last_error = e
+    #                     break
+    #                 except Exception as e:
+    #                     last_error = e
+    #                     break
+    #
+    #         raise Exception(f"Could not click company title: {self.company_name}. Last error: {last_error}")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Click_Title_Company: {e}")
+    #         raise
+    # #
+
+
+
+
+
     def Click_Title_Company(self):
         try:
             if not self.company_name:
@@ -2055,6 +2125,41 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        self.click_client_section = (By.XPATH, "//a[@id='clients' and @href='/admin/clients']")
+        self.click_plus_add = (By.XPATH, "//button[.//span[normalize-space()='Add']]")
+
+
+
+
+    def Click_Client_Section(self):
+        try:
+            client = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_client_section))
+            time.sleep(.2)
+            client.click()
+            time.sleep(.2)
+
+            print("Click on Client_section successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Plus_Add(self):
+        try:
+            plus = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_plus_add))
+            time.sleep(.2)
+            plus.click()
+            time.sleep(.2)
+
+            print("Click on Plus icon for Add button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
 
 
 
