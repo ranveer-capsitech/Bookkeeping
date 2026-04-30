@@ -14,10 +14,16 @@ import pytest
 class Login(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # --- Chrome Options Setup ---
         chrome_options = Options()
-        # 1 = Allow, 2 = Block
-        prefs = {"profile.default_content_setting_values.notifications": 1}
+
+        prefs = {
+            "profile.default_content_setting_values.notifications": 1,
+            "autofill.profile_enabled": False,
+            "autofill.credit_card_enabled": False,
+            "credentials_enable_service": False,
+            "profile.password_manager_enabled": False,
+        }
+
         chrome_options.add_experimental_option("prefs", prefs)
         chrome_options.add_argument("--start-maximized")
 
@@ -25,6 +31,13 @@ class Login(unittest.TestCase):
         cls.driver.implicitly_wait(3)
 
         cls.login()
+
+
+
+
+
+
+
 
     @classmethod
     def tearDownClass(cls):
@@ -60,10 +73,10 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add current account")
 
 
-    def test_23_Expense_claims(self):
+    def test_23_Banking(self):
         client_section = Banking(driver=self.driver)
         time.sleep(.2)
 
@@ -79,6 +92,11 @@ class Login(unittest.TestCase):
 
         client_section.Banking_Section()
         time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
         client_section.Account()
         time.sleep(.2)
 
@@ -89,7 +107,89 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Sort_Code()
         time.sleep(.2)
-        client_section.Enter_IBAN()
+        client_section.Click_Primary_Account()
         time.sleep(.2)
+
         client_section.Save_Banking()
+        time.sleep(1)
+
+    @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add Credit card")
+
+    #------------------------------ Add Credit card --------------------------------------------------------------------
+
+    def test_24_Credit(self):
+        client_section = Banking(driver=self.driver)
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Account()
+        time.sleep(.2)
+        client_section.Select_Account_Type()
+        time.sleep(.2)
+        client_section.Select_Bank()
+        time.sleep(.2)
+        client_section.Enter_Credit_Card()
+        time.sleep(.2)
+
+        client_section.Save_Credit_card()
+        time.sleep(1)
+
+    #-------------------------------------------setting-----------------------------------------------------------------
+
+    @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> setting")
+
+
+    def test_25_Setting(self):
+        client_section = Banking(driver=self.driver)
+        time.sleep(.2)
+
+        # client_section.Select_Search()
+        # time.sleep(5)
+        # client_section.Enter_Company()
+        # time.sleep(.2)
+        # client_section.Click_Company()
+        # time.sleep(.2)
+        # time.sleep(3)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+
+
+
+        client_section.Select_Setting_Section()
+        time.sleep(.2)
+
+        client_section.Chart_Of_Account()
+        time.sleep(.2)
+
+        client_section.Click_Add_Account()
+        time.sleep(.2)
+
+        client_section.Select_Account_Type_Setting()
+        time.sleep(.2)
+
+        client_section.Enter_name()
+        time.sleep(.2)
+
+        client_section.Select_vat_Rate()
+        time.sleep(.2)
+
+        client_section.Click_Is_Credit_Card()
+        time.sleep(.2)
+
+        client_section.Save_Account()
+        time.sleep(.2)
+
+        client_section.Banking_Section()
+        time.sleep(.2)
+
+        client_section.Click_Active_Account()
+        time.sleep(.2)
+
+        client_section.Click_Yes()
+        time.sleep(.2)
+
+
+
+

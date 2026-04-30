@@ -1,8 +1,10 @@
+import os
+
 import pyautogui
 from faker import Faker
 import time
 
-from selenium.common import StaleElementReferenceException, TimeoutException
+from selenium.common import StaleElementReferenceException, TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -125,7 +127,8 @@ class Vat:
         self.click_yes = (By.XPATH, "//div[contains(@class,'Dialog')]//button[.//span[normalize-space()='Yes']]")
         self.e_sign = (By.XPATH, "//div[contains(@class,'actions')]//button[.//span[normalize-space()='E-Sign']]")
 
-        self.send_mail = (By.XPATH, "//div[contains(@class,'actions')]//button[.//span[normalize-space()='Send mail']]")
+        #self.send_mail = (By.XPATH, "//div[contains(@class,'actions')]//button[.//span[normalize-space()='Send mail']]")
+        self.send_mail = (By.XPATH, "//span[normalize-space()='Send email again']/ancestor::button[1]")
 
         self.send = (By.XPATH, "//span[normalize-space()='Send']/ancestor::button[1]")
 
@@ -176,6 +179,10 @@ class Vat:
         self.ero_of_download_report = (By.XPATH, "//span[normalize-space()='Download report']/ancestor::button[1]")
         self.click_vat_return_submit = (By.XPATH, "//button[@id='submit-btn' and .//span[normalize-space()='Submit']]")
 
+        self.click_mail_icon_after_submit = (By.XPATH, "(//i[@data-icon-name='NewMail']/ancestor::button)[1]")
+        self.send_submit_mail = (By.XPATH, "(//button[@type='button' and .//span[normalize-space()='Send']])[1]")
+        self.send_anyway_button = (By.XPATH, "//span[normalize-space()='Send anyway']/ancestor::button")
+
         #--------------------go to crm------------------------------------------------------------------------------------
 
         self.click_on_menu = (By.XPATH,
@@ -190,6 +197,29 @@ class Vat:
         self.click_period_folder = (By.XPATH, "(//div[@role='gridcell']//button[@title])[1]")
         self.click_first_file = (By.XPATH, "(//div[@data-automationid='DetailsRow']//button[contains(@class,'ms-Link')])[1]")
         self.click_download_file = (By.XPATH, "//div[contains(@class,'ms-Panel-navigation')]//button[@title='Download']")
+
+        #----------------------------------changes-----------------------------------------------------------------------
+
+        self.click_pending = (By.XPATH, "//span[starts-with(@id,'btn-status') and normalize-space()='Pending']")
+        self.select_e_sign_drop_down = (
+            By.XPATH,
+            "//div[normalize-space()='E-signature status']/following::div[contains(@class,'rs-control')][1]"
+        )
+
+        self.send_option = (
+            By.XPATH,
+            "//div[contains(@class,'rs-option') and normalize-space()='Send']"
+        )
+        self.enter_remark_e_sign = (By.XPATH, "//label[normalize-space()='Remark']/following::textarea[1]")
+        self.e_sign_submit = (By.XPATH, "(//button[@type='button' and .//span[normalize-space()='Submit']])[1]")
+        self.back_button_for_verify = (By.XPATH, "//span[contains(text(),'Back')]")
+        self.click_view_button = (By.XPATH,"(//i[@data-icon-name='View']/ancestor::button)[1]")
+        self.click_send_button = (By.XPATH, "//span[starts-with(@id,'btn-status') and normalize-space()='Sent']")
+        self.click_drop_down_status = (By.XPATH, "//div[normalize-space()='E-signature status']/following::input[starts-with(@id,'react-select')][1]")
+        self.edit_icon = (By.XPATH, "(//i[@data-icon-name='Edit']/ancestor::button)[1]")
+
+
+
 
 
 
@@ -338,6 +368,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Handle_MTD_Or_Reauthorized(self):
         try:
             time.sleep(1)
@@ -379,7 +410,7 @@ class Vat:
 
     def Click_HMRC_Online(self):
         try:
-            hmrc = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.click_HMRC_online))
+            hmrc = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_HMRC_online))
             time.sleep(.2)
             hmrc.click()
             time.sleep(.2)
@@ -420,6 +451,7 @@ class Vat:
         except Exception as e:
             print(f"Error in Click_Test_User_Credentials: {e}")
             raise
+
 
     def Scroll_Down_Page(self):
         try:
@@ -470,6 +502,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click Radio Organization: {e}")
             raise
+
 
 
     def Click_Create(self):
@@ -535,6 +568,7 @@ class Vat:
     #         print(f"Error while getting Vat Date: {e}")
     #         raise
 
+
     def Get_Vat_Registration_Date(self):
         try:
             wait = WebDriverWait(self.driver, 20)
@@ -561,6 +595,8 @@ class Vat:
         except Exception as e:
             print(f"Error while getting Vat Date: {e}")
             raise
+
+
 
     def Get_Vat_Registration(self):
         try:
@@ -705,6 +741,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Store_Current_Vat_Page_URL(self):
         try:
             self.expected_vat_page_url = self.driver.current_url
@@ -712,6 +749,7 @@ class Vat:
         except Exception as e:
             print(f"Error while storing VAT page URL: {e}")
             raise
+
 
     def Verify_And_Return_To_Expected_Vat_Page(self):
         try:
@@ -772,6 +810,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Enter_Vat_Registration_Date(self, formatted_date):
         try:
             wait = WebDriverWait(self.driver, 20)
@@ -812,6 +851,8 @@ class Vat:
         except Exception as e:
             print(f"Error while entering VAT Registration Date: {e}")
             raise
+
+
 
     def Enter_Vat_No(self, formatted_date):
         try:
@@ -907,6 +948,8 @@ class Vat:
     #         print(f"Error on Click:{e}")
     #         time.sleep(.2)
 
+
+
     def Click_Save(self):
         try:
             wait = WebDriverWait(self.driver, 20)
@@ -942,6 +985,9 @@ class Vat:
         except Exception as e:
             print(f"Error on Click/Assertion: {e}")
             raise
+
+
+
 #--------------------edit vat functionality -----------------------------------------------------------------------------
 
 
@@ -972,6 +1018,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
 
     def Select_Obligations(self):
@@ -1034,6 +1081,7 @@ class Vat:
 
             time.sleep(2)
 
+
     def Edit_Vat_Return(self):
         try:
             edit_vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.edit_vat_return))
@@ -1045,6 +1093,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Import(self):
         try:
@@ -1065,6 +1114,58 @@ class Vat:
         except Exception as e:
             print(f"Error on Import Click/File Upload: {e}")
             raise
+    #
+    # def Click_Import(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 20)
+    #
+    #         file_path = r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
+    #
+    #         if not os.path.isfile(file_path):
+    #             raise FileNotFoundError(f"File not found: {file_path}")
+    #
+    #         import_file = wait.until(
+    #             EC.element_to_be_clickable(self.click_import)
+    #         )
+    #         import_file.click()
+    #         time.sleep(2)
+    #
+    #         # Move mouse away from screen corner
+    #         pyautogui.moveTo(500, 500)
+    #         time.sleep(0.5)
+    #
+    #         pyautogui.write(file_path, interval=0.01)
+    #         time.sleep(1)
+    #         pyautogui.press("enter")
+    #
+    #         print("Import VAT return file uploaded successfully....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Import Click/File Upload: {e}")
+    #         raise
+    # def Click_Import(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 20)
+    #
+    #         file_path = r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
+    #
+    #         import_file = wait.until(
+    #             EC.element_to_be_clickable(self.click_import)
+    #         )
+    #         import_file.click()
+    #         time.sleep(1)
+    #
+    #         file_input = wait.until(
+    #             EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+    #         )
+    #
+    #         file_input.send_keys(file_path)
+    #
+    #         print("Import VAT return file uploaded successfully....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Import Click/File Upload: {e}")
+    #         raise
 
 
 
@@ -1183,14 +1284,6 @@ class Vat:
             time.sleep(.2)
 
 
-
-
-
-
-
-
-
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1206,6 +1299,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Click_Reject_Button(self):
         try:
             reject = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_reject_button))
@@ -1217,6 +1311,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Reason_Drop_Down(self):
         try:
@@ -1294,6 +1389,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Click_Send_Again(self):
         try:
             send_again = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_send_again))
@@ -1305,6 +1401,8 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
+
 
     def Click_Review_Button(self):
         try:
@@ -1324,6 +1422,7 @@ class Vat:
 
 #------------------------------------------------------------------------------------------------------------------------
 
+
     def Click_Next(self):
         try:
             next = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_next))
@@ -1337,6 +1436,7 @@ class Vat:
             time.sleep(.2)
 
 
+
     def Click_Approve(self):
         try:
             approve = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_approve))
@@ -1348,6 +1448,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
 
     def Click_Yes(self):
@@ -1375,6 +1476,197 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+#----------------------------------changes------------------------------------------------------------------------------
+
+
+    def Click_Pending(self):
+        try:
+            pending = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_pending))
+            time.sleep(.2)
+            pending.click()
+            time.sleep(.2)
+
+            print("Click on pending button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Select_Drop_Down(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            dropdown = wait.until(EC.element_to_be_clickable(self.select_e_sign_drop_down))
+            dropdown.click()
+            time.sleep(.2)
+
+
+            # use active element (real input of react-select)
+            active = self.driver.switch_to.active_element
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.3)
+            active.send_keys(Keys.ENTER)
+
+            print("Selected Revoke option successfully....!!")
+
+        except Exception as e:
+            print(f"Error on Select_Drop_Down: {e}")
+            raise
+
+
+    def Enter_Remark(self):
+        try:
+            e_sign_remark = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.enter_remark_e_sign))
+            time.sleep(.2)
+            e_sign_remark.send_keys("Only for testing....!!")
+            time.sleep(.2)
+
+            print("Enter Remark successfully.....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Submit(self):
+        try:
+            click_submit = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.e_sign_submit))
+            time.sleep(.2)
+            click_submit.click()
+            time.sleep(.2)
+
+            print("Click on Submit button for  e Sign successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
+    def Back_Button_For_Verify(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            back_button = wait.until(
+                EC.presence_of_element_located(self.back_button_for_verify)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                back_button
+            )
+            time.sleep(0.3)
+
+            try:
+                wait.until(EC.element_to_be_clickable(self.back_button_for_verify))
+                back_button.click()
+            except ElementClickInterceptedException:
+                self.driver.execute_script("arguments[0].click();", back_button)
+
+            print("Click on Back button successfully....!!")
+
+        except Exception as e:
+            print(f"Error on Back button click: {e}")
+            raise
+
+
+    def Click_View_Button(self):
+        try:
+            view_button = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_view_button))
+            time.sleep(.2)
+            view_button.click()
+            time.sleep(.2)
+
+            print("Click on view button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Send_Button(self):
+        try:
+            send_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_send_button))
+            time.sleep(.2)
+            send_button.click()
+            time.sleep(.2)
+
+            print("Click on send button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Click_Drop_Down_Status(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            dropdown = wait.until(EC.element_to_be_clickable(self.click_drop_down_status))
+            dropdown.click()
+            time.sleep(.2)
+
+
+            # use active element (real input of react-select)
+            active = self.driver.switch_to.active_element
+            # active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.3)
+            active.send_keys(Keys.ENTER)
+
+            print("Selected Send option successfully....!!")
+
+        except Exception as e:
+            print(f"Error on Select_Drop_Down: {e}")
+            raise
+
+
+    # def Edit_Icon(self):
+    #     try:
+    #         edit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.edit_icon))
+    #         time.sleep(.2)
+    #         edit.click()
+    #         time.sleep(.2)
+    #
+    #         print("Click on Edit icon button successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.2)
+
+
+
+    def Click_First_Edit_Button(self):
+        try:
+            edit_btn = WebDriverWait(self.driver, 30).until(
+                EC.element_to_be_clickable(self.edit_icon)
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", edit_btn)
+            self.driver.execute_script("arguments[0].click();", edit_btn)
+
+            print("Clicked on first Edit button successfully....!!")
+
+        except Exception as e:
+            print(f"Error on Edit button click: {e}")
+            raise
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def Send_mail(self):
         try:
             mail = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send_mail))
@@ -1386,6 +1678,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_for_mail_Send(self):
         try:
@@ -1405,6 +1698,7 @@ class Vat:
     def Mail_Form(self):
         try:
             wait = WebDriverWait(self.driver, 20)
+
 
             mail = wait.until(EC.presence_of_element_located(self.from_mail))
             time.sleep(0.2)
@@ -1437,6 +1731,7 @@ class Vat:
                 print(f"Error on Click:{e}")
                 time.sleep(.2)
 
+
     def Click_Mail_Icon(self):
         try:
             icon = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_mail_icon))
@@ -1451,11 +1746,9 @@ class Vat:
 
 
 
-
-
     def Click_Review_Mail_New_Tab(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
             old_tabs = self.driver.window_handles.copy()
 
             # switch to iframe first
@@ -1551,6 +1844,7 @@ class Vat:
     #         print(f"Error on Click: {e}")
     #         raise
 
+
     def Click_Get_OTP(self):
         try:
             otp = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_get_otp))
@@ -1562,6 +1856,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Enter_OTP(self):
         try:
@@ -1588,6 +1883,7 @@ class Vat:
             print(f"Error while entering OTP: {e}")
             raise
 
+
     def Proceed_Securely(self):
         try:
             proceed = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.proceed_securely))
@@ -1599,6 +1895,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Accept(self):
         try:
@@ -1612,6 +1909,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Enter_Name_Signature(self):
         try:
             sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.enter_name_signature))
@@ -1623,6 +1921,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Sing_Button(self):
         try:
@@ -1742,8 +2041,6 @@ class Vat:
 
 
 
-
-
     def Three_dot(self):
         try:
             dot = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_three_dot))
@@ -1796,6 +2093,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Refresh_Page(self):
         try:
             self.driver.refresh()
@@ -1836,6 +2134,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Download_Response(self):
         try:
             response = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.download_response))
@@ -1847,6 +2146,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Cancel_Vat_Submission_Pop_up(self):
         try:
@@ -1860,6 +2160,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Click_Back_Button(self):
         try:
             back_button = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_back_button))
@@ -1872,10 +2173,50 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+    def wait_for_spinner_to_disappear(self):
+        wait = WebDriverWait(self.driver, 30)
+        try:
+            wait.until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, "//div[contains(@class,'spinner')]")
+                )
+            )
+        except TimeoutException:
+            print("Spinner still visible or not found, continuing...")
 
+    def Click_mail_icon_after_submit(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
 
+            # 1. Wait until loader/spinner disappears
+            self.wait_for_spinner_to_disappear()
 
-#-----------------------------------------Go-to_CRM---------------------------------------------------------------------
+            # 2. Wait for mail button clickable
+            mail_button = wait.until(
+                EC.element_to_be_clickable(self.click_mail_icon_after_submit)
+            )
+
+            # 3. Scroll into view
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});", mail_button
+            )
+
+            # 4. Wait again after scroll
+            self.wait_for_spinner_to_disappear()
+
+            # 5. Click
+            try:
+                mail_button.click()
+            except Exception:
+                self.driver.execute_script("arguments[0].click();", mail_button)
+
+            print("Clicked on first Mail icon button successfully.")
+
+        except Exception as e:
+            print(f"Error on Click Mail icon: {e}")
+            raise
+
+    #-----------------------------------------Go-to_CRM---------------------------------------------------------------------
 
     def Click_On_Menu(self):
         try:
@@ -1894,6 +2235,7 @@ class Vat:
         except Exception as e:
             print(f" Error on click: {e}")
 
+
     def Select_CRM(self):
         try:
             crm = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.select_crm))
@@ -1906,6 +2248,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Select_E_Signature(self):
         try:
             e_sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_e_signatures))
@@ -1917,6 +2260,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Enter_in_Search(self):
         try:
@@ -1938,6 +2282,7 @@ class Vat:
         except Exception as e:
             print(f"Error on search: {e}")
             time.sleep(0.2)
+
 
     def Click_1st_Ref(self):
 
@@ -2125,15 +2470,44 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+    def Click_Send_submit_mail(self):
+
+
+        try:
+            sumit_send_mail = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send_submit_mail))
+            time.sleep(.2)
+            sumit_send_mail.click()
+            time.sleep(.2)
+
+            print("Click send sumit mail successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+    def Send_Anyway_Button(self):
+        try:
+            send_anyway = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable(self.send_anyway_button))
+            time.sleep(.2)
+            send_anyway.click()
+            time.sleep(.2)
+            print("Click on send anyway button successfully....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
+
+
+
+
+
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
         self.click_client_section = (By.XPATH, "//a[@id='clients' and @href='/admin/clients']")
         self.click_plus_add = (By.XPATH, "//button[.//span[normalize-space()='Add']]")
-
 
 
 

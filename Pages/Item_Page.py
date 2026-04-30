@@ -169,6 +169,7 @@ class Items:
             click_add_item.click()
             time.sleep(.2)
             print("Click on add item icon successfully.....!!")
+            time.sleep(1)
         except Exception as e:
             print(f"Error on Click:{e}")
 
@@ -179,9 +180,10 @@ class Items:
             enter_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_name))
             time.sleep(.2)
             enter_name.clear()
-            time.sleep(0.2)
+            time.sleep(1)
             # enter_name.send_keys("Only for testing")
             enter_name.send_keys(random_first_name)
+            time.sleep(0.2)
             print(f" Entered Name: {random_first_name}")
             print("Enter name successfully.....!!")
             time.sleep(2)

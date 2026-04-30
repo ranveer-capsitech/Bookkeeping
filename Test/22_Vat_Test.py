@@ -67,11 +67,6 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Vat and HMRC Authentication")
 
 
-    # def test_15_1_Add_New_Company(self):
-    #     client_section = Vat(driver=self.driver)
-    #     time.sleep(.2)
-
-
 
     def test_15_2_HMRC_Authentication_for_Vat_Return(self):
         client_section = Vat(driver=self.driver)
@@ -159,7 +154,6 @@ class Login(unittest.TestCase):
 
 
 
-
         client_section.Select_Obligations()
         time.sleep(.2)
         client_section.Save_Vat()
@@ -174,6 +168,7 @@ class Login(unittest.TestCase):
 
         client_section. Click_Import()
         time.sleep(1)
+
         client_section.Send_Button()
         time.sleep(.2)
 
@@ -209,7 +204,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section.Enter_Reviewer()
         time.sleep(.2)
         remarks = "Please review and approve this VAT return."
@@ -222,10 +216,7 @@ class Login(unittest.TestCase):
         client_section.Click_Review()
         time.sleep(.2)
 
-
 #----------------------------------------------------------------------------
-
-
 
 
         client_section.Click_Next()
@@ -236,6 +227,100 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.E_Sign()
         time.sleep(.2)
+
+        #---------------------------------changes-----------------------------------------------------------------------
+
+        client_section.Click_Pending()
+        time.sleep(.2)
+        client_section.Select_Drop_Down()
+        time.sleep(.2)
+        client_section.Enter_Remark()
+        time.sleep(.2)
+        client_section.Submit()
+        time.sleep(.2)
+        client_section.Back_Button_For_Verify()
+        time.sleep(.2)
+
+        #----@@@
+
+
+
+
+        #----- after revoke submit click on edit icon ------------------------------------------------------------------
+
+        client_section.Edit_Vat_Return()
+        time.sleep(.2)
+        client_section.Send_Button()
+        time.sleep(.2)
+
+        client_section.Enter_Reviewer()
+        time.sleep(.2)
+
+        remarks = "Please review and approve this VAT return."
+        client_section.Enter_Remarks(remarks)
+        time.sleep(.2)
+        client_section.Add_Attachment()
+        time.sleep(.2)
+        client_section.Save_Request()
+        time.sleep(.2)
+        client_section.Click_Review()
+        time.sleep(.2)
+
+        #--- direct use next button ...not apply reject process
+
+        client_section.Click_Next()
+        time.sleep(.2)
+        client_section.Click_Approve()
+        time.sleep(.2)
+        client_section.Click_Yes()
+        time.sleep(.2)
+        client_section.E_Sign()
+        time.sleep(.2)
+
+        #--- again go for click on pending
+
+        client_section.Click_Pending()
+        time.sleep(.2)
+
+
+
+
+
+
+
+        # client_section.Back_Button_For_Verify()#
+        # time.sleep(.2)
+        # client_section.Click_View_Button()#
+        # time.sleep(.2)
+        # client_section.Click_Send_Button()#
+        # time.sleep(.2)
+
+        client_section.Click_Drop_Down_Status()
+        time.sleep(.2)
+        client_section.Enter_Remark()
+        time.sleep(.2)
+        client_section.Submit()
+        time.sleep(.2)
+
+        # client_section.Back_Button_For_Verify()#
+        # time.sleep(.2)#
+        # client_section.Click_First_Edit_Button()#
+        # time.sleep(.2)#
+
+
+
+
+
+
+
+
+
+
+
+
+        #----------------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -265,21 +350,24 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Refresh_Page()
         time.sleep(2)
+
+
         client_section.Click_Submit()
         time.sleep(.2)
         client_section.Click_Submit()
         time.sleep(.2)
+
+
+
         client_section.Click_Yes()
         time.sleep(.2)
         client_section.Download_Response()
         time.sleep(.2)
+
         client_section. Click_Cancel_Vat_Submission_Pop_up()
         time.sleep(.2)
         client_section.Click_Back_Button()
         time.sleep(.2)
-
-
-
 
 
 
@@ -288,8 +376,21 @@ class Login(unittest.TestCase):
         client_section.Click_Download_Report()
         time.sleep(.2)
 
+        client_section.Click_mail_icon_after_submit()
+        time.sleep(.2)
+        client_section.Mail_Form()
+        time.sleep(.2)
+        client_section.Send_Button()
+        time.sleep(.2)
+        # client_section.Click_Send_submit_mail()
+        # time.sleep(.2)
+        # client_section.Send_Anyway_Button()
+        # time.sleep(.5)
 
-#------------------------go - to - CRM ---------------------------------------------------------------------------
+
+
+#------------------------Go - to - CRM ---------------------------------------------------------------------------
+
 
         client_section.Click_On_Menu()
         time.sleep(.2)
@@ -315,6 +416,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Download_File()
         time.sleep(2)
+
 
 
 

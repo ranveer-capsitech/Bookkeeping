@@ -35,7 +35,7 @@ class ClientSell:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
@@ -78,7 +78,7 @@ class ClientSell:
             print(f"Error on click:{e}")
 
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="RDX LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)

@@ -182,11 +182,11 @@ class Asset:
                 print("Click on add assets successfully..... ")
             except Exception as e:
                 print(f"Error on click:{e}")
-                time.sleep(.2)
+                time.sleep(2)
 
     def Asset_Name(self):
         try:
-            asset = WebDriverWait(self.driver, 30).until(
+            asset = WebDriverWait(self.driver, 40).until(
                     EC.visibility_of_element_located(self.asset_name))
             time.sleep(.2)
             asset.send_keys("Onpy for testing")

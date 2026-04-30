@@ -94,5 +94,7 @@ class Login(unittest.TestCase):
         client_section.Enter_Notes()
         time.sleep(.2)
 
+
+
         client_section.Click_Save_Estimation()
         time.sleep(.2)
