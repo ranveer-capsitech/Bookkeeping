@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Completed HMRC with CRM condition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Assets_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Assets_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/BankingPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/BankingPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Mileage_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Mileage_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/18_Banking_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/4_Estimates_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/pytest_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/pytest_report.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +163,7 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking">
     <configuration name="Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -248,8 +241,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking" />
+        <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting" />
         <item itemvalue="Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims" />
         <item itemvalue="Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell" />
         <item itemvalue="Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" />
@@ -591,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776436418809</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Completed HMRC with CRM condition">
+      <option name="closed" value="true" />
+      <created>1777539980946</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1777539980946</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

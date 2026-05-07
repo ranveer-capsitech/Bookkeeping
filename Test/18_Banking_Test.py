@@ -113,6 +113,89 @@ class Login(unittest.TestCase):
         client_section.Save_Banking()
         time.sleep(1)
 
+
+        client_section.Click_Added_Bank()
+        time.sleep(.2)
+
+        client_section.Click_Import()
+        time.sleep(.2)
+        client_section.Click_Templet()
+        time.sleep(.2)
+        client_section.Click_Upload()
+        time.sleep(.2)
+
+        client_section. Upload_Import()
+        time.sleep(.2)
+        client_section.Click_Next()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+        client_section.Click_Explain_1st()
+        time.sleep(.2)
+        client_section.Click_This_Transaction()
+        time.sleep(.5)
+
+
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+        client_section.Click_Explain_1st()
+        time.sleep(1)
+        client_section.Click_With_All_Recommendation()
+        time.sleep(1)
+
+
+        client_section.Click_1st_Check_Box_Of_Similar_Transaction()
+        time.sleep(1)
+        client_section. wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Select_Account_Head()
+        time.sleep(2)
+        client_section.Click_Similar_Section_Explain_Button()
+        time.sleep(.2)
+        client_section.Click_This_Transaction()
+        time.sleep(.5)
+
+
+
+        # client_section.Click_Similar_Section_Explain_Button()
+        # time.sleep(.2)
+        #
+        client_section.Click_1st_Check_Box_Of_Similar_Transaction()
+        time.sleep(1)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Select_Account_Head()
+        time.sleep(2)
+
+        client_section.Click_Similar_Section_Explain_Button()
+        time.sleep(.2)
+        client_section.Click_Similar_For_Explain()
+        time.sleep(.2)
+
+
+        client_section.Simple_Check_Box_Selection()
+        time.sleep(5)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Select_Account_Head()
+        time.sleep(2)
+        client_section.Click_Similar_Section_Explain_Button()
+        time.sleep(.2)
+        client_section.Click_This_Transaction()
+        time.sleep(.5)
+
+
+
+
+
+
+
+
+
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add Credit card")
 
@@ -180,6 +263,9 @@ class Login(unittest.TestCase):
 
         client_section.Save_Account()
         time.sleep(.2)
+
+
+        #---------------------------------------------------------------------------------------------------------------
 
         client_section.Banking_Section()
         time.sleep(.2)

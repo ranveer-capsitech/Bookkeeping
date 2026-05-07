@@ -82,13 +82,11 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section. Vat_Return_Section()
         time.sleep(.2)
 
         client_section.Handle_MTD_Or_Reauthorized()
         time.sleep(.2)
-
 
 
         client_section.Click_Continue()
@@ -153,7 +151,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section.Select_Obligations()
         time.sleep(.2)
         client_section.Save_Vat()
@@ -164,7 +161,6 @@ class Login(unittest.TestCase):
 
         client_section.Edit_Vat_Return()
         time.sleep(.2)
-
 
         client_section. Click_Import()
         time.sleep(1)
@@ -241,12 +237,9 @@ class Login(unittest.TestCase):
         client_section.Back_Button_For_Verify()
         time.sleep(.2)
 
-        #----@@@
 
 
-
-
-        #----- after revoke submit click on edit icon ------------------------------------------------------------------
+        #----- After revoke submit click on edit icon ------------------------------------------------------------------
 
         client_section.Edit_Vat_Return()
         time.sleep(.2)
@@ -266,7 +259,7 @@ class Login(unittest.TestCase):
         client_section.Click_Review()
         time.sleep(.2)
 
-        #--- direct use next button ...not apply reject process
+        #--- Direct use next button ...not apply reject process
 
         client_section.Click_Next()
         time.sleep(.2)
@@ -277,15 +270,10 @@ class Login(unittest.TestCase):
         client_section.E_Sign()
         time.sleep(.2)
 
-        #--- again go for click on pending
+        #--- Again go for click on pending
 
         client_section.Click_Pending()
         time.sleep(.2)
-
-
-
-
-
 
 
         # client_section.Back_Button_For_Verify()#
@@ -309,19 +297,7 @@ class Login(unittest.TestCase):
 
 
 
-
-
-
-
-
-
-
-
-
         #----------------------------------------------------------------------------------------------------------------
-
-
-
 
 
         client_section.Send_mail()
@@ -384,8 +360,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         # client_section.Click_Send_submit_mail()
         # time.sleep(.2)
-        # client_section.Send_Anyway_Button()
-        # time.sleep(.5)
+        client_section.Send_Anyway_Button()
+        time.sleep(.5)
 
 
 

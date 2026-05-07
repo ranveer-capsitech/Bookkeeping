@@ -1,5 +1,6 @@
 import random
 
+import pyautogui
 from faker import Faker
 import time
 
@@ -43,7 +44,7 @@ class Banking:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -60,9 +61,41 @@ class Banking:
         self.click_primary_account = (By.XPATH, "//span[contains(text(),'Primary account')]")
         self.save_account = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
 
+
+
         self.select_account_type = (By.XPATH, "//label[normalize-space()='Account type']/following::div[contains(@class,'rs-control')][1]")
 
         self.enter_credit_card_number = (By.XPATH, "//label[normalize-space()='Credit card number']/following::input[1]")
+        self.click_import = (By.XPATH, "//span[contains(text(),'Import')]")
+        self.click_templet = (By.XPATH, "//span[contains(text(),'Template')]")
+        self.click_upload = (By.XPATH, "//label[contains(text(),'Upload')]")
+        self.upload_import = (By.XPATH, "//div[contains(@class,'ao-modal-container')]//button[.//span[normalize-space()='Import']]")
+        self.click_next_button = (By.XPATH, "//span[contains(text(),'Next')]")
+        self.click_checkbox_single_element = (By.XPATH, "(//div[contains(@class,'ms-Checkbox-checkbox')]//i[@data-icon-name='CheckMark']/ancestor::label)[2]")
+        self.click_explain_1st = (By.XPATH, "(//button[starts-with(@id,'explain-btn-') and .//span[normalize-space()='Explain']])[1]")
+        self.click_this_transaction = (By.XPATH, "//div[contains(text(),'This transaction')]")
+        self.click_with_all_recommendation = (By.XPATH, "//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Recommendation')]")
+        self.click_1st_check_box_of_similar_transaction = (By.XPATH, "(//div[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//label[contains(@class,'ms-Checkbox-label')])[1]")
+        self.select_account_head = (By.XPATH, "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//div[contains(@class,'rs-control')])[1]")
+        self.click_similar_section_explain_button = (By.XPATH, "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//button[starts-with(@id,'explain-btn-')])[1]")
+        self.click_similar_for_explain = (By.XPATH, "(//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Similar')])[1]")
+
+        self.click_1st_check_box_of_similar_transaction = (
+            By.XPATH,
+            "(//*[contains(normalize-space(.),'Similar transactions') and not(descendant::*)]"
+            "/ancestor::*[contains(@class,'tr')][1]"
+            "//input[@type='checkbox']/following-sibling::label)[1]"
+        )
+
+
+        self.simple_check_box_selection = (By.XPATH, "(//div[contains(@class,'tr') and .//input[@type='checkbox'] and not(.//*[contains(normalize-space(),'Recommendation')]) and not(.//*[contains(normalize-space(),'Similar transactions')])]//input[@type='checkbox']/following-sibling::label)[1]")
+
+
+
+
+
+
+
 
 
 
@@ -96,7 +129,7 @@ class Banking:
 
 
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout= 30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -159,7 +192,7 @@ class Banking:
             time.sleep(.5)
 
 
-#--------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------Current account----------------------------------------------------
 
 
     def Click_Input(self):
@@ -284,30 +317,50 @@ class Banking:
             time.sleep(0.2)
 
 
+    # def Sort_Code(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 30)
+    #
+    #     try:
+    #
+    #         code = wait.until(EC.visibility_of_element_located(self.enter_sort_code))
+    #
+    #         time.sleep(0.2)
+    #         code.clear()
+    #         time.sleep(0.2)
+    #
+    #         code.send_keys("112233")
+    #
+    #         time.sleep(0.3)
+    #
+    #         active = driver.switch_to.active_element
+    #         active.send_keys(Keys.ENTER)
+    #
+    #         print("Enter sort code successfully...!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Click: {e}")
+    #         time.sleep(0.2)
+
     def Sort_Code(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
 
         try:
-
             code = wait.until(EC.visibility_of_element_located(self.enter_sort_code))
 
-            time.sleep(0.2)
+            self.sort_code_value = "112233"
+
             code.clear()
-            time.sleep(0.2)
+            code.send_keys(self.sort_code_value)
 
-            code.send_keys("112233")
-
-            time.sleep(0.3)
-
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ENTER)
+            driver.switch_to.active_element.send_keys(Keys.ENTER)
 
             print("Enter sort code successfully...!!")
 
         except Exception as e:
             print(f"Error on Click: {e}")
-            time.sleep(0.2)
+            raise
 
 
     def Click_Primary_Account(self):
@@ -344,6 +397,48 @@ class Banking:
             print(f"Error: {e}")
 
             time.sleep(2)
+
+    def Click_Added_Bank(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            # after save, wait for page/card reload
+            self.wait_for_loader_to_disappear()
+            time.sleep(2)
+
+            # 112233 -> 11-22-33
+            formatted_sort_code = f"{self.sort_code_value[:2]}-{self.sort_code_value[2:4]}-{self.sort_code_value[4:]}"
+
+            print("Looking for sort code:", formatted_sort_code)
+
+            bank_card_xpath = (
+                f"//label[contains(normalize-space(),'{formatted_sort_code}')]"
+                f"/ancestor::div[contains(@class,'box-shadow') or contains(@class,'p10')]"
+            )
+
+            bank_card = wait.until(
+                EC.presence_of_element_located((By.XPATH, bank_card_xpath))
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});", bank_card
+            )
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", bank_card)
+
+            print("Click on added bank successfully.......!!!!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            raise
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
     def Save_Credit_card(self):
@@ -449,7 +544,381 @@ class Banking:
             print(f"Error on Enter_Account_no: {e}")
             time.sleep(0.2)
 
-#-----------------------------------------------------------------------------------------------------------------------
+    def Click_Import(self):
+        try:
+            import_click = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_import))
+            time.sleep(.2)
+            import_click.click()
+            time.sleep(.2)
+
+            print("Clicked on Import button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    # def Click_Upload(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         upload = wait.until(EC.element_to_be_clickable(self.click_upload))
+    #         upload.click()
+    #         time.sleep(2)
+    #
+    #         pyautogui.moveTo(500, 500)
+    #         pyautogui.write(r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv", interval=0.01)
+    #         pyautogui.press("enter")
+    #
+    #         print("Clicked on upload button successfully.....!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         raise
+
+
+    def Click_Templet(self):
+        try:
+            templet = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_templet))
+            time.sleep(.2)
+            templet.click()
+            time.sleep(.2)
+
+            print("Clicked on templet  button successfully and templet downloaded .....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+
+
+
+    def Click_Upload(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+            file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
+
+            upload = wait.until(EC.element_to_be_clickable(self.click_upload))
+            self.driver.execute_script("arguments[0].click();", upload)
+            time.sleep(1)
+
+            file_input = wait.until(
+                EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+            )
+
+            file_input.send_keys(file_path)
+
+            print("File uploaded successfully.....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            raise
+
+
+
+    def Upload_Import(self):
+        try:
+            import_upload = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.upload_import))
+            time.sleep(.2)
+            import_upload.click()
+            time.sleep(.2)
+
+            print("Clicked on Upload Import button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Click_Next(self):
+        try:
+            next_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_next_button))
+            time.sleep(.2)
+            next_button.click()
+            time.sleep(.2)
+
+            print("Clicked on Next button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
+
+    def Click_Checkbox_Single_Element(self):
+        try:
+            wait = WebDriverWait(self.driver, 50)
+
+            # 1. Wait until spinner/loader disappears
+            self.wait_for_loader_to_disappear()
+
+            # 2. Locate checkbox
+            checkbox = wait.until(
+                EC.presence_of_element_located(self.click_checkbox_single_element)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});", checkbox
+            )
+
+            self.wait_for_loader_to_disappear()
+
+            try:
+                checkbox = wait.until(
+                    EC.element_to_be_clickable(self.click_checkbox_single_element)
+                )
+                checkbox.click()
+            except ElementClickInterceptedException:
+                self.wait_for_loader_to_disappear()
+                self.driver.execute_script("arguments[0].click();", checkbox)
+
+            print("Click checkbox single element successfully.....!!")
+
+        except Exception as e:
+            print(f"Error on checkbox click: {e}")
+            raise
+
+
+    def Click_Explain_1st(self):
+        try:
+            explain_1st = WebDriverWait(self.driver, 50).until(EC.element_to_be_clickable(self.click_explain_1st))
+            time.sleep(.2)
+            explain_1st.click()
+            time.sleep(.2)
+
+            print("Clicked on explain_1st button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Click_This_Transaction(self):
+        try:
+            this_transaction = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_this_transaction))
+            time.sleep(.2)
+            this_transaction.click()
+            time.sleep(.2)
+
+            print("Clicked on this transaction button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Click_With_All_Recommendation(self):
+        # try:
+            all_transaction = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_with_all_recommendation))
+            time.sleep(.2)
+            all_transaction.click()
+            time.sleep(.2)
+
+            print("Clicked on All transaction button successfully.....!! ")
+
+        # except Exception as e:
+        #     print(f"Error: {e}")
+
+            # time.sleep(2)
+
+    def Click_1st_Check_Box_Of_Similar_Transaction(self):
+        wait = WebDriverWait(self.driver, 50)
+
+        for attempt in range(3):
+            try:
+                self.wait_for_loader_to_disappear()
+
+                check_box = wait.until(
+                    EC.presence_of_element_located(self.click_1st_check_box_of_similar_transaction)
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    check_box
+                )
+                time.sleep(0.3)
+
+                self.wait_for_loader_to_disappear()
+
+                check_box = wait.until(
+                    EC.element_to_be_clickable(self.click_1st_check_box_of_similar_transaction)
+                )
+
+                try:
+                    check_box.click()
+                except ElementClickInterceptedException:
+                    self.driver.execute_script("arguments[0].click();", check_box)
+
+                print("Clicked 1st check box of similar transaction successfully.....!!")
+                return
+
+            except StaleElementReferenceException:
+                print(f"Stale element found, retrying... {attempt + 1}")
+                time.sleep(1)
+
+        raise Exception("Unable to click 1st similar transaction checkbox after retries")
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
+
+    def Select_Account_Head(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            self.wait_for_loader_to_disappear()
+
+            account_head = wait.until(
+                EC.element_to_be_clickable(self.select_account_head)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                account_head
+            )
+            account_head.click()
+
+
+
+            self.wait_for_loader_to_disappear()
+            self.driver.execute_script("arguments[0].click();", account_head)
+            time.sleep(0.5)
+
+            active = self.driver.switch_to.active_element
+
+            active.send_keys("Sales")
+            time.sleep(0.5)
+            active.send_keys(Keys.ENTER)
+            time.sleep(0.5)
+
+            print("Selected Sales - 1/1 successfully.")
+
+        except Exception as e:
+            print(f"Error while selecting Sales: {e}")
+            raise
+
+
+    # def Click_Similar_Section_Explain_Button(self):
+    #     try:
+    #         account_head = WebDriverWait(self.driver, 30).until(
+    #             EC.element_to_be_clickable(self.click_similar_section_explain_button))
+    #         time.sleep(.2)
+    #         account_head.click()
+    #         time.sleep(.2)
+    #         print("Select Account head  successfully.....!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         time.sleep(2)
+    def Click_Similar_Section_Explain_Button(self):
+
+        wait = WebDriverWait(self.driver, 30)
+
+        for attempt in range(3):
+
+            try:
+                self.wait_for_loader_to_disappear()
+
+                # Re-locate every time
+                explain_btn = wait.until(
+                    EC.presence_of_element_located(
+                        self.click_similar_section_explain_button
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    explain_btn
+                )
+
+                time.sleep(0.5)
+
+                self.wait_for_loader_to_disappear()
+
+                explain_btn = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_similar_section_explain_button
+                    )
+                )
+
+                try:
+                    explain_btn.click()
+
+                except ElementClickInterceptedException:
+                    self.driver.execute_script(
+                        "arguments[0].click();",
+                        explain_btn
+                    )
+
+                print("Clicked Similar Section Explain Button successfully.....!!")
+                return
+
+            except StaleElementReferenceException:
+                print(f"Stale element found, retrying... {attempt + 1}")
+                time.sleep(1)
+
+        raise Exception("Unable to click Similar Section Explain Button")
+
+    def Click_Similar_For_Explain(self):
+        try:
+            account_head = WebDriverWait(self.driver, 30).until(
+                EC.element_to_be_clickable(self.click_similar_for_explain))
+            time.sleep(.2)
+            account_head.click()
+            time.sleep(.2)
+            print("Select All similar head head successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+
+
+
+    def Simple_Check_Box_Selection(self):
+        try:
+            normal = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.simple_check_box_selection))
+            time.sleep(.2)
+            normal.click()
+            time.sleep(.2)
+            print("Click on check box for simple entries successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+
+    #--------------------------------------------Credit card--------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
     def Select_Setting_Section(self):
@@ -468,6 +937,7 @@ class Banking:
 
                 time.sleep(2)
 
+
     def Chart_Of_Account(self):
         try:
             account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.chart_of_account))
@@ -482,6 +952,7 @@ class Banking:
 
             time.sleep(2)
 
+
     def Click_Add_Account(self):
         try:
             add_account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_add_account))
@@ -495,6 +966,7 @@ class Banking:
             print(f"Error: {e}")
 
             time.sleep(2)
+
 
     def Select_Account_Type_Setting(self):
         try:
@@ -511,11 +983,12 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
+
     def Enter_name(self):
         try:
             name = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.enter_name))
             time.sleep(.2)
-            name.send_keys("Only for testing")
+            name.send_keys("Cashplus Credit Card")
             time.sleep(.2)
 
 
@@ -524,6 +997,7 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Select_vat_Rate(self):
         try:
@@ -552,6 +1026,7 @@ class Banking:
             print(f"Error while selecting VAT rate: {e}")
             raise
 
+
     def Click_Is_Credit_Card(self):
         try:
             credit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_credit_card))
@@ -579,6 +1054,7 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Click_Yes(self):
         try:
