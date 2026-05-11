@@ -87,14 +87,18 @@ class Banking:
             "//input[@type='checkbox']/following-sibling::label)[1]"
         )
 
+        self.last_plain_entry_checkbox = (
+            By.XPATH,
+            "(//div[contains(@class,'tr') "
+            "and .//input[@type='checkbox'] "
+            "and not(contains(normalize-space(.),'Recommendation')) "
+            "and not(contains(normalize-space(.),'Similar transactions')) "
+            "and .//div[normalize-space()='Select']]"
+            "//input[@type='checkbox']/following-sibling::label)[last()]"
+        )
 
-        self.simple_check_box_selection = (By.XPATH, "(//div[contains(@class,'tr') and .//input[@type='checkbox'] and not(.//*[contains(normalize-space(),'Recommendation')]) and not(.//*[contains(normalize-space(),'Similar transactions')])]//input[@type='checkbox']/following-sibling::label)[1]")
-
-
-
-
-
-
+        self.click_last_select = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
+        self.click_last_explain = (By.XPATH, "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
 
 
 
@@ -591,21 +595,20 @@ class Banking:
 
             time.sleep(2)
 
-
-
-
     def Click_Upload(self):
         try:
             wait = WebDriverWait(self.driver, 40)
             file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
 
-            upload = wait.until(EC.element_to_be_clickable(self.click_upload))
-            self.driver.execute_script("arguments[0].click();", upload)
-            time.sleep(1)
-
             file_input = wait.until(
                 EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
             )
+
+            self.driver.execute_script("""
+                arguments[0].style.display = 'block';
+                arguments[0].style.visibility = 'visible';
+                arguments[0].style.opacity = 1;
+            """, file_input)
 
             file_input.send_keys(file_path)
 
@@ -614,6 +617,30 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             raise
+
+
+
+
+    # def Click_Upload(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #         file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
+    #
+    #         upload = wait.until(EC.element_to_be_clickable(self.click_upload))
+    #         self.driver.execute_script("arguments[0].click();", upload)
+    #         time.sleep(1)
+    #
+    #         file_input = wait.until(
+    #             EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+    #         )
+    #
+    #         file_input.send_keys(file_path)
+    #
+    #         print("File uploaded successfully.....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         raise
 
 
 
@@ -897,7 +924,7 @@ class Banking:
     def Simple_Check_Box_Selection(self):
         try:
             normal = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.simple_check_box_selection))
+                EC.element_to_be_clickable(self.last_plain_entry_checkbox))
             time.sleep(.2)
             normal.click()
             time.sleep(.2)
@@ -906,6 +933,67 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
+    def Click_Last_Select(self):
+
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            self.wait_for_loader_to_disappear()
+
+            last = wait.until(
+                EC.element_to_be_clickable(self.click_last_select)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                last
+            )
+            last.click()
+
+            self.wait_for_loader_to_disappear()
+            self.driver.execute_script("arguments[0].click();", last)
+            time.sleep(0.5)
+
+            active = self.driver.switch_to.active_element
+
+            active.send_keys("Sales")
+            time.sleep(0.5)
+            active.send_keys(Keys.ENTER)
+            time.sleep(0.5)
+
+            print("Selected Sales - 1/1 successfully.")
+
+        except Exception as e:
+            print(f"Error while selecting Sales: {e}")
+            raise
+
+    def Click_Explain(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            explains = wait.until(EC.presence_of_all_elements_located((
+                By.XPATH, "//*[normalize-space()='Explain']"
+            )))
+
+            visible_explains = [el for el in explains if el.is_displayed()]
+
+            explain = visible_explains[-1]
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                explain
+            )
+            time.sleep(1)
+
+            self.driver.execute_script("arguments[0].click();", explain)
+
+            print("Click on last visible explain successfully.....!!")
+
+        except Exception as e:
+            print(f"Error while clicking last explain: {type(e).__name__} - {e}")
+            raise
+
 
 
 

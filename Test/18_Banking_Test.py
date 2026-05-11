@@ -177,21 +177,18 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
+
+
         client_section.Simple_Check_Box_Selection()
         time.sleep(5)
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
-        client_section.Select_Account_Head()
+        client_section.Click_Last_Select()
         time.sleep(2)
-        client_section.Click_Similar_Section_Explain_Button()
-        time.sleep(.2)
-        client_section.Click_This_Transaction()
-        time.sleep(.5)
-
-
-
-
-
+        client_section. Click_Explain()
+        time.sleep(2)
+        # client_section.Click_This_Transaction()
+        # time.sleep(.5)
 
 
 
@@ -200,6 +197,7 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add Credit card")
 
     #------------------------------ Add Credit card --------------------------------------------------------------------
+
 
     def test_24_Credit(self):
         client_section = Banking(driver=self.driver)
@@ -275,7 +273,4 @@ class Login(unittest.TestCase):
 
         client_section.Click_Yes()
         time.sleep(.2)
-
-
-
 
