@@ -100,6 +100,11 @@ class Banking:
         self.click_last_select = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
         self.click_last_explain = (By.XPATH, "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
 
+        #----------------------------------------------------------------------------------------------------------------
+
+        self.select_credit_account = (By.XPATH, "(//div[contains(@style,'cursor: pointer') and .//*[normalize-space()='Reconciled'] and .//*[contains(normalize-space(),'Unexplained transactions')]])[1]")
+
+
 
 
 
@@ -1000,12 +1005,58 @@ class Banking:
     #--------------------------------------------Credit card--------------------------------------------------------------------
 
 
+    def Click_Credit_Account(self):
+        try:
+            credit_account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.select_credit_account))
+            time.sleep(.2)
+            credit_account.click()
+            time.sleep(.2)
+
+            print("Click on Credit account section successfully.")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Click_Upload_File(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
+
+            # Find actual file input
+            file_input = wait.until(
+                EC.presence_of_element_located((
+                    By.XPATH,
+                    "//div[@role='dialog' and .//*[contains(text(),'Bank Transactions')]]//input[@type='file']"
+                ))
+            )
+
+            # Make hidden input visible
+            self.driver.execute_script("""
+                arguments[0].style.display = 'block';
+                arguments[0].style.visibility = 'visible';
+                arguments[0].style.opacity = 1;
+                arguments[0].removeAttribute('hidden');
+            """, file_input)
+
+            time.sleep(1)
+
+            # Upload file
+            file_input.send_keys(file_path)
+
+            print("File uploaded successfully.....!!")
+
+        except Exception as e:
+            print(f"Error while uploading file: {type(e).__name__} - {e}")
+            raise
 
 
 
 
 
-
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -1122,7 +1173,6 @@ class Banking:
             credit.click()
             time.sleep(.2)
 
-
             print("Tick on check box of credit card successfully....!!")
 
         except Exception as e:
@@ -1157,6 +1207,8 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 

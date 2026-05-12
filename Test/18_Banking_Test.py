@@ -202,6 +202,21 @@ class Login(unittest.TestCase):
     def test_24_Credit(self):
         client_section = Banking(driver=self.driver)
         time.sleep(.2)
+
+        client_section.Select_Search()
+        time.sleep(5)
+        client_section.Enter_Company()
+        time.sleep(.2)
+        client_section.Click_Company()
+        time.sleep(.2)
+        time.sleep(3)
+        client_section.Click_Input()
+        time.sleep(.2)
+
+        client_section.Banking_Section()
+        time.sleep(.2)
+
+
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
         client_section.Account()
@@ -214,12 +229,81 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
         client_section.Save_Credit_card()
+        time.sleep(.2)
+
+        client_section.Click_Credit_Account()
+        time.sleep(.2)
+        client_section.Click_Import()
+        time.sleep(.2)
+        client_section.Click_Templet()
+        time.sleep(.2)
+        client_section.Click_Upload_File()
+        time.sleep(.2)
+        client_section.Upload_Import()
+        time.sleep(.2)
+        client_section.Click_Next()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        #
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+        client_section.Click_Explain_1st()
+        time.sleep(.2)
+        client_section.Click_This_Transaction()
+        time.sleep(.5)
+
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+        client_section.Click_Explain_1st()
         time.sleep(1)
+        client_section.Click_With_All_Recommendation()
+        time.sleep(1)
+        #
+        client_section.Click_1st_Check_Box_Of_Similar_Transaction()
+        time.sleep(1)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Select_Account_Head()
+        time.sleep(2)
+        client_section.Click_Similar_Section_Explain_Button()
+        time.sleep(.2)
+        client_section.Click_This_Transaction()
+        time.sleep(.5)
+
+        # #
+        # # ## client_section.Click_Similar_Section_Explain_Button()
+        # # ## time.sleep(.2)
+        # # #
+
+        client_section.Click_1st_Check_Box_Of_Similar_Transaction()
+        time.sleep(1)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Select_Account_Head()
+        time.sleep(2)
+
+        client_section.Click_Similar_Section_Explain_Button()
+        time.sleep(.2)
+        client_section.Click_Similar_For_Explain()
+        time.sleep(.2)
+
+        client_section.Simple_Check_Box_Selection()
+        time.sleep(5)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Last_Select()
+        time.sleep(2)
+        client_section.Click_Explain()
+        time.sleep(2)
+
+
 
     #-------------------------------------------setting-----------------------------------------------------------------
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> setting")
+    @pytest.mark.description(f" Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Banking >> setting")
 
 
     def test_25_Setting(self):
@@ -235,7 +319,6 @@ class Login(unittest.TestCase):
         # time.sleep(3)
         # client_section.Click_Input()
         # time.sleep(.2)
-
 
 
         client_section.Select_Setting_Section()
@@ -263,7 +346,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-        #---------------------------------------------------------------------------------------------------------------
+    #---------------------------------------------------------------------------------------------------------------
+
 
         client_section.Banking_Section()
         time.sleep(.2)

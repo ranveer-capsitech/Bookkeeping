@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/BankingPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/BankingPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/18_Banking_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +52,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
@@ -163,22 +163,7 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking">
-    <configuration name="Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="BOOKKEEPING" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;11_Dividend_Test.Login.test_13_Expense_claims&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit">
     <configuration name="Python tests for 18_Banking_Test.Login.test_23_Banking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -191,6 +176,21 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;18_Banking_Test.Login.test_23_Banking&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for 18_Banking_Test.Login.test_24_Credit" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="BOOKKEEPING" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;18_Banking_Test.Login.test_24_Credit&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -241,11 +241,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting" />
         <item itemvalue="Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims" />
         <item itemvalue="Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell" />
-        <item itemvalue="Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims" />
       </list>
     </recent_temporary>
   </component>
@@ -592,7 +592,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777539980946</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Completed HMRC with CRM condition">
+      <option name="closed" value="true" />
+      <created>1778152823753</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1778152823753</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Completed HMRC with CRM condition">
+      <option name="closed" value="true" />
+      <created>1778483130590</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1778483130590</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
