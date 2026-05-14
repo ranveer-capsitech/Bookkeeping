@@ -7,6 +7,7 @@
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Completed HMRC with CRM condition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/BankingPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/BankingPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/18_Banking_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +164,7 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit">
+  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking">
     <configuration name="Python tests for 18_Banking_Test.Login.test_23_Banking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -241,8 +242,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking" />
+        <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting" />
         <item itemvalue="Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims" />
         <item itemvalue="Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell" />
@@ -608,7 +609,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778483130590</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Completed HMRC with CRM condition">
+      <option name="closed" value="true" />
+      <created>1778595315665</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1778595315665</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

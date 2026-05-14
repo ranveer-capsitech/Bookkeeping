@@ -36,9 +36,6 @@ class Login(unittest.TestCase):
 
 
 
-
-
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -177,8 +174,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
-
         client_section.Simple_Check_Box_Selection()
         time.sleep(5)
         client_section.wait_for_loader_to_disappear()
@@ -189,6 +184,88 @@ class Login(unittest.TestCase):
         time.sleep(2)
         # client_section.Click_This_Transaction()
         # time.sleep(.5)
+
+
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+
+
+        client_section.Click_Exclude_Button()
+        time.sleep(.2)
+        client_section.Click_Yes()
+        time.sleep(.2)
+
+
+
+
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Select_Excluded_Tab()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_First_Checkbox()
+        time.sleep(.2)
+        client_section.Click_Second_Checkbox()
+        time.sleep(.2)
+
+        client_section.Click_Delete_Button()
+        time.sleep(.2)
+        client_section.Click_Yes_Delete()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
+        client_section.Click_First_Checkbox()
+        time.sleep(.2)
+        client_section.Click_Revive_Button()
+        time.sleep(.2)
+        client_section.Click_Yes_Delete()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section. Select_Explained_Tab()
+        time.sleep(.2)
+        client_section.Click_First_Checkbox()
+        time.sleep(.2)
+        client_section.Click_Unexplain()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_First_Checkbox()
+        time.sleep(.2)
+        client_section.Click_Single_Explain_Translation()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
+        #split---
+
+        client_section.Click_Unexplain_Tab()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Simple_Check_Box_Selection()
+        time.sleep(5)
+        client_section.Click_three_dot()
+        time.sleep(.2)
+        client_section.Click_Split()
+        time.sleep(10)
+
+
+
+
+
+
+
+
 
 
 

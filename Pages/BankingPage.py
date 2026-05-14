@@ -105,6 +105,29 @@ class Banking:
         self.select_credit_account = (By.XPATH, "(//div[contains(@style,'cursor: pointer') and .//*[normalize-space()='Reconciled'] and .//*[contains(normalize-space(),'Unexplained transactions')]])[1]")
 
 
+        self.click_exclude_button = (By.XPATH, "//button[@type='button' and .//i[@data-icon-name='PageRemove'] and .//span[normalize-space()='Exclude']]")
+        self.select_excluded = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Excluded')]]")
+        self.click_first_checkbox = (By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[1]")
+        self.click_second_checkbox = (By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[2]")
+        self.click_delete_button = (By.XPATH, "//button[.//span[normalize-space()='Delete']]")
+
+        self.click_revive_button = (By.XPATH, "(//div[contains(@class,'tr-focus')]//button[@id='btn-delete' and .//i[@data-icon-name='SyncOccurence']])[1]")
+
+        self.click_explained_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Explained')]]")
+        self.click_unexplain = (By.XPATH, "//button[@title='Unexplain all checked transactions']")
+        self.explain_translation = (By.XPATH, "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]")
+
+        self.click_unexplain_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Unexplained')]]")
+        self.click_three_dot = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//button[.//i[@data-icon-name='More']])[1]")
+        self.click_split = (By.XPATH, "//button[@role='menuitem'][.//span[normalize-space()='Split']]")
+
+
+
+
+
+
+
+
 
 
 
@@ -1001,6 +1024,228 @@ class Banking:
 
 
 
+    def Click_Exclude_Button(self):
+        try:
+            exclude = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_exclude_button))
+            time.sleep(.2)
+            exclude.click()
+            time.sleep(.2)
+            print("Click Excluded Button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+    def Select_Excluded_Tab(self):
+        try:
+            tab = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.select_excluded))
+            time.sleep(.2)
+            tab.click()
+            time.sleep(.2)
+            print("Select Excluded section successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_First_Checkbox(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            checkbox = wait.until(
+                EC.presence_of_element_located(self.click_first_checkbox)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                checkbox
+            )
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", checkbox)
+
+            print("Select 1st checkbox successfully.....!!")
+
+        except Exception as e:
+            print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
+            raise
+
+    def Click_Second_Checkbox(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            checkbox1 = wait.until(
+                EC.presence_of_element_located(self.click_second_checkbox)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                checkbox1
+            )
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", checkbox1)
+
+            print("Select second checkbox successfully.....!!")
+
+        except Exception as e:
+            print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
+            raise
+
+    def Click_Delete_Button(self):
+        try:
+            delete = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_delete_button))
+            time.sleep(.2)
+            delete.click()
+            time.sleep(.2)
+            print("Select delete icon successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+    def Click_Revive_Button(self):
+        try:
+            revive = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_revive_button))
+            time.sleep(.2)
+            revive.click()
+            time.sleep(.2)
+            print("Click on Revive successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Select_Explained_Tab(self):
+        try:
+            exp_tab = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_explained_tab ))
+            time.sleep(.2)
+            exp_tab.click()
+            time.sleep(.2)
+            print("Select Explained section successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+    def Click_Unexplain(self):
+        try:
+            unexplain = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_unexplain ))
+            time.sleep(.2)
+            unexplain.click()
+            time.sleep(.2)
+            print("Click on Un Explained icon successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Single_Explain_Translation(self):
+        try:
+            single_explain = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.explain_translation))
+            time.sleep(.2)
+            single_explain.click()
+            time.sleep(.2)
+            print("Click on Single explain translation successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Unexplain_Tab(self):
+        try:
+            Unexplain_Tab = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_unexplain_tab))
+            time.sleep(.2)
+            Unexplain_Tab.click()
+            time.sleep(.2)
+            print("Click on Unexplain Tab successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_three_dot(self):
+        try:
+            dot = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_three_dot))
+            time.sleep(.2)
+            dot.click()
+            time.sleep(.2)
+            print("Click on three dot successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Split(self):
+        try:
+            split = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_split))
+            time.sleep(.2)
+            split.click()
+            time.sleep(.2)
+            print("Click on Split successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #--------------------------------------------Credit card--------------------------------------------------------------------
 
@@ -1023,7 +1268,7 @@ class Banking:
         try:
             wait = WebDriverWait(self.driver, 40)
 
-            file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
+            file_path = r"C:\Users\CT_USER\Desktop\test\Bank Credit Card.csv"
 
             # Find actual file input
             file_input = wait.until(
@@ -1202,6 +1447,19 @@ class Banking:
             time.sleep(.2)
 
             print("Click on Yes button successfully and Account activated successfully....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Yes_Delete(self):
+        try:
+            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
+            time.sleep(.2)
+            yes.click()
+            time.sleep(.2)
+
+            print("Click on Yes button successfully for delete successfully....!!")
 
         except Exception as e:
             print(f"Error: {e}")

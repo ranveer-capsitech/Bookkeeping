@@ -2373,7 +2373,7 @@ class Vat:
 
             company_xpath = f"//a[@title='{self.company_name}']"
 
-            title = WebDriverWait(self.driver, 20).until(
+            title = WebDriverWait(self.driver, 40).until(
                 EC.presence_of_element_located((By.XPATH, company_xpath))
             )
 
