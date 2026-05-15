@@ -200,10 +200,10 @@ class Vat:
 
         #----------------------------------changes-----------------------------------------------------------------------
 
-        self.click_pending = (By.XPATH, "//span[starts-with(@id,'btn-status') and normalize-space()='Pending']")
+        self.click_pending = (By.XPATH, "(//span[normalize-space()='Pending'])[last()]")
         self.select_e_sign_drop_down = (
-            By.XPATH,
-            "//div[normalize-space()='E-signature status']/following::div[contains(@class,'rs-control')][1]"
+            By.XPATH,"//div[contains(@class,'ms-Callout-main') and .//*[normalize-space()='E-signature status']]//div[contains(@class,'rs-control')]"
+            # "//div[normalize-space()='E-signature status']/following::div[contains(@class,'rs-control')][1]"
         )
 
         self.send_option = (
@@ -1476,41 +1476,162 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+    def wait_for_loader_to_disappear(self, timeout=60):
+        try:
+            wait = WebDriverWait(self.driver, timeout)
+
+            loader_xpath = (
+                "//*[contains(@class,'spinner') "
+                "or contains(@class,'loader') "
+                "or contains(@class,'loading') "
+                "or contains(@class,'ms-Spinner') "
+                "or contains(@class,'ms-Overlay') "
+                "or contains(@aria-label,'Loading') "
+                "or contains(text(),'Loading')]"
+            )
+
+            wait.until(EC.invisibility_of_element_located((By.XPATH, loader_xpath)))
+
+            print("Loader disappeared successfully.....!!")
+
+        except TimeoutException:
+            print("Loader still visible or not found within timeout, continuing...")
+
 
 #----------------------------------changes------------------------------------------------------------------------------
 
-
     def Click_Pending(self):
         try:
-            pending = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_pending))
-            time.sleep(.2)
-            pending.click()
-            time.sleep(.2)
+            wait = WebDriverWait(self.driver, 90)
+
+            # wait after E-Sign because card is async generated
+            time.sleep(5)
+
+            # scroll bottom/right side where e-signature card appears
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)
+
+            # Debug body text
+            print("Pending in page text:", "Pending" in self.driver.execute_script("return document.body.innerText"))
+
+            # wait until Pending text appears anywhere
+            wait.until(lambda d: "Pending" in d.execute_script("return document.body.innerText"))
+
+            pending_elements = self.driver.find_elements(
+                By.XPATH,
+                "//*[contains(normalize-space(.),'Pending')]"
+            )
+
+            visible_pending = [el for el in pending_elements if el.is_displayed()]
+
+            print("Pending elements:", len(pending_elements))
+            print("Visible pending:", len(visible_pending))
+
+            if not visible_pending:
+                raise Exception("Pending text found in page, but no visible Pending element")
+
+            pending = visible_pending[-1]
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                pending
+            )
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", pending)
+
+            print("Clicked Pending successfully.....!!")
+
+        except Exception as e:
+            print(f"Error on Click_Pending: {type(e).__name__} - {e}")
+            raise
+
 
             print("Click on pending button successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+        # except Exception as e:
+        #     print(f"Error on Click:{e}")
+        #     time.sleep(.2)
 
+    # def Select_Drop_Down(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         dropdown = wait.until(EC.element_to_be_clickable(self.select_e_sign_drop_down))
+    #         time.sleep(.2)
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #          dropdown
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #     # JS click
+    #         self.driver.execute_script(
+    #             "arguments[0].click();",
+    #             dropdown
+    #         )
+    #
+    #         time.sleep(1)
+    #
+    #     # keyboard navigation
+    #         actions = ActionChains(self.driver)
+    #
+    #         actions.send_keys(Keys.ARROW_DOWN)
+    #         actions.pause(0.5)
+    #
+    #         actions.send_keys(Keys.ENTER)
+    #
+    #         actions.perform()
+    #
+    #         print("Selected dropdown option successfully.....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Select_Drop_Down: {type(e).__name__} - {e}")
+    #     raise
+        #     dropdown.click()
+        #     time.sleep(.2)
+        #
+        #
+        #     # use active element (real input of react-select)
+        #     active = self.driver.switch_to.active_element
+        #     active.send_keys(Keys.ARROW_DOWN)
+        #     time.sleep(0.3)
+        #     active.send_keys(Keys.ENTER)
+        #
+        #     print("Selected Revoke option successfully....!!")
+        #
+        # except Exception as e:
+        #     print(f"Error on Select_Drop_Down: {e}")
+        #     raise
     def Select_Drop_Down(self):
         try:
             wait = WebDriverWait(self.driver, 30)
 
-            dropdown = wait.until(EC.element_to_be_clickable(self.select_e_sign_drop_down))
-            dropdown.click()
-            time.sleep(.2)
+            dropdown = wait.until(
+                EC.element_to_be_clickable(self.select_e_sign_drop_down)
+            )
 
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
 
-            # use active element (real input of react-select)
-            active = self.driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.3)
-            active.send_keys(Keys.ENTER)
+            time.sleep(0.5)
 
-            print("Selected Revoke option successfully....!!")
+            self.driver.execute_script("arguments[0].click();", dropdown)
+
+            time.sleep(1)
+
+            actions = ActionChains(self.driver)
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+            actions.send_keys(Keys.ENTER)
+            actions.perform()
+
+            print("Selected dropdown option successfully.....!!")
 
         except Exception as e:
-            print(f"Error on Select_Drop_Down: {e}")
+            print(f"Error on Select_Drop_Down: {type(e).__name__} - {e}")
             raise
 
 

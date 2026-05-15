@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/Pages/BankingPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/BankingPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/18_Banking_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +165,7 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking">
+  <component name="RunManager">
     <configuration name="Python tests for 18_Banking_Test.Login.test_23_Banking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -617,7 +618,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778595315665</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Completed HMRC with CRM condition">
+      <option name="closed" value="true" />
+      <created>1778738158546</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1778738158546</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

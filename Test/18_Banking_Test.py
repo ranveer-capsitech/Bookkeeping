@@ -242,6 +242,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Single_Explain_Translation()
         time.sleep(.2)
+        # client_section.Click_Single_Explain_And_Confirm()
+        # time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
@@ -257,7 +259,22 @@ class Login(unittest.TestCase):
         client_section.Click_three_dot()
         time.sleep(.2)
         client_section.Click_Split()
-        time.sleep(10)
+        time.sleep(.2)
+        client_section.Money_in_or_Money_out()
+        time.sleep(.2)
+
+        client_section.Fill_Opposite_Split_Amount()
+        time.sleep(.2)
+        client_section.Select_Second_Account_Head_Option()
+        time.sleep(.2)
+        client_section.Fill_Opposite__Sec_Split_Amount()
+        time.sleep(.2)
+        client_section.Select_Next_option_Second_Account_Head_Option()
+        time.sleep(1)
+        client_section.Click_Split_Button()
+        time.sleep(1)
+
+
 
 
 

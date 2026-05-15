@@ -223,11 +223,14 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.E_Sign()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+
 
         #---------------------------------changes-----------------------------------------------------------------------
 
         client_section.Click_Pending()
         time.sleep(.2)
+
         client_section.Select_Drop_Down()
         time.sleep(.2)
         client_section.Enter_Remark()

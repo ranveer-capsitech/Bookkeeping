@@ -87,15 +87,17 @@ class Banking:
             "//input[@type='checkbox']/following-sibling::label)[1]"
         )
 
-        self.last_plain_entry_checkbox = (
-            By.XPATH,
-            "(//div[contains(@class,'tr') "
-            "and .//input[@type='checkbox'] "
-            "and not(contains(normalize-space(.),'Recommendation')) "
-            "and not(contains(normalize-space(.),'Similar transactions')) "
-            "and .//div[normalize-space()='Select']]"
-            "//input[@type='checkbox']/following-sibling::label)[last()]"
-        )
+        self.last_plain_entry_checkbox =By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[last()]"
+
+        # self.last_plain_entry_checkbox = (
+        #     By.XPATH,
+        #     "(//div[contains(@class,'tr') "
+        #     "and .//input[@type='checkbox'] "
+        #     "and not(contains(normalize-space(.),'Recommendation')) "
+        #     "and not(contains(normalize-space(.),'Similar transactions')) "
+        #     "and .//div[normalize-space()='Select']]"
+        #     "//input[@type='checkbox']/following-sibling::label)[last()]"
+        # )
 
         self.click_last_select = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
         self.click_last_explain = (By.XPATH, "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
@@ -115,11 +117,51 @@ class Banking:
 
         self.click_explained_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Explained')]]")
         self.click_unexplain = (By.XPATH, "//button[@title='Unexplain all checked transactions']")
-        self.explain_translation = (By.XPATH, "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]")
+        # self.explain_translation = (By.XPATH, "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]")
+
+        self.explain_translation = (
+            By.XPATH,
+            "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]"
+        )
+
+        self.yes_button = (
+            By.XPATH,
+            "//div[@role='dialog']//button[.//span[normalize-space()='Yes']]"
+        )
+
+        self.modal_overlay = (
+            By.XPATH,
+            "//div[contains(@class,'ms-Overlay')]"
+        )
+        self.clicks_yes_button =  (
+    By.XPATH,
+    "(//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Yes']])[last()]"
+)
+
 
         self.click_unexplain_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Unexplained')]]")
         self.click_three_dot = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//button[.//i[@data-icon-name='More']])[1]")
         self.click_split = (By.XPATH, "//button[@role='menuitem'][.//span[normalize-space()='Split']]")
+
+        self.money_in_or_money_out = (By.XPATH, "//label[normalize-space()='Money in' or normalize-space()='Money out']/following-sibling::label")
+
+        self.enter_money_in = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyIn')]")
+        self.enter_money_out = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyOut')]")
+
+        # self.enter_2nd_money_out = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.moneyOut']")
+        # self.enter_2nd_money_in = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.moneyIn']")
+
+        self.enter_2nd_money_out = (
+            By.XPATH,
+            "(//div[@role='dialog']//input[contains(@name,'moneyOut')])[2]"
+        )
+
+        self.enter_2nd_money_in = (
+            By.XPATH,
+            "(//div[@role='dialog']//input[contains(@name,'moneyIn')])[2]"
+        )
+
+        self.click_split_button = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//button[.//span[normalize-space()='Split']]")
 
 
 
@@ -687,18 +729,47 @@ class Banking:
             time.sleep(2)
 
     def Click_Next(self):
-        try:
-            next_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_next_button))
-            time.sleep(.2)
-            next_button.click()
-            time.sleep(.2)
+        for attempt in range(3):
+            try:
+                wait = WebDriverWait(self.driver, 30)
 
-            print("Clicked on Next button successfully.....!! ")
+                next_button = wait.until(
+                    EC.element_to_be_clickable(self.click_next_button)
+                )
 
-        except Exception as e:
-            print(f"Error: {e}")
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                    next_button
+                )
 
-            time.sleep(2)
+                time.sleep(0.5)
+
+                self.driver.execute_script("arguments[0].click();", next_button)
+
+                print("Clicked on Next button successfully.....!!")
+                return
+
+            except StaleElementReferenceException:
+                print(f"Stale element found, retrying... attempt {attempt + 1}")
+                time.sleep(1)
+
+            except Exception as e:
+                print(f"Error while clicking Next: {type(e).__name__} - {e}")
+                raise
+
+    # def Click_Next(self):
+    #     try:
+    #         next_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_next_button))
+    #         time.sleep(.2)
+    #         next_button.click()
+    #         time.sleep(.2)
+    #
+    #         print("Clicked on Next button successfully.....!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #
+    #         time.sleep(2)
 
     def wait_for_loader_to_disappear(self):
         try:
@@ -1149,18 +1220,73 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
+    # def Click_Single_Explain_Translation(self):
+    #     #     try:
+    #     #         single_explain = WebDriverWait(self.driver, 40).until(
+    #     #             EC.element_to_be_clickable(self.explain_translation))
+    #     #         time.sleep(.2)
+    #     #         single_explain.click()
+    #     #         time.sleep(.2)
+    #     #         print("Click on Single explain translation successfully.....!! ")
+    #     #
+    #     #     except Exception as e:
+    #     #         print(f"Error: {e}")
+    #     #         time.sleep(2)
+
     def Click_Single_Explain_Translation(self):
         try:
-            single_explain = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.explain_translation))
-            time.sleep(.2)
-            single_explain.click()
-            time.sleep(.2)
-            print("Click on Single explain translation successfully.....!! ")
+            wait = WebDriverWait(self.driver, 40)
+
+
+            yes_buttons = self.driver.find_elements(*self.yes_button)
+            if yes_buttons and yes_buttons[0].is_displayed():
+                self.driver.execute_script("arguments[0].click();", yes_buttons[0])
+                time.sleep(1)
+
+                # wait overlay disappear
+                wait.until(EC.invisibility_of_element_located(self.modal_overlay))
+
+            # Now click single unexplain/undo icon
+            single_explain = wait.until(
+                EC.presence_of_element_located(self.explain_translation)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                single_explain
+            )
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", single_explain)
+
+            print("Click on Single explain translation successfully.....!!")
 
         except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+
+    def Click_Single_Explain_And_Confirm(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            unexplain_icon = wait.until(EC.presence_of_element_located(self.explain_translation))
+            self.driver.execute_script("arguments[0].click();", unexplain_icon)
+
+            yes_btn = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//span[normalize-space()='Yes']/ancestor::button"
+            )))
+            self.driver.execute_script("arguments[0].click();", yes_btn)
+
+            print("Clicked single unexplain and confirmed successfully.....!!")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+
+#-------------------------------------------------------------------------------------------------------------------------
 
     def Click_Unexplain_Tab(self):
         try:
@@ -1188,6 +1314,7 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
+
     def Click_Split(self):
         try:
             split = WebDriverWait(self.driver, 40).until(
@@ -1200,6 +1327,279 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
+    def Money_in_or_Money_out(self):
+        try:
+            money = WebDriverWait(self.driver, 40).until(
+                EC.visibility_of_element_located(self.money_in_or_money_out)).text
+            time.sleep(.2)
+
+
+            print("Money In Value:", money)
+
+            clean_money = money.replace("£", "").replace(",", "").strip()
+
+            # Convert to float
+            money_value = float(clean_money)
+
+            # Divide by 2
+            divided_value = money_value / 2
+
+            print("Divided Value:", divided_value)
+
+            return f"{divided_value:.2f}"
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Money_In(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            divided_value = self.Money_in_or_Money_out()
+
+            money_in = wait.until(
+                EC.element_to_be_clickable(self.enter_money_in)
+            )
+
+            money_in.clear()
+            money_in.send_keys(divided_value)
+
+            print("Entered Money In Value:", divided_value)
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Money_Out(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            divided_value = self.Money_in_or_Money_out()
+
+            money_out = wait.until(
+                EC.element_to_be_clickable(self.enter_money_out)
+            )
+
+            money_out.clear()
+            money_out.send_keys(divided_value)
+
+            print("Entered Money In Value:", divided_value)
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Fill_Opposite_Split_Amount(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            def clean_amount(value):
+                return float(value.replace("£", "").replace(",", "").replace("(", "").replace(")", "").strip())
+
+            money_out = self.driver.find_elements(
+                By.XPATH,
+                "//label[normalize-space()='Money out']/following-sibling::label"
+            )
+
+            money_in = self.driver.find_elements(
+                By.XPATH,
+                "//label[normalize-space()='Money in']/following-sibling::label"
+            )
+
+            if money_out and money_out[0].text.strip():
+                amount = clean_amount(money_out[0].text)
+                divided_value = f"{amount / 2:.2f}"
+
+                field = wait.until(EC.element_to_be_clickable(self.enter_money_in))
+                field.clear()
+                field.send_keys(divided_value)
+
+                print(f"Money Out found, entered {divided_value} in Money In field")
+
+            elif money_in and money_in[0].text.strip():
+                amount = clean_amount(money_in[0].text)
+                divided_value = f"{amount / 2:.2f}"
+
+                field = wait.until(EC.element_to_be_clickable(self.enter_money_out))
+                field.clear()
+                field.send_keys(divided_value)
+
+                print(f"Money In found, entered {divided_value} in Money Out field")
+
+            else:
+                print("No Money In or Money Out value found")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Select_Second_Account_Head_Option(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            # 2nd row Account Head dropdown container
+            dropdown = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "(//div[@role='dialog']//table//tr[td]//div[contains(@class,'rs-container')])[2]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                dropdown
+            )
+            time.sleep(0.5)
+
+            # click container, not input
+            self.driver.execute_script("arguments[0].click();", dropdown)
+            time.sleep(0.5)
+
+            # select second option using keyboard
+            actions = ActionChains(self.driver)
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.3)
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.3)
+            actions.send_keys(Keys.ENTER)
+            actions.perform()
+
+            print("Selected 2nd account head option successfully")
+
+        except Exception as e:
+            print(f"Error selecting 2nd account head option: {type(e).__name__} - {e}")
+            raise
+
+    def Fill_Opposite__Sec_Split_Amount(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            def clean_amount(value):
+                return float(
+                    value.replace("£", "")
+                    .replace(",", "")
+                    .replace("(", "")
+                    .replace(")", "")
+                    .strip()
+                )
+
+            money_out = self.driver.find_elements(
+                By.XPATH,
+                "//label[normalize-space()='Money out']/following-sibling::label"
+            )
+
+            money_in = self.driver.find_elements(
+                By.XPATH,
+                "//label[normalize-space()='Money in']/following-sibling::label"
+            )
+
+            print("MoneyIn input count:",
+                  len(self.driver.find_elements(By.XPATH,
+                                                "//div[@role='dialog']//input[contains(@name,'moneyIn')]")))
+
+            print("MoneyOut input count:",
+                  len(self.driver.find_elements(By.XPATH,
+                                                "//div[@role='dialog']//input[contains(@name,'moneyOut')]")))
+
+            if money_out and money_out[0].text.strip():
+
+                amount = clean_amount(money_out[0].text)
+                divided_value = f"{amount / 2:.2f}"
+
+                # ALWAYS use LAST visible moneyIn field
+                field = wait.until(EC.presence_of_element_located((
+                    By.XPATH,
+                    "(//div[@role='dialog']//input[contains(@name,'moneyIn')])[last()]"
+                )))
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});", field
+                )
+
+                self.driver.execute_script("arguments[0].value='';", field)
+
+                field.send_keys(divided_value)
+
+                print(f"Entered {divided_value} in Money In")
+
+            elif money_in and money_in[0].text.strip():
+
+                amount = clean_amount(money_in[0].text)
+                divided_value = f"{amount / 2:.2f}"
+
+                field = wait.until(EC.presence_of_element_located((
+                    By.XPATH,
+                    "(//div[@role='dialog']//input[contains(@name,'moneyOut')])[last()]"
+                )))
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});", field
+                )
+
+                self.driver.execute_script("arguments[0].value='';", field)
+
+                field.send_keys(divided_value)
+
+                print(f"Entered {divided_value} in Money Out")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Select_Next_option_Second_Account_Head_Option(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            # always select LAST account head dropdown
+            dropdown = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "(//div[@role='dialog']//div[contains(@class,'rs-container')])[last()]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", dropdown)
+
+            time.sleep(1)
+
+            # keyboard navigation
+            actions = ActionChains(self.driver)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ENTER)
+
+            actions.perform()
+            time.sleep(.2)
+
+            print("Selected next account head option successfully")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+    def Click_Split_Button(self):
+
+            try:
+                split_button = WebDriverWait(self.driver, 40).until(
+                    EC.element_to_be_clickable(self.click_split_button))
+                time.sleep(.2)
+                split_button.click()
+                time.sleep(.2)
+                print("Click on Split button successfully.....!! ")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(2)
 
 
 
