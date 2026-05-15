@@ -1288,19 +1288,67 @@ class Banking:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
+    # def Click_Unexplain_Tab(self):
+    #     try:
+    #         Unexplain_Tab = WebDriverWait(self.driver, 40).until(
+    #             EC.element_to_be_clickable(self.click_unexplain_tab))
+    #         time.sleep(.2)
+    #         Unexplain_Tab.click()
+    #         time.sleep(.2)
+    #         print("Click on Unexplain Tab successfully.....!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         time.sleep(2)
+
     def Click_Unexplain_Tab(self):
         try:
-            Unexplain_Tab = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.click_unexplain_tab))
-            time.sleep(.2)
-            Unexplain_Tab.click()
-            time.sleep(.2)
-            print("Click on Unexplain Tab successfully.....!! ")
+            wait = WebDriverWait(self.driver, 40)
+
+            # wait for overlay/modal to disappear
+            try:
+                wait.until(EC.invisibility_of_element_located((
+                    By.XPATH,
+                    "//div[contains(@class,'ms-Overlay')]"
+                )))
+            except TimeoutException:
+                print("Overlay still visible, trying to close modal if available...")
+
+                close_buttons = self.driver.find_elements(
+                    By.XPATH,
+                    "//button[@aria-label='Close' or @title='Close']"
+                )
+
+                for btn in close_buttons:
+                    if btn.is_displayed():
+                        self.driver.execute_script("arguments[0].click();", btn)
+                        time.sleep(1)
+                        break
+
+                wait.until(EC.invisibility_of_element_located((
+                    By.XPATH,
+                    "//div[contains(@class,'ms-Overlay')]"
+                )))
+
+            unexplain_tab = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//button[@role='tab' and contains(@name,'Unexplained')]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                unexplain_tab
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", unexplain_tab)
+
+            print("Click on Unexplained Tab successfully.....!!")
 
         except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
+            print(f"Error on Click_Unexplain_Tab: {type(e).__name__} - {e}")
+            raise
     def Click_three_dot(self):
         try:
             dot = WebDriverWait(self.driver, 40).until(
@@ -1330,28 +1378,81 @@ class Banking:
 
     def Money_in_or_Money_out(self):
         try:
-            money = WebDriverWait(self.driver, 40).until(
-                EC.visibility_of_element_located(self.money_in_or_money_out)).text
-            time.sleep(.2)
+            wait = WebDriverWait(self.driver, 40)
 
+            def clean_amount(value):
+                return float(
+                    value.replace("£", "")
+                    .replace(",", "")
+                    .replace("(", "")
+                    .replace(")", "")
+                    .strip()
+                )
 
-            print("Money In Value:", money)
+            # Wait for split popup
+            wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]"
+            )))
 
-            clean_money = money.replace("£", "").replace(",", "").strip()
+            money_out_elements = self.driver.find_elements(
+                By.XPATH,
+                "//div[@role='dialog']//label[normalize-space()='Money out']/following-sibling::label[1]"
+            )
 
-            # Convert to float
-            money_value = float(clean_money)
+            money_in_elements = self.driver.find_elements(
+                By.XPATH,
+                "//div[@role='dialog']//label[normalize-space()='Money in']/following-sibling::label[1]"
+            )
 
-            # Divide by 2
+            if money_out_elements and money_out_elements[0].text.strip():
+                money_text = money_out_elements[0].text.strip()
+                source_type = "money_out"
+
+            elif money_in_elements and money_in_elements[0].text.strip():
+                money_text = money_in_elements[0].text.strip()
+                source_type = "money_in"
+
+            else:
+                raise Exception("Money In or Money Out value not found in split popup")
+
+            print(f"Found {source_type}: {money_text}")
+
+            money_value = clean_amount(money_text)
             divided_value = money_value / 2
 
             print("Divided Value:", divided_value)
 
-            return f"{divided_value:.2f}"
+            return source_type, f"{divided_value:.2f}"
 
         except Exception as e:
-            print(f"Error: {type(e).__name__} - {e}")
+            print(f"Error in Money_in_or_Money_out: {type(e).__name__} - {e}")
             raise
+
+    # def Money_in_or_Money_out(self):
+    #     try:
+    #         money = WebDriverWait(self.driver, 40).until(
+    #             EC.visibility_of_element_located(self.money_in_or_money_out)).text
+    #         time.sleep(.2)
+    #
+    #
+    #         print("Money In Value:", money)
+    #
+    #         clean_money = money.replace("£", "").replace(",", "").strip()
+    #
+    #         # Convert to float
+    #         money_value = float(clean_money)
+    #
+    #         # Divide by 2
+    #         divided_value = money_value / 2
+    #
+    #         print("Divided Value:", divided_value)
+    #
+    #         return f"{divided_value:.2f}"
+    #
+    #     except Exception as e:
+    #         print(f"Error: {type(e).__name__} - {e}")
+    #         raise
 
     def Money_In(self):
         try:

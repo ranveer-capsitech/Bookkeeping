@@ -247,6 +247,8 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
+        print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+
 
         #split---
 
