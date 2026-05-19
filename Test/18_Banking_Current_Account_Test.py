@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Pages.BankingPage import Banking
+from Pages.Banking_Current_Account_Page import Banking
 from Pages.Dividend_Page import Dividend
 from Pages.Journals_Page import Journals
 from configReader import ConfigReader
@@ -196,9 +196,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
-
-
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
@@ -247,7 +244,7 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-        print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+
 
 
         #split---
@@ -311,6 +308,7 @@ class Login(unittest.TestCase):
 
         client_section.Banking_Section()
         time.sleep(.2)
+
 
 
         client_section.wait_for_loader_to_disappear()

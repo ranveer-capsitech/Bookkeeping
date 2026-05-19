@@ -173,7 +173,7 @@ class Banking:
 
 
 
-#----------------------------------------------setting----------------------------------------------------------------
+#----------------------------------------------setting------------------------------------------------------------------
 
         self.setting_section = (By.XPATH, "//a[@aria-label='Settings' and contains(@href,'/settings')]")
         self.chart_of_account = (By.XPATH, "//span[normalize-space()='Chart of accounts']/ancestor::button")
@@ -189,6 +189,7 @@ class Banking:
 
 
 
+#-----------------------------------------------------------------------------------------------------------------------
 
 
     def Select_Search(self):
