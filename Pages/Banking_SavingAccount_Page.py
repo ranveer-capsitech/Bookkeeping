@@ -32,7 +32,7 @@ account_number = ''.join([str(random.randint(0,9)) for _ in range(8)])
 credit_card_number = fake.credit_card_number(card_type="visa")
 
 
-class Banking:
+class Banking_Savings_account:
 
     def __init__(self, driver):
         self.wait = WebDriverWait(driver, 50)
@@ -50,75 +50,55 @@ class Banking:
 
         self.banking_section  = (By.XPATH, "//div[contains(text(),'Banking')]")
 
-
-#-----------------------------------------------------------------------------------------------------------------------
-
         self.account = (By.XPATH, "//label[normalize-space()='Add account'] | //span[normalize-space()='Account']")
-        self.select_bank = (By.XPATH, "//label[normalize-space()='Bank']/following::div[contains(@class,'rs-input-container')][1]")
+        self.select_bank = (By.XPATH,
+                            "//label[normalize-space()='Bank']/following::div[contains(@class,'rs-input-container')][1]")
         self.enter_account_no = (By.XPATH, "//label[normalize-space()='Account no.']/following::input[1]")
         self.enter_sort_code = (By.XPATH, "//label[normalize-space()='Sort code']/following::input[1]")
         # self.enter_iban = (By.XPATH, "//label[normalize-space()='IBAN']/following::input[1]")
         self.click_primary_account = (By.XPATH, "//span[contains(text(),'Primary account')]")
         self.save_account = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
-
-
-
-        self.select_account_type = (By.XPATH, "//label[normalize-space()='Account type']/following::div[contains(@class,'rs-control')][1]")
-
-        self.enter_credit_card_number = (By.XPATH, "//label[normalize-space()='Credit card number']/following::input[1]")
         self.click_import = (By.XPATH, "//span[contains(text(),'Import')]")
         self.click_templet = (By.XPATH, "//span[contains(text(),'Template')]")
         self.click_upload = (By.XPATH, "//label[contains(text(),'Upload')]")
-        self.upload_import = (By.XPATH, "//div[contains(@class,'ao-modal-container')]//button[.//span[normalize-space()='Import']]")
+        self.upload_import = (By.XPATH,
+                              "//div[contains(@class,'ao-modal-container')]//button[.//span[normalize-space()='Import']]")
         self.click_next_button = (By.XPATH, "//span[contains(text(),'Next')]")
-        self.click_checkbox_single_element = (By.XPATH, "(//div[contains(@class,'ms-Checkbox-checkbox')]//i[@data-icon-name='CheckMark']/ancestor::label)[2]")
-        self.click_explain_1st = (By.XPATH, "(//button[starts-with(@id,'explain-btn-') and .//span[normalize-space()='Explain']])[1]")
+
+        self.click_checkbox_single_element = (By.XPATH,
+                                              "(//div[contains(@class,'ms-Checkbox-checkbox')]//i[@data-icon-name='CheckMark']/ancestor::label)[2]")
+        self.click_explain_1st = (By.XPATH,
+                                  "(//button[starts-with(@id,'explain-btn-') and .//span[normalize-space()='Explain']])[1]")
         self.click_this_transaction = (By.XPATH, "//div[contains(text(),'This transaction')]")
-        self.click_with_all_recommendation = (By.XPATH, "//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Recommendation')]")
-        self.click_1st_check_box_of_similar_transaction = (By.XPATH, "(//div[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//label[contains(@class,'ms-Checkbox-label')])[1]")
-        self.select_account_head = (By.XPATH, "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//div[contains(@class,'rs-control')])[1]")
-        self.click_similar_section_explain_button = (By.XPATH, "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//button[starts-with(@id,'explain-btn-')])[1]")
-        self.click_similar_for_explain = (By.XPATH, "(//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Similar')])[1]")
-
-        self.click_1st_check_box_of_similar_transaction = (
-            By.XPATH,
-            "(//*[contains(normalize-space(.),'Similar transactions') and not(descendant::*)]"
-            "/ancestor::*[contains(@class,'tr')][1]"
-            "//input[@type='checkbox']/following-sibling::label)[1]"
-        )
-
-        self.last_plain_entry_checkbox =By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[last()]"
-
-        # self.last_plain_entry_checkbox = (
-        #     By.XPATH,
-        #     "(//div[contains(@class,'tr') "
-        #     "and .//input[@type='checkbox'] "
-        #     "and not(contains(normalize-space(.),'Recommendation')) "
-        #     "and not(contains(normalize-space(.),'Similar transactions')) "
-        #     "and .//div[normalize-space()='Select']]"
-        #     "//input[@type='checkbox']/following-sibling::label)[last()]"
-        # )
-
-        self.click_last_select = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
-        self.click_last_explain = (By.XPATH, "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
-
-        #----------------------------------------------------------------------------------------------------------------
-
-        self.select_credit_account = (By.XPATH, "(//div[contains(@style,'cursor: pointer') and .//*[normalize-space()='Reconciled'] and .//*[contains(normalize-space(),'Unexplained transactions')]])[1]")
-
-
-        self.click_exclude_button = (By.XPATH, "//button[@type='button' and .//i[@data-icon-name='PageRemove'] and .//span[normalize-space()='Exclude']]")
+        self.click_with_all_recommendation = (By.XPATH,
+                                              "//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Recommendation')]")
+        self.click_1st_check_box_of_similar_transaction = (By.XPATH,
+                                                           "(//div[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//label[contains(@class,'ms-Checkbox-label')])[1]")
+        self.select_account_head = (By.XPATH,
+                                    "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//div[contains(@class,'rs-control')])[1]")
+        self.click_similar_section_explain_button = (By.XPATH,
+                                                     "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//button[starts-with(@id,'explain-btn-')])[1]")
+        self.click_similar_for_explain = (By.XPATH,
+                                          "(//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Similar')])[1]")
+        self.last_plain_entry_checkbox = By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[last()]"
+        self.click_last_select = (By.XPATH,
+                                  "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
+        self.click_last_explain = (By.XPATH,
+                                   "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
+        self.click_exclude_button = (By.XPATH,
+                                     "//button[@type='button' and .//i[@data-icon-name='PageRemove'] and .//span[normalize-space()='Exclude']]")
         self.select_excluded = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Excluded')]]")
-        self.click_first_checkbox = (By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[1]")
-        self.click_second_checkbox = (By.XPATH, "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[2]")
+        self.click_first_checkbox = (By.XPATH,
+                                     "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[1]")
+        self.click_second_checkbox = (By.XPATH,
+                                      "(//div[contains(@class,'tr-focus')]//label[contains(@class,'ms-Checkbox-label')])[2]")
         self.click_delete_button = (By.XPATH, "//button[.//span[normalize-space()='Delete']]")
-
-        self.click_revive_button = (By.XPATH, "(//div[contains(@class,'tr-focus')]//button[@id='btn-delete' and .//i[@data-icon-name='SyncOccurence']])[1]")
+        self.click_revive_button = (By.XPATH,
+                                    "(//div[contains(@class,'tr-focus')]//button[@id='btn-delete' and .//i[@data-icon-name='SyncOccurence']])[1]")
 
         self.click_explained_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Explained')]]")
+        self.click_yes = (By.XPATH, "//span[contains(text(),'Yes')]")
         self.click_unexplain = (By.XPATH, "//button[@title='Unexplain all checked transactions']")
-        # self.explain_translation = (By.XPATH, "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]")
-
         self.explain_translation = (
             By.XPATH,
             "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]"
@@ -133,28 +113,29 @@ class Banking:
             By.XPATH,
             "//div[contains(@class,'ms-Overlay')]"
         )
-        self.clicks_yes_button =  (
-    By.XPATH,
-    "(//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Yes']])[last()]"
-)
+        self.clicks_yes_button = (
+            By.XPATH,
+            "(//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Yes']])[last()]"
+        )
 
+        self.search_input = (
+            By.XPATH,
+            "//input[@role='searchbox' and @placeholder='Search']"
+        )
 
-        self.click_unexplain_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Unexplained')]]")
-        self.click_three_dot = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//button[.//i[@data-icon-name='More']])[1]")
+        self.click_three_dot = (By.XPATH,
+                                "(//div[contains(@class,'tr-focus')][last()]//button[.//i[@data-icon-name='More']])[1]")
         self.click_split = (By.XPATH, "//button[@role='menuitem'][.//span[normalize-space()='Split']]")
 
-        self.money_in_or_money_out = (By.XPATH, "//label[normalize-space()='Money in' or normalize-space()='Money out']/following-sibling::label")
+        self.money_in_or_money_out = (By.XPATH,
+                                      "//label[normalize-space()='Money in' or normalize-space()='Money out']/following-sibling::label")
 
-        self.enter_money_in = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyIn')]")
-        self.enter_money_out = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyOut')]")
-
-        self.select_vat = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.vat']/ancestor::div[contains(@class,'rs-container')]")
-
-        self.click_description = (By.XPATH, "//label[normalize-space()='Description']")
+        self.enter_money_in = (By.XPATH,
+                               "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyIn')])[1]")
+        self.enter_money_out = (By.XPATH,
+                                "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyOut')])[1]")
 
 
-        # self.enter_2nd_money_out = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.moneyOut']")
-        # self.enter_2nd_money_in = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.moneyIn']")
 
         self.enter_2nd_money_out = (
             By.XPATH,
@@ -166,41 +147,23 @@ class Banking:
             "(//div[@role='dialog']//input[contains(@name,'moneyIn')])[2]"
         )
 
-        self.click_split_button = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//button[.//span[normalize-space()='Split']]")
+        self.click_split_button = (By.XPATH,
+                                   "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//button[.//span[normalize-space()='Split']]")
 
+        self.select_unexplained_Tab = (By.XPATH, "//button[@role='tab']//span[contains(normalize-space(),'Unexplained')]")
 
+        self.second_money_in = (By.XPATH,
+                                               "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[@name='transactions.1.moneyIn']")
 
+        self.first_money_out = (By.XPATH,
+                                "(//div[@role='dialog']//input[contains(@name,'moneyOut')])[1]")
 
+        self.select_vat = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.vat']/ancestor::div[contains(@class,'rs-container')]")
 
+        self.click_description = (By.XPATH, "//label[normalize-space()='Description']")
 
+    #-----------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-#----------------------------------------------setting------------------------------------------------------------------
-
-        self.setting_section = (By.XPATH, "//a[@aria-label='Settings' and contains(@href,'/settings')]")
-        self.chart_of_account = (By.XPATH, "//span[normalize-space()='Chart of accounts']/ancestor::button")
-        self.click_add_account = (By.XPATH, "//span[normalize-space()='Account']/ancestor::button")
-        self.select_account_type_setting  = (By.XPATH, "//label[normalize-space()='Account type']/following::input[contains(@id,'react-select')][1]")
-        self.enter_name = (By.XPATH, "//label[normalize-space()='Name']/following::input[1]")
-        self.enter_vat = (By.XPATH, "//label[normalize-space()='Default VAT rate']/following::div[contains(@class,'rs-control')][1]")
-        self.click_credit_card = (By.XPATH, "//span[contains(text(),'is credit card')]")
-
-
-        self.click_active_account = (By.XPATH, "//span[contains(text(),'Activate')]")
-        self.click_yes = (By.XPATH, "//span[contains(text(),'Yes')]")
-        self.select_unexplained_Tab = (By.XPATH,
-                                       "//button[@role='tab']//span[contains(normalize-space(),'Unexplained')]")
-        self.search_input = (
-            By.XPATH,
-            "//input[@role='searchbox' and @placeholder='Search']"
-        )
-
-
-
-#-----------------------------------------------------------------------------------------------------------------------
 
 
     def Select_Search(self):
@@ -277,8 +240,6 @@ class Banking:
             print(f"Enter on click: {e}")
             time.sleep(.5)
 
-
-#----------------------------------------------------Current account----------------------------------------------------
 
 
     def Click_Input(self):
@@ -402,31 +363,45 @@ class Banking:
             print(f"Error on Enter_Account_no: {e}")
             time.sleep(0.2)
 
+    def Select_Account_Type(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
 
-    # def Sort_Code(self):
-    #     driver = self.driver
-    #     wait = WebDriverWait(driver, 30)
-    #
-    #     try:
-    #
-    #         code = wait.until(EC.visibility_of_element_located(self.enter_sort_code))
-    #
-    #         time.sleep(0.2)
-    #         code.clear()
-    #         time.sleep(0.2)
-    #
-    #         code.send_keys("112233")
-    #
-    #         time.sleep(0.3)
-    #
-    #         active = driver.switch_to.active_element
-    #         active.send_keys(Keys.ENTER)
-    #
-    #         print("Enter sort code successfully...!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error on Click: {e}")
-    #         time.sleep(0.2)
+            account_type_input = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[@role='dialog' and .//*[normalize-space()='Add account']]"
+                "//label[normalize-space()='Account type']"
+                "/following::input[contains(@id,'react-select')][1]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                account_type_input
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", account_type_input)
+            time.sleep(0.3)
+
+            account_type_input.send_keys(Keys.CONTROL, "a")
+            account_type_input.send_keys("Savings account")
+            time.sleep(1)
+
+            savings_account_option = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//*[contains(@id,'react-select') and contains(@id,'-option') "
+                "and contains(translate(normalize-space(.), "
+                "'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'savings account')]"
+            )))
+
+            self.driver.execute_script("arguments[0].click();", savings_account_option)
+
+            print("Savings account selected successfully....!!")
+
+        except Exception as e:
+            print(f"Error in Select_Account_Type: {type(e).__name__} - {e}")
+            raise
 
     def Sort_Code(self):
         driver = self.driver
@@ -447,7 +422,6 @@ class Banking:
         except Exception as e:
             print(f"Error on Click: {e}")
             raise
-
 
     def Click_Primary_Account(self):
         driver = self.driver
@@ -519,117 +493,6 @@ class Banking:
             print(f"Error: {e}")
             raise
 
-
-
-
-#------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-    def Save_Credit_card(self):
-
-        try:
-            save_credit = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_account))
-            time.sleep(.2)
-            save_credit.click()
-            time.sleep(.2)
-
-
-            print("Test Case  -   Pass: Credit card saved successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
-
-    def Save_Account(self):
-
-        try:
-            save_banking = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_account))
-            time.sleep(.2)
-            save_banking.click()
-            time.sleep(.2)
-
-            print("Test Case  -   Pass:  Account saved successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
-
-
-
-    #-------------------------------------------------------------------------------------------------------------------
-
-    def Select_Account_Type(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 30)
-
-        try:
-            bank = wait.until(EC.element_to_be_clickable(self.select_account_type))
-
-            driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                bank
-            )
-            time.sleep(0.2)
-
-            try:
-                bank.click()
-            except ElementClickInterceptedException:
-
-                driver.execute_script("arguments[0].click();", bank)
-
-            time.sleep(0.2)
-
-            credit = driver.switch_to.active_element
-            credit.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            credit.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            credit.send_keys(Keys.ENTER)
-            time.sleep(0.2)
-
-            print("Credit Card selected successfully....!!")
-
-        except Exception as e:
-            print(f"Error in Select_Bank: {e}")
-            time.sleep(0.2)
-
-
-    def Enter_Credit_Card(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 15)
-
-        try:
-
-            enter_account = wait.until(
-                EC.element_to_be_clickable(self.enter_credit_card_number)
-            )
-
-            driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                enter_account
-            )
-            time.sleep(0.2)
-
-            enter_account.click()
-            time.sleep(0.2)
-
-            enter_account.send_keys(Keys.CONTROL, "a")
-            enter_account.send_keys(Keys.DELETE)
-            time.sleep(0.2)
-
-            enter_account.send_keys(credit_card_number)
-            time.sleep(0.2)
-
-            print("Credit card number entered successfully!")
-
-        except Exception as e:
-            print(f"Error on Enter_Account_no: {e}")
-            time.sleep(0.2)
-
     def Click_Import(self):
         try:
             import_click = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_import))
@@ -643,25 +506,6 @@ class Banking:
             print(f"Error: {e}")
 
             time.sleep(2)
-
-    # def Click_Upload(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 30)
-    #
-    #         upload = wait.until(EC.element_to_be_clickable(self.click_upload))
-    #         upload.click()
-    #         time.sleep(2)
-    #
-    #         pyautogui.moveTo(500, 500)
-    #         pyautogui.write(r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv", interval=0.01)
-    #         pyautogui.press("enter")
-    #
-    #         print("Clicked on upload button successfully.....!! ")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         raise
-
 
     def Click_Templet(self):
         try:
@@ -687,10 +531,10 @@ class Banking:
             )
 
             self.driver.execute_script("""
-                arguments[0].style.display = 'block';
-                arguments[0].style.visibility = 'visible';
-                arguments[0].style.opacity = 1;
-            """, file_input)
+                   arguments[0].style.display = 'block';
+                   arguments[0].style.visibility = 'visible';
+                   arguments[0].style.opacity = 1;
+               """, file_input)
 
             file_input.send_keys(file_path)
 
@@ -699,30 +543,6 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             raise
-
-
-
-
-    # def Click_Upload(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 40)
-    #         file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
-    #
-    #         upload = wait.until(EC.element_to_be_clickable(self.click_upload))
-    #         self.driver.execute_script("arguments[0].click();", upload)
-    #         time.sleep(1)
-    #
-    #         file_input = wait.until(
-    #             EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
-    #         )
-    #
-    #         file_input.send_keys(file_path)
-    #
-    #         print("File uploaded successfully.....!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         raise
 
 
 
@@ -769,20 +589,6 @@ class Banking:
                 print(f"Error while clicking Next: {type(e).__name__} - {e}")
                 raise
 
-    # def Click_Next(self):
-    #     try:
-    #         next_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_next_button))
-    #         time.sleep(.2)
-    #         next_button.click()
-    #         time.sleep(.2)
-    #
-    #         print("Clicked on Next button successfully.....!! ")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #
-    #         time.sleep(2)
-
     def wait_for_loader_to_disappear(self):
         try:
             WebDriverWait(self.driver, 30).until(
@@ -827,6 +633,8 @@ class Banking:
             print(f"Error on checkbox click: {e}")
             raise
 
+    #---------------------------------------------------------------------------------------
+
 
     def Click_Explain_1st(self):
         try:
@@ -870,6 +678,7 @@ class Banking:
 
             # time.sleep(2)
 
+
     def Click_1st_Check_Box_Of_Similar_Transaction(self):
         wait = WebDriverWait(self.driver, 50)
 
@@ -907,16 +716,6 @@ class Banking:
 
         raise Exception("Unable to click 1st similar transaction checkbox after retries")
 
-    def wait_for_loader_to_disappear(self):
-        try:
-            WebDriverWait(self.driver, 30).until(
-                EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
-                )
-            )
-        except TimeoutException:
-            pass
 
     def Select_Account_Head(self):
         try:
@@ -933,8 +732,6 @@ class Banking:
                 account_head
             )
             account_head.click()
-
-
 
             self.wait_for_loader_to_disappear()
             self.driver.execute_script("arguments[0].click();", account_head)
@@ -954,18 +751,46 @@ class Banking:
             raise
 
 
-    # def Click_Similar_Section_Explain_Button(self):
-    #     try:
-    #         account_head = WebDriverWait(self.driver, 30).until(
-    #             EC.element_to_be_clickable(self.click_similar_section_explain_button))
-    #         time.sleep(.2)
-    #         account_head.click()
-    #         time.sleep(.2)
-    #         print("Select Account head  successfully.....!! ")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         time.sleep(2)
+
+
+
+    def Click_1st_Check_Box_Of_Similar_Transaction(self):
+        wait = WebDriverWait(self.driver, 50)
+
+        for attempt in range(3):
+            try:
+                self.wait_for_loader_to_disappear()
+
+                check_box = wait.until(
+                    EC.presence_of_element_located(self.click_1st_check_box_of_similar_transaction)
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    check_box
+                )
+                time.sleep(0.3)
+
+                self.wait_for_loader_to_disappear()
+
+                check_box = wait.until(
+                    EC.element_to_be_clickable(self.click_1st_check_box_of_similar_transaction)
+                )
+
+                try:
+                    check_box.click()
+                except ElementClickInterceptedException:
+                    self.driver.execute_script("arguments[0].click();", check_box)
+
+                print("Clicked 1st check box of similar transaction successfully.....!!")
+                return
+
+            except StaleElementReferenceException:
+                print(f"Stale element found, retrying... {attempt + 1}")
+                time.sleep(1)
+
+        raise Exception("Unable to click 1st similar transaction checkbox after retries")
+
     def Click_Similar_Section_Explain_Button(self):
 
         wait = WebDriverWait(self.driver, 30)
@@ -1013,7 +838,6 @@ class Banking:
                 print(f"Stale element found, retrying... {attempt + 1}")
                 time.sleep(1)
 
-        raise Exception("Unable to click Similar Section Explain Button")
 
     def Click_Similar_For_Explain(self):
         try:
@@ -1219,6 +1043,33 @@ class Banking:
             time.sleep(2)
 
 
+    def Click_Yes(self):
+        try:
+            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
+            time.sleep(.2)
+            yes.click()
+            time.sleep(.2)
+
+            print("Click on Yes button successfully and Account activated successfully....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Yes_Delete(self):
+        try:
+            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
+            time.sleep(.2)
+            yes.click()
+            time.sleep(.2)
+
+            print("Click on Yes button successfully for delete successfully....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
     def Click_Unexplain(self):
         try:
             unexplain = WebDriverWait(self.driver, 40).until(
@@ -1226,15 +1077,50 @@ class Banking:
             time.sleep(.2)
             unexplain.click()
             time.sleep(.2)
-            print("Click on Un Explained icon successfully.....!! ")
+            print("Click on Un-explain all checked transactions icon successfully.....!! ")
 
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
 
-
-
     def Click_Single_Explain_Translation(self):
+        try:
+            wait = WebDriverWait(self.driver, 50)
+
+            # Wait for loader/modal overlay disappear
+            wait.until(
+                EC.invisibility_of_element_located(self.modal_overlay)
+            )
+
+            self.wait_for_loader_to_disappear()
+
+            # Wait for explain translation icon/button
+            single_explain = wait.until(
+                EC.presence_of_element_located(self.explain_translation)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                single_explain
+            )
+
+            time.sleep(0.5)
+
+            # JS click (more stable for Fluent UI)
+            self.driver.execute_script(
+                "arguments[0].click();",
+                single_explain
+            )
+
+            print("Click on Single explain translation successfully.....!!")
+
+        except Exception as e:
+            print(f"Error in Click_Single_Explain_Translation: {type(e).__name__} - {e}")
+            raise
+
+
+
+    def Click_Yes_Confirm_To_Unexplain_Selected_Transaction(self):
         try:
             wait = WebDriverWait(self.driver, 40)
 
@@ -1244,113 +1130,53 @@ class Banking:
                 self.driver.execute_script("arguments[0].click();", yes_buttons[0])
                 time.sleep(1)
 
-                # wait overlay disappear
-                wait.until(EC.invisibility_of_element_located(self.modal_overlay))
-
-            # Now click single unexplain/undo icon
-            single_explain = wait.until(
-                EC.presence_of_element_located(self.explain_translation)
-            )
-
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                single_explain
-            )
-            time.sleep(0.5)
-
-            self.driver.execute_script("arguments[0].click();", single_explain)
-
-            print("Click on Single explain translation successfully.....!!")
+            print("Click on yes button for confirm to un-explain selected transaction successfully.....!!")
 
         except Exception as e:
             print(f"Error: {type(e).__name__} - {e}")
             raise
 
-
-    def Click_Single_Explain_And_Confirm(self):
+    def Select_Unexplained_Tab(self):
         try:
-            wait = WebDriverWait(self.driver, 40)
-
-            unexplain_icon = wait.until(EC.presence_of_element_located(self.explain_translation))
-            self.driver.execute_script("arguments[0].click();", unexplain_icon)
-
-            yes_btn = wait.until(EC.presence_of_element_located((
-                By.XPATH,
-                "//span[normalize-space()='Yes']/ancestor::button"
-            )))
-            self.driver.execute_script("arguments[0].click();", yes_btn)
-
-            print("Clicked single unexplain and confirmed successfully.....!!")
-
+            unexplained = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.select_unexplained_Tab))
+            time.sleep(.2)
+            unexplained.click()
+            time.sleep(.5)
+            print("Select Unexplained tab successfully.....! ")
         except Exception as e:
-            print(f"Error: {type(e).__name__} - {e}")
-            raise
+            print(f"Error on click:{e}")
 
 
-#-------------------------------------------------------------------------------------------------------------------------
 
-    # def Click_Unexplain_Tab(self):
-    #     try:
-    #         Unexplain_Tab = WebDriverWait(self.driver, 40).until(
-    #             EC.element_to_be_clickable(self.click_unexplain_tab))
-    #         time.sleep(.2)
-    #         Unexplain_Tab.click()
-    #         time.sleep(.2)
-    #         print("Click on Unexplain Tab successfully.....!! ")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         time.sleep(2)
+    def Check_Search_Functionality(self):
 
-    def Click_Unexplain_Tab(self):
         try:
-            wait = WebDriverWait(self.driver, 40)
+            wait = WebDriverWait(self.driver, 30)
 
-            # wait for overlay/modal to disappear
-            try:
-                wait.until(EC.invisibility_of_element_located((
-                    By.XPATH,
-                    "//div[contains(@class,'ms-Overlay')]"
-                )))
-            except TimeoutException:
-                print("Overlay still visible, trying to close modal if available...")
-
-                close_buttons = self.driver.find_elements(
-                    By.XPATH,
-                    "//button[@aria-label='Close' or @title='Close']"
-                )
-
-                for btn in close_buttons:
-                    if btn.is_displayed():
-                        self.driver.execute_script("arguments[0].click();", btn)
-                        time.sleep(1)
-                        break
-
-                wait.until(EC.invisibility_of_element_located((
-                    By.XPATH,
-                    "//div[contains(@class,'ms-Overlay')]"
-                )))
-
-            unexplain_tab = wait.until(EC.presence_of_element_located((
-                By.XPATH,
-                "//button[@role='tab' and contains(@name,'Unexplained')]"
-            )))
-
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                unexplain_tab
+            client = wait.until(
+                EC.element_to_be_clickable(self.search_input)
             )
 
-            time.sleep(0.5)
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                client
+            )
 
-            self.driver.execute_script("arguments[0].click();", unexplain_tab)
+            client.click()
+            time.sleep(0.3)
 
-            print("Click on Unexplained Tab successfully.....!!")
+            client.send_keys(Keys.CONTROL + "a")
+            client.send_keys(Keys.BACKSPACE)
+
+            client.send_keys("Thames Water")
+            time.sleep(1)
+
+            client.send_keys(Keys.ENTER)
+
+            print("Search entered successfully.....!!")
 
         except Exception as e:
-            print(f"Error on Click_Unexplain_Tab: {type(e).__name__} - {e}")
-            raise
-
+            print(f"Error on search field: {e}")
 
     def Click_three_dot(self):
         try:
@@ -1380,8 +1206,12 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
+
+
+
     def Money_in_or_Money_out(self):
         try:
+            wait = WebDriverWait(self.driver, 40)
 
             def clean_amount(value):
                 return float(
@@ -1392,58 +1222,47 @@ class Banking:
                     .strip()
                 )
 
-            time.sleep(1)
+            # Wait for split popup
+            wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]"
+            )))
 
-            # Get top summary Money Out
             money_out_elements = self.driver.find_elements(
                 By.XPATH,
-                "(//*[normalize-space()='Money out']/following-sibling::*[1])[1]"
+                "//div[@role='dialog']//label[normalize-space()='Money out']/following-sibling::label[1]"
             )
 
-            # Get top summary Money In
             money_in_elements = self.driver.find_elements(
                 By.XPATH,
-                "(//*[normalize-space()='Money in']/following-sibling::*[1])[1]"
+                "//div[@role='dialog']//label[normalize-space()='Money in']/following-sibling::label[1]"
             )
 
-            money_out_elements = [
-                e for e in money_out_elements
-                if e.is_displayed() and e.text.strip()
-            ]
-
-            money_in_elements = [
-                e for e in money_in_elements
-                if e.is_displayed() and e.text.strip()
-            ]
-
-            if money_out_elements:
-
+            if money_out_elements and money_out_elements[0].text.strip():
                 money_text = money_out_elements[0].text.strip()
                 source_type = "money_out"
 
-            elif money_in_elements:
-
+            elif money_in_elements and money_in_elements[0].text.strip():
                 money_text = money_in_elements[0].text.strip()
                 source_type = "money_in"
 
             else:
-                raise Exception(
-                    "Money In or Money Out value not found"
-                )
+                raise Exception("Money In or Money Out value not found in split popup")
 
             print(f"Found {source_type}: {money_text}")
 
             money_value = clean_amount(money_text)
-
             divided_value = money_value / 2
 
-            print(f"Divided Value: {divided_value}")
+            print("Divided Value:", divided_value)
 
             return source_type, f"{divided_value:.2f}"
 
         except Exception as e:
             print(f"Error in Money_in_or_Money_out: {type(e).__name__} - {e}")
             raise
+
+
 
 
     def Fill_Split_Amount_Money_In(self):
@@ -1592,12 +1411,12 @@ class Banking:
             # Find all visible Money Out fields
             wait.until(lambda d: len(d.find_elements(
                 By.XPATH,
-                "//div[@role='dialog']//input[@name='transactions.1.moneyOut']"
+                "//div[@role='dialog']//input[@name='transactions.1.moneyIn']"
             )) > 0)
 
             money_out_fields = self.driver.find_elements(
                 By.XPATH,
-                "//div[@role='dialog']//input[@name='transactions.1.moneyOut']"
+                "//div[@role='dialog']//input[@name='transactions.1.moneyIn']"
             )
 
             visible_fields = [f for f in money_out_fields if f.is_displayed()]
@@ -1637,6 +1456,12 @@ class Banking:
 
 
 
+
+
+
+
+
+
     def Select_Next_option_Second_Account_Head_Option(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1644,7 +1469,7 @@ class Banking:
             # always select LAST account head dropdown
             dropdown = wait.until(EC.presence_of_element_located((
                 By.XPATH,
-                "(//div[@role='dialog']//div[contains(@class,'rs-container')])[last()]"
+                "(//div[@role='dialog']//table//tbody//tr[2]//div[contains(@class,'rs-control')])[1]"
             )))
 
             self.driver.execute_script(
@@ -1781,266 +1606,8 @@ class Banking:
 
 
 
-    #--------------------------------------------Credit card--------------------------------------------------------------------
 
 
-    def Click_Credit_Account(self):
-        try:
-            credit_account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.select_credit_account))
-            time.sleep(.2)
-            credit_account.click()
-            time.sleep(.2)
-
-            print("Click on Credit account section successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
-
-    def Click_Upload_File(self):
-        try:
-            wait = WebDriverWait(self.driver, 40)
-
-            file_path = r"C:\Users\CT_USER\Desktop\test\Bank Credit Card.csv"
-
-            # Find actual file input
-            file_input = wait.until(
-                EC.presence_of_element_located((
-                    By.XPATH,
-                    "//div[@role='dialog' and .//*[contains(text(),'Bank Transactions')]]//input[@type='file']"
-                ))
-            )
-
-            # Make hidden input visible
-            self.driver.execute_script("""
-                arguments[0].style.display = 'block';
-                arguments[0].style.visibility = 'visible';
-                arguments[0].style.opacity = 1;
-                arguments[0].removeAttribute('hidden');
-            """, file_input)
-
-            time.sleep(1)
-
-            # Upload file
-            file_input.send_keys(file_path)
-
-            print("File uploaded successfully.....!!")
-
-        except Exception as e:
-            print(f"Error while uploading file: {type(e).__name__} - {e}")
-            raise
-
-
-
-
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-
-
-    def Select_Setting_Section(self):
-
-
-            try:
-                setting = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.setting_section))
-                time.sleep(.2)
-                setting.click()
-                time.sleep(.2)
-
-                print("Click on Setting section successfully.")
-
-            except Exception as e:
-                print(f"Error: {e}")
-
-                time.sleep(2)
-
-
-    def Chart_Of_Account(self):
-        try:
-            account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.chart_of_account))
-            time.sleep(.2)
-            account.click()
-            time.sleep(.2)
-
-            print("Click on Chart of account section successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
-
-
-    def Click_Add_Account(self):
-        try:
-            add_account = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_add_account))
-            time.sleep(.2)
-            add_account.click()
-            time.sleep(.2)
-
-            print("Click on Add Account successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-            time.sleep(2)
-
-
-    def Select_Account_Type_Setting(self):
-        try:
-            account_type = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.select_account_type_setting))
-            time.sleep(.2)
-            account_type.send_keys("Other creditors Less than one year")
-            time.sleep(.2)
-            account_type.send_keys(Keys.ENTER)
-            time.sleep(.2)
-
-            print("Select Account type successfully.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-
-    def Enter_name(self):
-        try:
-            name = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.enter_name))
-            time.sleep(.2)
-            name.send_keys("Cashplus Credit Card")
-            time.sleep(.2)
-
-
-            print("Enter account name successfully....!!")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-
-    def Select_vat_Rate(self):
-        try:
-            wait = WebDriverWait(self.driver, 30)
-
-            # 1. Click dropdown
-            vat_dropdown = wait.until(
-                EC.element_to_be_clickable(
-                    (By.XPATH,
-                     "//label[normalize-space()='Default VAT rate']/following::div[contains(@class,'rs-control')][1]")
-                )
-            )
-            vat_dropdown.click()
-            time.sleep(0.5)
-
-            # 2. Use active element (react-select input)
-            active = self.driver.switch_to.active_element
-
-            active.send_keys("Exempt")
-            time.sleep(0.5)
-            active.send_keys(Keys.ENTER)
-
-            print("Selected VAT type successfully: Exempt")
-
-        except Exception as e:
-            print(f"Error while selecting VAT rate: {e}")
-            raise
-
-
-    def Click_Is_Credit_Card(self):
-        try:
-            credit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_credit_card))
-            time.sleep(.2)
-            credit.click()
-            time.sleep(.2)
-
-            print("Tick on check box of credit card successfully....!!")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-
-    def Click_Active_Account(self):
-        try:
-            active = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_active_account))
-            time.sleep(.2)
-            active.click()
-            time.sleep(.2)
-
-            print("Click on Active button successfully....!!")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-
-    def Click_Yes(self):
-        try:
-            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
-            time.sleep(.2)
-            yes.click()
-            time.sleep(.2)
-
-            print("Click on Yes button successfully and Account activated successfully....!!")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-    def Click_Yes_Delete(self):
-        try:
-            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
-            time.sleep(.2)
-            yes.click()
-            time.sleep(.2)
-
-            print("Click on Yes button successfully for delete successfully....!!")
-
-        except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(2)
-
-    def Select_Unexplained_Tab(self):
-        try:
-            unexplained = WebDriverWait(self.driver, 30).until(
-                EC.visibility_of_element_located(self.select_unexplained_Tab))
-            time.sleep(.2)
-            unexplained.click()
-            time.sleep(.5)
-            print("Select Unexplained tab successfully.....! ")
-        except Exception as e:
-            print(f"Error on click:{e}")
-
-    def Check_Search_Functionality(self):
-
-        try:
-            wait = WebDriverWait(self.driver, 30)
-
-            client = wait.until(
-                EC.element_to_be_clickable(self.search_input)
-            )
-
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                client
-            )
-
-            client.click()
-            time.sleep(0.3)
-
-            client.send_keys(Keys.CONTROL + "a")
-            client.send_keys(Keys.BACKSPACE)
-
-            client.send_keys("Thames Water")
-            time.sleep(1)
-
-            client.send_keys(Keys.ENTER)
-
-            print("Search entered successfully.....!!")
-
-        except Exception as e:
-            print(f"Error on search field: {e}")
-
-#-----------------------------------------------------------------------------------------------------------------------
 
 
 

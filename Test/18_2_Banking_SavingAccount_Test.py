@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from Banking_Creditcard_Page import Banking_Credit_card
+from Banking_SavingAccount_Page import Banking_Savings_account
 
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
@@ -67,17 +68,16 @@ class Login(unittest.TestCase):
             unittest.main()
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add Credit card")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >>Banking >> Add Saving Account")
 
 
 
 
 
+# ------------------------------ Add Saving Account --------------------------------------------------------------------
 
-        # ------------------------------ Add Credit card --------------------------------------------------------------------
-
-    def test_24_Credit(self):
-            client_section = Banking_Credit_card(driver=self.driver)
+    def test_24_Banking_Savings_account(self):
+            client_section = Banking_Savings_account(driver=self.driver)
             time.sleep(.2)
 
             client_section.Select_Search()
@@ -90,6 +90,9 @@ class Login(unittest.TestCase):
             client_section.Click_Input()
             time.sleep(.2)
 
+            # client_section.wait_for_loader_to_disappear()
+            # time.sleep(.2)
+
             client_section.Banking_Section()
             time.sleep(.2)
 
@@ -101,48 +104,45 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.Select_Bank()
             time.sleep(.2)
-            client_section.Enter_Credit_Card()
+            client_section.Enter_Account_no()
             time.sleep(.2)
-
-            client_section.Save_Credit_card()
+            client_section.Sort_Code()
             time.sleep(.2)
-
-            client_section.Click_Credit_Account()
+            client_section.Click_Primary_Account()
+            time.sleep(.2)
+            client_section.Save_Banking()
+            time.sleep(.2)
+            client_section.Click_Added_Bank()
             time.sleep(.2)
             client_section.Click_Import()
             time.sleep(.2)
             client_section.Click_Templet()
             time.sleep(.2)
-            client_section.Click_Upload_File()
+            client_section.Click_Upload()
             time.sleep(.2)
             client_section.Upload_Import()
             time.sleep(.2)
             client_section.Click_Next()
             time.sleep(.2)
-
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
-
             client_section.Click_Checkbox_Single_Element()
             time.sleep(.2)
 
+
+            #-------------------------------------------------------------------------------
+
             client_section.Click_Explain_1st()
             time.sleep(.2)
-
-            client_section.Click_Explain_And_All_Recommendation()
-            time.sleep(1)
-
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-
-
+            client_section.Click_This_Transaction()
+            time.sleep(.5)
 
             client_section.Click_Checkbox_Single_Element()
             time.sleep(.2)
             client_section.Click_Explain_1st()
             time.sleep(1)
-
-
+            client_section.Click_With_All_Recommendation()
+            time.sleep(1)
 
             client_section.Click_1st_Check_Box_Of_Similar_Transaction()
             time.sleep(1)
@@ -155,9 +155,9 @@ class Login(unittest.TestCase):
             client_section.Click_This_Transaction()
             time.sleep(.5)
 
-
-
-
+            # client_section.Click_Similar_Section_Explain_Button()
+            # time.sleep(.2)
+            #
             client_section.Click_1st_Check_Box_Of_Similar_Transaction()
             time.sleep(1)
             client_section.wait_for_loader_to_disappear()
@@ -178,16 +178,13 @@ class Login(unittest.TestCase):
             time.sleep(2)
             client_section.Click_Explain()
             time.sleep(2)
+            # client_section.Click_This_Transaction()
+            # time.sleep(.5)
 
-#------------------------Explained-----------------------------
+            client_section.Click_Checkbox_Single_Element()
+            time.sleep(.2)
 
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-            client_section.Select_Explained_Tab()
-            time.sleep(.2)
-            client_section.Select_Explained_1st_Entry()
-            time.sleep(.2)
-            client_section.Click_Unexplain_Icon()
+            client_section.Click_Exclude_Button()
             time.sleep(.2)
             client_section.Click_Yes()
             time.sleep(.2)
@@ -195,79 +192,60 @@ class Login(unittest.TestCase):
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
-
-#---------------UnExplained------------------------------------------------------------
-
-            client_section.Click_Unexplained_Tab()
-            time.sleep(.2)
-            client_section.Click_First_Row_Checkbox()
-            time.sleep(.2)
-            client_section.Click_Row_Exclude_Icon()
-            time.sleep(.2)
-            client_section.Click_This_Transaction_Exclude_Button()
-            time.sleep(.5)
-
-            client_section.Click_Yes()
+            client_section.Select_Excluded_Tab()
             time.sleep(.2)
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
-
-
-
-            client_section.Select_Excluded_Section()
+            client_section.Click_First_Checkbox()
+            time.sleep(.2)
+            client_section.Click_Second_Checkbox()
             time.sleep(.2)
 
-            client_section.Select_Active_Tab_1st_Entry()
+            client_section.Click_Delete_Button()
+            time.sleep(.2)
+            client_section.Click_Yes_Delete()
+            time.sleep(.2)
+
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+            client_section.Click_First_Checkbox()
             time.sleep(.2)
             client_section.Click_Revive_Button()
             time.sleep(.2)
-
-            client_section.Click_Yes()
-            time.sleep(.2)
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-
-
-
-
-
-            # client_section.Click_Unexplain_Icon()
-            # time.sleep(.2)
-
-
-
-            client_section.Click_Unexplained_Tab()
-            time.sleep(.2)
-            client_section.Select_Active_Tab_1st_Entry()
-            time.sleep(.2)
-            client_section.Click_Row_Exclude_Icon()
-            time.sleep(.2)
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-
-
-            client_section.Click_Select_All_Checkbox()
-            time.sleep(.2)
-            client_section.Click_Exclude_Button_For_All()
-            time.sleep(.2)
-
-
-            client_section.Select_Excluded_Section()
+            client_section.Click_Yes_Delete()
             time.sleep(.2)
 
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
-
-
-
-
+            client_section.Select_Explained_Tab()
+            time.sleep(.2)
+            client_section.Click_First_Checkbox()
+            time.sleep(.2)
+            client_section.Click_Unexplain()
+            time.sleep(.2)
+            client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Click_First_Checkbox()
+            time.sleep(.2)
+            client_section.Click_Single_Explain_Translation()
+            time.sleep(.2)
+            client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
             client_section.Select_Unexplained_Tab()
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
             client_section.Check_Search_Functionality()
             time.sleep(.2)
+
+
+
 
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
@@ -284,10 +262,13 @@ class Login(unittest.TestCase):
             client_section.Click_Description()
             time.sleep(.2)
 
+
             client_section.Select_Second_Account_Head_Option()
             time.sleep(.2)
             client_section.Fill_Split_Amount_Money_Out()
             time.sleep(.2)
+
+
 
             client_section.Select_Next_option_Second_Account_Head_Option()
             time.sleep(.2)
@@ -295,32 +276,4 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.Click_Split_Button()
             time.sleep(1)
-
-    # client_section.Click_Unexplained_Tab()
-            # time.sleep(.2)
-            # client_section.Click_1st_Check_Box_Of_Similar_Transaction()
-            # time.sleep(1)
-            # client_section.Click_Row_Exclude_Icon()
-            # time.sleep(.2)
-            # client_section.Click_Yes()
-            # time.sleep(.2)
-            # client_section.wait_for_loader_to_disappear()
-            # time.sleep(.2)
-            # client_section.Select_Excluded_Section()
-            # time.sleep(.2)
-
-            #
-            #
-            #
-            # client_section.Select_Active_Tab_1st_Entry()
-            # time.sleep(1)
-            # client_section.Click_Include_Button()
-            # time.sleep(.2)
-            # client_section.Click_Yes()
-            # time.sleep(.2)
-            # print("7thhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-            #
-
-
-
 
