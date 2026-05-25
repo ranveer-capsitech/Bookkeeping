@@ -135,7 +135,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_This_Transaction()
         time.sleep(.5)
-        print("1stttttttttttttttttttttttttttttttttttttttttttttttttttt")
+
 
 
         client_section.Click_Checkbox_Single_Element()
@@ -144,7 +144,7 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Click_With_All_Recommendation()
         time.sleep(1)
-        print("2ndddddddddddddddddddddddddddddddddddddddddddddddddddd")
+
 
 
         client_section.Click_1st_Check_Box_Of_Similar_Transaction()
@@ -179,7 +179,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Similar_For_Explain()
         time.sleep(.2)
-        print("3rdddddddddddddddddddddddddddddddddddddddddddddddddddddd")
+
 
 
         client_section.Simple_Check_Box_Selection()
@@ -215,7 +215,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Second_Checkbox()
         time.sleep(.2)
-        print("4thhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+
 
         client_section.Click_Delete_Button()
         time.sleep(.2)
@@ -246,7 +246,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_First_Checkbox()
         time.sleep(.2)
-        print("5thhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+
 
         client_section.Click_Single_Explain_Translation()
         time.sleep(.2)
@@ -254,7 +254,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
-        print("6thhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+
 
         client_section.Select_Unexplained_Tab()
         client_section.wait_for_loader_to_disappear()
@@ -275,7 +275,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Money_in_or_Money_out()
         time.sleep(.2)
-        client_section.Fill_Split_Amount_Money_In()
+        client_section.Fill_Split_Amount()
         time.sleep(.2)
         client_section.Click_Description()
         time.sleep(.2)

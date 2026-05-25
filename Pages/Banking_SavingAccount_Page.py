@@ -1262,10 +1262,7 @@ class Banking_Savings_account:
             print(f"Error in Money_in_or_Money_out: {type(e).__name__} - {e}")
             raise
 
-
-
-
-    def Fill_Split_Amount_Money_In(self):
+    def Fill_Split_Amount(self):
         try:
             wait = WebDriverWait(self.driver, 40)
 
@@ -1292,17 +1289,17 @@ class Banking_Savings_account:
                 amount = clean_amount(money_out[0].text)
                 divided_value = f"{amount / 2:.2f}"
 
-                # Money out found, so enter value in Money In field
-                field_locator = self.enter_money_in
-                field_name = "Money In"
+                # Money out found, so enter value in Money Out field
+                field_locator = self.enter_money_out
+                field_name = "Money Out"
 
             elif money_in and money_in[0].text.strip():
                 amount = clean_amount(money_in[0].text)
                 divided_value = f"{amount / 2:.2f}"
 
-                # Money in found, so enter value in Money Out field
-                field_locator = self.enter_money_out
-                field_name = "Money Out"
+                # Money in found, so enter value in Money In field
+                field_locator = self.enter_money_in
+                field_name = "Money In"
 
             else:
                 raise Exception("Money In or Money Out amount not found")
@@ -1312,13 +1309,14 @@ class Banking_Savings_account:
             )
 
             self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
                 field
             )
 
             time.sleep(0.3)
 
-            field.click()
+            self.driver.execute_script("arguments[0].click();", field)
+
             field.send_keys(Keys.CONTROL + "a")
             field.send_keys(Keys.BACKSPACE)
             field.send_keys(divided_value)
@@ -1326,10 +1324,8 @@ class Banking_Savings_account:
             print(f"Entered {divided_value} in {field_name} field")
 
         except Exception as e:
-            print(f"Error in Fill_Split_Amount_Money_In: {type(e).__name__} - {e}")
+            print(f"Error in Fill_Split_Amount: {type(e).__name__} - {e}")
             raise
-
-
 
 
     def Select_Second_Account_Head_Option(self):
@@ -1411,12 +1407,12 @@ class Banking_Savings_account:
             # Find all visible Money Out fields
             wait.until(lambda d: len(d.find_elements(
                 By.XPATH,
-                "//div[@role='dialog']//input[@name='transactions.1.moneyIn']"
+                "//div[@role='dialog']//input[@name='transactions.1.moneyOut']"
             )) > 0)
 
             money_out_fields = self.driver.find_elements(
                 By.XPATH,
-                "//div[@role='dialog']//input[@name='transactions.1.moneyIn']"
+                "//div[@role='dialog']//input[@name='transactions.1.moneyOut']"
             )
 
             visible_fields = [f for f in money_out_fields if f.is_displayed()]

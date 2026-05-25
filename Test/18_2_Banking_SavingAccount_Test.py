@@ -257,7 +257,7 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.Money_in_or_Money_out()
             time.sleep(.2)
-            client_section.Fill_Split_Amount_Money_In()
+            client_section.Fill_Split_Amount()
             time.sleep(.2)
             client_section.Click_Description()
             time.sleep(.2)
