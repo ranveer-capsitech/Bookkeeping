@@ -209,6 +209,8 @@ class Banking_Credit_card:
         self.select_vat = (By.XPATH,
                            "//div[@role='dialog']//input[@name='transactions.1.vat']/ancestor::div[contains(@class,'rs-container')]")
 
+        self.vat_dropdown = (By.XPATH, "(//div[@role='dialog']//table//tbody//tr[1]//div[contains(@class,'rs-control')])[2]")
+
         self.click_description = (By.XPATH, "//label[normalize-space()='Description']")
 
         self.search_input = (
@@ -227,6 +229,10 @@ class Banking_Credit_card:
                                "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyIn')])[1]")
         self.enter_money_out = (By.XPATH,
                                 "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyOut')])[1]")
+        self.click_split_button = (By.XPATH,
+                                   "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//button[.//span[normalize-space()='Split']]")
+
+        self.cross_button = (By.XPATH, "//input[contains(@id,'SearchBox')]/following-sibling::div[contains(@class,'clearButton')]//button[@aria-label='Clear text']")
 
     #-----------------------------------------------------------------------------------------------------------------------
 
@@ -1517,7 +1523,7 @@ class Banking_Credit_card:
             client.send_keys(Keys.CONTROL + "a")
             client.send_keys(Keys.BACKSPACE)
 
-            client.send_keys("PURCHASE FINANCE CHARGE")
+            client.send_keys("LATE PAYMENT FEE")
             time.sleep(1)
 
             client.send_keys(Keys.ENTER)
@@ -1526,6 +1532,8 @@ class Banking_Credit_card:
 
         except Exception as e:
             print(f"Error on search field: {e}")
+
+
 
     def Click_three_dot(self):
         try:
@@ -1610,6 +1618,7 @@ class Banking_Credit_card:
             print(f"Error in Money_in_or_Money_out: {type(e).__name__} - {e}")
             raise
 
+
     def Fill_Split_Amount(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1676,40 +1685,41 @@ class Banking_Credit_card:
             raise
 
 
-    def Select_Second_Account_Head_Option(self):
-        try:
-            wait = WebDriverWait(self.driver, 40)
 
-            # 2nd row Account Head dropdown container
-            dropdown = wait.until(EC.presence_of_element_located((
-                By.XPATH,
-                "(//div[@role='dialog']//table//tr[td]//div[contains(@class,'rs-container')])[2]"
-            )))
-
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                dropdown
-            )
-            time.sleep(0.5)
-
-            # click container, not input
-            self.driver.execute_script("arguments[0].click();", dropdown)
-            time.sleep(0.5)
-
-            # select second option using keyboard
-            actions = ActionChains(self.driver)
-            actions.send_keys(Keys.ARROW_DOWN)
-            actions.pause(0.3)
-            actions.send_keys(Keys.ARROW_DOWN)
-            actions.pause(0.3)
-            actions.send_keys(Keys.ENTER)
-            actions.perform()
-
-            print("Selected 2nd account head option successfully")
-
-        except Exception as e:
-            print(f"Error selecting 2nd account head option: {type(e).__name__} - {e}")
-            raise
+    # def Select_Second_Account_Head_Option(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         # 2nd row Account Head dropdown container
+    #         dropdown = wait.until(EC.presence_of_element_located((
+    #             By.XPATH,
+    #             "(//div[@role='dialog']//table//tr[td]//div[contains(@class,'rs-container')])[2]"
+    #         )))
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             dropdown
+    #         )
+    #         time.sleep(0.5)
+    #
+    #         # click container, not input
+    #         self.driver.execute_script("arguments[0].click();", dropdown)
+    #         time.sleep(0.5)
+    #
+    #         # select second option using keyboard
+    #         actions = ActionChains(self.driver)
+    #         actions.send_keys(Keys.ARROW_DOWN)
+    #         actions.pause(0.3)
+    #         actions.send_keys(Keys.ARROW_DOWN)
+    #         actions.pause(0.3)
+    #         actions.send_keys(Keys.ENTER)
+    #         actions.perform()
+    #
+    #         print("Selected 2nd account head option successfully")
+    #
+    #     except Exception as e:
+    #         print(f"Error selecting 2nd account head option: {type(e).__name__} - {e}")
+    #         raise
 
 
 
@@ -1792,6 +1802,97 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error in Fill_Split_Amount_Money_Out: {type(e).__name__} - {e}")
             raise
+
+    def Select_Next_Option_Second_Account_Head_Option(self, option_index=1):
+        # try:
+            wait = WebDriverWait(self.driver, 40)
+
+            wait.until(EC.visibility_of_element_located((
+                By.XPATH,
+                "//*[normalize-space()='Transaction to split']"
+            )))
+
+            controls = wait.until(lambda d: [
+                c for c in d.find_elements(
+                    By.XPATH,
+                    "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/form[1]/div[1]/div[2]/div[2]/table[1]/tbody[1]/tr[1]/td[6]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                )
+                if c.is_displayed()
+            ])
+
+            print("Visible dropdown controls:", len(controls))
+            for i, c in enumerate(controls):
+                print(i, c.text)
+
+
+            if len(controls) >= 4:
+                dropdown = controls[2]
+            else:
+                dropdown = controls[0]  # fallback: first account head
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
+            self.driver.execute_script("arguments[0].click();", dropdown)
+
+            time.sleep(0.5)
+
+            ActionChains(self.driver) \
+                .send_keys(Keys.ARROW_DOWN) \
+                .pause(0.3) \
+                .send_keys(Keys.ARROW_DOWN) \
+                .pause(0.3) \
+                .send_keys(Keys.ENTER) \
+                .perform()
+
+            print("Selected account head option successfully")
+
+        # except Exception as e:
+        #     print(f"Error in Select_Next_Option_Second_Account_Head_Option: {type(e).__name__} - {e}")
+        #     raise
+
+
+    def Select_Next_Option_Second_Account_head_Option(self):
+        # try:
+            wait = WebDriverWait(self.driver, 40)
+
+            # always select LAST account head dropdown
+            dropdown = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[@role='dialog']//input[@name='transactions.1.accountHead']/preceding::div[contains(@class,'rs-control')][1]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", dropdown)
+
+            time.sleep(1)
+
+            # keyboard navigation
+            actions = ActionChains(self.driver)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ENTER)
+
+            actions.perform()
+            time.sleep(.2)
+
+            print("Selected next account head option successfully")
+
+        # except Exception as e:
+        #     print(f"Error: {type(e).__name__} - {e}")
+        #     raise
 
 
 
@@ -1918,6 +2019,54 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
+    def Select_Vat_Drop_Down(self):
+        try:
+            vat = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.vat_dropdown))
+            time.sleep(.2)
+            vat.click()
+            time.sleep(.2)
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                vat
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", vat)
+
+            time.sleep(1)
+
+            # keyboard navigation
+            actions = ActionChains(self.driver)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.5)
+
+            actions.send_keys(Keys.ENTER)
+
+            actions.perform()
+            time.sleep(.2)
+
+            print("Select vat successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Cross_Button(self):
+        try:
+            cross = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.cross_button))
+            time.sleep(.2)
+            cross.click()
+            time.sleep(.5)
+            print("Click on Cross icon successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
 
 
 

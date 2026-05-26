@@ -93,6 +93,7 @@ class Login(unittest.TestCase):
             client_section.Banking_Section()
             time.sleep(.2)
 
+
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
             client_section.Account()
@@ -123,11 +124,75 @@ class Login(unittest.TestCase):
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
-            client_section.Click_Checkbox_Single_Element()
+            #----------------------------------------------------------------------
+
+            client_section.Select_Unexplained_Tab()
+            client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
+
+            client_section.Check_Search_Functionality()
+            time.sleep(.2)
+
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Simple_Check_Box_Selection()
+            time.sleep(5)
+            client_section.Click_three_dot()
+            time.sleep(.2)
+            client_section.Click_Split()
+            time.sleep(.2)
+            client_section.Money_in_or_Money_out()
+            time.sleep(.2)
+            client_section.Fill_Split_Amount()
+            time.sleep(.2)
+
+            # client_section.Select_Next_Option_Second_Account_Head_Option()
+            # time.sleep(.2)
+
+            client_section.Select_Vat_Drop_Down()
+            time.sleep(.2)
+            client_section.Click_Description()
+            time.sleep(.2)
+
+            # client_section.Select_Second_Account_Head_Option()
+            # time.sleep(.2)
+            client_section.Fill_Split_Amount_Money_Out()
+            time.sleep(.2)
+
+            # client_section.Select_Next_option_Second_Account_Head_Option()
+            # time.sleep(.2)
+            client_section.Select_Next_Option_Second_Account_head_Option()
+            time.sleep(.2)
+
+            client_section.Select_Vat()
+            time.sleep(.2)
+
+            client_section.Click_Split_Button()
+            time.sleep(.2)
+
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+            client_section.Cross_Button()
+            time.sleep(.2)
+
+
+            # client_section.Select_Unexplained_Tab()
+            # time.sleep(.2)
+
+
+            #----------------------------------------------------------------------------------
 
             client_section.Click_Explain_1st()
             time.sleep(.2)
+
+            #------------------------------------------------------------------------------------------
+
+            client_section.Click_Checkbox_Single_Element()
+            time.sleep(.2)
+
+            # client_section.Click_Explain_1st()
+            # time.sleep(.2)
 
             client_section.Click_Explain_And_All_Recommendation()
             time.sleep(1)
@@ -260,40 +325,56 @@ class Login(unittest.TestCase):
 
 
 
-            client_section.Select_Unexplained_Tab()
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
+            # client_section.Select_Unexplained_Tab()
+            # client_section.wait_for_loader_to_disappear()
+            # time.sleep(.2)
+            #
+            #
+            # client_section.Check_Search_Functionality()
+            # time.sleep(.2)
+            #
+            # client_section.wait_for_loader_to_disappear()
+            # time.sleep(.2)
+            # client_section.Simple_Check_Box_Selection()
+            # time.sleep(5)
+            # client_section.Click_three_dot()
+            # time.sleep(.2)
+            # client_section.Click_Split()
+            # time.sleep(.2)
+            # client_section.Money_in_or_Money_out()
+            # time.sleep(.2)
+            # client_section.Fill_Split_Amount()
+            # time.sleep(.2)
+            #
+            # client_section.Select_Next_Option_Second_Account_Head_Option()
+            # time.sleep(.2)
+            #
+            # client_section. Select_Vat_Drop_Down()
+            # time.sleep(.2)
+            # client_section.Click_Description()
+            # time.sleep(.2)
+            #
+            # # client_section.Select_Second_Account_Head_Option()
+            # # time.sleep(.2)
+            # client_section.Fill_Split_Amount_Money_Out()
+            # time.sleep(.2)
+            #
+            #
+            #
+            # # client_section.Select_Next_option_Second_Account_Head_Option()
+            # # time.sleep(.2)
+            # client_section.Select_Next_Option_Second_Account_head_Option()
+            # time.sleep(.2)
+            #
+            # client_section.Select_Vat()
+            # time.sleep(.2)
+            #
+            # client_section.Click_Split_Button()
+            # time.sleep(.2)
 
 
-            client_section.Check_Search_Functionality()
-            time.sleep(.2)
 
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-            client_section.Simple_Check_Box_Selection()
-            time.sleep(5)
-            client_section.Click_three_dot()
-            time.sleep(.2)
-            client_section.Click_Split()
-            time.sleep(.2)
-            client_section.Money_in_or_Money_out()
-            time.sleep(.2)
-            client_section.Fill_Split_Amount()
-            time.sleep(.2)
-            client_section.Click_Description()
-            time.sleep(.2)
 
-            client_section.Select_Second_Account_Head_Option()
-            time.sleep(.2)
-            client_section.Fill_Split_Amount_Money_Out()
-            time.sleep(.2)
-
-            client_section.Select_Next_option_Second_Account_Head_Option()
-            time.sleep(.2)
-            client_section.Select_Vat()
-            time.sleep(.2)
-            client_section.Click_Split_Button()
-            time.sleep(1)
 
 # client_section.Click_Unexplained_Tab()
             # time.sleep(.2)
