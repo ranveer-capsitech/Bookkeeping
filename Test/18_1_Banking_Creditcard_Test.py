@@ -294,11 +294,8 @@ class Login(unittest.TestCase):
 
 
 
-
-
             # client_section.Click_Unexplain_Icon()
             # time.sleep(.2)
-
 
 
             client_section.Click_Unexplained_Tab()
@@ -322,85 +319,5 @@ class Login(unittest.TestCase):
 
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
-
-
-
-            # client_section.Select_Unexplained_Tab()
-            # client_section.wait_for_loader_to_disappear()
-            # time.sleep(.2)
-            #
-            #
-            # client_section.Check_Search_Functionality()
-            # time.sleep(.2)
-            #
-            # client_section.wait_for_loader_to_disappear()
-            # time.sleep(.2)
-            # client_section.Simple_Check_Box_Selection()
-            # time.sleep(5)
-            # client_section.Click_three_dot()
-            # time.sleep(.2)
-            # client_section.Click_Split()
-            # time.sleep(.2)
-            # client_section.Money_in_or_Money_out()
-            # time.sleep(.2)
-            # client_section.Fill_Split_Amount()
-            # time.sleep(.2)
-            #
-            # client_section.Select_Next_Option_Second_Account_Head_Option()
-            # time.sleep(.2)
-            #
-            # client_section. Select_Vat_Drop_Down()
-            # time.sleep(.2)
-            # client_section.Click_Description()
-            # time.sleep(.2)
-            #
-            # # client_section.Select_Second_Account_Head_Option()
-            # # time.sleep(.2)
-            # client_section.Fill_Split_Amount_Money_Out()
-            # time.sleep(.2)
-            #
-            #
-            #
-            # # client_section.Select_Next_option_Second_Account_Head_Option()
-            # # time.sleep(.2)
-            # client_section.Select_Next_Option_Second_Account_head_Option()
-            # time.sleep(.2)
-            #
-            # client_section.Select_Vat()
-            # time.sleep(.2)
-            #
-            # client_section.Click_Split_Button()
-            # time.sleep(.2)
-
-
-
-
-
-# client_section.Click_Unexplained_Tab()
-            # time.sleep(.2)
-            # client_section.Click_1st_Check_Box_Of_Similar_Transaction()
-            # time.sleep(1)
-            # client_section.Click_Row_Exclude_Icon()
-            # time.sleep(.2)
-            # client_section.Click_Yes()
-            # time.sleep(.2)
-            # client_section.wait_for_loader_to_disappear()
-            # time.sleep(.2)
-            # client_section.Select_Excluded_Section()
-            # time.sleep(.2)
-
-            #
-            #
-            #
-            # client_section.Select_Active_Tab_1st_Entry()
-            # time.sleep(1)
-            # client_section.Click_Include_Button()
-            # time.sleep(.2)
-            # client_section.Click_Yes()
-            # time.sleep(.2)
-            # print("7thhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-            #
-
-
 
 

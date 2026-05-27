@@ -802,6 +802,7 @@ class Banking_Credit_card:
         except TimeoutException:
             pass
 
+
     def Select_Account_Head(self):
         try:
             wait = WebDriverWait(self.driver, 30)
@@ -817,8 +818,6 @@ class Banking_Credit_card:
                 account_head
             )
             account_head.click()
-
-
 
             self.wait_for_loader_to_disappear()
             self.driver.execute_script("arguments[0].click();", account_head)
@@ -887,6 +886,7 @@ class Banking_Credit_card:
 
         raise Exception("Unable to click Similar Section Explain Button")
 
+
     def Click_Similar_For_Explain(self):
         try:
             account_head = WebDriverWait(self.driver, 30).until(
@@ -899,8 +899,6 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
-
-
 
 
 
@@ -1007,6 +1005,7 @@ class Banking_Credit_card:
             print(f"Error: {e}")
             time.sleep(2)
 
+
     def Click_First_Checkbox(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1029,6 +1028,7 @@ class Banking_Credit_card:
             print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
             raise
 
+
     def Click_Second_Checkbox(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1050,6 +1050,7 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
             raise
+
 
     def Click_Delete_Button(self):
         try:
@@ -1077,6 +1078,7 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Select_Explained_Tab(self):
         try:
@@ -1191,6 +1193,7 @@ class Banking_Credit_card:
 
             time.sleep(2)
 
+
     def Click_Upload_File(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1260,6 +1263,7 @@ class Banking_Credit_card:
             print(f"Error in Select_Explained_1st_Entry: {type(e).__name__} - {e}")
             raise
 
+
     def Click_Unexplain_Icon(self):
         wait = WebDriverWait(self.driver, 40)
 
@@ -1274,6 +1278,7 @@ class Banking_Credit_card:
         self.driver.execute_script("arguments[0].click();", btn)
 
         print("Clicked Unexplain icon successfully")
+
 
     def Click_Yes(self):
         try:
@@ -1305,6 +1310,7 @@ class Banking_Credit_card:
 
         print("Clicked Excluded tab successfully")
 
+
     def Click_Revive_Button(self):
         try:
             revive = WebDriverWait(self.driver, 40).until(
@@ -1317,6 +1323,7 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Click_Delete_Icon(self):
         try:
@@ -1348,6 +1355,7 @@ class Banking_Credit_card:
         except Exception as e:
             print(f"Error in Click_Delete_Icon: {type(e).__name__} - {e}")
             raise
+
 
     def Click_Unexplained_Tab(self):
         wait = WebDriverWait(self.driver, 40)
@@ -1686,45 +1694,6 @@ class Banking_Credit_card:
 
 
 
-    # def Select_Second_Account_Head_Option(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 40)
-    #
-    #         # 2nd row Account Head dropdown container
-    #         dropdown = wait.until(EC.presence_of_element_located((
-    #             By.XPATH,
-    #             "(//div[@role='dialog']//table//tr[td]//div[contains(@class,'rs-container')])[2]"
-    #         )))
-    #
-    #         self.driver.execute_script(
-    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-    #             dropdown
-    #         )
-    #         time.sleep(0.5)
-    #
-    #         # click container, not input
-    #         self.driver.execute_script("arguments[0].click();", dropdown)
-    #         time.sleep(0.5)
-    #
-    #         # select second option using keyboard
-    #         actions = ActionChains(self.driver)
-    #         actions.send_keys(Keys.ARROW_DOWN)
-    #         actions.pause(0.3)
-    #         actions.send_keys(Keys.ARROW_DOWN)
-    #         actions.pause(0.3)
-    #         actions.send_keys(Keys.ENTER)
-    #         actions.perform()
-    #
-    #         print("Selected 2nd account head option successfully")
-    #
-    #     except Exception as e:
-    #         print(f"Error selecting 2nd account head option: {type(e).__name__} - {e}")
-    #         raise
-
-
-
-
-
     def Fill_Split_Amount_Money_Out(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1893,18 +1862,6 @@ class Banking_Credit_card:
         # except Exception as e:
         #     print(f"Error: {type(e).__name__} - {e}")
         #     raise
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

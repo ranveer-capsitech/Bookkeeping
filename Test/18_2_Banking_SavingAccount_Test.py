@@ -275,5 +275,29 @@ class Login(unittest.TestCase):
             client_section.Select_Vat()
             time.sleep(.2)
             client_section.Click_Split_Button()
-            time.sleep(1)
+            time.sleep(.2)
+
+
+
+
+
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Check_Search_Functionality()
+            time.sleep(.2)
+            client_section.Select_Explained_Tab()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Check_Search_Functionality()
+            time.sleep(.2)
+            client_section.Click_Checkbox_Single_Element()
+            time.sleep(.2)
+            client_section.Click_Unexplain()
+            time.sleep(.2)
+            client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
+            time.sleep(.2)
+
+
+
 
