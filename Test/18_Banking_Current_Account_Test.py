@@ -263,7 +263,7 @@ class Login(unittest.TestCase):
         client_section.Check_Search_Functionality()
         time.sleep(.2)
 
-        #split---
+        #-------------------------------split----------------------------
 
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
@@ -294,6 +294,23 @@ class Login(unittest.TestCase):
 
 
 
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Check_Search_Functionality()
+        time.sleep(.2)
+        client_section.Select_Explained_Tab()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Check_Search_Functionality()
+        time.sleep(.2)
+        client_section.Click_Checkbox_Single_Element()
+        time.sleep(.2)
+        client_section.Click_Unexplain()
+        time.sleep(.2)
+        client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
+        time.sleep(.2)
+
     #-------------------------------------------setting-----------------------------------------------------------------
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
@@ -315,8 +332,6 @@ class Login(unittest.TestCase):
         time.sleep(3)
         client_section.Click_Input()
         time.sleep(.2)
-
-
 
 
         client_section.Select_Setting_Section()
@@ -345,7 +360,6 @@ class Login(unittest.TestCase):
 
 
     #---------------------------------------------------------------------------------------------------------------
-
 
         client_section.Banking_Section()
         time.sleep(.2)

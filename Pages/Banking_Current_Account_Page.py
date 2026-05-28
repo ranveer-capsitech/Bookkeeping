@@ -1933,6 +1933,24 @@ class Banking:
         except Exception as e:
             print(f"Error on search field: {e}")
 
+
+
+    def Click_Yes_Confirm_To_Unexplain_Selected_Transaction(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+
+            yes_buttons = self.driver.find_elements(*self.yes_button)
+            if yes_buttons and yes_buttons[0].is_displayed():
+                self.driver.execute_script("arguments[0].click();", yes_buttons[0])
+                time.sleep(1)
+
+            print("Click on yes button for confirm to un-explain selected transaction successfully.....!!")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
 #-----------------------------------------------------------------------------------------------------------------------
 
 

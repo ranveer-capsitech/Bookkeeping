@@ -240,17 +240,29 @@ class Login(unittest.TestCase):
         client_section.Back_Button_For_Verify()
         time.sleep(.2)
 
+        print("passsssss---1")
+
 
 
         #----- After revoke submit click on edit icon ------------------------------------------------------------------
 
         client_section.Edit_Vat_Return()
         time.sleep(.2)
+        print("passsssss---2")
+
+
+
+
+
+
+
+
         client_section.Send_Button()
         time.sleep(.2)
 
         client_section.Enter_Reviewer()
         time.sleep(.2)
+        print("passsssss---3")
 
         remarks = "Please review and approve this VAT return."
         client_section.Enter_Remarks(remarks)
@@ -261,6 +273,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Review()
         time.sleep(.2)
+        print("passsssss---4")
 
         #--- Direct use next button ...not apply reject process
 
@@ -277,14 +290,14 @@ class Login(unittest.TestCase):
 
         client_section.Click_Pending()
         time.sleep(.2)
+        print("passsssss---5")
 
-
-        # client_section.Back_Button_For_Verify()#
-        # time.sleep(.2)
-        # client_section.Click_View_Button()#
-        # time.sleep(.2)
-        # client_section.Click_Send_Button()#
-        # time.sleep(.2)
+        ## client_section.Back_Button_For_Verify()#
+        # #time.sleep(.2)
+        ## client_section.Click_View_Button()#
+        # #time.sleep(.2)
+        # #client_section.Click_Send_Button()#
+        ## time.sleep(.2)
 
         client_section.Click_Drop_Down_Status()
         time.sleep(.2)
@@ -293,10 +306,10 @@ class Login(unittest.TestCase):
         client_section.Submit()
         time.sleep(.2)
 
-        # client_section.Back_Button_For_Verify()#
-        # time.sleep(.2)#
-        # client_section.Click_First_Edit_Button()#
-        # time.sleep(.2)#
+        ## client_section.Back_Button_For_Verify()#
+       # # time.sleep(.2)#
+       # # client_section.Click_First_Edit_Button()#
+       # # time.sleep(.2)#
 
 
 
@@ -361,14 +374,14 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Send_Button()
         time.sleep(.2)
-        # client_section.Click_Send_submit_mail()
-        # time.sleep(.2)
+       # # client_section.Click_Send_submit_mail()
+       # # time.sleep(.2)
         client_section.Send_Anyway_Button()
         time.sleep(.5)
 
 
 
-#------------------------Go - to - CRM ---------------------------------------------------------------------------
+# ------------------------Go - to - CRM ---------------------------------------------------------------------------
 
 
         client_section.Click_On_Menu()

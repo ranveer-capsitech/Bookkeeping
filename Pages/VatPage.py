@@ -1170,21 +1170,22 @@ class Vat:
 
 
     def Send_Button(self):
-        try:
+        # try:
             send = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_send))
             time.sleep(.2)
             send.click()
             time.sleep(.2)
 
             print("Click on Send button successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+        # except Exception as e:
+        #     print(f"Error on Click:{e}")
+        #     time.sleep(.2)
 
 
 
     def Enter_Reviewer(self):
         try:
+
             review = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.enter_reviewer)
             )
@@ -1547,92 +1548,53 @@ class Vat:
             raise
 
 
-            print("Click on pending button successfully....!!")
-        # except Exception as e:
-        #     print(f"Error on Click:{e}")
-        #     time.sleep(.2)
 
-    # def Select_Drop_Down(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 30)
-    #
-    #         dropdown = wait.until(EC.element_to_be_clickable(self.select_e_sign_drop_down))
-    #         time.sleep(.2)
-    #         self.driver.execute_script(
-    #             "arguments[0].scrollIntoView({block:'center'});",
-    #          dropdown
-    #         )
-    #
-    #         time.sleep(0.5)
-    #
-    #     # JS click
-    #         self.driver.execute_script(
-    #             "arguments[0].click();",
-    #             dropdown
-    #         )
-    #
-    #         time.sleep(1)
-    #
-    #     # keyboard navigation
-    #         actions = ActionChains(self.driver)
-    #
-    #         actions.send_keys(Keys.ARROW_DOWN)
-    #         actions.pause(0.5)
-    #
-    #         actions.send_keys(Keys.ENTER)
-    #
-    #         actions.perform()
-    #
-    #         print("Selected dropdown option successfully.....!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error on Select_Drop_Down: {type(e).__name__} - {e}")
-    #     raise
-        #     dropdown.click()
-        #     time.sleep(.2)
-        #
-        #
-        #     # use active element (real input of react-select)
-        #     active = self.driver.switch_to.active_element
-        #     active.send_keys(Keys.ARROW_DOWN)
-        #     time.sleep(0.3)
-        #     active.send_keys(Keys.ENTER)
-        #
-        #     print("Selected Revoke option successfully....!!")
-        #
-        # except Exception as e:
-        #     print(f"Error on Select_Drop_Down: {e}")
-        #     raise
-    def Select_Drop_Down(self):
+
+    def Select_Drop_Down(self, option_text=None):
         try:
             wait = WebDriverWait(self.driver, 30)
 
-            dropdown = wait.until(
-                EC.element_to_be_clickable(self.select_e_sign_drop_down)
-            )
+            dropdown = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[contains(@class,'ms-Callout-main') or contains(@class,'ms-Modal')]"
+                "//div[contains(@class,'rs-control')]"
+            )))
 
             self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
                 dropdown
             )
 
             time.sleep(0.5)
 
             self.driver.execute_script("arguments[0].click();", dropdown)
+            time.sleep(0.5)
 
-            time.sleep(1)
+            input_box = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "//div[contains(@class,'ms-Callout-main') or contains(@class,'ms-Modal')]"
+                "//input[contains(@id,'react-select')]"
+            )))
 
-            actions = ActionChains(self.driver)
-            actions.send_keys(Keys.ARROW_DOWN)
-            actions.pause(0.5)
-            actions.send_keys(Keys.ENTER)
-            actions.perform()
+            self.driver.execute_script("arguments[0].focus();", input_box)
+
+            if option_text:
+                input_box.send_keys(option_text)
+                time.sleep(0.5)
+                input_box.send_keys(Keys.ENTER)
+            else:
+                input_box.send_keys(Keys.ARROW_DOWN)
+                time.sleep(0.5)
+                input_box.send_keys(Keys.ENTER)
+
+            time.sleep(0.5)
 
             print("Selected dropdown option successfully.....!!")
 
         except Exception as e:
             print(f"Error on Select_Drop_Down: {type(e).__name__} - {e}")
             raise
+
 
 
     def Enter_Remark(self):
@@ -1733,17 +1695,6 @@ class Vat:
             raise
 
 
-    # def Edit_Icon(self):
-    #     try:
-    #         edit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.edit_icon))
-    #         time.sleep(.2)
-    #         edit.click()
-    #         time.sleep(.2)
-    #
-    #         print("Click on Edit icon button successfully....!!")
-    #     except Exception as e:
-    #         print(f"Error on Click:{e}")
-    #         time.sleep(.2)
 
 
 
