@@ -1549,7 +1549,6 @@ class Vat:
 
 
 
-
     def Select_Drop_Down(self, option_text=None):
         try:
             wait = WebDriverWait(self.driver, 30)
@@ -1696,8 +1695,6 @@ class Vat:
 
 
 
-
-
     def Click_First_Edit_Button(self):
         try:
             edit_btn = WebDriverWait(self.driver, 30).until(
@@ -1712,31 +1709,6 @@ class Vat:
         except Exception as e:
             print(f"Error on Edit button click: {e}")
             raise
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     def Send_mail(self):
@@ -1763,8 +1735,6 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
-
-
 
 
     def Mail_Form(self):
@@ -1869,52 +1839,6 @@ class Vat:
             self.driver.switch_to.default_content()
             print(f"Error on CTRL+Click Review mail: {e}")
             raise
-
-
-
-    # def Click_Review_Mail_New_Tab(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 20)
-    #
-    #         old_tabs = self.driver.window_handles
-    #
-    #         review = wait.until(
-    #             EC.element_to_be_clickable(self.review_mail)
-    #         )
-    #
-    #         actions = ActionChains(self.driver)
-    #         actions.key_down(Keys.CONTROL).click(review).key_up(Keys.CONTROL).perform()
-    #
-    #         wait.until(lambda d: len(d.window_handles) > len(old_tabs))
-    #         self.driver.switch_to.window(self.driver.window_handles[-1])
-    #
-    #         print("Review mail link opened successfully in new tab....!!")
-    #         print("Current URL:", self.driver.current_url)
-    #
-    #     except Exception as e:
-    #         print(f"Error on CTRL+Click Review mail: {e}")
-    #         raise
-
-    # def Click_Review_Mail(self):
-    #     try:
-    #         review = WebDriverWait(self.driver, 10).until(
-    #             EC.element_to_be_clickable(self.review_mail)
-    #         )
-    #         time.sleep(0.2)
-    #
-    #         actions = ActionChains(self.driver)
-    #         actions.key_down(Keys.CONTROL)
-    #         actions.move_to_element(review)
-    #         actions.click()
-    #         actions.key_up(Keys.CONTROL)
-    #         actions.perform()
-    #
-    #         time.sleep(0.2)
-    #         print("Click on Review mail icon successfully....!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error on Click: {e}")
-    #         raise
 
 
     def Click_Get_OTP(self):
@@ -2063,55 +1987,6 @@ class Vat:
             print(f"Error in Click_Okay_And_Return_To_Previous_Tab: {e}")
             raise
 
-    # def Click_Okay_And_Return_To_Previous_Tab(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 20)
-    #
-    #         # before close, get all tabs
-    #         tabs_before_close = self.driver.window_handles
-    #         current_tab = self.driver.current_window_handle
-    #
-    #         # choose previous tab as tab other than current
-    #         previous_tabs = [tab for tab in tabs_before_close if tab != current_tab]
-    #         if not previous_tabs:
-    #             raise Exception("No previous tab found.")
-    #
-    #         previous_tab = previous_tabs[-1]
-    #
-    #         # click Okay
-    #         okay = wait.until(
-    #             EC.element_to_be_clickable(self.click_okay)
-    #         )
-    #         okay.click()
-    #         time.sleep(1)
-    #
-    #         print("Click on Okay button successfully....!!")
-    #
-    #         # close current tab
-    #         self.driver.close()
-    #         time.sleep(1)
-    #
-    #         # switch to previous tab
-    #         self.driver.switch_to.window(previous_tab)
-    #         time.sleep(1)
-    #
-    #         print("Switched back to previous tab successfully....!!")
-    #
-    #         # click close/cross button
-    #         cross = wait.until(
-    #             EC.element_to_be_clickable(self.close_cross)
-    #         )
-    #         self.driver.execute_script("arguments[0].click();", cross)
-    #         time.sleep(0.5)
-    #
-    #         print("Clicked on cross button successfully....!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error in Click_Okay_And_Return_To_Previous_Tab: {e}")
-    #         raise
-
-
-
 
     def Three_dot(self):
         try:
@@ -2124,7 +1999,6 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
-
 
 
     def Click_Download_Report(self):
@@ -2245,6 +2119,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def wait_for_spinner_to_disappear(self):
         wait = WebDriverWait(self.driver, 30)
         try:
@@ -2255,6 +2130,8 @@ class Vat:
             )
         except TimeoutException:
             print("Spinner still visible or not found, continuing...")
+
+
 
     def Click_mail_icon_after_submit(self):
         try:
@@ -2288,7 +2165,11 @@ class Vat:
             print(f"Error on Click Mail icon: {e}")
             raise
 
+
+
     #-----------------------------------------Go-to_CRM---------------------------------------------------------------------
+
+
 
     def Click_On_Menu(self):
         try:
@@ -2370,74 +2251,6 @@ class Vat:
                 time.sleep(.2)
 
 
-
-
-    #
-    # def Click_Title_Company(self):
-    #     try:
-    #         if not self.company_name:
-    #             raise Exception("Company name is not set. Please call Enter_Company() first.")
-    #
-    #         wait = WebDriverWait(self.driver, 30)
-    #
-    #         # wait for detail page to stabilize after Click_1st_Ref()
-    #         wait.until(lambda d: "/admin/clients/business/" in d.current_url)
-    #         time.sleep(1)
-    #
-    #         # try multiple strong locators
-    #         locators = [
-    #             (By.XPATH, f"//a[@title='{self.company_name}']"),
-    #             (By.XPATH, f"//a[normalize-space()='{self.company_name}']"),
-    #             (By.XPATH,
-    #              f"//a[contains(@href,'/admin/clients/business') and contains(normalize-space(),'{self.company_name}')]"),
-    #             (By.XPATH,
-    #              f"//*[contains(@class,'ms-Stack')]//a[contains(@href,'/admin/clients/business') and @title='{self.company_name}']"),
-    #         ]
-    #
-    #         last_error = None
-    #
-    #         for by, locator in locators:
-    #             for _ in range(3):
-    #                 try:
-    #                     element = wait.until(
-    #                         EC.visibility_of_element_located((by, locator))
-    #                     )
-    #
-    #                     self.driver.execute_script(
-    #                         "arguments[0].scrollIntoView({block:'center'});", element
-    #                     )
-    #                     time.sleep(0.3)
-    #
-    #                     try:
-    #                         wait.until(EC.element_to_be_clickable((by, locator)))
-    #                         element.click()
-    #                     except Exception:
-    #                         self.driver.execute_script("arguments[0].click();", element)
-    #
-    #                     print(f"Click on company title successfully: {self.company_name}")
-    #                     return True
-    #
-    #                 except StaleElementReferenceException as e:
-    #                     last_error = e
-    #                     time.sleep(0.5)
-    #                 except TimeoutException as e:
-    #                     last_error = e
-    #                     break
-    #                 except Exception as e:
-    #                     last_error = e
-    #                     break
-    #
-    #         raise Exception(f"Could not click company title: {self.company_name}. Last error: {last_error}")
-    #
-    #     except Exception as e:
-    #         print(f"Error on Click_Title_Company: {e}")
-    #         raise
-    # #
-
-
-
-
-
     def Click_Title_Company(self):
         try:
             if not self.company_name:
@@ -2482,6 +2295,8 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
     def Click_Vat_Return_Folder(self):
         try:
             vat_folder = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_vat_return_folder))
@@ -2493,6 +2308,8 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
+
 
     def Click_Year_Folder(self):
         try:
@@ -2506,6 +2323,8 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
     def Click_Period_Folder(self):
         try:
             period = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_period_folder))
@@ -2517,6 +2336,8 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
+
 
     def Click_first_file(self):
         try:
@@ -2530,6 +2351,8 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
+
     def Click_Download_File(self):
         try:
             download_file = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_download_file))
@@ -2542,8 +2365,9 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
-    def Click_Send_submit_mail(self):
 
+
+    def Click_Send_submit_mail(self):
 
         try:
             sumit_send_mail = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send_submit_mail))
@@ -2556,6 +2380,7 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+
     def Send_Anyway_Button(self):
         try:
             send_anyway = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable(self.send_anyway_button))
@@ -2566,10 +2391,6 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
-
-
-
-
 
 
 
@@ -2594,6 +2415,7 @@ class Vat:
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.2)
+
 
     def Click_Plus_Add(self):
         try:
