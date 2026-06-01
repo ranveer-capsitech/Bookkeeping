@@ -240,20 +240,12 @@ class Login(unittest.TestCase):
         client_section.Back_Button_For_Verify()
         time.sleep(.2)
 
-        print("passsssss---1")
-
 
 
         #----- After revoke submit click on edit icon ------------------------------------------------------------------
 
         client_section.Edit_Vat_Return()
         time.sleep(.2)
-        print("passsssss---2")
-
-
-
-
-
 
 
 
@@ -262,7 +254,7 @@ class Login(unittest.TestCase):
 
         client_section.Enter_Reviewer()
         time.sleep(.2)
-        print("passsssss---3")
+
 
         remarks = "Please review and approve this VAT return."
         client_section.Enter_Remarks(remarks)
@@ -273,7 +265,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Review()
         time.sleep(.2)
-        print("passsssss---4")
+
 
         #--- Direct use next button ...not apply reject process
 
@@ -290,7 +282,7 @@ class Login(unittest.TestCase):
 
         client_section.Click_Pending()
         time.sleep(.2)
-        print("passsssss---5")
+
 
         ## client_section.Back_Button_For_Verify()#
         # #time.sleep(.2)
@@ -393,15 +385,15 @@ class Login(unittest.TestCase):
         client_section.Enter_in_Search()
         time.sleep(1)
         client_section.Click_1st_Ref()
-        time.sleep(.2)
+        time.sleep(.5)
         client_section.Click_Title_Company()
-        time.sleep(.2)
+        time.sleep(.5)
         client_section.Click_Document()
-        time.sleep(.2)
+        time.sleep(.5)
         client_section.Click_Vat_Return_Folder()
-        time.sleep(.2)
+        time.sleep(.5)
         client_section.Click_Year_Folder()
-        time.sleep(.2)
+        time.sleep(.5)
         client_section.Click_Period_Folder()
         time.sleep(.2)
         client_section.Click_first_file()

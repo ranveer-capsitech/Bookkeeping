@@ -3,8 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Add_Customer import Add_Customer
-from Add_Suppliers import Add_Supplier
+from Banking_Detailed_Explaination_Page import Banking_detailed_explaination
 from configReader import ConfigReader
 from Pages.Client_SellPage import ClientSell
 from Pages.LoginPage import loginPage
@@ -61,13 +60,12 @@ class Login(unittest.TestCase):
         if __name__ == "__main__":
             unittest.main()
 
-    @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Supplier ")
-    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for supplier >> click on sell>> click on add supplier section")
+    @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
+    @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell")
 
 
-
-    def test_04_Go_Supplier(self):
-        client_section = Add_Supplier(driver=self.driver)
+    def test_04_Go_Client_Sell(self):
+        client_section = Banking_detailed_explaination(driver=self.driver)
         time.sleep(.2)
 
         client_section. Select_Search()
@@ -78,59 +76,64 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Input()
         time.sleep(.2)
-        client_section.Click_Purchase()
+
+
+        client_section.Click_Sales()
         time.sleep(.2)
 
-        client_section.Select_Suppliers_Section()
+        client_section.Add_Invoice()
+        time.sleep(.2)
+        client_section.Select_Customer_Keyboard()
         time.sleep(.2)
 
-        client_section.Click_On_Add_Suppliers()
-        time.sleep(.2)
-
-        client_section.Enter_Suppliers_Name()
-        time.sleep(.2)
-        client_section.Click_Billing_Field()
-        time.sleep(.2)
-        client_section.Enter_Building()
-        time.sleep(.2)
-        client_section.Enter_Street()
-        time.sleep(.2)
-        client_section.Enter_City()
-        time.sleep(.2)
-        client_section.Enter_County()
-        time.sleep(.2)
-        client_section.Select_Country()
-        time.sleep(.2)
-        client_section.Enter_Postcode()
-        time.sleep(.2)
-        client_section.Click_Contact_Person()
-        time.sleep(.2)
-
-        client_section.First_Name()
-        time.sleep(.2)
-        client_section.Enter_Name()
-        time.sleep(.2)
-        client_section.Enter_Contact_Number()
-        time.sleep(.2)
-        client_section.Enter_Mail()
-        time.sleep(.2)
-        client_section.Account_name()
-        time.sleep(.2)
-        client_section.Select_Vat()
-        time.sleep(.2)
-        client_section.Enter_Vat()
-        time.sleep(.2)
-        client_section.Enter_EORI()
-        time.sleep(.2)
-        client_section.Sort_Code()
-        time.sleep(.2)
-        client_section.Account_Number()
-        time.sleep(.2)
-        client_section.Project_tags()
-        time.sleep(.2)
         client_section.Add_Attachment()
         time.sleep(.2)
-        client_section.Save_Suppliers()
+
+        client_section.Select_item_sale()
+        time.sleep(.5)
+
+
+        client_section.Enter_Discount()
+        time.sleep(.3)
+        client_section.Click_Enter_Notes()
+        time.sleep(.3)
+        client_section.Enter_Notes()
+        time.sleep(.3)
+
+        client_section.Click_Save()
+        time.sleep(2)
+
+
+        #---------------------------------------------------------------------------------------------------------------
+
+        client_section.Click_Purchases()
+        time.sleep(.5)
         time.sleep(.2)
+
+        client_section.Add_Invoice()
+        time.sleep(.2)
+        client_section.Select_Customer()
+        time.sleep(.2)
+
+        client_section.Add_Attachment()
+        time.sleep(.2)
+        client_section.Enter_Discount()
+        time.sleep(.2)
+        ## client_section.Click_Enter_Notes()
+        ## time.sleep(.2)
+        ## client_section.Enter_Notes()
+        ## time.sleep(.2)
+
+        client_section.Select_item_purchase()
+        time.sleep(.5)
+        client_section.Enter_amount()
+        time.sleep(2)
+        client_section.Save_Services()
+        time.sleep(.2)
+
+
+
+
+
 
 

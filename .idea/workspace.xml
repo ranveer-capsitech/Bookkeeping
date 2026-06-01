@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Transaction to split">
+      <change afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_Explaination_Page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/21_Add_Suppliers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/21_Add_Suppliers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +113,7 @@
     &quot;Python tests.Python tests in 20_Add_Customer_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 21_Add_Suppliers.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 22_Vat_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 23_Banking_Detailed_Explaination_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 29_Reimbursements_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 2_ClientSell_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
@@ -170,7 +174,7 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell">
+  <component name="RunManager">
     <configuration name="Python tests for 18_Banking_Current_Account_Test.Login.test_23_Banking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -270,14 +274,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00005" summary="When change UAT to Demo">
-      <option name="closed" value="true" />
-      <created>1762517230376</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1762517230376</updated>
     </task>
     <task id="LOCAL-00006" summary="When change UAT to Demo">
       <option name="closed" value="true" />
@@ -663,7 +659,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779968881412</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Transaction to split">
+      <option name="closed" value="true" />
+      <created>1779970686602</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1779970686603</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
