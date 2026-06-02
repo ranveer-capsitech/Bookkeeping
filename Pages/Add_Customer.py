@@ -35,7 +35,7 @@ class Add_Customer:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
@@ -82,7 +82,7 @@ class Add_Customer:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -250,7 +250,7 @@ class Add_Customer:
             time.sleep(.2)
             city.click()
             time.sleep(.2)
-            city.send_keys("Jodhpur")
+            city.send_keys("Scotland")
             time.sleep(.2)
             print("Enter city successfully.....!!")
         except Exception as e:
@@ -264,7 +264,7 @@ class Add_Customer:
             time.sleep(.2)
             county.click()
             time.sleep(.2)
-            county.send_keys("Rajasthan")
+            county.send_keys("North")
             time.sleep(.2)
             print("Enter county successfully.....!!")
 
@@ -513,7 +513,8 @@ class Add_Customer:
 
             #  Upload file(Rv)
             file_input.send_keys(
-                r"C:\Users\CT_USER\Desktop\test.csv"
+                r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
+
             )
 
             print("File uploaded successfully!")

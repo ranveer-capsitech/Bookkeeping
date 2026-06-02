@@ -293,7 +293,6 @@ class Login(unittest.TestCase):
             time.sleep(.2)
 
 
-
             # client_section.Click_Unexplain_Icon()
             # time.sleep(.2)
 
@@ -312,7 +311,6 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.Click_Exclude_Button_For_All()
             time.sleep(.2)
-
 
             client_section.Select_Excluded_Section()
             time.sleep(.2)

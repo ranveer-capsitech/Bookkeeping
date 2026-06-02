@@ -352,6 +352,7 @@ class Banking_Credit_card:
             pass
 
 
+
     def Account(self):
         try:
             acc = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.account))
@@ -435,6 +436,7 @@ class Banking_Credit_card:
             print(f"Error on Enter_Account_no: {e}")
             time.sleep(0.2)
 
+
     def Select_Account_Type(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -478,8 +480,6 @@ class Banking_Credit_card:
             raise
 
 
-
-
     def Enter_Credit_Card(self):
         driver = self.driver
         wait = WebDriverWait(driver, 15)
@@ -512,6 +512,7 @@ class Banking_Credit_card:
             print(f"Error on Enter_Account_no: {e}")
             time.sleep(0.2)
 
+
     def Click_Import(self):
         try:
             import_click = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_import))
@@ -525,8 +526,6 @@ class Banking_Credit_card:
             print(f"Error: {e}")
 
             time.sleep(2)
-
-
 
 
     def Click_Templet(self):
@@ -623,6 +622,7 @@ class Banking_Credit_card:
         except TimeoutException:
             pass
 
+
     def Click_Checkbox_Single_Element(self):
         try:
             wait = WebDriverWait(self.driver, 50)
@@ -670,6 +670,7 @@ class Banking_Credit_card:
             print(f"Error: {e}")
 
             time.sleep(2)
+
 
     def Click_This_Transaction(self):
         try:

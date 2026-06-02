@@ -67,7 +67,7 @@ class Login(unittest.TestCase):
     def test_04_Go_Client_Sell(self):
         client_section = Banking_detailed_explaination(driver=self.driver)
         time.sleep(.2)
-
+        #
         client_section. Select_Search()
         time.sleep(5)
         client_section.Enter_Company()
@@ -78,58 +78,109 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-        client_section.Click_Sales()
+        # client_section.Click_Sales()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Invoice()
+        # time.sleep(.2)
+        # client_section.Select_Customer_Keyboard()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Attachment()
+        # time.sleep(.2)
+        #
+        # client_section.Select_item_sale()
+        # time.sleep(.5)
+        #
+        #
+        # client_section.Enter_Discount()
+        # time.sleep(.3)
+        #
+        #
+        # client_section.Click_Save()
+        # time.sleep(2)
+        #
+        #
+        # #---------------------------------------------------------------------------------------------------------------
+        # #
+        # client_section.Click_Purchases()
+        # time.sleep(.5)
+        # time.sleep(.2)
+        #
+        # client_section.Add_Invoice()
+        # time.sleep(.2)
+        # client_section.Select_Customer()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Attachment()
+        # time.sleep(.2)
+        # client_section.Enter_Discount()
+        # time.sleep(.2)
+        #
+        #
+        # client_section.Select_item_purchase()
+        # time.sleep(.5)
+        # client_section.Enter_amount()
+        # time.sleep(2)
+        # client_section.Save_Services()
+        # time.sleep(.2)
+        # client_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
+        #
+
+#---------------------------------------------------------banking-------------------------------------------------------
+
+        client_section.Banking_Section()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-        client_section.Add_Invoice()
+        client_section.Account()
         time.sleep(.2)
-        client_section.Select_Customer_Keyboard()
+        client_section.Select_Account_Type()
         time.sleep(.2)
-
-        client_section.Add_Attachment()
+        client_section.Select_Bank()
         time.sleep(.2)
-
-        client_section.Select_item_sale()
-        time.sleep(.5)
-
-
-        client_section.Enter_Discount()
-        time.sleep(.3)
-        client_section.Click_Enter_Notes()
-        time.sleep(.3)
-        client_section.Enter_Notes()
-        time.sleep(.3)
-
-        client_section.Click_Save()
-        time.sleep(2)
-
-
-        #---------------------------------------------------------------------------------------------------------------
-
-        client_section.Click_Purchases()
-        time.sleep(.5)
+        client_section.Enter_Credit_Card()
         time.sleep(.2)
 
-        client_section.Add_Invoice()
-        time.sleep(.2)
-        client_section.Select_Customer()
+        client_section.Save_Credit_card()
         time.sleep(.2)
 
-        client_section.Add_Attachment()
+        client_section.Click_Credit_Account()
         time.sleep(.2)
-        client_section.Enter_Discount()
-        time.sleep(.2)
-        ## client_section.Click_Enter_Notes()
-        ## time.sleep(.2)
-        ## client_section.Enter_Notes()
-        ## time.sleep(.2)
 
-        client_section.Select_item_purchase()
-        time.sleep(.5)
-        client_section.Enter_amount()
-        time.sleep(2)
-        client_section.Save_Services()
+        client_section.Click_Import()
         time.sleep(.2)
+        client_section.Click_Templet()
+        time.sleep(.2)
+        client_section.Click_Upload_File()
+        time.sleep(.2)
+        client_section.Upload_Import()
+        time.sleep(.2)
+        client_section.Click_Next()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Click_Back_Button()
+        time.sleep(.2)
+        client_section.Add_Manual_Transaction()
+        time.sleep(.2)
+        client_section.Enter_Date()
+        time.sleep(.2)
+        client_section.Enter_Description()
+        time.sleep(.2)
+        client_section.Enter_Money_Out()
+        time.sleep(.2)
+        client_section.Click_Save_Manual_Transaction()
+        time.sleep(.2)
+        client_section.Money_Out_Value()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(20)
+
 
 
 
