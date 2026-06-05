@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Transaction to split">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Manual Transaction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Add_Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Add_Customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Add_Suppliers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Add_Suppliers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_Explaination_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_Explaination_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/LoginPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/21_Add_Suppliers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,6 +116,7 @@
     &quot;Python tests.Python tests in 1_Test_Login.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 20_Add_Customer_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 21_Add_Suppliers.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 21_Add_Suppliers_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 22_Vat_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 23_Banking_Detailed_Explaination_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 29_Reimbursements_Test.py.executor&quot;: &quot;Run&quot;,
@@ -276,14 +280,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00007" summary="When change UAT to Demo">
-      <option name="closed" value="true" />
-      <created>1762942271771</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1762942271771</updated>
     </task>
     <task id="LOCAL-00008" summary="Automation of PO and CreditNote">
       <option name="closed" value="true" />
@@ -669,7 +665,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780322540282</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Manual Transaction">
+      <option name="closed" value="true" />
+      <created>1780410893475</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1780410893475</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -684,7 +688,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial commit" />
     <MESSAGE value="When change UAT to Demo" />
     <MESSAGE value="Automation of PO and CreditNote" />
     <MESSAGE value="Automation of payment and item module" />
@@ -709,6 +712,7 @@
     <MESSAGE value="Completed Banking Credit card condition" />
     <MESSAGE value="Completed Banking split condition" />
     <MESSAGE value="Transaction to split" />
-    <option name="LAST_COMMIT_MESSAGE" value="Transaction to split" />
+    <MESSAGE value="Manual Transaction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manual Transaction" />
   </component>
 </project>

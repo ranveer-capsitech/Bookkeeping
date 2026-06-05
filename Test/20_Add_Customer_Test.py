@@ -80,6 +80,9 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Sales()
         time.sleep(.2)
+
+
+
         client_section.Select_Client_Section()
         time.sleep(.2)
         client_section.Click_On_Add_Customer()

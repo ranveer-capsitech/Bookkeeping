@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
-from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException, InvalidSessionIdException
 
 fake = Faker()
 random_first_name = fake.first_name()
@@ -36,7 +36,7 @@ class Add_Supplier:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
@@ -62,7 +62,7 @@ class Add_Supplier:
         self.select_country = (By.XPATH,
                                "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/form[1]/form[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]")
 
-        self.postcode  = (By.XPATH, "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/form[1]/form[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/input[1]")
+        self.postcode  = (By.XPATH, "/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/form[1]/form[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/input[1]")
 
         self.click_contact_person = (By.XPATH,
                                      "//label[normalize-space()='Contact person']/following::input[@type='text'][1]")
@@ -125,7 +125,7 @@ class Add_Supplier:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -343,37 +343,58 @@ class Add_Supplier:
 
 
 
-    def Enter_Postcode(self):
-        driver = self.driver
-        wait = WebDriverWait(driver, 30)
-
-        # Wait until visible (not just present(rv))
-        el = wait.until(EC.visibility_of_element_located(self.postcode))
-
-        # Scroll + try safe click
-        driver.execute_script("arguments[0].scrollIntoView({block:'center'});", el)
-
+    def Enter_Postcode(self, postcode_value="ABC11223"):
         try:
-            ActionChains(driver).move_to_element(el).pause(0.1).click(el).perform()
-        except Exception:
-            driver.execute_script("arguments[0].click();", el)
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
 
-        # Clear (CTRL+A + BACKSPACE)
-        el.send_keys(Keys.CONTROL, "a")
-        el.send_keys(Keys.BACKSPACE)
+            # Check browser session is alive
+            try:
+                _ = driver.current_url
+            except InvalidSessionIdException:
+                raise Exception(
+                    "Browser session is invalid/closed. Check if driver.quit() or driver.close() is called before Enter_Postcode()."
+                )
 
-        # Type
-        try:
-            el.send_keys("ABC11223")
-        except Exception:
-            # JS fallback if still not interactable
-            driver.execute_script("""
-                arguments[0].value = arguments[1];
-                arguments[0].dispatchEvent(new Event('input', {bubbles:true}));
-                arguments[0].dispatchEvent(new Event('change', {bubbles:true}));
-            """, el, "ABC11223")
+            postcode_locator = self.postcode
 
-        print("Enter postcode successfully.....!!")
+            for attempt in range(3):
+                try:
+                    el = wait.until(
+                        EC.element_to_be_clickable(postcode_locator)
+                    )
+
+                    driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                        el
+                    )
+
+                    time.sleep(0.3)
+
+                    el = wait.until(
+                        EC.element_to_be_clickable(postcode_locator)
+                    )
+
+                    driver.execute_script("arguments[0].click();", el)
+
+                    el.send_keys(Keys.CONTROL + "a")
+                    el.send_keys(Keys.BACKSPACE)
+                    el.send_keys(postcode_value)
+
+                    print(f"Postcode entered successfully: {postcode_value}")
+                    return
+
+                except StaleElementReferenceException:
+                    print(f"Stale element retry {attempt + 1}/3")
+                    time.sleep(1)
+
+            raise Exception("Unable to enter postcode after retries")
+
+        except Exception as e:
+            print(f"Error in Enter_Postcode: {type(e).__name__} - {e}")
+            raise
+
+
 
     def Click_Contact_Person(self):
         try:

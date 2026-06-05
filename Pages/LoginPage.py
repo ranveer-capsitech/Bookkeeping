@@ -1,4 +1,7 @@
 import time
+
+from selenium.common import TimeoutException, ElementClickInterceptedException
+from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
@@ -38,21 +41,71 @@ class loginPage:
 
 
     def Click_On_Menu(self):
+
+        wait = WebDriverWait(self.driver, 30)
+
+        waffle_locator = (
+            By.XPATH,
+            "//i[@data-icon-name='Waffle']/ancestor::button[1]"
+        )
+
+        overlay_locator = (
+            By.XPATH,
+            "//div[@style='position: fixed; inset: 0px;']"
+        )
+
         try:
-            WebDriverWait(self.driver, 30).until(
-                EC.invisibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
+            # Wait for blocking overlay to disappear
+            try:
+                wait.until(EC.invisibility_of_element_located(overlay_locator))
+            except TimeoutException:
+                print("Overlay still visible, trying ESC key or JS cleanup")
+
+                self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
+                time.sleep(1)
+
+            waffle_btn = wait.until(
+                EC.presence_of_element_located(waffle_locator)
             )
 
-            click_menu = WebDriverWait(self.driver, 30).until(
-            EC.visibility_of_element_located(self.click_on_menu)
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                waffle_btn
             )
-            click_menu.click()
-            time.sleep(.2)
-            print("Test case - 2: Pass: Click an active employee section successfully.....!")
-            time.sleep(.2)
+
+            time.sleep(0.5)
+
+            waffle_btn = wait.until(
+                EC.element_to_be_clickable(waffle_locator)
+            )
+
+            try:
+                waffle_btn.click()
+            except ElementClickInterceptedException:
+                self.driver.execute_script("arguments[0].click();", waffle_btn)
+
+            print("Clicked on Waffle icon successfully.")
 
         except Exception as e:
-            print(f" Error on click: {e}")
+            print(f"Error on click Waffle icon: {type(e).__name__} - {e}")
+            raise
+
+
+        # try:
+        #     WebDriverWait(self.driver, 30).until(
+        #         EC.invisibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
+        #     )
+        #
+        #     click_menu = WebDriverWait(self.driver, 30).until(
+        #     EC.visibility_of_element_located(self.click_on_menu)
+        #     )
+        #     click_menu.click()
+        #     time.sleep(.2)
+        #     print("Test case - 2: Pass: Click an active employee section successfully.....!")
+        #     time.sleep(.2)
+        #
+        # except Exception as e:
+        #     print(f" Error on click: {e}")
 
 
     def Click_Bookkeeping(self):

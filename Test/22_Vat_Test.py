@@ -342,7 +342,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section.Click_Yes()
         time.sleep(.2)
         client_section.Download_Response()
@@ -352,7 +351,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Back_Button()
         time.sleep(.2)
-
 
 
         client_section.Three_dot()

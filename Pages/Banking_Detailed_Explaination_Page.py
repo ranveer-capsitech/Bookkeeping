@@ -1,3 +1,5 @@
+import os
+
 import pyautogui
 from faker import Faker
 import time
@@ -177,6 +179,57 @@ class Banking_detailed_explaination:
             "//div[contains(@class,'td-focus')][4]"
         )
         self.click_find_match = (By.XPATH, "//button[@role='tab' and .//span[normalize-space()='Find match']]")
+
+        self.click_contact_dropdown = (By.XPATH,"//label[normalize-space()='Contact']/following::div[contains(@class,'rs-indicators-container')][1]")
+
+        self.select_claims = (By.XPATH, "//input[@name='invoices.0']/preceding-sibling::div[contains(@class,'rs-control')][1]")
+        self.enter_allocated_amount = (By.XPATH, "//input[@name='invoices.0.amount']")
+        self.click_match = (By.XPATH, "//span[contains(text(),'Match')]")
+        self.click_attachment_icon = (By.XPATH, "//label[normalize-space()='Contact']/following::button[.//i[@data-icon-name='attachment']][1]")
+        self.drag_drop_file = (By.XPATH, "//span[contains(text(),'Drag & drop files here or ')]")
+        self.click_explain = (By.XPATH, "//button[@role='tab']//span[normalize-space()='Explain']/ancestor::button")
+        self.contact_name_dropdown = (
+            By.XPATH,
+            "//label[normalize-space()='Contact name']/following::div[contains(@class,'rs-control') and .//div[normalize-space()='Select']][1]"
+        )
+        self.explain_submit_button = (
+            By.XPATH,
+            "//div[contains(@class,'linked-transaction')]"
+    "//button[contains(@class,'ms-Button--primary') and not(@disabled) and .//span[normalize-space()='Explain']]"
+        )
+        # self.transfer_section = (By.XPATH, "//button[contains(@id,'Pivot') and @role='tab' and .//span[normalize-space()='Transfer']]")
+        #
+        # self.transfer_select_account_dropdown = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
+        #
+        # # self.transfer_select_account_dropdown = (
+        # #     By.XPATH,
+        # #     "//div[@role='tabpanel' and @aria-hidden='false']//label[normalize-space()='Select account']/following::div[contains(@class,'rs-control')][1]"
+        # # )
+        #
+        # self.transfer_submit_button = (
+        #     By.XPATH,
+        #     "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Transfer']]"
+        # )
+
+        self.transfer_section = (
+            By.XPATH,
+            "//button[@role='tab' and @data-content='Transfer']"
+        )
+
+        self.transfer_select_account_dropdown = (
+            By.XPATH,
+            "//div[@role='tabpanel' and @aria-hidden='false']"
+            "//label[normalize-space()='Select account']"
+            "/following::div[contains(@class,'rs-control')][1]"
+        )
+
+        self.transfer_select_account_input = (
+            By.XPATH,
+            "//div[@role='tabpanel' and @aria-hidden='false']"
+            "//label[normalize-space()='Select account']"
+            "/following::input[@role='combobox'][1]"
+        )
+
 
 
 
@@ -360,7 +413,7 @@ class Banking_detailed_explaination:
             )
 
             # 3) Upload file (this will NOT open OS dialog(rv))
-            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test.csv")
+            file_input.send_keys(r"C:\Users\CT_USER\Desktop\test\Revolut Template.csv")
 
             print("File uploaded successfully.......!")
 
@@ -1153,34 +1206,76 @@ class Banking_detailed_explaination:
 
             time.sleep(2)
 
+
+
     def Money_Out_Value(self):
-        try:
-            wait = WebDriverWait(self.driver, 30)
 
-            first_row = wait.until(
-                EC.presence_of_element_located((
-                    By.XPATH,
-                    "(//div[contains(@class,'bkDetailList')]//label[normalize-space()='Manual'])[1]"
-                ))
-            )
+        locator = (
+            By.XPATH,
+            "(//label[normalize-space()='Manual'])[1]"
+        )
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                first_row
-            )
+        wait = WebDriverWait(self.driver, 30)
 
-            time.sleep(0.5)
+        for attempt in range(3):
+            try:
+                element = wait.until(
+                    EC.visibility_of_element_located(locator)
+                )
 
-            self.driver.execute_script(
-                "arguments[0].click();",
-                first_row
-            )
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    element
+                )
 
-            print("First transaction row clicked successfully.")
+                wait.until(
+                    EC.element_to_be_clickable(locator)
+                )
 
-        except Exception as e:
-            print(f"Error: {e}")
-            raise
+                # Re-fetch element after scroll
+                element = self.driver.find_element(*locator)
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    element
+                )
+
+                print("First transaction row clicked successfully.")
+                return
+
+            except StaleElementReferenceException:
+                print(f"Stale element detected. Retry {attempt + 1}/3")
+
+        raise Exception("Unable to click transaction row after retries")
+    #
+    # def Money_Out_Value(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         first_row = wait.until(
+    #             EC.presence_of_element_located((
+    #                 By.XPATH,
+    #                 "(//div[contains(@class,'bkDetailList')]//label[normalize-space()='Manual'])[1]"
+    #             ))
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             first_row
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].click();",
+    #             first_row
+    #         )
+    #
+    #         print("First transaction row clicked successfully.")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         raise
 
     def Click_Find_Match(self):
         try:
@@ -1202,6 +1297,476 @@ class Banking_detailed_explaination:
         except Exception as e:
             print(f"Error in Click_Find_Match: {type(e).__name__} - {e}")
             raise
+
+
+    def Click_Contact_Dropdown(self):
+
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            try:
+                contact = wait.until(EC.element_to_be_clickable(self.click_contact_dropdown))
+
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    contact
+                )
+                time.sleep(0.2)
+
+                try:
+                    contact.click()
+                except ElementClickInterceptedException:
+
+                    driver.execute_script("arguments[0].click();", contact)
+
+                time.sleep(0.2)
+
+                active = driver.switch_to.active_element
+                active.send_keys("KM Consultancy Limited")
+                # active.send_keys(Keys.ARROW_DOWN)
+                # time.sleep(0.2)
+                # active.send_keys(Keys.ARROW_DOWN)
+                # time.sleep(0.2)
+                # active.send_keys(Keys.ARROW_DOWN)
+                # time.sleep(0.2)
+                # active.send_keys(Keys.ARROW_DOWN)
+                time.sleep(2)
+                active.send_keys(Keys.ENTER)
+                time.sleep(1)
+
+                print("Contact selected successfully....!!")
+
+            except Exception as e:
+                print(f"Error in Select_Bank: {e}")
+                time.sleep(0.2)
+
+
+    def Select_Claims(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            claims = wait.until(
+                EC.element_to_be_clickable(self.select_claims)
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                claims
+            )
+            time.sleep(0.2)
+
+            try:
+                claims.click()
+            except ElementClickInterceptedException:
+                driver.execute_script("arguments[0].click();", claims)
+
+            time.sleep(0.2)
+
+            active = driver.switch_to.active_element
+            active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.2)
+            # active.send_keys(Keys.ARROW_DOWN)
+            # time.sleep(0.2)
+            active.send_keys(Keys.ENTER)
+            time.sleep(0.5)
+
+            selected_value = claims.text.strip()
+
+            if not selected_value:
+                selected_value = driver.execute_script(
+                    "return arguments[0].innerText;",
+                    claims
+                ).strip()
+
+            print(f"Claims selected successfully: {selected_value}")
+
+        except Exception as e:
+            print(f"Error in Select_Claims: {type(e).__name__} - {e}")
+            time.sleep(0.2)
+            raise
+
+
+    def Enter_Allocated_Amount(self, money="100"):
+
+            # try:
+                wait = WebDriverWait(self.driver, 30)
+
+                amount = wait.until(
+                    EC.element_to_be_clickable(self.enter_allocated_amount))
+
+                self.driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                    amount
+                )
+
+                self.driver.execute_script("arguments[0].click();", amount)
+
+                amount.send_keys(Keys.CONTROL + "a")
+                amount.send_keys(Keys.BACKSPACE)
+                amount.send_keys(money)
+
+                print(f"Allocated amount entered successfully: {money}")
+
+            # except Exception as e:
+            #     print(f"Error in Enter_Description: {type(e).__name__} - {e}")
+            #     raise
+
+    def Click_Match(self):
+        # try:
+            match = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_match))
+            time.sleep(1)
+            match.click()
+            time.sleep(1)
+
+            print("Clicked on match button successfully.....!! ")
+
+        # except Exception as e:
+        #     print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Click_Attachment_Icon(self):
+        try:
+            attachment = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_attachment_icon))
+            time.sleep(.2)
+            attachment.click()
+            time.sleep(.2)
+
+            time.sleep(1)
+
+
+            print("Clicked on attachment button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+    def Drag_Drop_File(self, file_path=r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"):
+                try:
+                    wait = WebDriverWait(self.driver, 30)
+
+                    if not os.path.exists(file_path):
+                        raise FileNotFoundError(f"File not found: {file_path}")
+
+                    for attempt in range(3):
+                        try:
+                            drag_drop = wait.until(
+                                EC.element_to_be_clickable(self.drag_drop_file)
+                            )
+
+                            self.driver.execute_script(
+                                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                                drag_drop
+                            )
+
+                            time.sleep(0.5)
+
+                            try:
+                                drag_drop.click()
+                            except ElementClickInterceptedException:
+                                self.driver.execute_script("arguments[0].click();", drag_drop)
+
+                            time.sleep(1)
+
+                            pyautogui.write(file_path)
+                            time.sleep(0.5)
+                            pyautogui.press("enter")
+
+                            print(f"Attachment file added successfully: {file_path}")
+                            return
+
+                        except StaleElementReferenceException:
+                            print(f"Stale element retry {attempt + 1}/3")
+                            time.sleep(1)
+
+                    raise Exception("Unable to upload attachment after retries")
+
+                except Exception as e:
+                    print(f"Error in Drag_Drop_File: {type(e).__name__} - {e}")
+                    raise
+
+
+
+
+    def Click_Explain(self):
+        try:
+            explain = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_explain))
+            time.sleep(.2)
+            explain.click()
+            time.sleep(.2)
+            print("Click on Explain section successfully....!!")
+        except Exception as e:
+            print(f"Error: {e}")
+
+
+    def Contact_Name_Dropdown(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            contact_name = wait.until(EC.element_to_be_clickable(self.contact_name_dropdown))
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                contact_name
+            )
+            time.sleep(0.2)
+
+            try:
+                contact_name.click()
+            except ElementClickInterceptedException:
+
+                driver.execute_script("arguments[0].click();",  contact_name)
+
+            time.sleep(0.2)
+
+            active = driver.switch_to.active_element
+            active.send_keys("Alex")
+            # active.send_keys(Keys.ARROW_DOWN)
+            # time.sleep(0.2)
+
+            time.sleep(2)
+            active.send_keys(Keys.ENTER)
+            time.sleep(1)
+
+            print("Explain Contact selected successfully....!!")
+
+        except Exception as e:
+            print(f"Error in Select_Bank: {e}")
+            time.sleep(0.2)
+
+
+
+    def Select_Account_Head(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            account_head = wait.until(EC.element_to_be_clickable(self.contact_name_dropdown))
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                account_head
+            )
+            time.sleep(0.2)
+
+            try:
+                account_head.click()
+            except ElementClickInterceptedException:
+
+                driver.execute_script("arguments[0].click();", account_head)
+
+            time.sleep(0.2)
+
+            active = driver.switch_to.active_element
+            active.send_keys("Telephone & internet")
+            # active.send_keys(Keys.ARROW_DOWN)
+            # time.sleep(0.2)
+
+            time.sleep(0.2)
+            active.send_keys(Keys.ENTER)
+            time.sleep(0.2)
+
+            print("Account head selected successfully....!!")
+
+        except Exception as e:
+            print(f"Error in Select_Bank: {e}")
+            time.sleep(0.2)
+
+
+
+    def Explain_Submit_Button(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            explain_submit_locator = (
+                By.XPATH,
+                "//label[normalize-space()='Description']"
+                "/following::button[.//span[normalize-space()='Explain']][1]"
+            )
+
+            # wait until button exists
+            explain_submit = wait.until(
+                EC.presence_of_element_located(explain_submit_locator)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                explain_submit
+            )
+
+            time.sleep(1)
+
+            # if button disabled, print and stop
+            disabled = explain_submit.get_attribute("disabled")
+            aria_disabled = explain_submit.get_attribute("aria-disabled")
+
+            print("Explain disabled:", disabled)
+            print("Explain aria-disabled:", aria_disabled)
+
+            if disabled or aria_disabled == "true":
+                raise Exception(
+                    "Explain button is disabled. Please select required fields: Contact name, Account head, and VAT."
+                )
+
+            self.driver.execute_script("arguments[0].click();", explain_submit)
+
+            print("Click on Explain submit button successfully....!!")
+
+        except Exception as e:
+            print(f"Error in Explain_Submit_Button: {type(e).__name__} - {e}")
+            raise
+
+
+
+    def Click_Transfer_Section(self):
+        wait = WebDriverWait(self.driver, 30)
+
+        transfer = wait.until(
+            EC.element_to_be_clickable(self.transfer_section)
+        )
+
+        self.driver.execute_script("arguments[0].click();", transfer)
+
+        wait.until(
+            EC.presence_of_element_located(self.transfer_select_account_dropdown)
+        )
+
+        print("Clicked on Transfer section successfully.")
+
+
+    def Select_Transfer_Account_Dropdown(self, account_name="Monzo - Current"):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            dropdown = wait.until(
+                EC.element_to_be_clickable(self.transfer_select_account_dropdown)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
+
+            self.driver.execute_script("arguments[0].click();", dropdown)
+
+            input_box = wait.until(
+                EC.presence_of_element_located(self.transfer_select_account_input)
+            )
+
+            self.driver.execute_script("arguments[0].focus();", input_box)
+
+            input_box.send_keys(Keys.CONTROL + "a")
+            input_box.send_keys(Keys.BACKSPACE)
+            input_box.send_keys(account_name)
+
+            time.sleep(1)
+
+            # input_box.send_keys(Keys.ARROW_DOWN)
+            input_box.send_keys(Keys.ENTER)
+            time.sleep(.2)
+
+            print(f"Transfer account selected successfully: {account_name}")
+
+        except Exception as e:
+            print(f"Error in Select_Transfer_Account_Dropdown: {type(e).__name__} - {e}")
+            raise
+
+
+    def Transfer_Submit_Button(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            transfer_btn_locator = (
+                By.XPATH,
+                "//div[@role='tabpanel' and @aria-hidden='false']"
+                "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Transfer']]"
+            )
+
+            for attempt in range(3):
+                try:
+                    transfer_btn = wait.until(
+                        EC.presence_of_element_located(transfer_btn_locator)
+                    )
+
+                    print("Transfer button displayed:", transfer_btn.is_displayed())
+                    print("Transfer button enabled:", transfer_btn.is_enabled())
+                    print("Transfer button disabled attr:", transfer_btn.get_attribute("disabled"))
+                    print("Transfer button text:", transfer_btn.text)
+
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                        transfer_btn
+                    )
+
+                    time.sleep(0.5)
+
+                    # Re-fetch after scroll
+                    transfer_btn = wait.until(
+                        EC.element_to_be_clickable(transfer_btn_locator)
+                    )
+
+                    self.driver.execute_script("arguments[0].click();", transfer_btn)
+
+                    print("Clicked on Transfer submit button successfully....!!")
+                    return
+
+                except StaleElementReferenceException:
+                    print(f"Stale element retry {attempt + 1}/3")
+                    time.sleep(1)
+
+            raise Exception("Unable to click Transfer submit button after retries")
+
+        except TimeoutException:
+            buttons = self.driver.find_elements(
+                By.XPATH,
+                "//button[.//span[normalize-space()='Transfer']]"
+            )
+
+            print("Total Transfer buttons found:", len(buttons))
+
+            for i, btn in enumerate(buttons, start=1):
+                print(
+                    f"Button {i}: text='{btn.text}', "
+                    f"displayed={btn.is_displayed()}, "
+                    f"enabled={btn.is_enabled()}, "
+                    f"disabled={btn.get_attribute('disabled')}, "
+                    f"aria-disabled={btn.get_attribute('aria-disabled')}"
+                )
+
+            raise
+
+        except Exception as e:
+            print(f"Error in Transfer_Submit_Button: {type(e).__name__} - {e}")
+            raise
+
+
+
+    # def Transfer_Submit_Button(self):
+    #     # try:
+    #         transfer_submit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.transfer_submit_button))
+    #         time.sleep(.2)
+    #         transfer_submit.click()
+    #         time.sleep(.2)
+    #         print("Click on transfer submit section successfully....!!")
+        # except Exception as e:
+        #     print(f"Error: {e}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

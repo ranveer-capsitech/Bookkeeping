@@ -2424,6 +2424,7 @@ class Vat:
             plus.click()
             time.sleep(.2)
 
+
             print("Click on Plus icon for Add button successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
