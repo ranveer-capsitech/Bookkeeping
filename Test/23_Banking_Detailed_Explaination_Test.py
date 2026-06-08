@@ -253,6 +253,30 @@ class Login(unittest.TestCase):
         client_section.Click_Input()
         time.sleep(.2)
 
+        client_section.Click_Sales()
+        time.sleep(.2)
+
+        client_section.Add_Invoice()
+        time.sleep(.2)
+        client_section.Select_Customer_Keyboard()
+        time.sleep(.2)
+
+        client_section.Add_Attachment()
+        time.sleep(.2)
+
+        client_section.Select_item_sale()
+        time.sleep(.5)
+
+        client_section.Enter_Discount()
+        time.sleep(.3)
+
+        client_section.Click_Save()
+        time.sleep(2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(2)
+
+        #________________purchases---------------------------------------------
+
         client_section.Click_Purchases()
         time.sleep(.5)
         time.sleep(.2)
@@ -290,11 +314,12 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Bank()
         time.sleep(.2)
-        client_section.Enter_Credit_Card()
+        client_section.Enter_Credit_Card_2nd()
         time.sleep(.2)
 
         client_section.Save_Credit_card()
         time.sleep(.2)
+
 
         # -----------------------------------------------------------------------------------------------------------------------
 

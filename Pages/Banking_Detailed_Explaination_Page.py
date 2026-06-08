@@ -29,6 +29,7 @@ dob = fake.date_of_birth(minimum_age=18)
 formatted_dob = dob.strftime('%d/%m/%Y')
 account_number = ''.join([str(random.randint(0,9)) for _ in range(8)])
 credit_card_number = fake.credit_card_number(card_type="visa")
+credit_card_no = fake.credit_card_number(card_type="visa")
 
 
 class Banking_detailed_explaination:
@@ -909,6 +910,39 @@ class Banking_detailed_explaination:
             time.sleep(0.2)
 
             enter_account.send_keys(credit_card_number)
+            time.sleep(0.2)
+
+            print("Credit card number entered successfully!")
+
+        except Exception as e:
+            print(f"Error on Enter_Account_no: {e}")
+            time.sleep(0.2)
+
+
+    def Enter_Credit_Card_2nd(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 15)
+
+        try:
+
+            enter_account = wait.until(
+                EC.element_to_be_clickable(self.enter_credit_card_number)
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                enter_account
+            )
+            time.sleep(0.2)
+
+            enter_account.click()
+            time.sleep(0.2)
+
+            enter_account.send_keys(Keys.CONTROL, "a")
+            enter_account.send_keys(Keys.DELETE)
+            time.sleep(0.2)
+
+            enter_account.send_keys(credit_card_no)
             time.sleep(0.2)
 
             print("Credit card number entered successfully!")
