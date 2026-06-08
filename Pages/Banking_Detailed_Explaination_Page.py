@@ -172,6 +172,7 @@ class Banking_detailed_explaination:
         self.enter_date = (By.XPATH, "//input[@name='transactions.0.date']/following::i[@data-icon-name='Calendar'][1]")
         self.first_description = (By.XPATH,"//input[@name='transactions.0.description']")
         self.enter_money_out = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.0.moneyOut']")
+        self.enter_money_in = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.0.moneyIn']")
         self.click_save_manual_transaction = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Add manual transactions']]//button[.//span[normalize-space()='Save']]")
         self.money_out_value = (
             By.XPATH,
@@ -1192,6 +1193,30 @@ class Banking_detailed_explaination:
             print(f"Error in Enter_Description: {type(e).__name__} - {e}")
             raise
 
+    def Enter_Money_In(self, moneyin="100"):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            money_in = wait.until(
+                EC.element_to_be_clickable(self.enter_money_in))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                money_in
+            )
+
+            self.driver.execute_script("arguments[0].click();", money_in)
+
+            money_in.send_keys(Keys.CONTROL + "a")
+            money_in.send_keys(Keys.BACKSPACE)
+            money_in.send_keys(moneyin)
+
+            print(f"Description entered successfully: {moneyin}")
+
+        except Exception as e:
+            print(f"Error in Enter_Description: {type(e).__name__} - {e}")
+            raise
+
     def Click_Save_Manual_Transaction(self):
         try:
             save_manual_transaction = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_save_manual_transaction))
@@ -1247,35 +1272,7 @@ class Banking_detailed_explaination:
                 print(f"Stale element detected. Retry {attempt + 1}/3")
 
         raise Exception("Unable to click transaction row after retries")
-    #
-    # def Money_Out_Value(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 30)
-    #
-    #         first_row = wait.until(
-    #             EC.presence_of_element_located((
-    #                 By.XPATH,
-    #                 "(//div[contains(@class,'bkDetailList')]//label[normalize-space()='Manual'])[1]"
-    #             ))
-    #         )
-    #
-    #         self.driver.execute_script(
-    #             "arguments[0].scrollIntoView({block:'center'});",
-    #             first_row
-    #         )
-    #
-    #         time.sleep(0.5)
-    #
-    #         self.driver.execute_script(
-    #             "arguments[0].click();",
-    #             first_row
-    #         )
-    #
-    #         print("First transaction row clicked successfully.")
-    #
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    #         raise
+
 
     def Click_Find_Match(self):
         try:
@@ -1743,16 +1740,6 @@ class Banking_detailed_explaination:
             raise
 
 
-
-    # def Transfer_Submit_Button(self):
-    #     # try:
-    #         transfer_submit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.transfer_submit_button))
-    #         time.sleep(.2)
-    #         transfer_submit.click()
-    #         time.sleep(.2)
-    #         print("Click on transfer submit section successfully....!!")
-        # except Exception as e:
-        #     print(f"Error: {e}")
 
 
 
