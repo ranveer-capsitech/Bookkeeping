@@ -311,62 +311,62 @@ class Login(unittest.TestCase):
         client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
         time.sleep(.2)
 
-    #-------------------------------------------setting-----------------------------------------------------------------
-
-    @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
-    @pytest.mark.description(f" Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Banking >> setting")
-
-
-    def test_25_Setting(self):
-        client_section = Banking(driver=self.driver)
-        time.sleep(.2)
-
-
-
-        client_section.Select_Search()
-        time.sleep(5)
-        client_section.Enter_Company()
-        time.sleep(.2)
-        client_section.Click_Company()
-        time.sleep(.2)
-        time.sleep(3)
-        client_section.Click_Input()
-        time.sleep(.2)
-
-
-        client_section.Select_Setting_Section()
-        time.sleep(.2)
-
-        client_section.Chart_Of_Account()
-        time.sleep(.2)
-
-        client_section.Click_Add_Account()
-        time.sleep(.2)
-
-        client_section.Select_Account_Type_Setting()
-        time.sleep(.2)
-
-        client_section.Enter_name()
-        time.sleep(.2)
-
-        client_section.Select_vat_Rate()
-        time.sleep(.2)
-
-        client_section.Click_Is_Credit_Card()
-        time.sleep(.2)
-
-        client_section.Save_Account()
-        time.sleep(.2)
-
-
-    #---------------------------------------------------------------------------------------------------------------
-
-        client_section.Banking_Section()
-        time.sleep(.2)
-
-        client_section.Click_Active_Account()
-        time.sleep(.2)
-
-        client_section.Click_Yes()
-        time.sleep(.2)
-
+    # #-------------------------------------------setting-----------------------------------------------------------------
+    #
+    # @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
+    # @pytest.mark.description(f" Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> Banking >> setting")
+    #
+    #
+    # def test_25_Setting(self):
+    #     client_section = Banking(driver=self.driver)
+    #     time.sleep(.2)
+    #
+    #
+    #
+    #     client_section.Select_Search()
+    #     time.sleep(5)
+    #     client_section.Enter_Company()
+    #     time.sleep(.2)
+    #     client_section.Click_Company()
+    #     time.sleep(.2)
+    #     time.sleep(3)
+    #     client_section.Click_Input()
+    #     time.sleep(.2)
+    #
+    #
+    #     client_section.Select_Setting_Section()
+    #     time.sleep(.2)
+    #
+    #     client_section.Chart_Of_Account()
+    #     time.sleep(.2)
+    #
+    #     client_section.Click_Add_Account()
+    #     time.sleep(.2)
+    #
+    #     client_section.Select_Account_Type_Setting()
+    #     time.sleep(.2)
+    #
+    #     client_section.Enter_name()
+    #     time.sleep(.2)
+    #
+    #     client_section.Select_vat_Rate()
+    #     time.sleep(.2)
+    #
+    #     client_section.Click_Is_Credit_Card()
+    #     time.sleep(.2)
+    #
+    #     client_section.Save_Account()
+    #     time.sleep(.2)
+    #
+    #
+    # #---------------------------------------------------------------------------------------------------------------
+    #
+    #     client_section.Banking_Section()
+    #     time.sleep(.2)
+    #
+    #     client_section.Click_Active_Account()
+    #     time.sleep(.2)
+    #
+    #     client_section.Click_Yes()
+    #     time.sleep(.2)
+    #

@@ -83,11 +83,14 @@ class Login(unittest.TestCase):
 
 
 
+
         client_section.Select_Client_Section()
         time.sleep(.2)
         client_section.Click_On_Add_Customer()
         time.sleep(.2)
         client_section.Enter_Customer_Name()
+        time.sleep(.2)
+        client_section.Click_Cancel()
         time.sleep(.2)
         client_section.Click_Billing_Field()
         time.sleep(.2)

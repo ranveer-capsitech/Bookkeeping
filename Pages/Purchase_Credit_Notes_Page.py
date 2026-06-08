@@ -282,7 +282,6 @@ class Purchase_PO:
             print(f"Error in upload: {e}")
 
 
-
     def Enter_Discount(self):
         driver = self.driver
         wait = WebDriverWait(self.driver, 30)
@@ -314,6 +313,8 @@ class Purchase_PO:
 
             print(f"Error on Click : {e}")
 
+
+
     def Enter_Notes(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
@@ -333,10 +334,6 @@ class Purchase_PO:
             print("Notes added successfully....!!")
         except Exception as e:
             print(f"Error on Click : {e}")
-
-
-
-
 
 
     def Save_Credit_Notes(self):
@@ -410,7 +407,6 @@ class Purchase_PO:
         time.sleep(1)
 
 
-
         toast_xpath = "//div[contains(text(),'Duplicate refund number')]"
 
         try:
@@ -430,7 +426,7 @@ class Purchase_PO:
               print(" Test Case -8 : Pass : Purchase credit note saved successfully....!")
 
         except TimeoutException:
-            print(" Exception")
+            print(" Duplicate entry is not detected")
 
 
 

@@ -1445,22 +1445,66 @@ class Banking_Credit_card:
 
         print("Clicked first row checkbox successfully")
 
+    # def Click_This_Transaction_Exclude_Button(self):
+    #     wait = WebDriverWait(self.driver, 40)
+    #
+    #     option = wait.until(
+    #         EC.presence_of_element_located(self.click_this_transaction_exclude_button)
+    #     )
+    #
+    #     self.driver.execute_script(
+    #         "arguments[0].scrollIntoView({block:'center'});",
+    #         option
+    #     )
+    #
+    #     time.sleep(0.5)
+    #     self.driver.execute_script("arguments[0].click();", option)
+    #
+    #     print("Clicked on Exclude button and This transaction successfully")
+
+
     def Click_This_Transaction_Exclude_Button(self):
-        wait = WebDriverWait(self.driver, 40)
-
-        option = wait.until(
-            EC.presence_of_element_located(self.click_this_transaction_exclude_button)
+        wait = WebDriverWait(
+            self.driver,
+            40,
+            ignored_exceptions=[StaleElementReferenceException]
         )
 
-        self.driver.execute_script(
-            "arguments[0].scrollIntoView({block:'center'});",
-            option
-        )
+        locator = self.click_this_transaction_exclude_button
 
-        time.sleep(0.5)
-        self.driver.execute_script("arguments[0].click();", option)
+        try:
+            for attempt in range(5):
+                try:
+                    option = wait.until(
+                        EC.presence_of_element_located(locator)
+                    )
 
-        print("Clicked on Exclude button and This transaction successfully")
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                        option
+                    )
+
+                    time.sleep(0.5)
+
+                    # Re-fetch after scroll because DOM may re-render
+                    option = wait.until(
+                        EC.element_to_be_clickable(locator)
+                    )
+
+                    self.driver.execute_script("arguments[0].click();", option)
+
+                    print("Clicked on Exclude button and This transaction successfully")
+                    return
+
+                except StaleElementReferenceException:
+                    print(f"Stale element retry {attempt + 1}/5")
+                    time.sleep(1)
+
+            raise Exception("Unable to click Exclude option after retries")
+
+        except Exception as e:
+            print(f"Error in Click_This_Transaction_Exclude_Button: {type(e).__name__} - {e}")
+            raise
 
     def Click_Select_All_Checkbox(self):
         wait = WebDriverWait(self.driver, 40)

@@ -69,6 +69,8 @@ class Add_Customer:
         self.attachment = (By.XPATH, "//i[@data-icon-name='Attachment' and @aria-label='Attachment']")
         self.save_customer = (By.XPATH, "//button[@type='submit']//span[normalize-space()='Save']")
 
+        self.click_cancel = (By.XPATH,"//span[contains(text(),'Close')]")
+
 
 #-----------------------------------------Methods-----------------------------------------------------------------------
 
@@ -200,12 +202,31 @@ class Add_Customer:
         try:
             enter_customer_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_customer_name))
             time.sleep(.2)
-            enter_customer_name.send_keys(full_name)
+            enter_customer_name.send_keys("T.H. LIMITED")
+            time.sleep(.2)
+            enter_customer_name.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            enter_customer_name.send_keys(Keys.ENTER)
             time.sleep(.2)
             print("Enter Customer name successfully......!! ")
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.5)
+
+    def Click_Cancel(self):
+        try:
+            cancel = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_cancel))
+            time.sleep(.2)
+            cancel.click()
+            time.sleep(.2)
+            print("Click on cancel button successfully.....!!")
+        except Exception as e:
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
+
+
 
     def Click_Billing_Field(self):
         try:
@@ -345,9 +366,13 @@ class Add_Customer:
             enter_name =  WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.name))
             time.sleep(.2)
             enter_name.click()
-            time.sleep(.2)
+            time.sleep(.5)
             enter_name.send_keys(random_first_name)
+            time.sleep(.2)
+            enter_name.send_keys(Keys.ENTER)
+            time.sleep(.2)
             print("Name enters successfully.....!!")
+
         except Exception as e:
             print(f"Error on Click:{e}")
             time.sleep(.5)
@@ -510,12 +535,14 @@ class Add_Customer:
             file_input = wait.until(EC.presence_of_element_located(
                 (By.XPATH, "//input[@type='file']")
             ))
+            time.sleep(.2)
 
             #  Upload file(Rv)
             file_input.send_keys(
                 r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
 
             )
+            time.sleep(.2)
 
             print("File uploaded successfully!")
 

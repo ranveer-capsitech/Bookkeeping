@@ -36,7 +36,7 @@ class Credit_Notes:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
 
 
         self.click_input_drop_down = (By.XPATH,"//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
@@ -69,7 +69,7 @@ class Credit_Notes:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout= 30):
+    def Enter_Company(self, company_name="RDX LIMITED", timeout= 30):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -248,28 +248,7 @@ class Credit_Notes:
         print(" Failed: Save button not enabled after retries.....!")
         return False
 
-    # def Invoice_ref(self):
-    #     try:
-    #         driver = self.driver
-    #         wait = WebDriverWait(driver, 15)
-    #
-    #
-    #         dropdown = wait.until(EC.element_to_be_clickable((self.invoice_ref_no)))
-    #         driver.execute_script("arguments[0].scrollIntoView({block:'center'});", dropdown)
-    #         dropdown.click()
-    #         time.sleep(0.5)
-    #
-    #         active = driver.switch_to.active_element
-    #         active.send_keys(Keys.ARROW_DOWN)
-    #         time.sleep(0.3)
-    #         active.send_keys(Keys.ARROW_DOWN)
-    #         time.sleep(0.3)
-    #         active.send_keys(Keys.ENTER)
-    #         time.sleep(0.5)
-    #
-    #         print("Invoice reference selected successfully!")
-    #     except Exception as e:
-    #         print(f" Could not select customer: {e}")
+
 
     def Add_Attachment(self):
         try:
@@ -313,6 +292,8 @@ class Credit_Notes:
         except Exception as e:
 
             print(f"Error on Click : {e}")
+
+
 
 
     def Click_Enter_Notes(self):

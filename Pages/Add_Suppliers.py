@@ -341,58 +341,144 @@ class Add_Supplier:
             print(f"Error on Click:{e}")
             time.sleep(.5)
 
+    def Enter_Postcode(self, postcode_value="NW1 6XE"):
+        driver = self.driver
+        wait = WebDriverWait(driver, 40)
 
+        postcode_locators = [
+            # input having postcode related attributes
+            (By.XPATH,
+             "//input[contains(translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postcode')]"),
+            (By.XPATH,
+             "//input[contains(translate(@id,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postcode')]"),
+            (By.XPATH,
+             "//input[contains(translate(@placeholder,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postcode')]"),
 
-    def Enter_Postcode(self, postcode_value="ABC11223"):
+            # postal code variations
+            (By.XPATH,
+             "//input[contains(translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postal')]"),
+            (By.XPATH,
+             "//input[contains(translate(@id,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postal')]"),
+            (By.XPATH,
+             "//input[contains(translate(@placeholder,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'postal')]"),
+
+            # label based: nearest input inside same parent/container
+            (By.XPATH,
+             "//*[contains(normalize-space(),'Postcode') or contains(normalize-space(),'Post code') or contains(normalize-space(),'Postal code')]/ancestor::*[self::div or self::label][1]//input[not(@type='hidden')]"),
+
+            # label based: following input
+            (By.XPATH,
+             "//*[contains(normalize-space(),'Postcode') or contains(normalize-space(),'Post code') or contains(normalize-space(),'Postal code')]/following::input[not(@type='hidden')][1]"),
+        ]
+
         try:
-            driver = self.driver
-            wait = WebDriverWait(driver, 30)
+            print("Current URL:", driver.current_url)
+            print("Page title:", driver.title)
 
-            # Check browser session is alive
-            try:
-                _ = driver.current_url
-            except InvalidSessionIdException:
-                raise Exception(
-                    "Browser session is invalid/closed. Check if driver.quit() or driver.close() is called before Enter_Postcode()."
-                )
+            postcode_input = None
 
-            postcode_locator = self.postcode
+            end_time = time.time() + 40
+            while time.time() < end_time:
+                for locator in postcode_locators:
+                    elements = driver.find_elements(*locator)
 
-            for attempt in range(3):
-                try:
-                    el = wait.until(
-                        EC.element_to_be_clickable(postcode_locator)
-                    )
+                    for element in elements:
+                        try:
+                            if element.is_displayed() and element.is_enabled():
+                                postcode_input = element
+                                break
+                        except StaleElementReferenceException:
+                            continue
 
-                    driver.execute_script(
-                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                        el
-                    )
+                    if postcode_input:
+                        break
 
-                    time.sleep(0.3)
+                if postcode_input:
+                    break
 
-                    el = wait.until(
-                        EC.element_to_be_clickable(postcode_locator)
-                    )
+                time.sleep(0.5)
 
-                    driver.execute_script("arguments[0].click();", el)
+            if postcode_input is None:
+                driver.save_screenshot("postcode_not_found.png")
+                print(driver.page_source[:5000])
+                raise TimeoutException("No visible/enabled postcode input found")
 
-                    el.send_keys(Keys.CONTROL + "a")
-                    el.send_keys(Keys.BACKSPACE)
-                    el.send_keys(postcode_value)
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                postcode_input
+            )
 
-                    print(f"Postcode entered successfully: {postcode_value}")
-                    return
+            wait.until(lambda d: postcode_input.is_displayed() and postcode_input.is_enabled())
 
-                except StaleElementReferenceException:
-                    print(f"Stale element retry {attempt + 1}/3")
-                    time.sleep(1)
+            driver.execute_script("arguments[0].focus();", postcode_input)
+            driver.execute_script("arguments[0].click();", postcode_input)
 
-            raise Exception("Unable to enter postcode after retries")
+            postcode_input.send_keys(Keys.CONTROL, "a")
+            postcode_input.send_keys(Keys.BACKSPACE)
+            postcode_input.send_keys(postcode_value)
+
+            driver.execute_script("""
+                arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+                arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+                arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));
+            """, postcode_input)
+
+            print(f"Postcode entered successfully: {postcode_value}")
 
         except Exception as e:
             print(f"Error in Enter_Postcode: {type(e).__name__} - {e}")
+            driver.save_screenshot("postcode_error.png")
             raise
+    # def Enter_Postcode(self, postcode_value="ABC11223"):
+    #     try:
+    #         driver = self.driver
+    #         wait = WebDriverWait(driver, 30)
+    #
+    #         # Check browser session is alive
+    #         try:
+    #             _ = driver.current_url
+    #         except InvalidSessionIdException:
+    #             raise Exception(
+    #                 "Browser session is invalid/closed. Check if driver.quit() or driver.close() is called before Enter_Postcode()."
+    #             )
+    #
+    #         postcode_locator = self.postcode
+    #
+    #         for attempt in range(3):
+    #             try:
+    #                 el = wait.until(
+    #                     EC.element_to_be_clickable(postcode_locator)
+    #                 )
+    #
+    #                 driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #                     el
+    #                 )
+    #
+    #                 time.sleep(0.3)
+    #
+    #                 el = wait.until(
+    #                     EC.element_to_be_clickable(postcode_locator)
+    #                 )
+    #
+    #                 driver.execute_script("arguments[0].click();", el)
+    #
+    #                 el.send_keys(Keys.CONTROL + "a")
+    #                 el.send_keys(Keys.BACKSPACE)
+    #                 el.send_keys(postcode_value)
+    #
+    #                 print(f"Postcode entered successfully: {postcode_value}")
+    #                 return
+    #
+    #             except StaleElementReferenceException:
+    #                 print(f"Stale element retry {attempt + 1}/3")
+    #                 time.sleep(1)
+    #
+    #         raise Exception("Unable to enter postcode after retries")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Enter_Postcode: {type(e).__name__} - {e}")
+    #         raise
 
 
 
