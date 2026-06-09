@@ -3,9 +3,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Add_Customer import Add_Customer
+
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+from Pages.Add_Customer import Add_Customer
 from Pages.LoginPage import loginPage
 import pytest
 

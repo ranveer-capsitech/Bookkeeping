@@ -3,7 +3,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Banking_Creditcard_Page import Banking_Credit_card
+from Pages.Banking_Creditcard_Page import Banking_Credit_card
+
 
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage

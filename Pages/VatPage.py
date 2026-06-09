@@ -2191,7 +2191,7 @@ class Vat:
 
     def Select_CRM(self):
         try:
-            crm = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.select_crm))
+            crm = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.select_crm))
             time.sleep(.2)
             crm.click()
             time.sleep(.2)
@@ -2204,7 +2204,7 @@ class Vat:
 
     def Select_E_Signature(self):
         try:
-            e_sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_e_signatures))
+            e_sign = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_e_signatures))
             time.sleep(.2)
             e_sign.click()
             time.sleep(.2)
@@ -2220,14 +2220,14 @@ class Vat:
             if not self.company_name:
                 raise Exception("Company name is not set. Please call Enter_Company() first.")
 
-            e_search = WebDriverWait(self.driver, 20).until(
+            e_search = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.enter_search)
             )
             time.sleep(0.2)
 
             e_search.clear()
             e_search.send_keys(self.company_name)
-            time.sleep(0.2)
+            time.sleep(0.5)
             e_search.send_keys(Keys.ENTER)
 
             print(f"Search entered successfully with company name: {self.company_name}")
@@ -2240,7 +2240,7 @@ class Vat:
     def Click_1st_Ref(self):
 
             try:
-                ref = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_1st_ref_number))
+                ref = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_1st_ref_number))
                 time.sleep(.2)
                 ref.click()
                 time.sleep(.2)
@@ -2251,41 +2251,111 @@ class Vat:
                 time.sleep(.2)
 
 
+    # def Click_Title_Company(self):
+    #     try:
+    #         if not self.company_name:
+    #             raise Exception("Company name is not set. Please call Enter_Company() first.")
+    #
+    #         company_xpath = f"//a[@title='{self.company_name}']"
+    #
+    #         title = WebDriverWait(self.driver, 40).until(
+    #             EC.presence_of_element_located((By.XPATH, company_xpath))
+    #         )
+    #
+    #         self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", title)
+    #         time.sleep(0.2)
+    #
+    #         WebDriverWait(self.driver, 20).until(
+    #             EC.element_to_be_clickable((By.XPATH, company_xpath))
+    #         )
+    #
+    #         try:
+    #             title.click()
+    #         except Exception:
+    #             self.driver.execute_script("arguments[0].click();", title)
+    #
+    #         time.sleep(0.2)
+    #         print(f"Click on company title successfully: {self.company_name}")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Click: {e}")
+    #         time.sleep(0.2)
+    #         raise
+    def wait_for_loader_or_overlay_to_disappear(self, timeout=20):
+        wait = WebDriverWait(self.driver, timeout)
+
+        possible_blockers = [
+            (By.XPATH, "//div[contains(@class,'ms-Overlay')]"),
+            (By.XPATH, "//div[contains(@class,'loading')]"),
+            (By.XPATH, "//div[contains(@class,'spinner')]"),
+            (By.XPATH, "//div[contains(@class,'ms-Spinner')]"),
+            (By.XPATH, "//*[contains(@class,'overlay')]"),
+        ]
+
+        for blocker in possible_blockers:
+            try:
+                wait.until(EC.invisibility_of_element_located(blocker))
+            except TimeoutException:
+                pass
+
     def Click_Title_Company(self):
         try:
             if not self.company_name:
                 raise Exception("Company name is not set. Please call Enter_Company() first.")
 
-            company_xpath = f"//a[@title='{self.company_name}']"
+            wait = WebDriverWait(self.driver, 40)
 
-            title = WebDriverWait(self.driver, 40).until(
-                EC.presence_of_element_located((By.XPATH, company_xpath))
-            )
+            company_xpath = f"//a[@title={repr(self.company_name)}]"
 
-            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", title)
-            time.sleep(0.2)
+            for attempt in range(5):
+                try:
+                    print(f"Click_Title_Company attempt: {attempt + 1}")
 
-            WebDriverWait(self.driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, company_xpath))
-            )
+                    # wait until page overlay/loading disappears
+                    self.wait_for_loader_or_overlay_to_disappear()
 
-            try:
-                title.click()
-            except Exception:
-                self.driver.execute_script("arguments[0].click();", title)
+                    # always re-find fresh element
+                    title = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, company_xpath))
+                    )
 
-            time.sleep(0.2)
-            print(f"Click on company title successfully: {self.company_name}")
+                    self.driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                        title
+                    )
+
+                    time.sleep(0.5)
+
+                    # re-find again after scroll because DOM can refresh
+                    title = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, company_xpath))
+                    )
+
+                    try:
+                        title.click()
+                    except ElementClickInterceptedException:
+                        print("Normal click intercepted, using JS click with fresh element")
+                        title = self.driver.find_element(By.XPATH, company_xpath)
+                        self.driver.execute_script("arguments[0].click();", title)
+
+                    print(f"Click on company title successfully: {self.company_name}")
+                    return
+
+                except StaleElementReferenceException:
+                    print(f"Stale element found, retrying... {attempt + 1}/5")
+                    time.sleep(1)
+
+            raise Exception(f"Unable to click company title after retries: {self.company_name}")
 
         except Exception as e:
-            print(f"Error on Click: {e}")
-            time.sleep(0.2)
+            print(f"Error on Click_Title_Company: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("click_title_company_error.png")
             raise
 
 
     def Click_Document(self):
         try:
-            doc = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_document))
+            doc = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_document))
             time.sleep(.2)
             doc.click()
             time.sleep(.2)

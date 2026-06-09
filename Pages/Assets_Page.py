@@ -50,7 +50,7 @@ class Asset:
 #----------------------------------------------Asset_claims-------------------------------------------------------------
 
         self.click_fixed = (By.XPATH, "//span[contains(text(),'Fixed asset')]")
-        self.asset_name = (By.XPATH, "//label[normalize-space()='Asset name']/following::input[@type='text'][1]")
+        self.enter_asset_name = (By.XPATH, "//label[normalize-space()='Asset name']/following::input[@type='text'][1]")
         self.account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
         self.purchase_price = (By.XPATH, "//label[normalize-space()='Purchase price (Ex. VAT)']/following::input[@type='text'][1]")
 
@@ -184,17 +184,71 @@ class Asset:
                 print(f"Error on click:{e}")
                 time.sleep(2)
 
-    def Asset_Name(self):
+    # def Asset_Name(self):
+    #     # try:
+    #         asset = WebDriverWait(self.driver, 40).until(
+    #                 EC.visibility_of_element_located(self.asset_name))
+    #         time.sleep(.2)
+    #         asset.send_keys("Onpy for testing")
+    #         time.sleep(.2)
+    #         print("Click on Enter assets successfully..... ")
+    #     # except Exception as e:
+    #     #         print(f"Error on click:{e}")
+    #     #         time.sleep(.2)
+    def wait_for_overlay_to_disappear(self, timeout=30):
         try:
-            asset = WebDriverWait(self.driver, 40).until(
-                    EC.visibility_of_element_located(self.asset_name))
-            time.sleep(.2)
-            asset.send_keys("Onpy for testing")
-            time.sleep(.2)
-            print("Click on Enter assets successfully..... ")
+            WebDriverWait(self.driver, timeout).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, "//div[contains(@class,'ms-Overlay')]")
+                )
+            )
+        except TimeoutException:
+            print("Overlay still visible after wait")
+
+    def Asset_Name(self):
+        asset_name = f"Asset_{fake.word().title()}_{fake.random_int(1000, 9999)}"
+
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            self.wait_for_overlay_to_disappear()
+
+            asset = wait.until(
+                EC.presence_of_element_located(self.enter_asset_name)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                asset
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("""
+                const input = arguments[0];
+                const value = arguments[1];
+
+                input.removeAttribute('readonly');
+                input.removeAttribute('disabled');
+
+                const nativeInputValueSetter =
+                    Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+
+                nativeInputValueSetter.call(input, value);
+
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                input.dispatchEvent(new Event('blur', { bubbles: true }));
+            """, asset, asset_name)
+
+            print(f"Asset name entered successfully using JS: {asset_name}")
+
+            return asset_name
+
         except Exception as e:
-                print(f"Error on click:{e}")
-                time.sleep(.2)
+            print(f"Error in Asset_Name: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("asset_name_error.png")
+            raise
 
     def Purchase(self):
        driver = self.driver

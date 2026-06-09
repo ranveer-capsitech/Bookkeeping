@@ -3,10 +3,10 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Add_Customer import Add_Customer
-from Add_Suppliers import Add_Supplier
+from Pages.Add_Suppliers import Add_Supplier
+
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+
 from Pages.LoginPage import loginPage
 import pytest
 

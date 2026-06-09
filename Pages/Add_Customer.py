@@ -47,6 +47,7 @@ class Add_Customer:
         self.click_customers = (By.XPATH, "//button[@role='tab'][.//span[normalize-space()='Customers']]")
         self.add_customer_button = (By.XPATH, "//span[normalize-space()='Customer']")
         self.enter_customer_name = (By.XPATH, "//label[normalize-space()='Name']/following::input[1]")
+        self.select_customer = (By.XPATH, "//button[contains(text(),'T.H. LIMITED')]")
         self.click_billing_field = (By.XPATH, "//label[normalize-space()='Billing address']/following::label[normalize-space()='Building, Street, City'][1]")
         self.enter_building_no = (By.XPATH, "//input[@placeholder='Building']")
         self.enter_street = (By.XPATH, "//input[@placeholder='Street']")
@@ -198,20 +199,72 @@ class Add_Customer:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
-    def Enter_Customer_Name(self):
+    def wait_for_blockers_to_disappear(self, timeout=40):
+        blockers = [
+            (By.XPATH, "//*[contains(@class,'spinner')]"),
+            (By.XPATH, "//*[contains(@class,'Spinner')]"),
+            (By.XPATH, "//*[contains(@class,'loading')]"),
+            (By.XPATH, "//*[contains(@class,'Loading')]"),
+            (By.XPATH, "//div[contains(@class,'ms-Overlay') and contains(@class,'ms-Overlay--dark')]"),
+        ]
+
+        for blocker in blockers:
+            try:
+                WebDriverWait(self.driver, timeout).until(
+                    EC.invisibility_of_element_located(blocker)
+                )
+            except TimeoutException:
+                pass
+
+    def Enter_Customer_Name(self, customer_name="T.H. LIMITED"):
         try:
-            enter_customer_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_customer_name))
-            time.sleep(.2)
-            enter_customer_name.send_keys("T.H. LIMITED")
-            time.sleep(.2)
+            wait = WebDriverWait(self.driver, 40)
+
+            # Wait for spinner/overlay before touching input
+            self.wait_for_blockers_to_disappear()
+
+            enter_customer_name = wait.until(
+                EC.presence_of_element_located(self.enter_customer_name)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                enter_customer_name
+            )
+
+            time.sleep(0.5)
+
+            # Re-wait after scroll
+            self.wait_for_blockers_to_disappear()
+
+            enter_customer_name = wait.until(
+                EC.element_to_be_clickable(self.enter_customer_name)
+            )
+
+            try:
+                ActionChains(self.driver).move_to_element(enter_customer_name).pause(0.3).click().perform()
+            except ElementClickInterceptedException:
+                self.wait_for_blockers_to_disappear()
+                self.driver.execute_script("arguments[0].focus();", enter_customer_name)
+                self.driver.execute_script("arguments[0].click();", enter_customer_name)
+
+            enter_customer_name.send_keys(Keys.CONTROL, "a")
+            enter_customer_name.send_keys(Keys.BACKSPACE)
+            enter_customer_name.send_keys(customer_name)
+
+            time.sleep(2)
+
+            # Select first suggestion using keyboard
+            enter_customer_name.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.5)
             enter_customer_name.send_keys(Keys.ENTER)
-            time.sleep(.2)
-            enter_customer_name.send_keys(Keys.ENTER)
-            time.sleep(.2)
-            print("Enter Customer name successfully......!! ")
+
+            print("Enter Customer name successfully......!!")
+
         except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.5)
+            print(f"Error on Enter_Customer_Name: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("enter_customer_name_error.png")
+            raise
 
     def Click_Cancel(self):
         try:
@@ -535,7 +588,7 @@ class Add_Customer:
             file_input = wait.until(EC.presence_of_element_located(
                 (By.XPATH, "//input[@type='file']")
             ))
-            time.sleep(.2)
+            time.sleep(.5)
 
             #  Upload file(Rv)
             file_input.send_keys(
@@ -549,20 +602,6 @@ class Add_Customer:
         except Exception as e:
             print(f"Error in upload: {e}")
 
-        # try:
-        #     driver = self.driver
-        #     wait = WebDriverWait(driver, 30)
-        #     attach = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.attachment))
-        #     time.sleep(.2)
-        #     driver.execute_script("arguments[0].click();",  attach)
-        #     time.sleep(.2)
-        #     attach.send_keys(r"C:\Users\CT_USER\Desktop\Demo Bank Statement_Accabot 23.csv")
-        #     time.sleep(.2)
-        #     print("File uploaded successfully.......!")
-        #     time.sleep(.2)(Rv)
-        #
-        # except Exception as e:
-        #     print(f"Error in upload: {e}")
 
     def Save_customer(self):
         try:

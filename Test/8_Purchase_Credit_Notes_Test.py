@@ -83,13 +83,13 @@ class Login(unittest.TestCase):
 
 
         time.sleep(.5)
-        time.sleep(.2)
+
         client_section.Click_Credit_Notes()
         time.sleep(.5)
         client_section.Add_Credit_Note()
-        time.sleep(.3)
+        time.sleep(.2)
         client_section.Select_Suppiler_for_Credit_Note()
-        time.sleep(.3)
+        time.sleep(.2)
         client_section.Invoice_ref()
         time.sleep(.2)
         client_section.Add_Attachment()

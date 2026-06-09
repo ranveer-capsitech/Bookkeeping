@@ -378,6 +378,9 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_CRM()
         time.sleep(1)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
+
         client_section.Select_E_Signature()
         time.sleep(1)
         client_section.Enter_in_Search()

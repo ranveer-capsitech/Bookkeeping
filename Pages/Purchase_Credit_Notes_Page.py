@@ -115,7 +115,8 @@ class Purchase_PO:
                 el.send_keys(Keys.ENTER)
 
                 time.sleep(0.5)
-                print(f"Entered '{company_name}' using XPath: {xp}")
+                print(f"Entered '{company_name}' ")
+                # print(f"Entered '{company_name}' using XPath: {xp}")
                 return True
 
 
@@ -281,22 +282,101 @@ class Purchase_PO:
         except Exception as e:
             print(f"Error in upload: {e}")
 
+    def wait_for_blockers_to_disappear(self, timeout=30):
+        blockers = [
+            (By.XPATH, "//*[contains(@class,'spinner')]"),
+            (By.XPATH, "//*[contains(@class,'Spinner')]"),
+            (By.XPATH, "//*[contains(@class,'loading')]"),
+            (By.XPATH, "//*[contains(@class,'Loading')]"),
+            (By.XPATH, "//div[contains(@class,'ms-Overlay')]"),
+        ]
 
-    def Enter_Discount(self):
+        for blocker in blockers:
+            try:
+                WebDriverWait(self.driver, timeout).until(
+                    EC.invisibility_of_element_located(blocker)
+                )
+            except:
+                pass
+
+    def Enter_Discount(self, discount_value="10"):
         driver = self.driver
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(driver, 30)
 
         try:
-            control = wait.until(EC.visibility_of_element_located(self.add_discount))
-            time.sleep(.2)
-            control.click()
-            time.sleep(.2)
-            control.send_keys("10")
-            time.sleep(.2)
-            print("Discount added successfully....!!")
-        except Exception as e:
+            # wait for loader/spinner/overlay
+            self.wait_for_blockers_to_disappear()
 
-            print(f"Error on Click : {e}")
+            discount = wait.until(
+                EC.presence_of_element_located(self.add_discount)
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                discount
+            )
+
+            time.sleep(0.5)
+
+            # find actual input if locator points to parent div/control
+            if discount.tag_name.lower() != "input":
+                discount = discount.find_element(By.XPATH, ".//input[not(@type='hidden')]")
+
+            try:
+                discount = wait.until(
+                    EC.element_to_be_clickable(discount)
+                )
+            except:
+                pass
+
+            try:
+                discount.click()
+                discount.send_keys(Keys.CONTROL, "a")
+                discount.send_keys(Keys.BACKSPACE)
+                discount.send_keys(discount_value)
+            except Exception:
+                print("Normal input failed, using JS value setter")
+
+                driver.execute_script("""
+                    const input = arguments[0];
+                    const value = arguments[1];
+
+                    input.removeAttribute('readonly');
+                    input.removeAttribute('disabled');
+
+                    const nativeInputValueSetter =
+                        Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+
+                    nativeInputValueSetter.call(input, value);
+
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    input.dispatchEvent(new Event('blur', { bubbles: true }));
+                """, discount, discount_value)
+
+            print(f"Discount added successfully: {discount_value}")
+
+        except Exception as e:
+            print(f"Error on Enter_Discount: {type(e).__name__} - {e}")
+            driver.save_screenshot("enter_discount_error.png")
+            raise
+
+
+    # def Enter_Discount(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(self.driver, 30)
+    #
+    #     try:
+    #         control = wait.until(EC.visibility_of_element_located(self.add_discount))
+    #         time.sleep(.2)
+    #         control.click()
+    #         time.sleep(.2)
+    #         control.send_keys("10")
+    #         time.sleep(.2)
+    #         print("Discount added successfully....!!")
+    #     except Exception as e:
+    #
+    #         print(f"Error on Click : {e}")
 
 
     def Click_Enter_Notes(self):

@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Banking_Detailed_Explaination_Page import Banking_detailed_explaination
+from Pages. Banking_Detailed_Explaination_Page import Banking_detailed_explaination
 from configReader import ConfigReader
 from Pages.Client_SellPage import ClientSell
 from Pages.LoginPage import loginPage
