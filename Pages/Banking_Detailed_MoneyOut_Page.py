@@ -43,6 +43,7 @@ class Banking_detailed_explaination:
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
         self.click_company = (By.XPATH,"//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
+        # self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
@@ -199,19 +200,7 @@ class Banking_detailed_explaination:
             "//div[contains(@class,'linked-transaction')]"
     "//button[contains(@class,'ms-Button--primary') and not(@disabled) and .//span[normalize-space()='Explain']]"
         )
-        # self.transfer_section = (By.XPATH, "//button[contains(@id,'Pivot') and @role='tab' and .//span[normalize-space()='Transfer']]")
-        #
-        # self.transfer_select_account_dropdown = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
-        #
-        # # self.transfer_select_account_dropdown = (
-        # #     By.XPATH,
-        # #     "//div[@role='tabpanel' and @aria-hidden='false']//label[normalize-space()='Select account']/following::div[contains(@class,'rs-control')][1]"
-        # # )
-        #
-        # self.transfer_submit_button = (
-        #     By.XPATH,
-        #     "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Transfer']]"
-        # )
+
 
         self.transfer_section = (
             By.XPATH,
@@ -231,6 +220,27 @@ class Banking_detailed_explaination:
             "//label[normalize-space()='Select account']"
             "/following::input[@role='combobox'][1]"
         )
+
+
+
+        # self.transfer_section = (
+        #     By.XPATH,
+        #     "//button[@role='tab' and (.//span[normalize-space()='Transfer'] or normalize-space()='Transfer' or @name='Transfer' or @data-content='Transfer')]"
+        # )
+        #
+        # self.transfer_select_account_dropdown = (
+        #     By.XPATH,
+        #     "//*[contains(@class,'ms-Dialog') or contains(@class,'ms-Modal') or @role='dialog']"
+        #     "//*[normalize-space()='Select account']"
+        #     "/following::div[contains(@class,'rs-control')][1]"
+        # )
+        #
+        # self.transfer_select_account_input = (
+        #     By.XPATH,
+        #     "//*[contains(@class,'ms-Dialog') or contains(@class,'ms-Modal') or @role='dialog']"
+        #     "//*[normalize-space()='Select account']"
+        #     "/following::input[@role='combobox'][1]"
+        # )
 
 
 
@@ -255,6 +265,7 @@ class Banking_detailed_explaination:
 
 
     def Enter_Company(self, company_name="RDX LIMITED", timeout=30, os=None):
+    # def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -723,7 +734,7 @@ class Banking_detailed_explaination:
         try:
             amount = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.net_amount))
             time.sleep(.2)
-            amount.send_keys("100")
+            amount.send_keys("100000")
             time.sleep(.2)
             print("Enter amount successfully....!!")
         except Exception as e:
@@ -1132,6 +1143,8 @@ class Banking_detailed_explaination:
 
             time.sleep(2)
 
+
+
     def Enter_Date(self):
         try:
             wait = WebDriverWait(self.driver, 30)
@@ -1141,7 +1154,9 @@ class Banking_detailed_explaination:
             date_field = wait.until(
                 EC.presence_of_element_located((
                     By.XPATH,
-                    "//input[@name='transactions.0.date']"
+                    # "//input[@name='transactions.0.date']"
+                     "//input[starts-with(@name,'transactions.') and contains(@name,'.date') and @placeholder='DD/MM/YYYY']"
+
                 ))
             )
 
@@ -1330,7 +1345,7 @@ class Banking_detailed_explaination:
             raise
 
 
-    def Click_Contact_Dropdown(self):
+    def Click_Contact_Dropdown_For_Money_In(self):
 
             driver = self.driver
             wait = WebDriverWait(driver, 30)
@@ -1353,14 +1368,51 @@ class Banking_detailed_explaination:
                 time.sleep(0.2)
 
                 active = driver.switch_to.active_element
-                active.send_keys("KM Consultancy Limited")
+                active.send_keys("KM Consultancy Limited (Steven Phillip)")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
+
+                time.sleep(2)
+                active.send_keys(Keys.ENTER)
+                time.sleep(1)
+
+                print("Contact selected successfully....!!")
+
+            except Exception as e:
+                print(f"Error in Select_Bank: {e}")
+                time.sleep(0.2)
+
+    def Click_Contact_Dropdown_For_Money_Out(self):
+
+            driver = self.driver
+            wait = WebDriverWait(driver, 30)
+
+            try:
+                contact = wait.until(EC.element_to_be_clickable(self.click_contact_dropdown))
+
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    contact
+                )
+                time.sleep(0.2)
+
+                try:
+                    contact.click()
+                except ElementClickInterceptedException:
+
+                    driver.execute_script("arguments[0].click();", contact)
+
+                time.sleep(0.2)
+
+                active = driver.switch_to.active_element
+                active.send_keys("Alex")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
                 # active.send_keys(Keys.ARROW_DOWN)
+                # time.sleep(0.2)
+
                 time.sleep(2)
                 active.send_keys(Keys.ENTER)
                 time.sleep(1)
@@ -1392,11 +1444,11 @@ class Banking_detailed_explaination:
             except ElementClickInterceptedException:
                 driver.execute_script("arguments[0].click();", claims)
 
-            time.sleep(0.2)
+            time.sleep(2)
 
             active = driver.switch_to.active_element
             active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
+            time.sleep(1)
             # active.send_keys(Keys.ARROW_DOWN)
             # time.sleep(0.2)
             active.send_keys(Keys.ENTER)
@@ -1666,6 +1718,8 @@ class Banking_detailed_explaination:
         )
 
         print("Clicked on Transfer section successfully.")
+
+
 
 
     def Select_Transfer_Account_Dropdown(self, account_name="Monzo - Current"):

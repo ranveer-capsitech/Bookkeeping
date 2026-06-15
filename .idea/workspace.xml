@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="clean-up">
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyIn_Page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/24_Banking_Detailed_MoneyIn_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Add_Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Add_Customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Assets_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Assets_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_Explaination_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyOut_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/23_Banking_Detailed_Explaination_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +119,7 @@
     &quot;Python tests.Python tests in 21_Add_Suppliers_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 22_Vat_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 23_Banking_Detailed_Explaination_Test.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in 24_Banking_Detailed_MoneyIn_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 29_Reimbursements_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 2_ClientSell_Test.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
@@ -151,6 +147,7 @@
     &quot;Python.Assets_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.Banking_Creditcard_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.Banking_Detailed_Explaination_Page.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Banking_Detailed_MoneyIn_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.Banking_SavingAccount_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.Budget_manager_Page.executor&quot;: &quot;Run&quot;,
     &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
@@ -287,14 +284,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Expense claims module">
-      <option name="closed" value="true" />
-      <created>1763557227619</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1763557227619</updated>
     </task>
     <task id="LOCAL-00013" summary="mileages_section">
       <option name="closed" value="true" />
@@ -680,7 +669,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780926391342</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="clean-up">
+      <option name="closed" value="true" />
+      <created>1781015585554</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1781015585554</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

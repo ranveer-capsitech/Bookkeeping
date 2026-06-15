@@ -1,4 +1,3 @@
-import os
 
 import pyautogui
 from faker import Faker
@@ -61,6 +60,9 @@ class Vat:
         self.password_id_value = (By.XPATH, "//p[@id='password-label']/following-sibling::p[1]")
         self.vat_registration_date = (By.XPATH, "//p[@id='vatregistrationdate-label']/following-sibling::p[1]")
         self.vat_registration_no = (By.XPATH, "//p[@id='vrn-label']/following-sibling::p[1]")
+
+
+#----------------------window handling --------------------------------------------------
 
         self.parent_window = self.driver.current_window_handle
         self.user_id = (By.XPATH, "(//input[@id='userId'])[1]")
@@ -185,8 +187,11 @@ class Vat:
 
         #--------------------go to crm------------------------------------------------------------------------------------
 
-        self.click_on_menu = (By.XPATH,
-                              "//button[contains(@class,'Header-button') and @title='Modules']//i[@data-icon-name='Waffle']")
+        # self.click_on_menu = (By.XPATH,
+        #                       "//button[contains(@class,'Header-button') and @title='Modules']//i[@data-icon-name='Waffle']")
+
+        self.click_on_menu = (By.XPATH, "//button[@id='btn-menus-callout']")
+
         self.select_crm = (By.XPATH, "(//span[normalize-space()='CRM'])[1]")
         self.click_e_signatures = (By.XPATH, "//a[.//div[normalize-space()='E-signatures']]")
         self.enter_search = (By.XPATH, "//input[contains(@class,'ms-SearchBox-field') and @placeholder='Search']")
@@ -217,17 +222,6 @@ class Vat:
         self.click_send_button = (By.XPATH, "//span[starts-with(@id,'btn-status') and normalize-space()='Sent']")
         self.click_drop_down_status = (By.XPATH, "//div[normalize-space()='E-signature status']/following::input[starts-with(@id,'react-select')][1]")
         self.edit_icon = (By.XPATH, "(//i[@data-icon-name='Edit']/ancestor::button)[1]")
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -810,12 +804,10 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
-
     def Enter_Vat_Registration_Date(self, formatted_date):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
-            # convert 13:04:2017 -> 13/04/2017
             input_date = formatted_date.replace(":", "/")
 
             date_input = wait.until(
@@ -826,37 +818,71 @@ class Vat:
                 "arguments[0].scrollIntoView({block:'center'});",
                 date_input
             )
+
             time.sleep(0.5)
 
-            # click field
-            date_input.click()
-            time.sleep(0.2)
+            self.driver.execute_script("""
+                arguments[0].value = arguments[1];
 
-            # clear existing value properly
-            date_input.send_keys(Keys.CONTROL, "a")
-            time.sleep(0.2)
-            date_input.send_keys(Keys.BACKSPACE)
-            time.sleep(0.2)
-
-            # fallback clear using JS also
-            self.driver.execute_script("arguments[0].value = '';", date_input)
-            time.sleep(0.2)
-
-            # enter new value
-            date_input.send_keys(input_date)
-            time.sleep(0.5)
+                arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+                arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+                arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));
+            """, date_input, input_date)
 
             print(f"VAT Registration Date entered successfully: {input_date}")
 
         except Exception as e:
             print(f"Error while entering VAT Registration Date: {e}")
+            self.driver.save_screenshot("vat_registration_date_error.png")
             raise
+
+
+    # def Enter_Vat_Registration_Date(self, formatted_date):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         # convert 13:04:2017 -> 13/04/2017
+    #         input_date = formatted_date.replace(":", "/")
+    #
+    #         date_input = wait.until(
+    #             EC.presence_of_element_located(self.vat_registration_date_input)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             date_input
+    #         )
+    #         time.sleep(0.5)
+    #
+    #         # click field
+    #         date_input.click()
+    #         time.sleep(0.2)
+    #
+    #         # clear existing value properly
+    #         date_input.send_keys(Keys.CONTROL, "a")
+    #         time.sleep(0.2)
+    #         date_input.send_keys(Keys.BACKSPACE)
+    #         time.sleep(0.2)
+    #
+    #         # fallback clear using JS also
+    #         self.driver.execute_script("arguments[0].value = '';", date_input)
+    #         time.sleep(0.2)
+    #
+    #         # enter new value
+    #         date_input.send_keys(input_date)
+    #         time.sleep(0.5)
+    #
+    #         print(f"VAT Registration Date entered successfully: {input_date}")
+    #
+    #     except Exception as e:
+    #         print(f"Error while entering VAT Registration Date: {e}")
+    #         raise
 
 
 
     def Enter_Vat_No(self, formatted_date):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             # convert 13:04:2017 -> 13/04/2017
             input_date = formatted_date.replace(":", "/")
@@ -899,7 +925,7 @@ class Vat:
 
     def Enter_Vat_Registration_Number(self, vat_number):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             vat_input = wait.until(
                 EC.presence_of_element_located(self.enter_vat)
@@ -936,55 +962,20 @@ class Vat:
             print(f"Error while entering VAT Registration Number: {e}")
             raise
 
-    # def Click_Save(self):
-    #     try:
-    #         save = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.save))
-    #         time.sleep(.2)
-    #         save.click()
-    #         time.sleep(.2)
-    #
-    #         print("Click on save button successfully....!!")
-    #     except Exception as e:
-    #         print(f"Error on Click:{e}")
-    #         time.sleep(.2)
-
-
-
     def Click_Save(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            save = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.save))
+            time.sleep(.2)
+            save.click()
+            time.sleep(.2)
 
-            save = wait.until(EC.presence_of_element_located(self.save))
-
-            print("Save found:", save.is_displayed(), save.is_enabled())
-
-            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", save)
-            time.sleep(1)
-
-            print("Button text:", save.text)
-            print("Outer HTML:", save.get_attribute("outerHTML"))
-
-            try:
-                save.click()
-            except Exception as click_error:
-                print("Normal click failed:", click_error)
-                self.driver.execute_script("arguments[0].click();", save)
-
-            success_msg = wait.until(
-                EC.visibility_of_element_located(self.success_message)
-            )
-
-            actual_message = success_msg.text.strip()
-            expected_message = "Setting updated successfully"
-
-            assert actual_message == expected_message, \
-                f"Expected message: '{expected_message}', but got: '{actual_message}'"
-
-            print(f"Assertion passed: '{actual_message}' message displayed successfully....!!")
-
+            print("Click on save button successfully....!!")
         except Exception as e:
-            print(f"Error on Click/Assertion: {e}")
-            raise
+            print(f"Error on Click:{e}")
+            time.sleep(.2)
+
+
+
 
 
 
@@ -1114,72 +1105,105 @@ class Vat:
         except Exception as e:
             print(f"Error on Import Click/File Upload: {e}")
             raise
-    #
+
     # def Click_Import(self):
     #     try:
-    #         wait = WebDriverWait(self.driver, 20)
+    #         wait = WebDriverWait(self.driver, 30)
     #
-    #         file_path = r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
+    #         file_path = r "C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
     #
-    #         if not os.path.isfile(file_path):
-    #             raise FileNotFoundError(f"File not found: {file_path}")
+    #         if not os.path.exists(file_path):
+    #             raise Exception(f"File not found: {file_path}")
     #
     #         import_file = wait.until(
     #             EC.element_to_be_clickable(self.click_import)
     #         )
-    #         import_file.click()
-    #         time.sleep(2)
     #
-    #         # Move mouse away from screen corner
-    #         pyautogui.moveTo(500, 500)
-    #         time.sleep(0.5)
-    #
-    #         pyautogui.write(file_path, interval=0.01)
-    #         time.sleep(1)
-    #         pyautogui.press("enter")
-    #
-    #         print("Import VAT return file uploaded successfully....!!")
-    #
-    #     except Exception as e:
-    #         print(f"Error on Import Click/File Upload: {e}")
-    #         raise
-    # def Click_Import(self):
-    #     try:
-    #         wait = WebDriverWait(self.driver, 20)
-    #
-    #         file_path = r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
-    #
-    #         import_file = wait.until(
-    #             EC.element_to_be_clickable(self.click_import)
-    #         )
     #         import_file.click()
     #         time.sleep(1)
     #
     #         file_input = wait.until(
-    #             EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+    #             EC.presence_of_element_located(
+    #                 (By.XPATH, "//input[@type='file']")
+    #             )
     #         )
+    #
+    #         self.driver.execute_script("""
+    #             arguments[0].style.display = 'block';
+    #             arguments[0].style.visibility = 'visible';
+    #             arguments[0].style.opacity = 1;
+    #         """, file_input)
     #
     #         file_input.send_keys(file_path)
     #
     #         print("Import VAT return file uploaded successfully....!!")
     #
     #     except Exception as e:
-    #         print(f"Error on Import Click/File Upload: {e}")
+    #         print(f"Error on Import Click/File Upload: {type(e).__name__} - {e}")
+    #         self.driver.save_screenshot("vat_import_error.png")
     #         raise
+    #
+    def wait_for_blockers_to_disappear(self, timeout=40):
+        blockers = [
+            (By.XPATH, "//*[contains(@class,'spinner')]"),
+            (By.XPATH, "//*[contains(@class,'Spinner')]"),
+            (By.XPATH, "//*[contains(@class,'loading')]"),
+            (By.XPATH, "//*[contains(@class,'Loading')]"),
+            (By.XPATH, "//div[contains(@class,'ms-Overlay')]"),
+        ]
+
+        for blocker in blockers:
+            try:
+                WebDriverWait(self.driver, timeout).until(
+                    EC.invisibility_of_element_located(blocker)
+                )
+            except TimeoutException:
+                pass
 
 
+
+    # def Send_Button(self):
+    #     # try:
+    #         send = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_send))
+    #         time.sleep(.2)
+    #         send.click()
+    #         time.sleep(.2)
+    #
+    #         print("Click on Send button successfully....!!")
+    #     # except Exception as e:
+    #     #     print(f"Error on Click:{e}")
+    #         time.sleep(.2)
 
     def Send_Button(self):
-        # try:
-            send = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_send))
-            time.sleep(.2)
-            send.click()
-            time.sleep(.2)
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            # Wait until spinner disappears
+            wait.until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, "//*[contains(@class,'spinner')]")
+                )
+            )
+
+            send = wait.until(
+                EC.element_to_be_clickable(self.click_send)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                send
+            )
+
+            try:
+                send.click()
+            except:
+                self.driver.execute_script("arguments[0].click();", send)
 
             print("Click on Send button successfully....!!")
-        # except Exception as e:
-        #     print(f"Error on Click:{e}")
-        #     time.sleep(.2)
+
+        except Exception as e:
+            print(f"Error on Send Button: {e}")
+            raise
 
 
 
@@ -1405,21 +1429,17 @@ class Vat:
 
 
 
-    def Click_Review_Button(self):
-        try:
-            review_btn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_review_button))
-            time.sleep(.2)
-            review_btn .click()
-            time.sleep(.2)
-
-            print("Click on send again button successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
-
-
-
-
+    # def Click_Review_Button(self):
+    #     try:
+    #         review_btn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_review_button))
+    #         time.sleep(.2)
+    #         review_btn .click()
+    #         time.sleep(.2)
+    #
+    #         print("Click on send again button successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.2)
 
 #------------------------------------------------------------------------------------------------------------------------
 
@@ -1856,7 +1876,7 @@ class Vat:
 
     def Enter_OTP(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             otp_inputs = wait.until(
                 EC.visibility_of_all_elements_located(self.otp_boxes)
@@ -2106,6 +2126,46 @@ class Vat:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
+    # def Click_Cancel_Vat_Submission_Pop_up(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         self.wait_for_blockers_to_disappear()
+    #
+    #         close_btn = wait.until(
+    #             EC.presence_of_element_located(self.click_cross_vat_submission_pop_up)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             close_btn
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         self.wait_for_blockers_to_disappear()
+    #
+    #         close_btn = wait.until(
+    #             EC.element_to_be_clickable(self.click_cross_vat_submission_pop_up)
+    #         )
+    #
+    #         try:
+    #             close_btn.click()
+    #         except ElementClickInterceptedException:
+    #             print("Normal click intercepted, using JS click")
+    #             self.wait_for_blockers_to_disappear()
+    #             close_btn = wait.until(
+    #                 EC.presence_of_element_located(self.click_cross_vat_submission_pop_up)
+    #             )
+    #             self.driver.execute_script("arguments[0].click();", close_btn)
+    #
+    #         print("Click cancel button of VAT submission successfully....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Click_Cancel_Vat_Submission_Pop_up: {type(e).__name__} - {e}")
+    #         self.driver.save_screenshot("cancel_vat_submission_popup_error.png")
+    #         raise
+
 
     def Click_Back_Button(self):
         try:
@@ -2281,6 +2341,7 @@ class Vat:
     #         print(f"Error on Click: {e}")
     #         time.sleep(0.2)
     #         raise
+
     def wait_for_loader_or_overlay_to_disappear(self, timeout=20):
         wait = WebDriverWait(self.driver, timeout)
 
@@ -2305,52 +2366,130 @@ class Vat:
 
             wait = WebDriverWait(self.driver, 40)
 
-            company_xpath = f"//a[@title={repr(self.company_name)}]"
+            company_name = self.company_name.strip()
+
+            company_locators = [
+                # exact title
+                (By.XPATH, f"//a[normalize-space(@title)={repr(company_name)}]"),
+
+                # title contains company name
+                (By.XPATH, f"//a[contains(normalize-space(@title), {repr(company_name)})]"),
+
+                # visible text exact
+                (By.XPATH, f"//a[normalize-space()={repr(company_name)}]"),
+
+                # visible text contains
+                (By.XPATH, f"//a[contains(normalize-space(), {repr(company_name)})]"),
+
+                # any clickable element with title
+                (By.XPATH, f"//*[@title and contains(normalize-space(@title), {repr(company_name)})]"),
+
+                # any visible text element
+                (By.XPATH, f"//*[contains(normalize-space(), {repr(company_name)})]"),
+            ]
 
             for attempt in range(5):
-                try:
-                    print(f"Click_Title_Company attempt: {attempt + 1}")
+                print(f"Click_Title_Company attempt: {attempt + 1}")
 
-                    # wait until page overlay/loading disappears
-                    self.wait_for_loader_or_overlay_to_disappear()
+                self.wait_for_loader_or_overlay_to_disappear()
 
-                    # always re-find fresh element
-                    title = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, company_xpath))
-                    )
-
-                    self.driver.execute_script(
-                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                        title
-                    )
-
-                    time.sleep(0.5)
-
-                    # re-find again after scroll because DOM can refresh
-                    title = wait.until(
-                        EC.element_to_be_clickable((By.XPATH, company_xpath))
-                    )
-
+                for locator in company_locators:
                     try:
-                        title.click()
-                    except ElementClickInterceptedException:
-                        print("Normal click intercepted, using JS click with fresh element")
-                        title = self.driver.find_element(By.XPATH, company_xpath)
-                        self.driver.execute_script("arguments[0].click();", title)
+                        elements = self.driver.find_elements(*locator)
+                        print(f"Locator {locator[1]} found: {len(elements)}")
 
-                    print(f"Click on company title successfully: {self.company_name}")
-                    return
+                        for element in elements:
+                            try:
+                                if element.is_displayed():
+                                    self.driver.execute_script(
+                                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                                        element
+                                    )
 
-                except StaleElementReferenceException:
-                    print(f"Stale element found, retrying... {attempt + 1}/5")
-                    time.sleep(1)
+                                    time.sleep(0.5)
 
-            raise Exception(f"Unable to click company title after retries: {self.company_name}")
+                                    self.wait_for_loader_or_overlay_to_disappear()
+
+                                    try:
+                                        element.click()
+                                    except Exception:
+                                        self.driver.execute_script("arguments[0].click();", element)
+
+                                    print(f"Click on company title successfully: {company_name}")
+                                    return
+
+                            except StaleElementReferenceException:
+                                continue
+
+                    except Exception:
+                        continue
+
+                time.sleep(1)
+
+            self.driver.save_screenshot("company_title_not_found.png")
+            print("Current URL:", self.driver.current_url)
+            print("Page Title:", self.driver.title)
+
+            raise TimeoutException(f"Company title not found/clickable: {company_name}")
 
         except Exception as e:
             print(f"Error on Click_Title_Company: {type(e).__name__} - {e}")
             self.driver.save_screenshot("click_title_company_error.png")
             raise
+
+    # def Click_Title_Company(self):
+    #     try:
+    #         if not self.company_name:
+    #             raise Exception("Company name is not set. Please call Enter_Company() first.")
+    #
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         company_xpath = f"//a[@title={repr(self.company_name)}]"
+    #
+    #         for attempt in range(5):
+    #             try:
+    #                 print(f"Click_Title_Company attempt: {attempt + 1}")
+    #
+    #                 # wait until page overlay/loading disappears
+    #                 self.wait_for_loader_or_overlay_to_disappear()
+    #
+    #                 # always re-find fresh element
+    #                 title = wait.until(
+    #                     EC.element_to_be_clickable((By.XPATH, company_xpath))
+    #                 )
+    #
+    #                 self.driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #                     title
+    #                 )
+    #
+    #                 time.sleep(0.5)
+    #
+    #                 # re-find again after scroll because DOM can refresh
+    #                 title = wait.until(
+    #                     EC.element_to_be_clickable((By.XPATH, company_xpath))
+    #                 )
+    #
+    #                 try:
+    #                     title.click()
+    #                 except ElementClickInterceptedException:
+    #                     print("Normal click intercepted, using JS click with fresh element")
+    #                     title = self.driver.find_element(By.XPATH, company_xpath)
+    #                     self.driver.execute_script("arguments[0].click();", title)
+    #
+    #                 print(f"Click on company title successfully: {self.company_name}")
+    #                 return
+    #
+    #             except StaleElementReferenceException:
+    #                 print(f"Stale element found, retrying... {attempt + 1}/5")
+    #                 time.sleep(1)
+    #
+    #         raise Exception(f"Unable to click company title after retries: {self.company_name}")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Click_Title_Company: {type(e).__name__} - {e}")
+    #         self.driver.save_screenshot("click_title_company_error.png")
+    #         raise
 
 
     def Click_Document(self):

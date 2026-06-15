@@ -150,9 +150,13 @@ class Banking_Credit_card:
             By.XPATH,
             "//button[@role='tab' and .//span[contains(normalize-space(),'Unexplained')]]"
         )
+        # self.click_row_exclude_icon = (
+        #     By.XPATH,
+        #     "(//button[starts-with(@id,'exclude-btn') and .//i[@data-icon-name='PageRemove']])[1]"
+        # )
         self.click_row_exclude_icon = (
             By.XPATH,
-            "(//button[starts-with(@id,'exclude-btn') and .//i[@data-icon-name='PageRemove']])[1]"
+            "(//button[contains(@title,'Exclude') or contains(@aria-label,'Exclude') or .//*[contains(@data-icon-name,'Blocked') or contains(@data-icon-name,'Cancel')]])[1]"
         )
 
         self.click_include_button = (
@@ -1387,6 +1391,8 @@ class Banking_Credit_card:
         self.driver.execute_script("arguments[0].click();", btn)
 
         print("Clicked row exclude icon successfully")
+
+
 
     def Click_Include_Button(self):
         wait = WebDriverWait(self.driver, 40)

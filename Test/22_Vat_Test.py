@@ -3,8 +3,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Pages.ExpenseclaimsPage import Expenseclaims
-from Pages.PurchasePage import ClientPurchase
 from Pages.VatPage import Vat
 from configReader import ConfigReader
 
@@ -117,14 +115,14 @@ class Login(unittest.TestCase):
 
 
         client_section.Switch_Back_And_Enter_User_ID(user_id)
-        time.sleep(.2)
+        time.sleep(.3)
 
         client_section. Enter_Password(pass_id)
         time.sleep(.2)
         client_section.Click_SignIn_Button()
         time.sleep(.2)
         client_section.Give_Permission()
-        time.sleep(.2)
+        time.sleep(.3)
 
 
 
@@ -132,17 +130,19 @@ class Login(unittest.TestCase):
 
         client_section.Verify_And_Return_To_Expected_Vat_Page()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
 #------------------------------------------------------HMRC completed---------------------------------------------------
 
         client_section.Click_Edit()
-        time.sleep(.2)
+        time.sleep(.3)
         client_section.Enter_Vat_Registration_Date(formatted_date)
-        time.sleep(.2)
+        time.sleep(.3)
         client_section.Enter_Vat_Registration_Number(vat_number)
-        time.sleep(.2)
+        time.sleep(.3)
         client_section.Click_Save()
-        time.sleep(1)
+        time.sleep(2)
 
 #------------------------------edit vat details ----------------------------------------------------------------------------
 
@@ -304,9 +304,7 @@ class Login(unittest.TestCase):
        # # time.sleep(.2)#
 
 
-
         #----------------------------------------------------------------------------------------------------------------
-
 
         client_section.Send_mail()
         time.sleep(.2)
@@ -314,14 +312,15 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section.Click_Review_Mail_New_Tab()
         time.sleep(4)
 
         client_section.Click_Get_OTP()
         time.sleep(.2)
+
         client_section.Enter_OTP()
         time.sleep(.2)
+
         client_section.Proceed_Securely()
         time.sleep(.2)
         client_section.Click_Accept()
@@ -366,6 +365,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
        # # client_section.Click_Send_submit_mail()
        # # time.sleep(.2)
+
+
         client_section.Send_Anyway_Button()
         time.sleep(.5)
 
