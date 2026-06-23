@@ -34,7 +34,6 @@ class Login(unittest.TestCase):
 
 
 
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -128,8 +127,23 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
+
+
+
+
+
+
+    # -----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
         client_section.Click_Checkbox_Single_Element()
         time.sleep(.2)
+
+
+
         client_section.Click_Explain_1st()
         time.sleep(.2)
         client_section.Click_This_Transaction()
@@ -178,13 +192,39 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Similar_For_Explain()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
+
+#----------------QUICK FILL------------------------------------------------
+        client_section.Simple_Check_Box_Selection()
+        time.sleep(2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Select_2nd_Last_Entry()
+        time.sleep(.2)
+
+        client_section.Click_Last_Select()
+        time.sleep(2)
+
+        client_section.Click_Quick_Fill()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Selected_All_Explain_Icon()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
+#--------------------------------------------------------------------------------------------
 
 
         client_section.Simple_Check_Box_Selection()
-        time.sleep(5)
+        time.sleep(2)
         client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+        time.sleep(.1)
         client_section.Click_Last_Select()
         time.sleep(2)
         client_section. Click_Explain()
@@ -239,6 +279,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_First_Checkbox()
         time.sleep(.2)
+
+
         client_section.Click_Unexplain()
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
@@ -306,9 +348,40 @@ class Login(unittest.TestCase):
         client_section.Click_Checkbox_Single_Element()
         time.sleep(.2)
         client_section.Click_Unexplain()
-        time.sleep(.2)
+        time.sleep(2)
         client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
-        time.sleep(.2)
+        time.sleep(10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # #-------------------------------------------setting-----------------------------------------------------------------
     #

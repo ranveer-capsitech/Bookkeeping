@@ -3,10 +3,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Pages.Banking_Current_Account_Page import Banking
+
 from Pages.Budget_manager_Page import Budget
-from Pages.Dividend_Page import Dividend
-from Pages.Journals_Page import Journals
+
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
 import pytest

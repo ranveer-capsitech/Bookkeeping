@@ -73,8 +73,6 @@ class Login(unittest.TestCase):
 
 
 
-
-
         # ------------------------------ Add Credit card --------------------------------------------------------------------
 
     def test_24_Credit(self):
@@ -125,11 +123,43 @@ class Login(unittest.TestCase):
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
+
+
             #----------------------------------------------------------------------
 
             client_section.Select_Unexplained_Tab()
+            time.sleep(.2)
+
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
+
+            # -----------------------------------quick------------------------------------------------------------------
+
+            client_section.Simple_Check_Box_Selection()
+            time.sleep(2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+            client_section.Select_2nd_Last_Entry()
+            time.sleep(.2)
+
+            client_section.Click_Last_Select()
+            time.sleep(2)
+
+            client_section.Click_Quick_Fill()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Selected_All_Explain_Icon()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+            # -----------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
             client_section.Check_Search_Functionality()
             time.sleep(.2)
@@ -147,21 +177,21 @@ class Login(unittest.TestCase):
             client_section.Fill_Split_Amount()
             time.sleep(.2)
 
-            # client_section.Select_Next_Option_Second_Account_Head_Option()
-            # time.sleep(.2)
+            # #client_section.Select_Next_Option_Second_Account_Head_Option()
+            ## time.sleep(.2)
 
             client_section.Select_Vat_Drop_Down()
             time.sleep(.2)
             client_section.Click_Description()
             time.sleep(.2)
 
-            # client_section.Select_Second_Account_Head_Option()
-            # time.sleep(.2)
+            ## client_section.Select_Second_Account_Head_Option()
+            # #time.sleep(.2)
             client_section.Fill_Split_Amount_Money_Out()
             time.sleep(.2)
 
-            # client_section.Select_Next_option_Second_Account_Head_Option()
-            # time.sleep(.2)
+            ## client_section.Select_Next_option_Second_Account_Head_Option()
+            # #time.sleep(.2)
             client_section.Select_Next_Option_Second_Account_head_Option()
             time.sleep(.2)
 
@@ -171,6 +201,9 @@ class Login(unittest.TestCase):
             client_section.Click_Split_Button()
             time.sleep(.2)
 
+
+            #-----------------------------------------------------------------------------------------------------
+
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
@@ -178,8 +211,10 @@ class Login(unittest.TestCase):
             time.sleep(.2)
 
 
-            # client_section.Select_Unexplained_Tab()
-            # time.sleep(.2)
+
+
+            ## client_section.Select_Unexplained_Tab()
+            # #time.sleep(.2)
 
 
             #----------------------------------------------------------------------------------
@@ -192,15 +227,14 @@ class Login(unittest.TestCase):
             client_section.Click_Checkbox_Single_Element()
             time.sleep(.2)
 
-            # client_section.Click_Explain_1st()
-            # time.sleep(.2)
+            ## client_section.Click_Explain_1st()
+            ## time.sleep(.2)
 
             client_section.Click_Explain_And_All_Recommendation()
             time.sleep(1)
 
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
-
 
 
             client_section.Click_Checkbox_Single_Element()
@@ -236,14 +270,14 @@ class Login(unittest.TestCase):
             client_section.Click_Similar_For_Explain()
             time.sleep(.2)
 
-            client_section.Simple_Check_Box_Selection()
-            time.sleep(5)
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(.2)
-            client_section.Click_Last_Select()
-            time.sleep(2)
-            client_section.Click_Explain()
-            time.sleep(2)
+            # client_section.Simple_Check_Box_Selection()
+            # time.sleep(5)
+            # client_section.wait_for_loader_to_disappear()
+            # time.sleep(.2)
+            # client_section.Click_Last_Select()
+            # time.sleep(2)
+            # client_section.Click_Explain()
+            # time.sleep(2)
 
 #------------------------Explained-----------------------------
 
@@ -266,17 +300,23 @@ class Login(unittest.TestCase):
 
             client_section.Click_Unexplained_Tab()
             time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+
             client_section.Click_First_Row_Checkbox()
             time.sleep(.2)
             client_section.Click_Row_Exclude_Icon()
             time.sleep(.2)
-            client_section.Click_This_Transaction_Exclude_Button()
-            time.sleep(.5)
+            # client_section.Click_This_Transaction_Exclude_Button()
+            # time.sleep(.5)
 
             client_section.Click_Yes()
             time.sleep(.2)
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
+
+
 
 
 
@@ -294,8 +334,8 @@ class Login(unittest.TestCase):
             time.sleep(.2)
 
 
-            # client_section.Click_Unexplain_Icon()
-            # time.sleep(.2)
+            ## client_section.Click_Unexplain_Icon()
+            # #time.sleep(.2)
 
 
             client_section.Click_Unexplained_Tab()
@@ -319,4 +359,4 @@ class Login(unittest.TestCase):
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------

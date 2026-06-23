@@ -162,6 +162,19 @@ class Banking_Savings_account:
 
         self.click_description = (By.XPATH, "//label[normalize-space()='Description']")
 
+
+
+
+    #-------------------------------------------------------------------------------------------------------------------
+
+        self.select_2nd_last_entry = (
+            By.XPATH,
+            "(//div[contains(@class,'tr-focus')])[last()-1]//label[contains(@class,'ms-Checkbox-label')]"
+        )
+        self.click_quick_fill = (By.XPATH, "//span[contains(text(),'Quick fill')]")
+
+        self.selected_all_explain_btn = (By.XPATH, "//button[@title='Explain all checked transactions']")
+
     #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -1566,6 +1579,55 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
+# ------------------------------------------quick fill --------------------------------------------------------------------
+
+    def Select_2nd_Last_Entry(self):
+            wait = WebDriverWait(self.driver, 40)
+
+            checkbox = wait.until(
+                EC.presence_of_element_located(self.select_2nd_last_entry)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                checkbox
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", checkbox)
+
+            print("Clicked on 2nd last entry checkbox successfully.")
+
+    def Click_Quick_Fill(self):
+            try:
+                quick = WebDriverWait(self.driver, 40).until(
+                    EC.element_to_be_clickable(self.click_quick_fill))
+                time.sleep(.2)
+                quick.click()
+                time.sleep(.2)
+                print("Click on quick fill button and this functionality is running successfully.....!! ")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(2)
+
+    def Selected_All_Explain_Icon(self):
+            try:
+                all_explain_btn = WebDriverWait(self.driver, 40).until(
+                    EC.element_to_be_clickable(self.selected_all_explain_btn))
+                time.sleep(.2)
+                all_explain_btn.click()
+                time.sleep(.2)
+                print("Click on selected all explain button successfully.....!! ")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(2)
+
+
+
 
 
 

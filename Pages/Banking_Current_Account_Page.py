@@ -44,7 +44,7 @@ class Banking:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='PASALI LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='ALIS FITTINGS LTD' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -89,6 +89,7 @@ class Banking:
 
         self.click_last_select = (By.XPATH, "(//div[contains(@class,'tr-focus')][last()]//div[contains(@class,'rs-container')])[last()-2]")
         self.click_last_explain = (By.XPATH, "(//button[.//span[normalize-space()='Explain'] and not(@disabled)])[last()]")
+
 
         #----------------------------------------------------------------------------------------------------------------
 
@@ -148,6 +149,23 @@ class Banking:
 
         self.click_split_button = (By.XPATH, "//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//button[.//span[normalize-space()='Split']]")
 
+#------------------------------------------------------quick fill-------------------------------------------------------
+        # self.select_2nd_last_entry = (By.XPATH, "(//input[@type='checkbox' and contains(@id,'checkbox')])[last()-1]")
+        self.select_2nd_last_entry = (
+            By.XPATH,
+            "(//div[contains(@class,'tr-focus')])[last()-1]//label[contains(@class,'ms-Checkbox-label')]"
+        )
+        self.click_quick_fill = (By.XPATH, "//span[contains(text(),'Quick fill')]")
+
+        self.selected_all_explain_btn = (By.XPATH, "//button[@title='Explain all checked transactions']")
+
+#-----------------Change date-------------------------------------------------------------------------------------------
+        self.enter_from_date = (By.XPATH, "//input[@name='fromDate']")
+        self.enter_to_date = (By.XPATH, "//input[@name='toDate']")
+
+
+
+
 
 
 
@@ -188,7 +206,7 @@ class Banking:
 
 
 
-    def Enter_Company(self, company_name="PASALI LIMITED", timeout= 30, os=None):
+    def Enter_Company(self, company_name="ALIS FITTINGS LTD", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -916,9 +934,6 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
-
-
-
 
 
     def Simple_Check_Box_Selection(self):
@@ -1951,7 +1966,53 @@ class Banking:
             print(f"Error: {type(e).__name__} - {e}")
             raise
 
-#-----------------------------------------------------------------------------------------------------------------------
+#------------------------------------------quick fill --------------------------------------------------------------------
+
+    def Select_2nd_Last_Entry(self):
+        wait = WebDriverWait(self.driver, 40)
+
+        checkbox = wait.until(
+            EC.presence_of_element_located(self.select_2nd_last_entry)
+        )
+
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+            checkbox
+        )
+
+        time.sleep(0.5)
+
+        self.driver.execute_script("arguments[0].click();", checkbox)
+
+        print("Clicked on 2nd last entry checkbox successfully.")
+
+    def Click_Quick_Fill(self):
+        try:
+            quick = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.click_quick_fill))
+            time.sleep(.2)
+            quick.click()
+            time.sleep(.2)
+            print("Click on quick fill button and this functionality is running successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Selected_All_Explain_Icon(self):
+        try:
+            all_explain_btn = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.selected_all_explain_btn))
+            time.sleep(.2)
+            all_explain_btn.click()
+            time.sleep(.2)
+            print("Click on selected all explain button successfully.....!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
 
 
 

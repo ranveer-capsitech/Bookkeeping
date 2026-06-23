@@ -44,7 +44,7 @@ class Banking_Credit_card:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='2018 LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -183,7 +183,8 @@ class Banking_Credit_card:
 
         self.first_row_checkbox = (
             By.XPATH,
-            "(//div[@role='tabpanel' and @aria-hidden='false']//input[@type='checkbox'])[2]/ancestor::div[contains(@class,'ms-Checkbox')]"
+            "(//div[contains(@class,'ms-Checkbox') and contains(@class,'is-enabled')]//input[@type='checkbox'])[1]"
+            # "(//div[@role='tabpanel' and @aria-hidden='false']//input[@type='checkbox'])[2]/ancestor::div[contains(@class,'ms-Checkbox')]"
         )
 
         self.click_this_transaction_exclude_button = (
@@ -238,6 +239,15 @@ class Banking_Credit_card:
 
         self.cross_button = (By.XPATH, "//input[contains(@id,'SearchBox')]/following-sibling::div[contains(@class,'clearButton')]//button[@aria-label='Clear text']")
 
+
+        self.select_2nd_last_entry = (
+            By.XPATH,
+            "(//div[contains(@class,'tr-focus')])[last()-1]//label[contains(@class,'ms-Checkbox-label')]"
+        )
+        self.click_quick_fill = (By.XPATH, "//span[contains(text(),'Quick fill')]")
+
+        self.selected_all_explain_btn = (By.XPATH, "//button[@title='Explain all checked transactions']")
+
     #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -254,7 +264,7 @@ class Banking_Credit_card:
 
 
 
-    def Enter_Company(self, company_name="T.H. LIMITED", timeout= 30, os=None):
+    def Enter_Company(self, company_name="2018 LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -1451,66 +1461,100 @@ class Banking_Credit_card:
 
         print("Clicked first row checkbox successfully")
 
-    # def Click_This_Transaction_Exclude_Button(self):
-    #     wait = WebDriverWait(self.driver, 40)
-    #
-    #     option = wait.until(
-    #         EC.presence_of_element_located(self.click_this_transaction_exclude_button)
-    #     )
-    #
-    #     self.driver.execute_script(
-    #         "arguments[0].scrollIntoView({block:'center'});",
-    #         option
-    #     )
-    #
-    #     time.sleep(0.5)
-    #     self.driver.execute_script("arguments[0].click();", option)
-    #
-    #     print("Clicked on Exclude button and This transaction successfully")
-
+    def wait_for_spinner_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 40).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, "//div[contains(@class,'spinner')]")
+                )
+            )
+        except:
+            pass
 
     def Click_This_Transaction_Exclude_Button(self):
-        wait = WebDriverWait(
-            self.driver,
-            40,
-            ignored_exceptions=[StaleElementReferenceException]
-        )
-
-        locator = self.click_this_transaction_exclude_button
-
         try:
-            for attempt in range(5):
-                try:
-                    option = wait.until(
-                        EC.presence_of_element_located(locator)
-                    )
+            wait = WebDriverWait(self.driver, 40)
 
-                    self.driver.execute_script(
-                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                        option
-                    )
+            self.wait_for_spinner_to_disappear()
 
-                    time.sleep(0.5)
+            option = wait.until(
+                EC.presence_of_element_located(
+                    self.click_this_transaction_exclude_button
+                )
+            )
 
-                    # Re-fetch after scroll because DOM may re-render
-                    option = wait.until(
-                        EC.element_to_be_clickable(locator)
-                    )
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                option
+            )
 
-                    self.driver.execute_script("arguments[0].click();", option)
+            time.sleep(1)
 
-                    print("Clicked on Exclude button and This transaction successfully")
-                    return
+            self.wait_for_spinner_to_disappear()
 
-                except StaleElementReferenceException:
-                    print(f"Stale element retry {attempt + 1}/5")
-                    time.sleep(1)
+            # Re-fetch after scroll
+            option = wait.until(
+                EC.presence_of_element_located(
+                    self.click_this_transaction_exclude_button
+                )
+            )
 
-            raise Exception("Unable to click Exclude option after retries")
+            self.driver.execute_script(
+                "arguments[0].click();",
+                option
+            )
+
+            print("Clicked on Exclude - This transaction successfully.")
 
         except Exception as e:
             print(f"Error in Click_This_Transaction_Exclude_Button: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("this_transaction_exclude_error.png")
             raise
+
+    # def Click_This_Transaction_Exclude_Button(self):
+    #     wait = WebDriverWait(
+    #         self.driver,
+    #         40,
+    #         ignored_exceptions=[StaleElementReferenceException]
+    #     )
+    #
+    #     locator = self.click_this_transaction_exclude_button
+    #
+    #     try:
+    #         for attempt in range(5):
+    #             try:
+    #                 option = wait.until(
+    #                     EC.presence_of_element_located(locator)
+    #                 )
+    #
+    #                 self.driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #                     option
+    #                 )
+    #
+    #                 time.sleep(0.5)
+    #
+    #                 # Re-fetch after scroll because DOM may re-render
+    #                 option = wait.until(
+    #                     EC.element_to_be_clickable(locator)
+    #                 )
+    #
+    #                 self.driver.execute_script("arguments[0].click();", option)
+    #
+    #                 print("Clicked on Exclude button and This transaction successfully")
+    #                 return
+    #
+    #             except StaleElementReferenceException:
+    #                 print(f"Stale element retry {attempt + 1}/5")
+    #                 time.sleep(1)
+    #
+    #         raise Exception("Unable to click Exclude option after retries")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Click_This_Transaction_Exclude_Button: {type(e).__name__} - {e}")
+    #         raise
+
+
 
     def Click_Select_All_Checkbox(self):
         wait = WebDriverWait(self.driver, 40)
@@ -2075,6 +2119,140 @@ class Banking_Credit_card:
             print("Click on Cross icon successfully.....! ")
         except Exception as e:
             print(f"Error on click:{e}")
+
+
+
+
+
+
+    #--------------------------------------------------------------------------------------------------------------------
+
+    def Click_With_All_Recommendation(self):
+        # try:
+        all_transaction = WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable(self.click_with_all_recommendation))
+        time.sleep(.2)
+        all_transaction.click()
+        time.sleep(.2)
+
+        print("Clicked on All transaction button successfully.....!! ")
+
+    # except Exception as e:
+    #     print(f"Error: {e}")
+
+    # time.sleep(2)
+
+
+
+    def Select_2nd_Last_Entry(self):
+            wait = WebDriverWait(self.driver, 40)
+
+            checkbox = wait.until(
+                EC.presence_of_element_located(self.select_2nd_last_entry)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                checkbox
+            )
+
+            time.sleep(0.5)
+
+            self.driver.execute_script("arguments[0].click();", checkbox)
+
+            print("Clicked on 2nd last entry checkbox successfully.")
+
+    def Click_Quick_Fill(self):
+            try:
+                quick = WebDriverWait(self.driver, 40).until(
+                    EC.element_to_be_clickable(self.click_quick_fill))
+                time.sleep(.2)
+                quick.click()
+                time.sleep(.2)
+                print("Click on quick fill button and this functionality is running successfully.....!! ")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(2)
+
+    def Selected_All_Explain_Icon(self):
+            try:
+                all_explain_btn = WebDriverWait(self.driver, 40).until(
+                    EC.element_to_be_clickable(self.selected_all_explain_btn))
+                time.sleep(.2)
+                all_explain_btn.click()
+                time.sleep(.2)
+                print("Click on selected all explain button successfully.....!! ")
+
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(2)
+
+    def Click_Yes_Delete(self):
+        try:
+            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
+            time.sleep(.2)
+            yes.click()
+            time.sleep(.2)
+
+            print("Click on Yes button successfully for delete successfully....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+    def Click_Yes_Confirm_To_Unexplain_Selected_Transaction(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            yes_buttons = self.driver.find_elements(*self.yes_button)
+            if yes_buttons and yes_buttons[0].is_displayed():
+                self.driver.execute_script("arguments[0].click();", yes_buttons[0])
+                time.sleep(1)
+
+            print("Click on yes button for confirm to un-explain selected transaction successfully.....!!")
+
+        except Exception as e:
+            print(f"Error: {type(e).__name__} - {e}")
+            raise
+
+
+    def Select_Second_Account_Head_Option(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            # 2nd row Account Head dropdown container
+            dropdown = wait.until(EC.presence_of_element_located((
+                By.XPATH,
+                "(//div[@role='dialog']//table//tr[td]//div[contains(@class,'rs-container')])[2]"
+            )))
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                dropdown
+            )
+            time.sleep(0.5)
+
+            # click container, not input
+            self.driver.execute_script("arguments[0].click();", dropdown)
+            time.sleep(0.5)
+
+            # select second option using keyboard
+            actions = ActionChains(self.driver)
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.3)
+            actions.send_keys(Keys.ARROW_DOWN)
+            actions.pause(0.3)
+            actions.send_keys(Keys.ENTER)
+            actions.perform()
+
+            print("Selected 2nd account head option successfully")
+
+        except Exception as e:
+            print(f"Error selecting 2nd account head option: {type(e).__name__} - {e}")
+            raise
+
+
 
 
 

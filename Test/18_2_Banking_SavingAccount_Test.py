@@ -174,6 +174,43 @@ class Login(unittest.TestCase):
             time.sleep(5)
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
+
+
+#---------------------------------------------quick---------------------------------------------------------------------
+
+            client_section.Simple_Check_Box_Selection()
+            time.sleep(2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+            client_section.Select_2nd_Last_Entry()
+            time.sleep(.2)
+
+            client_section.Click_Last_Select()
+            time.sleep(2)
+
+            client_section.Click_Quick_Fill()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+            client_section.Selected_All_Explain_Icon()
+            time.sleep(.2)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+            client_section.Simple_Check_Box_Selection()
+            time.sleep(5)
+            client_section.wait_for_loader_to_disappear()
+            time.sleep(.2)
+
+
             client_section.Click_Last_Select()
             time.sleep(2)
             client_section.Click_Explain()
@@ -237,6 +274,8 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
+
+
             client_section.Select_Unexplained_Tab()
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
@@ -276,9 +315,6 @@ class Login(unittest.TestCase):
             time.sleep(.2)
             client_section.Click_Split_Button()
             time.sleep(.2)
-
-
-
 
 
             client_section.wait_for_loader_to_disappear()
