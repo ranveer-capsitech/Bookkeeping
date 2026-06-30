@@ -90,8 +90,8 @@ class Vat:
         self.save_vat = (By.XPATH,  "//button[.//span[normalize-space()='Save']]")
 
 #-----------------------------------------------------------------------------------------------------------------------
-        # self.edit_vat_return = (By.XPATH, "(//button[@id='btn-btnEdit'])[1]")
-        self.edit_vat_return = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/button[1]/span[1]/i[1]")
+        self.edit_vat_return = (By.XPATH, "//div[@role='row' and .//span[normalize-space()='Draft']]//button[@id='btn-btnEdit']")
+        # self.edit_vat_return = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[8]/div[1]/div[1]/div[1]/button[1]/span[1]/i[1]")
 
         self.click_import = (By.XPATH, "//span[normalize-space()='Import']/ancestor::button[1]")
 
@@ -233,7 +233,7 @@ class Vat:
 
     def Select_Search(self):
         try:
-            client = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.search))
+            client = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.search))
             time.sleep(.2)
             client.click()
             time.sleep(.5)
@@ -298,7 +298,7 @@ class Vat:
 
     def Click_Company(self):
         try:
-            click_on_selected_company = WebDriverWait(self.driver,20).until(EC.presence_of_element_located(self.click_company))
+            click_on_selected_company = WebDriverWait(self.driver,40).until(EC.presence_of_element_located(self.click_company))
             time.sleep(.3)
             click_on_selected_company.click()
             time.sleep(.2)
@@ -311,7 +311,7 @@ class Vat:
 
     def Click_Input(self):
         try:
-            input = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.click_input_drop_down))
+            input = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.click_input_drop_down))
             time.sleep(.2)
 
             input.click()
@@ -323,7 +323,7 @@ class Vat:
 
     def Vat_Return_Section(self):
         try:
-            vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.vat_return_section))
+            vat = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.vat_return_section))
             time.sleep(.2)
             vat.click()
             time.sleep(.2)
@@ -337,7 +337,7 @@ class Vat:
 
     def Click_Enable_MTD(self):
         try:
-            MTD = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_enable_MTD))
+            MTD = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_enable_MTD))
             time.sleep(.2)
             MTD.click()
             time.sleep(.2)
@@ -352,7 +352,7 @@ class Vat:
 
     def Click_Reauthorized(self):
         try:
-            reauthorized = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_reauthorized))
+            reauthorized = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_reauthorized))
             time.sleep(.2)
             reauthorized.click()
             time.sleep(.2)
@@ -392,7 +392,7 @@ class Vat:
 
     def Click_Continue(self):
         try:
-            cont = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_continue))
+            cont = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_continue))
             time.sleep(.2)
             cont.click()
             time.sleep(.2)
@@ -404,7 +404,7 @@ class Vat:
 
     def Click_HMRC_Online(self):
         try:
-            hmrc = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_HMRC_online))
+            hmrc = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_HMRC_online))
             time.sleep(.2)
             hmrc.click()
             time.sleep(.2)
@@ -418,7 +418,7 @@ class Vat:
 
     def Click_Test_User_Credentials(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             old_windows = self.driver.window_handles.copy()
 
@@ -449,7 +449,7 @@ class Vat:
 
     def Scroll_Down_Page(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
             wait.until(lambda d: "api-test-user" in d.current_url)
 
             self.driver.execute_script("window.scrollBy(0, 500);")
@@ -464,7 +464,7 @@ class Vat:
 
     def Click_Radio_Organization(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             wait.until(lambda d: "api-test-user" in d.current_url)
 
@@ -501,7 +501,7 @@ class Vat:
 
     def Click_Create(self):
         try:
-            create = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_create))
+            create = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_create))
             time.sleep(.2)
             create.click()
             time.sleep(.2)
@@ -513,7 +513,7 @@ class Vat:
 
     def Get_User_ID(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             user_id_element = wait.until(
                 EC.presence_of_element_located(self.user_id_value)
@@ -530,7 +530,7 @@ class Vat:
 
     def Get_User_Pass(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             Password_id_element = wait.until(
                 EC.presence_of_element_located(self.password_id_value)
@@ -565,7 +565,7 @@ class Vat:
 
     def Get_Vat_Registration_Date(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             Vat_Date = wait.until(
                 EC.presence_of_element_located(self.vat_registration_date)
@@ -594,7 +594,7 @@ class Vat:
 
     def Get_Vat_Registration(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             Vat_Reg = wait.until(
                 EC.presence_of_element_located(self.vat_registration_no)
@@ -712,7 +712,7 @@ class Vat:
 
     def Click_SignIn_Button(self):
         try:
-            signIn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_hmrc_submit))
+            signIn = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_hmrc_submit))
             time.sleep(.2)
             signIn.click()
             time.sleep(.2)
@@ -725,7 +725,7 @@ class Vat:
 
     def Give_Permission(self):
         try:
-            permission = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.give_permission))
+            permission = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.give_permission))
             time.sleep(.2)
             permission.click()
             time.sleep(.2)
@@ -794,7 +794,7 @@ class Vat:
 
     def Click_Edit(self):
         try:
-            edit = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_edit))
+            edit = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_edit))
             time.sleep(.2)
             edit.click()
             time.sleep(.2)
@@ -984,7 +984,7 @@ class Vat:
 
     def Click_VAT_return(self):
         try:
-            vat_return = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.vat_return))
+            vat_return = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.vat_return))
             time.sleep(.2)
             vat_return.click()
             time.sleep(.2)
@@ -1000,7 +1000,7 @@ class Vat:
 
     def Click_Add_Vat(self):
         try:
-            vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.add_vate))
+            vat = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.add_vate))
             time.sleep(.2)
             vat.click()
             time.sleep(.2)
@@ -1014,7 +1014,7 @@ class Vat:
 
     def Select_Obligations(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 40)
 
         try:
             # Wait until element is clickable
@@ -1052,7 +1052,7 @@ class Vat:
     def Save_Vat(self):
 
         try:
-            save_vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.save_vat))
+            save_vat = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.save_vat))
             time.sleep(.2)
             save_vat.click()
             time.sleep(.2)
@@ -1075,7 +1075,7 @@ class Vat:
 
     def Edit_Vat_Return(self):
         try:
-            edit_vat = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.edit_vat_return))
+            edit_vat = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.edit_vat_return))
             time.sleep(.2)
             edit_vat.click()
             time.sleep(.2)
@@ -1088,7 +1088,7 @@ class Vat:
 
     def Click_Import(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 40)
 
             import_file = wait.until(
                 EC.element_to_be_clickable(self.click_import)
@@ -1230,7 +1230,7 @@ class Vat:
 
     def Enter_Remarks(self, remarks):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             iframe = wait.until(
                 EC.presence_of_element_located((By.XPATH, "//iframe[contains(@class,'cke_wysiwyg_frame')]"))
@@ -1264,7 +1264,7 @@ class Vat:
 
     def Add_Attachment(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             import_file = wait.until(
                 EC.element_to_be_clickable(self.add_attachment)
@@ -1285,7 +1285,7 @@ class Vat:
 
     def Save_Request(self):
         try:
-            request = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.save_request))
+            request = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.save_request))
             time.sleep(.2)
             request.click()
             time.sleep(.2)
@@ -1298,7 +1298,7 @@ class Vat:
 
     def Click_Review(self):
         try:
-            review = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_review))
+            review = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_review))
             time.sleep(.2)
             review.click()
             time.sleep(.2)
@@ -1314,7 +1314,7 @@ class Vat:
 
     def Click_Download_working(self):
         try:
-            download = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_download_workings))
+            download = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_download_workings))
             time.sleep(.2)
             download.click()
             time.sleep(.2)
@@ -1327,7 +1327,7 @@ class Vat:
 
     def Click_Reject_Button(self):
         try:
-            reject = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_reject_button))
+            reject = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_reject_button))
             time.sleep(.2)
             reject.click()
             time.sleep(.2)
@@ -1340,7 +1340,7 @@ class Vat:
 
     def Click_Reason_Drop_Down(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             reason_input = wait.until(
                 EC.presence_of_element_located(
@@ -1446,7 +1446,7 @@ class Vat:
 
     def Click_Next(self):
         try:
-            next = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_next))
+            next = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_next))
             time.sleep(.2)
             next.click()
             time.sleep(.2)
@@ -1460,7 +1460,7 @@ class Vat:
 
     def Click_Approve(self):
         try:
-            approve = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_approve))
+            approve = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_approve))
             time.sleep(.2)
             approve.click()
             time.sleep(.2)
@@ -1474,7 +1474,7 @@ class Vat:
 
     def Click_Yes(self):
         try:
-            yes = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_yes))
+            yes = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_yes))
             time.sleep(.2)
             yes.click()
             time.sleep(.2)
@@ -1487,7 +1487,7 @@ class Vat:
 
     def E_Sign(self):
         try:
-            sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.e_sign))
+            sign = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.e_sign))
             time.sleep(.2)
             sign .click()
             time.sleep(.2)
@@ -1618,7 +1618,7 @@ class Vat:
 
     def Enter_Remark(self):
         try:
-            e_sign_remark = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.enter_remark_e_sign))
+            e_sign_remark = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.enter_remark_e_sign))
             time.sleep(.2)
             e_sign_remark.send_keys("Only for testing....!!")
             time.sleep(.2)
@@ -1630,7 +1630,7 @@ class Vat:
 
     def Submit(self):
         try:
-            click_submit = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.e_sign_submit))
+            click_submit = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.e_sign_submit))
             time.sleep(.2)
             click_submit.click()
             time.sleep(.2)
@@ -1670,7 +1670,7 @@ class Vat:
 
     def Click_View_Button(self):
         try:
-            view_button = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_view_button))
+            view_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_view_button))
             time.sleep(.2)
             view_button.click()
             time.sleep(.2)
@@ -1717,7 +1717,7 @@ class Vat:
 
     def Click_First_Edit_Button(self):
         try:
-            edit_btn = WebDriverWait(self.driver, 30).until(
+            edit_btn = WebDriverWait(self.driver, 40).until(
                 EC.element_to_be_clickable(self.edit_icon)
             )
 
@@ -1733,7 +1733,7 @@ class Vat:
 
     def Send_mail(self):
         try:
-            mail = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send_mail))
+            mail = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.send_mail))
             time.sleep(.2)
             mail .click()
             time.sleep(.2)
@@ -1746,7 +1746,7 @@ class Vat:
 
     def Click_for_mail_Send(self):
         try:
-            send = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send))
+            send = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.send))
             time.sleep(.2)
             send.click()
             time.sleep(.2)
@@ -1781,7 +1781,7 @@ class Vat:
 
     def Recipient(self):
             try:
-                rec = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(self.recipient))
+                rec = WebDriverWait(self.driver, 40).until(EC.presence_of_element_located(self.recipient))
                 time.sleep(.2)
                 rec.send_keys('kritika.v.nandlal@accenture.com')
                 time.sleep(.2)
@@ -1796,7 +1796,7 @@ class Vat:
 
     def Click_Mail_Icon(self):
         try:
-            icon = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_mail_icon))
+            icon = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_mail_icon))
             time.sleep(.2)
             icon.click()
             time.sleep(.2)
@@ -1863,7 +1863,7 @@ class Vat:
 
     def Click_Get_OTP(self):
         try:
-            otp = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_get_otp))
+            otp = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_get_otp))
             time.sleep(.2)
             otp.click()
             time.sleep(.2)
@@ -1902,7 +1902,7 @@ class Vat:
 
     def Proceed_Securely(self):
         try:
-            proceed = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.proceed_securely))
+            proceed = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.proceed_securely))
             time.sleep(.2)
             proceed.click()
             time.sleep(.2)
@@ -1915,7 +1915,7 @@ class Vat:
 
     def Click_Accept(self):
         try:
-            accept = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_accept))
+            accept = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_accept))
             time.sleep(.2)
             accept.click()
             time.sleep(.2)
@@ -1928,7 +1928,7 @@ class Vat:
 
     def Enter_Name_Signature(self):
         try:
-            sign = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.enter_name_signature))
+            sign = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.enter_name_signature))
             time.sleep(.2)
             sign.send_keys('Testing')
             time.sleep(.2)
@@ -1941,7 +1941,7 @@ class Vat:
 
     def Click_Sing_Button(self):
         try:
-            sign_btn = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_sing_button))
+            sign_btn = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_sing_button))
             time.sleep(.2)
             sign_btn.click()
             time.sleep(.2)
@@ -1955,7 +1955,7 @@ class Vat:
 
     def Click_Okay_And_Return_To_Previous_Tab(self):
         try:
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 30)
 
             # current + previous tabs
             tabs_before_close = self.driver.window_handles.copy()
@@ -2010,7 +2010,7 @@ class Vat:
 
     def Three_dot(self):
         try:
-            dot = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_three_dot))
+            dot = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_three_dot))
             time.sleep(.2)
             dot.click()
             time.sleep(.2)
@@ -2023,7 +2023,7 @@ class Vat:
 
     def Click_Download_Report(self):
         try:
-            report = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.ero_of_download_report))
+            report = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.ero_of_download_report))
             time.sleep(.2)
             report.click()
             time.sleep(.2)
@@ -2036,7 +2036,7 @@ class Vat:
 
     def Submit_VAT_Return(self):
         try:
-            submit_vat = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_vat_return_submit))
+            submit_vat = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_vat_return_submit))
             time.sleep(.2)
             submit_vat.click()
             time.sleep(.2)
@@ -2049,7 +2049,7 @@ class Vat:
 
     def Click_Download(self):
         try:
-            download = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_download))
+            download = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_download))
             time.sleep(.2)
             download.click()
             time.sleep(.2)
@@ -2063,7 +2063,7 @@ class Vat:
     def Refresh_Page(self):
         try:
             self.driver.refresh()
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, 40).until(
                 lambda d: d.execute_script("return document.readyState") == "complete"
             )
             time.sleep(1)
@@ -2076,7 +2076,7 @@ class Vat:
 
     def Click_Submit(self):
         try:
-            submit = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable(self.click_submit))
+            submit = WebDriverWait(self.driver,40).until(EC.element_to_be_clickable(self.click_submit))
             time.sleep(.2)
             submit.click()
             time.sleep(.2)
@@ -2090,7 +2090,7 @@ class Vat:
 
     def Send_Mail_Again_Button(self):
         try:
-            mail_again = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.send_mail_again))
+            mail_again = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.send_mail_again))
             time.sleep(.2)
             mail_again.click()
             time.sleep(.2)
@@ -2103,7 +2103,7 @@ class Vat:
 
     def Download_Response(self):
         try:
-            response = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.download_response))
+            response = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.download_response))
             time.sleep(.2)
             response.click()
             time.sleep(.2)
@@ -2116,7 +2116,7 @@ class Vat:
 
     def Click_Cancel_Vat_Submission_Pop_up(self):
         try:
-            response = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_cross_vat_submission_pop_up))
+            response = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_cross_vat_submission_pop_up))
             time.sleep(.2)
             response.click()
             time.sleep(.2)
@@ -2169,7 +2169,7 @@ class Vat:
 
     def Click_Back_Button(self):
         try:
-            back_button = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.click_back_button))
+            back_button = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_back_button))
             time.sleep(.2)
             back_button.click()
             time.sleep(.2)
@@ -2181,7 +2181,7 @@ class Vat:
 
 
     def wait_for_spinner_to_disappear(self):
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(self.driver, 40)
         try:
             wait.until(
                 EC.invisibility_of_element_located(
@@ -2195,7 +2195,7 @@ class Vat:
 
     def Click_mail_icon_after_submit(self):
         try:
-            wait = WebDriverWait(self.driver, 30)
+            wait = WebDriverWait(self.driver, 40)
 
             # 1. Wait until loader/spinner disappears
             self.wait_for_spinner_to_disappear()
@@ -2233,7 +2233,7 @@ class Vat:
 
     def Click_On_Menu(self):
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(self.driver, 40).until(
                 EC.invisibility_of_element_located((By.CLASS_NAME, "ant-spin-spinning"))
             )
 
@@ -2251,7 +2251,7 @@ class Vat:
 
     def Select_CRM(self):
         try:
-            crm = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.select_crm))
+            crm = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.select_crm))
             time.sleep(.2)
             crm.click()
             time.sleep(.2)
@@ -2264,7 +2264,7 @@ class Vat:
 
     def Select_E_Signature(self):
         try:
-            e_sign = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_e_signatures))
+            e_sign = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable(self.click_e_signatures))
             time.sleep(.2)
             e_sign.click()
             time.sleep(.2)

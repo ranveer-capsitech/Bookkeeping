@@ -1,3 +1,4 @@
+import os
 import random
 
 import pyautogui
@@ -44,7 +45,7 @@ class Banking_Credit_card:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='2018 LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -264,7 +265,7 @@ class Banking_Credit_card:
 
 
 
-    def Enter_Company(self, company_name="2018 LIMITED", timeout= 30, os=None):
+    def Enter_Company(self, company_name="RDX LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -1208,39 +1209,98 @@ class Banking_Credit_card:
 
             time.sleep(2)
 
-
     def Click_Upload_File(self):
         try:
-            wait = WebDriverWait(self.driver, 40)
-
-            file_path = r"C:\Users\CT_USER\Desktop\test\Bank Credit Card.csv"
-
-            # Find actual file input
-            file_input = wait.until(
-                EC.presence_of_element_located((
-                    By.XPATH,
-                    "//div[@role='dialog' and .//*[contains(text(),'Bank Transactions')]]//input[@type='file']"
-                ))
+            wait = WebDriverWait(
+                self.driver,
+                40,
+                ignored_exceptions=(StaleElementReferenceException,)
             )
 
-            # Make hidden input visible
-            self.driver.execute_script("""
-                arguments[0].style.display = 'block';
-                arguments[0].style.visibility = 'visible';
-                arguments[0].style.opacity = 1;
-                arguments[0].removeAttribute('hidden');
-            """, file_input)
+            file_path = r"C:\Users\CT_USER\Desktop\test\Bank Credit Card.csv"
+            # file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement Credit.csv"
 
-            time.sleep(1)
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"File not found: {file_path}")
 
-            # Upload file
-            file_input.send_keys(file_path)
+            file_input_xpath = (
+                "//div[@role='dialog' and .//*[contains(normalize-space(),'Bank Transactions')]]"
+                "//input[@type='file']"
+            )
 
-            print("File uploaded successfully.....!!")
+            for attempt in range(5):
+                try:
+                    file_input = wait.until(
+                        EC.presence_of_element_located((By.XPATH, file_input_xpath))
+                    )
+
+                    self.driver.execute_script("""
+                        arguments[0].style.display = 'block';
+                        arguments[0].style.visibility = 'visible';
+                        arguments[0].style.opacity = '1';
+                        arguments[0].style.height = '1px';
+                        arguments[0].style.width = '1px';
+                        arguments[0].style.position = 'relative';
+                        arguments[0].removeAttribute('hidden');
+                        arguments[0].removeAttribute('disabled');
+                    """, file_input)
+
+                    time.sleep(0.5)
+
+                    # Re-find after DOM change
+                    file_input = wait.until(
+                        EC.presence_of_element_located((By.XPATH, file_input_xpath))
+                    )
+
+                    file_input.send_keys(file_path)
+
+                    print("File uploaded successfully.....!!")
+                    return True
+
+                except StaleElementReferenceException:
+                    print(f"Stale file input retry: {attempt + 1}/5")
+                    time.sleep(1)
+
+            raise Exception("File input remained stale after retries.")
 
         except Exception as e:
             print(f"Error while uploading file: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("upload_file_error.png")
             raise
+
+
+    # def Click_Upload_File(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         file_path = r"C:\Users\CT_USER\Desktop\test\Bank Credit Card.csv"
+    #
+    #         # Find actual file input
+    #         file_input = wait.until(
+    #             EC.presence_of_element_located((
+    #                 By.XPATH,
+    #                 "//div[@role='dialog' and .//*[contains(text(),'Bank Transactions')]]//input[@type='file']"
+    #             ))
+    #         )
+    #
+    #         # Make hidden input visible
+    #         self.driver.execute_script("""
+    #             arguments[0].style.display = 'block';
+    #             arguments[0].style.visibility = 'visible';
+    #             arguments[0].style.opacity = 1;
+    #             arguments[0].removeAttribute('hidden');
+    #         """, file_input)
+    #
+    #         time.sleep(1)
+    #
+    #         # Upload file
+    #         file_input.send_keys(file_path)
+    #
+    #         print("File uploaded successfully.....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error while uploading file: {type(e).__name__} - {e}")
+    #         raise
 
 
 

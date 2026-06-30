@@ -159,8 +159,6 @@ class Login(unittest.TestCase):
 
 
 
-
-
             client_section.Check_Search_Functionality()
             time.sleep(.2)
 
