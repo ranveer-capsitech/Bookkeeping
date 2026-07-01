@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Update code according regression">
-      <change afterPath="$PROJECT_DIR$/Details_Explain_Saving_Account_Page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/Detail_Explain_Current_Account_Page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/25_Detail_Explain_Current_Account_Test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/26_Details_Explain_Saving_Account_Test.py" afterDir="false" />
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Details explain saving and current account">
+      <change afterPath="$PROJECT_DIR$/Pages/Details_Explain_Filtering_Function_Page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/27_Details_Explain_Filtering_Function_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +122,7 @@
     "Python tests.Python tests in 24_Banking_Detailed_MoneyIn_Test.py.executor": "Run",
     "Python tests.Python tests in 25_Detail_Explain_Current_Account_Test.py.executor": "Run",
     "Python tests.Python tests in 26_Details_Explain_Saving_Account_Test.py.executor": "Run",
+    "Python tests.Python tests in 27_Details_Explain_Filtering_Function_Test.py.executor": "Run",
     "Python tests.Python tests in 29_Reimbursements_Test.py.executor": "Run",
     "Python tests.Python tests in 2_ClientSell_Test.py.executor": "Run",
     "Python tests.Python tests in 2_Test_ClientSell.py.executor": "Run",
@@ -293,14 +289,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00015" summary="mileages_section">
-      <option name="closed" value="true" />
-      <created>1763712395222</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1763712395222</updated>
     </task>
     <task id="LOCAL-00016" summary="Journals">
       <option name="closed" value="true" />
@@ -686,7 +674,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782198133270</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Details explain saving and current account">
+      <option name="closed" value="true" />
+      <created>1782827034211</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1782827034211</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -701,7 +697,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mileages_section" />
     <MESSAGE value="Journals" />
     <MESSAGE value="Dividend" />
     <MESSAGE value="VAT-Return" />
@@ -726,6 +721,7 @@
     <MESSAGE value="Completed manual testing of all Banking Details functionalities, including Find Match, Transfer, and Explanation modules. Covered both Money In and Money Out transaction flows." />
     <MESSAGE value="clean-up" />
     <MESSAGE value="Update code according regression" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update code according regression" />
+    <MESSAGE value="Details explain saving and current account" />
+    <option name="LAST_COMMIT_MESSAGE" value="Details explain saving and current account" />
   </component>
 </project>
