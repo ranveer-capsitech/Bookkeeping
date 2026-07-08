@@ -371,7 +371,6 @@ class Login(unittest.TestCase):
         time.sleep(.5)
 
 
-
 # ------------------------------Go - to - CRM ---------------------------------------------------------------------------
 
 
@@ -402,10 +401,3 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Download_File()
         time.sleep(2)
-
-
-
-
-
-
-

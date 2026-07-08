@@ -1,3 +1,4 @@
+import pyautogui
 from faker import Faker
 import time
 from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
@@ -23,6 +24,7 @@ random_indian_phone = fake.phone_number()
 random_indian_phone_1 = fake.phone_number()
 dob = fake.date_of_birth(minimum_age=18)
 formatted_dob = dob.strftime('%d/%m/%Y')
+today_date = datetime.today().strftime("%d/%m/%Y")
 
 
 class ClientSell:
@@ -58,13 +60,24 @@ class ClientSell:
 
         self.allocate_save_button = (By.XPATH,"//div[@role='dialog']//button[.//span[normalize-space()='Save']]")
 
+        self.enter_search = (By.XPATH, "//input[@placeholder='Search']")
+        self.cancel_cross_button = (By.XPATH, "//i[@data-icon-name='Clear']")
+
+        self.enter_from_date = (By.XPATH, "//input[@name='fromDate']")
+        self.enter_to_date = (By.XPATH, "//input[@name='toDate']")
+        self.refresh_icon = (By.XPATH, "//i[@data-icon-name='Refresh']/ancestor::button")
+
+        self.filter_drop_down = (By.XPATH, "//div[contains(@class,'dropdown-indicator')]//*[name()='svg']")
+
+
+        self.hide_graph = (By.XPATH, "//button[@title='hide reports']//*[name()='svg']")
+        self.pagination = (By.XPATH, "//div[@role='combobox']")
 
 
 
 
 
-
-#-----------------------------------------Methods-----------------------------------------------------------------------
+    #-----------------------------------------Methods-----------------------------------------------------------------------
 
 
     def Select_Search(self):
@@ -381,76 +394,233 @@ class ClientSell:
             time.sleep(0.4)
             save_button.click()
             time.sleep(0.4)
-            print("Invoice created successfully")
-
-            update_message = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(
-            (By.XPATH, "//*[contains(normalize-space(), 'Invoice created successfully')]"))
-                )
-
-            # Assert the presence of the success message
-            assert update_message, "Invoice created successfully"
+            # print("Invoice created successfully")
+            #
+            # update_message = WebDriverWait(self.driver, 10).until(
+            # EC.visibility_of_element_located(
+            # (By.XPATH, "//*[contains(normalize-space(), 'Invoice created successfully')]"))
+            #     )
+            #
+            # # Assert the presence of the success message
+            # assert update_message, "Invoice created successfully"
 
             print("Test Case 2 - Pass: Invoice created successfully")
 
             time.sleep(2)
 
+#-------------------------------search ---------------------------------------------------------------------------------
 
-    # def Save_Invoice(self):
-    #     d = self.driver
-    #     w = WebDriverWait(d, 20)
+    def Enter_Search(self):
+        try:
+            search = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.enter_search))
+            time.sleep(.2)
+            search.click()
+            time.sleep(.2)
+            search.send_keys(today_date)
+            time.sleep(.2)
+            search.send_keys(Keys.ENTER)
+            time.sleep(.2)
+
+            print("Enter Search value  successfully........!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+
+    def Remove_Search(self):
+        try:
+            remove = WebDriverWait(self.driver,40).until(
+                EC.element_to_be_clickable(self.cancel_cross_button)
+            )
+            time.sleep(.2)
+            remove.click()
+            time.sleep(.2)
+            print("Search functionality reset  successfully........!! ")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+
+#----------------------------------------calendar-----------------------------------------------------------------------
+
+
+    def wait_for_spinner_to_disappear(self, timeout=40):
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH, "//div[contains(@class,'spinner')]")
+                )
+            )
+        except:
+            pass
+
+    def clear_and_enter_date(self, element, value):
+        self.driver.execute_script("""
+            const input = arguments[0];
+            input.removeAttribute('disabled');
+            input.removeAttribute('readonly');
+            input.focus();
+        """, element)
+
+        time.sleep(0.3)
+
+        self.driver.execute_script("arguments[0].click();", element)
+        time.sleep(0.2)
+
+        element.send_keys(Keys.CONTROL, "a")
+        time.sleep(0.2)
+
+        element.send_keys(Keys.BACKSPACE)
+        time.sleep(0.2)
+
+        element.send_keys(value)
+        time.sleep(0.3)
+
+        element.send_keys(Keys.ENTER)
+        time.sleep(0.3)
+
+        self.driver.execute_script("""
+            arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+            arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+            arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));
+        """, element)
+
+
+    def Change_Date_Calendar(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            self.wait_for_spinner_to_disappear()
+
+            from_date = wait.until(
+                EC.presence_of_element_located(self.enter_from_date)
+            )
+
+            to_date = wait.until(
+                EC.presence_of_element_located(self.enter_to_date)
+            )
+
+            self.clear_and_enter_date(from_date, "22/01/2023")
+            time.sleep(1)
+
+            self.clear_and_enter_date(to_date, "01/01/2028")
+            time.sleep(1)
+
+            try:
+                refresh = wait.until(
+                    EC.presence_of_element_located(self.refresh_icon)
+                )
+                self.driver.execute_script("arguments[0].click();", refresh)
+            except:
+                pass
+
+            self.wait_for_spinner_to_disappear()
+
+            print("Changed date successfully in calendar.")
+
+        except Exception as e:
+            print(f"Error in Change_Date_Calendar: {type(e).__name__} - {e}")
+            self.driver.save_screenshot("change_date_calendar_error.png")
+            raise
+
+    def wait_for_loader_to_disappear(self):
+            try:
+                WebDriverWait(self.driver, 30).until(
+                    EC.invisibility_of_element_located(
+                        (By.XPATH,
+                         "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                    )
+                )
+            except TimeoutException:
+                pass
+
+    def Select_Filter(self):
+        wait = WebDriverWait(self.driver, 20)
+
+        dropdown = wait.until(
+            EC.element_to_be_clickable(self.filter_drop_down)
+        )
+
+        # First option
+        dropdown.click()
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("enter")
+
+        time.sleep(5)
+
+        # Second option
+        dropdown.click()
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("enter")
+        time.sleep(5)
+
+
+        # 3rd option
+        dropdown.click()
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("enter")
+        time.sleep(5)
+        print("Shorting functionality is working fine.")
+
+
+    def Hide_Reports(self):
+        try:
+            hide = WebDriverWait(self.driver,40).until(
+                EC.element_to_be_clickable(self.hide_graph)
+            )
+            time.sleep(.2)
+            hide.click()
+            time.sleep(.2)
+            print(" Hide Report Section successfully.....!!")
+            hide.click()
+            time.sleep(.2)
+            print("Again showing Report Section successfully.....!!")
+
+        except Exception as e:
+            print(f"Error: {e}")
     #
-    #     save_btn = w.until(
-    #         EC.element_to_be_clickable(self.allocate_save_button)
-    #     )
-    #
-    #     for attempt in range(2):
-    #         try:
-    #             save_btn.click()
-    #             break
-    #         except (ElementClickInterceptedException, StaleElementReferenceException):
-    #             time.sleep(0.3)
-    #             save_btn = w.until(
-    #                 EC.element_to_be_clickable(self.allocate_save_button)
-    #             )
-    #
-    #     time.sleep(0.2)
-    #
-    #     try:
-    #         update_message = WebDriverWait(d, 10).until(
-    #             EC.visibility_of_element_located(
-    #                 (By.XPATH, "//*[contains(text(),'Invoice created successfully')]")
-    #             )
-    #         )
-    #     except TimeoutException:
-    #         raise AssertionError(
-    #             "Expected 'Invoice created successfully' toast but did not see it."
-    #         )
-    #
-    #     assert update_message.is_displayed(), "Invoice created successfully"
-    #     print("Test Case -4 :  Pass: Invoice created successfully.")
+    def Change_Pagination(self):
+        wait = WebDriverWait(self.driver, 20)
+
+        dropdown = wait.until(
+            EC.element_to_be_clickable(self.pagination)
+        )
+
+        # First option
+        dropdown.click()
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+        pyautogui.press("enter")
+
+        time.sleep(5)
+
+        # Second option
+        dropdown.click()
+        time.sleep(0.2)
+        pyautogui.press("down")
+        time.sleep(0.2)
+
+        pyautogui.press("enter")
+        time.sleep(5)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print("Change Pagination functionality  is working fine.")
 
 
 

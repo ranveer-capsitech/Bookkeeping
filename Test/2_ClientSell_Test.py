@@ -105,8 +105,31 @@ class Login(unittest.TestCase):
 
         client_section.Click_Save()
         time.sleep(2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
-        # client_section.Save_Invoice()
-        # time.sleep(.2)
+        client_section.Enter_Search()
+        time.sleep(.5)
+        client_section. Remove_Search()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.wait_for_spinner_to_disappear()
+        time.sleep(.2)
+
+        client_section.Change_Date_Calendar()
+        time.sleep(1)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Select_Filter()
+        time.sleep(.2)
+        client_section.Hide_Reports()
+        time.sleep(.2)
+        client_section.Change_Pagination()
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
 
 

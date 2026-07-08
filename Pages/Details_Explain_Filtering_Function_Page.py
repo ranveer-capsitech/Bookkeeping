@@ -236,6 +236,8 @@ class Detail_Explain_Filter:
         self.cancel_cross_button = (By.XPATH, "//i[@data-icon-name='Clear']")
 
 
+
+
     #-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1477,6 +1479,7 @@ class Detail_Explain_Filter:
 
             print("Magnifier icon clicked successfully")
 
+
     def Click_cross_icon(self):
             try:
                 cross = WebDriverWait(self.driver, 40).until(
@@ -1492,8 +1495,7 @@ class Detail_Explain_Filter:
 
                 time.sleep(2)
 
-
-
+#---------------------------------------search----------------------------------------------------------------------------
 
     def Enter_Search(self):
         try:
@@ -1527,22 +1529,4 @@ class Detail_Explain_Filter:
 
         except Exception as e:
             print(f"Error: {e}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
