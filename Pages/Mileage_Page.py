@@ -351,7 +351,7 @@ class Mileage:
                 save_btn.click()
                 time.sleep(2)
 
-                print("Save button clicked!")
+                print("Save button clicked Successfully.....!")
 
                 try:
                     popup = WebDriverWait(self.driver, 30).until(

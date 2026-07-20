@@ -1547,6 +1547,74 @@ class Detail_Explain_Current_Account:
 
             time.sleep(2)
 
+    # def Click_Match(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 40)
+    #
+    #     match_locator = (
+    #         By.XPATH,
+    #         "//span[normalize-space()='Match']/ancestor::button[1]"
+    #     )
+    #
+    #     overlay_locator = (
+    #         By.CSS_SELECTOR,
+    #         "div.ms-Overlay.ms-Overlay--dark"
+    #     )
+    #
+    #     try:
+    #         # Wait until the dark Fluent UI overlay disappears
+    #         wait.until(
+    #             EC.invisibility_of_element_located(overlay_locator)
+    #         )
+    #
+    #         # Locate the actual button, not the inner span
+    #         match_button = wait.until(
+    #             EC.presence_of_element_located(match_locator)
+    #         )
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             match_button
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         # Re-check overlay after scrolling
+    #         wait.until(
+    #             EC.invisibility_of_element_located(overlay_locator)
+    #         )
+    #
+    #         # Re-find element after DOM changes
+    #         match_button = wait.until(
+    #             EC.element_to_be_clickable(match_locator)
+    #         )
+    #
+    #         try:
+    #             match_button.click()
+    #
+    #         except (ElementClickInterceptedException, StaleElementReferenceException):
+    #             # Re-find and use JS click as fallback
+    #             match_button = wait.until(
+    #                 EC.presence_of_element_located(match_locator)
+    #             )
+    #
+    #             driver.execute_script(
+    #                 "arguments[0].click();",
+    #                 match_button
+    #             )
+    #
+    #         print("Match button clicked successfully.")
+    #
+    #     except TimeoutException:
+    #         driver.save_screenshot("click_match_timeout.png")
+    #         print("Match button could not be clicked because the overlay did not disappear.")
+    #         raise
+    #
+    #     except Exception as e:
+    #         driver.save_screenshot("click_match_error.png")
+    #         print(f"Error while clicking Match button: {e}")
+    #         raise
+
     def Click_Attachment_Icon(self):
         try:
             attachment = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_attachment_icon))

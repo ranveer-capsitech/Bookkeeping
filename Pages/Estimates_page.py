@@ -2,7 +2,7 @@ import os
 
 from faker import Faker
 import time
-from selenium.common import StaleElementReferenceException, ElementNotInteractableException
+from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -60,6 +60,10 @@ class Estimates:
                           "//div[contains(@class,'ms-Dialog-main')]//button[.//span[normalize-space()='Save']]")
 
         self.clicks_save_estimate = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+
+        self.click_download_icon = (By.XPATH, "(//button[.//i[@data-icon-name='BkInstallation']])[1]")
+
+        self.create_direct_invoice = (By.XPATH, "(//button[@id='btn-btnCreateInvoice'])[1]")
 
 
 
@@ -342,6 +346,63 @@ class Estimates:
             save_button.click()
             time.sleep(0.4)
             print(" Test Case -5 :  Pass: -  Estimate  saved successfully.....!!")
+
+    def Download_Invoice(self):
+        try:
+            debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
+            time.sleep(.2)
+            debts.click()
+            time.sleep(.5)
+            print(" download file successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Create_Direct_Invoice(self):
+        try:
+            invoice = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.create_direct_invoice))
+            time.sleep(.2)
+            invoice.click()
+            time.sleep(.5)
+            print("Create Direct Invoice successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
+
+    def Save_Direct_Invoice(self):
+
+
+            wait = WebDriverWait(self.driver, 30)
+
+            try:
+
+                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+            except:
+                pass
+
+            save_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Save']/ancestor::button"))
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.4)
+            save_button.click()
+            time.sleep(0.4)
+            print(" Direct invoice   saved from estimate section successfully.....!!")
+
+
+
+
 
 
 

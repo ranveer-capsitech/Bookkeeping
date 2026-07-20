@@ -2,9 +2,10 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from Detail_Explain_Current_Account_Page import Detail_Explain_Current_Account
-from Details_Explain_Filtering_Function_Page import Detail_Explain_Filter
-from Details_Explain_Saving_Account_Page import Detail_Explain_Savingt_Account
+
+from Pages.Details_Explain_Filtering_Function_Page import Detail_Explain_Filter
+
+
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
 import pytest
@@ -155,12 +156,16 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.wait_for_spinner_to_disappear()
         time.sleep(.2)
+
         client_section.Select_First_Option()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
         client_section.Click_Apply_Button()
         time.sleep(3)
         client_section.wait_for_spinner_to_disappear()
         time.sleep(2)
+
 
         client_section.Click_cross_icon()
         time.sleep(2)
@@ -191,6 +196,8 @@ class Login(unittest.TestCase):
         client_section.wait_for_spinner_to_disappear()
         time.sleep(.2)
         client_section.Select_First_Option()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
         client_section.Click_Apply_Button()
         time.sleep(3)
@@ -226,6 +233,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_First_Option()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
         client_section.Click_Apply_Button()
         time.sleep(3)
         client_section.wait_for_spinner_to_disappear()
@@ -260,6 +269,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_First_Option()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
         client_section.Click_Apply_Button()
         time.sleep(5)
         client_section.wait_for_spinner_to_disappear()
@@ -279,4 +290,19 @@ class Login(unittest.TestCase):
 
         client_section.click_magnifier_icon()
         time.sleep(2)
-    #
+
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()

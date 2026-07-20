@@ -95,6 +95,35 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         client_section.Click_Save_Estimation()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Download_Invoice()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Create_Direct_Invoice()
+        time.sleep(.2)
+        client_section.Save_Direct_Invoice()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()

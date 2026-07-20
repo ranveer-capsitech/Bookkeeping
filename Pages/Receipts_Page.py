@@ -1,7 +1,11 @@
 
 import random
+
+import pyautogui
 from faker import Faker
 import time
+
+from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -63,6 +67,8 @@ class Receipts:
 
 
         self.save_receipts = (By.XPATH, "//button[.//span[normalize-space()='Save'] and not(contains(.,'Save & New'))]")
+
+        self.click_download_icon = (By.XPATH, "(//button[.//i[@data-icon-name='BkInstallation']])[1]")
 
 
 
@@ -241,23 +247,10 @@ class Receipts:
         except Exception as e:
              print(f"Error on Click : {e}")
 
-    # def Select_Method(self):
-    #     # try:
-    #         select_method = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.method))
-    #         time.sleep(.2)
-    #         select_method.click()
-    #         time.sleep(.2)
-    #         select_method.send_keys(Keys.ARROW_DOWN)
-    #         time.sleep(.2)
-    #         select_method.send_keys(Keys.ENTER)
-    #         time.sleep(.2)
-    #         print("Method selected successfully....!!")
-    #
-    #     # except Exception as e:
-    #     #     print(f"Error on Click : {e}")
 
 
-    def Select_Method(self, method_text="Bank Transfer"):
+
+    def Select_Method(self):
             driver = self.driver
             wait = WebDriverWait(driver, 30)
 
@@ -267,18 +260,25 @@ class Receipts:
             ))
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
             control.click()
+            time.sleep(.2)
+            pyautogui.press('down')
+            time.sleep(.2)
+            pyautogui.press('enter')
+            time.sleep(.2)
+            print("Selected method successfully......!!")
+
 
             # 2) type into the combobox input (NOT into div)
-            input_box = wait.until(EC.visibility_of_element_located(
-                (By.XPATH, "//label[normalize-space()='Method']/following::input[@role='combobox'][1]")
-            ))
-            input_box.send_keys(Keys.CONTROL, "a")
-            input_box.send_keys(Keys.BACKSPACE)
-            input_box.send_keys(method_text)
-            time.sleep(0.2)
-            input_box.send_keys(Keys.ENTER)
+            # input_box = wait.until(EC.visibility_of_element_located(
+            #     (By.XPATH, "//label[normalize-space()='Method']/following::input[@role='combobox'][1]")
+            # ))
+            # input_box.send_keys(Keys.CONTROL, "a")
+            # input_box.send_keys(Keys.BACKSPACE)
+            # input_box.send_keys(method_text)
+            # time.sleep(0.2)
+            # input_box.send_keys(Keys.ENTER)
 
-            print(f"Method selected: {method_text}")
+            # print(f"Method selected: {method_text}")
 
 
     def Add_Attachment(self):
@@ -343,27 +343,158 @@ class Receipts:
 
 
 
+
+    # def Save_Receipt(self):
+    #     wait = WebDriverWait(self.driver, 30)
+    #
+    #     try:
+    #         wait.until(
+    #             EC.invisibility_of_element_located(
+    #                 (By.CSS_SELECTOR, ".ant-spin-spinning")
+    #             )
+    #         )
+    #     except:
+    #         pass
+    #
+    #     save_button = wait.until(
+    #         EC.element_to_be_clickable(self.save_receipts)
+    #     )
+    #
+    #     self.driver.execute_script(
+    #         "arguments[0].scrollIntoView({block:'center'});",
+    #         save_button
+    #     )
+    #
+    #     save_button.click()
+    #
+    #     # Verify click worked
+    #     wait.until(
+    #         EC.staleness_of(save_button)  # button removed from DOM
+    #     )
+    #
+    #     print("Receipt saved successfully.")
     def Save_Receipt(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
 
-
-            wait = WebDriverWait(self.driver, 30)
-
+        try:
+            # Wait for loader to disappear before clicking
             try:
-
-                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
-            except:
+                wait.until(
+                    EC.invisibility_of_element_located(
+                        (By.CSS_SELECTOR, ".ant-spin-spinning")
+                    )
+                )
+            except TimeoutException:
                 pass
 
             save_button = wait.until(
-            EC.element_to_be_clickable(self.save_receipts)
+                EC.element_to_be_clickable(self.save_receipts)
             )
 
-            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
-            time.sleep(0.4)
-            save_button.click()
-            time.sleep(0.4)
-            print(" Test Case -5 :  Pass: -  Receipt saved successfully.....!!")
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                save_button
+            )
 
+            time.sleep(0.4)
+
+            try:
+                save_button.click()
+            except (ElementClickInterceptedException, StaleElementReferenceException):
+                save_button = wait.until(
+                    EC.presence_of_element_located(self.save_receipts)
+                )
+                driver.execute_script("arguments[0].click();", save_button)
+
+            print("Save Receipt button clicked successfully.")
+
+            # Verification options
+            verified = False
+
+            # 1. Check success message
+            try:
+                message = WebDriverWait(driver, 10).until(
+                    EC.visibility_of_element_located((
+                        By.XPATH,
+                        "//*[contains(normalize-space(.),'Receipt saved successfully') "
+                        "or contains(normalize-space(.),'created successfully') "
+                        "or contains(normalize-space(.),'saved successfully')]"
+                    ))
+                )
+                print(f"Save verified by message: {message.text}")
+                verified = True
+            except TimeoutException:
+                pass
+
+            # 2. Check dialog/form closes
+            if not verified:
+                try:
+                    WebDriverWait(driver, 10).until(
+                        EC.invisibility_of_element_located(
+                            self.save_receipts
+                        )
+                    )
+                    print("Save verified: Receipt form/dialog closed.")
+                    verified = True
+                except TimeoutException:
+                    pass
+
+            # 3. Check loader appears and disappears
+            if not verified:
+                try:
+                    short_wait = WebDriverWait(driver, 5)
+
+                    short_wait.until(
+                        EC.visibility_of_element_located(
+                            (By.CSS_SELECTOR, ".ant-spin-spinning")
+                        )
+                    )
+
+                    wait.until(
+                        EC.invisibility_of_element_located(
+                            (By.CSS_SELECTOR, ".ant-spin-spinning")
+                        )
+                    )
+
+                    print("Save verified through loader completion.")
+                    verified = True
+                except TimeoutException:
+                    pass
+
+            if verified:
+                print("Test Case - 5: Pass - Receipt saved successfully.")
+            else:
+                print(
+                    "Save button was clicked, but no confirmation message, "
+                    "dialog closure, or loader activity was detected."
+                )
+
+        except Exception as e:
+            driver.save_screenshot("save_receipt_error.png")
+            print(f"Error while saving receipt: {e}")
+            raise
+
+    def Download_Invoice(self):
+        try:
+            debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
+            time.sleep(.2)
+            debts.click()
+            time.sleep(.5)
+            print("Download file successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
 
 
 

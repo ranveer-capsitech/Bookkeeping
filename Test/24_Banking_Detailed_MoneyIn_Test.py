@@ -3,7 +3,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Banking_Detailed_MoneyIn_Page import Banking_detailed_money_in
+
+
+from Pages.Banking_Detailed_MoneyIn_Page import Banking_detailed_money_in
 
 from configReader import ConfigReader
 
@@ -215,7 +217,11 @@ class Login(unittest.TestCase):
 
         client_section.Money_Out_Value()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
         client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
         client_section.Click_Contact_Dropdown_For_Money_In()
         time.sleep(1)
@@ -228,7 +234,11 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Enter_Allocated_Amount()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
         client_section.Click_Match()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
 
@@ -255,6 +265,20 @@ class Login(unittest.TestCase):
 
 
 
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 
 

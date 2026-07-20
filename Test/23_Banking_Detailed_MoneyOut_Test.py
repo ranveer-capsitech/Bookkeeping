@@ -264,6 +264,20 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 #---------------------------------------------2nd-----------------------------------------------------------------------
 
 

@@ -193,9 +193,9 @@ class Purchase_PO:
     def Add_Credit_Note(self):
         try:
             credit = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.credit_notes))
-            time.sleep(.3)
+            time.sleep(.2)
             credit.click()
-            time.sleep(.3)
+            time.sleep(.2)
 
             print("Click for add credit  successfully....!!")
         except Exception as e:
@@ -362,21 +362,6 @@ class Purchase_PO:
             raise
 
 
-    # def Enter_Discount(self):
-    #     driver = self.driver
-    #     wait = WebDriverWait(self.driver, 30)
-    #
-    #     try:
-    #         control = wait.until(EC.visibility_of_element_located(self.add_discount))
-    #         time.sleep(.2)
-    #         control.click()
-    #         time.sleep(.2)
-    #         control.send_keys("10")
-    #         time.sleep(.2)
-    #         print("Discount added successfully....!!")
-    #     except Exception as e:
-    #
-    #         print(f"Error on Click : {e}")
 
 
     def Click_Enter_Notes(self):

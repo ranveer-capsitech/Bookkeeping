@@ -42,7 +42,7 @@ class Detail_Explain_Filter:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         # self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
         self.click_input_drop_down = (By.XPATH,
@@ -193,8 +193,17 @@ class Detail_Explain_Filter:
         self.first_option = (By.XPATH,
                              "(//div[@data-is-focusable='true'][normalize-space()='Select all']/following-sibling::div[@data-is-focusable='true'])[1]")
         self.second_option = (By.XPATH, "//div[@data-is-focusable='true' and normalize-space()='06/04/2024']")
-        self.click_apply_button = (By.XPATH,
-                                   "//button[contains(@class,'ms-Button--primary') and normalize-space()='Apply']")
+        # self.click_apply_button = (By.XPATH,
+        #                            "//button[contains(@class,'ms-Button--primary') and normalize-space()='Apply']")
+
+        self.click_apply_button = (
+            By.XPATH,
+            "//button[contains(@class,'ms-Button--primary') "
+            "and not(@disabled) "
+            "and (@aria-disabled!='true') "
+            "and (.//span[normalize-space()='Apply'] "
+            "or normalize-space(.)='Apply')]"
+        )
 
         self.description_filter_icon = (By.XPATH, "//i[@id='desc-string-filter' and @data-icon-name='ChevronDown']")
         self.a_to_z = (By.XPATH, "//div[@data-is-focusable='true']//div[normalize-space()='A to Z']")
@@ -251,7 +260,7 @@ class Detail_Explain_Filter:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="RDX LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
             # def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
             driver = self.driver
@@ -1262,20 +1271,220 @@ class Detail_Explain_Filter:
 
                 time.sleep(2)
 
+
+
+    # def Select_First_Option(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 50)
+    #
+    #     try:
+    #         # Wait for any loading spinner/overlay to disappear
+    #         try:
+    #             wait.until(
+    #                 EC.invisibility_of_element_located(
+    #                     (By.CSS_SELECTOR, ".ant-spin-spinning, .ms-Overlay")
+    #                 )
+    #             )
+    #         except TimeoutException:
+    #             pass
+    #
+    #         # Retry because React/Fluent UI often refreshes the DOM
+    #         for _ in range(3):
+    #             try:
+    #                 option = wait.until(
+    #                     EC.presence_of_element_located(self.first_option)
+    #                 )
+    #
+    #                 driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center'});",
+    #                     option
+    #                 )
+    #
+    #                 time.sleep(0.5)
+    #
+    #                 try:
+    #                     wait.until(
+    #                         EC.element_to_be_clickable(self.first_option)
+    #                     ).click()
+    #                 except (ElementClickInterceptedException, StaleElementReferenceException):
+    #                     option = wait.until(
+    #                         EC.presence_of_element_located(self.first_option)
+    #                     )
+    #                     driver.execute_script("arguments[0].click();", option)
+    #
+    #                 print("Select first option successfully.")
+    #                 return
+    #
+    #             except StaleElementReferenceException:
+    #                 time.sleep(0.5)
+    #                 continue
+    #
+    #         raise TimeoutException("Could not select the first option.")
+    #
+    #     except Exception as e:
+    #         driver.save_screenshot("select_first_option_error.png")
+    #         print(f"Error while selecting first option: {e}")
+    #         raise
+
     def Select_First_Option(self):
-            # try:
-            option = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.first_option))
-            time.sleep(.2)
-            option.click()
-            time.sleep(.2)
+        driver = self.driver
 
-            print("Select first option successfully........!! ")
+        wait = WebDriverWait(
+            driver,
+            40,
+            poll_frequency=0.3,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
 
-            # except Exception as e:
-            #     print(f"Error: {e}")
+        def find_first_option(d):
+            # Find only visible Fluent UI dropdown/callout containers
+            popups = d.find_elements(
+                By.XPATH,
+                """
+                //*[
+                    @role='listbox'
+                    or contains(@class,'ms-Callout')
+                    or contains(@class,'ms-Dropdown-callout')
+                    or contains(@class,'ms-ContextualMenu')
+                ]
+                """
+            )
 
-            time.sleep(2)
+            for popup in popups:
+                try:
+                    if not popup.is_displayed():
+                        continue
+
+                    options = popup.find_elements(
+                        By.XPATH,
+                        """
+                        .//*[
+                            @role='option'
+                            or @role='menuitemcheckbox'
+                            or @data-is-focusable='true'
+                        ]
+                        """
+                    )
+
+                    for option in options:
+                        try:
+                            if not option.is_displayed():
+                                continue
+
+                            if not option.is_enabled():
+                                continue
+
+                            text = option.text.strip()
+
+                            if not text:
+                                continue
+
+                            if text.lower() == "select all":
+                                continue
+
+                            if option.get_attribute("aria-disabled") == "true":
+                                continue
+
+                            if option.get_attribute("disabled") is not None:
+                                continue
+
+                            return option
+
+                        except StaleElementReferenceException:
+                            continue
+
+                except StaleElementReferenceException:
+                    continue
+
+            return False
+
+        try:
+            self.wait_for_loader_to_disappear()
+
+            option = wait.until(
+                find_first_option,
+                message="No visible selectable option found in opened filter."
+            )
+
+            option_text = option.text.strip()
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'nearest'
+                });
+                """,
+                option
+            )
+
+            time.sleep(0.3)
+
+            # Re-locate because React/Fluent UI can rerender
+            option = wait.until(find_first_option)
+
+            try:
+                option.click()
+
+            except (
+                    ElementClickInterceptedException,
+                    StaleElementReferenceException
+            ):
+                option = wait.until(find_first_option)
+
+                driver.execute_script(
+                    """
+                    arguments[0].dispatchEvent(
+                        new MouseEvent('mousedown', {
+                            bubbles: true,
+                            cancelable: true
+                        })
+                    );
+
+                    arguments[0].dispatchEvent(
+                        new MouseEvent('mouseup', {
+                            bubbles: true,
+                            cancelable: true
+                        })
+                    );
+
+                    arguments[0].click();
+                    """,
+                    option
+                )
+
+            print(f"First option selected successfully: {option_text}")
+
+        except TimeoutException:
+            driver.save_screenshot("select_first_option_timeout.png")
+
+            print("No visible option found.")
+            print("Current URL:", driver.current_url)
+
+            visible_elements = driver.find_elements(
+                By.XPATH,
+                "//*[@role='option' or "
+                "@role='menuitemcheckbox' or "
+                "@data-is-focusable='true']"
+            )
+
+            print("Total possible option elements:", len(visible_elements))
+
+            for index, element in enumerate(visible_elements):
+                try:
+                    if element.is_displayed():
+                        print(
+                            f"{index}: "
+                            f"text='{element.text.strip()}', "
+                            f"role='{element.get_attribute('role')}', "
+                            f"class='{element.get_attribute('class')}', "
+                            f"aria-disabled="
+                            f"'{element.get_attribute('aria-disabled')}'"
+                        )
+                except StaleElementReferenceException:
+                    continue
+
+            raise
 
     def Second_Option(self):
             try:
@@ -1292,20 +1501,39 @@ class Detail_Explain_Filter:
 
                 time.sleep(2)
 
+    # def Click_Apply_Button(self):
+    #         try:
+    #             apply_button = WebDriverWait(self.driver, 40).until(
+    #                 EC.element_to_be_clickable(self.click_apply_button))
+    #             time.sleep(.2)
+    #             apply_button.click()
+    #             time.sleep(.2)
+    #
+    #             print("Click on apply button successfully........!! ")
+    #
+    #         except Exception as e:
+    #             print(f"Error: {e}")
+    #
+    #             time.sleep(2)
     def Click_Apply_Button(self):
-            try:
-                apply_button = WebDriverWait(self.driver, 40).until(
-                    EC.element_to_be_clickable(self.click_apply_button))
-                time.sleep(.2)
-                apply_button.click()
-                time.sleep(.2)
 
-                print("Click on apply button successfully........!! ")
+        buttons = self.driver.find_elements(
+            By.XPATH,
+            "//button[.//span[normalize-space()='Apply'] or normalize-space()='Apply']"
+        )
 
-            except Exception as e:
-                print(f"Error: {e}")
+        visible = [
+            b for b in buttons
+            if b.is_displayed()
+        ]
 
-                time.sleep(2)
+        if not visible:
+            print("Apply button not present. Filter is probably auto applied.")
+            return
+
+        visible[0].click()
+
+        print("Apply clicked successfully.")
 
         # ---------------------------------------Description---------------------------------------------------------------------
 
@@ -1517,16 +1745,48 @@ class Detail_Explain_Filter:
             time.sleep(2)
 
 
+    # def Remove_Search(self):
+    #     try:
+    #         remove = WebDriverWait(self.driver,40).until(
+    #             EC.element_to_be_clickable(self.cancel_cross_button)
+    #         )
+    #         time.sleep(.2)
+    #         remove.click()
+    #         time.sleep(.2)
+    #         print("Search functionality reset  successfully........!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+
     def Remove_Search(self):
+
+        wait = WebDriverWait(self.driver, 30)
+
         try:
-            remove = WebDriverWait(self.driver,40).until(
-                EC.element_to_be_clickable(self.cancel_cross_button)
+            remove = wait.until(
+                EC.presence_of_element_located(self.cancel_cross_button)
             )
-            time.sleep(.2)
-            remove.click()
-            time.sleep(.2)
-            print("Search functionality reset  successfully........!! ")
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                remove
+            )
+
+            time.sleep(0.5)
+
+            try:
+                remove.click()
+
+            except Exception:
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    remove
+                )
+
+            print("Search functionality reset successfully.")
 
         except Exception as e:
             print(f"Error: {e}")
+            raise
 

@@ -74,6 +74,17 @@ class ClientSell:
         self.pagination = (By.XPATH, "//div[@role='combobox']")
 
 
+        self.three_dot = (By.XPATH, "(//button[starts-with(@id,'btn-overflow-') and contains(@class,'ms-Button--hasMenu')])[1]")
+        self.clone = (By.XPATH, "(//span[normalize-space()='Clone'])[1]")
+        self.bad_debts = (By.XPATH, "(//span[normalize-space()='Bad debts'])[1]")
+        self.click_download_icon = (By.XPATH, "(//button[.//i[@data-icon-name='BkInstallation']])[1]")
+
+
+        self.click_pound_icon = (By.XPATH, "(//*[@data-automationid='DetailsRowCell']//button[contains(@id,'btnReceipt')])[1]")
+
+
+
+
 
 
 
@@ -621,6 +632,108 @@ class ClientSell:
 
 
         print("Change Pagination functionality  is working fine.")
+#-----------------------------------------------------------------------------------------------------------------------
+
+
+    def Click_Three_Dot(self):
+        try:
+            dot = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.three_dot))
+            time.sleep(.2)
+            dot.click()
+            time.sleep(.5)
+            print("Click on Three dot successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Clone(self):
+        try:
+            check_clone = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.clone))
+            time.sleep(.2)
+            check_clone.click()
+            time.sleep(.5)
+            print("Click on clone option successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Clone_Save(self):
+
+
+            wait = WebDriverWait(self.driver, 30)
+
+            try:
+
+                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+            except:
+                pass
+
+            save_button = wait.until(
+            EC.element_to_be_clickable(self.save_invoice)
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.4)
+            save_button.click()
+            time.sleep(0.4)
+            print("Save clone invoice successfully.......")
+
+    def Bad_Debts(self):
+        try:
+            debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.bad_debts))
+            time.sleep(.2)
+            debts .click()
+            time.sleep(.5)
+            print("Click on Bad Debts option successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Bad_Debts_Save(self):
+
+
+            wait = WebDriverWait(self.driver, 30)
+
+            try:
+
+                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+            except:
+                pass
+
+            save_button = wait.until(
+            EC.element_to_be_clickable(self.save_invoice)
+            )
+
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+            time.sleep(0.4)
+            save_button.click()
+            time.sleep(0.4)
+            print("Save Bad Debts invoice successfully.......")
+
+
+    def Download_Invoice(self):
+        try:
+            debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
+            time.sleep(.2)
+            debts .click()
+            time.sleep(.5)
+            print(" download file successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Pound_Icon(self):
+        try:
+            pound = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_pound_icon))
+            time.sleep(.2)
+            pound.click()
+            time.sleep(.5)
+            print(" Click on Pound icon successfully.....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+
+
+
+
 
 
 

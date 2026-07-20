@@ -350,11 +350,21 @@ class Login(unittest.TestCase):
         client_section.Click_Unexplain()
         time.sleep(2)
         client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
-        time.sleep(10)
+        time.sleep(5)
 
+        @classmethod
+        def tearDownClass(cls):
+            """
+            This method runs once after all test methods finish.
+            """
 
+            if hasattr(cls, "driver"):
+                cls.driver.quit()
 
+            print("Browser closed successfully.")
 
+    if __name__ == "__main__":
+        unittest.main()
 
 
 

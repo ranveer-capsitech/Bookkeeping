@@ -1,7 +1,7 @@
 from faker import Faker
 import time
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -330,8 +330,8 @@ class Dividend:
             payment_date.send_keys(today)
             time.sleep(0.3)
 
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ENTER)
+            # active = driver.switch_to.active_element
+            # active.send_keys(Keys.ENTER)
 
             print("Enter payment date successfully...!!")
 
@@ -340,46 +340,55 @@ class Dividend:
             time.sleep(0.2)
 
 
-    # def Enter_Payment_Date(self):
-    #     driver = self.driver
-    #     wait = WebDriverWait(driver, 15)
-    #     try:
-    #             payment_date = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.payment))
-    #             time.sleep(.2)
-    #             payment_date.send_keys("25/08/2025")
-    #             time.sleep(.2)
-    #             active = driver.switch_to.active_element
-    #             time.sleep(0.2)
-    #             active.send_keys(Keys.ENTER)
-    #             time.sleep(0.2)
-    #             print("Enter payment date  successfully....!!")
-    #     except Exception as e:
-    #             print(f"Error on Click:{e}")
-    #             time.sleep(.2)
-
     def Save_Asset(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            # Wait for common overlays/loaders to disappear
+            overlay_locators = [
+                (By.CSS_SELECTOR, ".ant-spin-spinning"),
+                (By.CSS_SELECTOR, ".ms-Overlay"),
+                (By.XPATH, "//div[contains(@class,'root-1288')]"),
+                (By.CSS_SELECTOR, "[aria-busy='true']")
+            ]
+
+            for locator in overlay_locators:
+                try:
+                    wait.until(EC.invisibility_of_element_located(locator))
+                except TimeoutException:
+                    pass
+
+            # Re-find the Save button after overlays disappear
+            save_button = wait.until(
+                EC.presence_of_element_located(self.save_dividends)
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                save_button
+            )
+
+            time.sleep(0.5)
+
+            # Re-locate once more to avoid stale reference
+            save_button = wait.until(
+                EC.element_to_be_clickable(self.save_dividends)
+            )
 
             try:
-                save_ref = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_dividends))
-                time.sleep(.2)
-                save_ref.click()
-                time.sleep(.2)
-                print(" click on save asset successfully....!!")
+                save_button.click()
 
-                # update_message = WebDriverWait(self.driver, 10).until(
-                #     EC.visibility_of_element_located(
-                #         (By.XPATH, "//*[contains(normalize-space(), 'Dividends created successfully')]"))
-                # )
-                #
-                # # Assert the presence of the success message
-                # assert update_message, "Dividends created successfully"
-                #
-                # print("Test Case 18 - Pass: Dividends created successfully.")
+            except (ElementClickInterceptedException, StaleElementReferenceException):
+                save_button = wait.until(
+                    EC.presence_of_element_located(self.save_dividends)
+                )
+                driver.execute_script("arguments[0].click();", save_button)
 
-            except Exception as e:
-                print(f"Error: {e}")
+            print("Asset saved successfully.")
+        except Exception as e:
+            print(f"Error: {e}")
 
-                time.sleep(2)
 
 #-----------------------------------------------------------------------------------------------------------------------
 

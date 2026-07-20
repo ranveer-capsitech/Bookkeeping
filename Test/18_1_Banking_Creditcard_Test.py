@@ -73,6 +73,7 @@ class Login(unittest.TestCase):
 
 
 
+
         # ------------------------------ Add Credit card --------------------------------------------------------------------
 
     def test_24_Credit(self):
@@ -358,3 +359,18 @@ class Login(unittest.TestCase):
             time.sleep(.2)
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()

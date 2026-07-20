@@ -2,8 +2,10 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from Detail_Explain_Current_Account_Page import Detail_Explain_Current_Account
-from Details_Explain_Saving_Account_Page import Detail_Explain_Savingt_Account
+
+from Pages.Details_Explain_Saving_Account_Page import Detail_Explain_Savingt_Account
+
+
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
 import pytest
@@ -233,6 +235,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Find_Match()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
         client_section.Click_Contact_Dropdown_For_Money_Out()
         time.sleep(1)
         # client_section.Click_Attachment_Icon()
@@ -438,6 +442,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Find_Match()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
         client_section.Click_Contact_Dropdown_For_Money_In()
         time.sleep(1)
 
@@ -449,6 +455,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Match()
         time.sleep(.2)
+
 
         # ------------------------------------------------
 
@@ -472,5 +479,19 @@ class Login(unittest.TestCase):
 
 
 
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 

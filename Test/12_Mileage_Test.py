@@ -3,9 +3,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Pages.ExpenseclaimsPage import Expenseclaims
+
 from Pages.Mileage_Page import Mileage
-from Pages.PurchasePage import ClientPurchase
+
 from configReader import ConfigReader
 
 from Pages.LoginPage import loginPage
@@ -104,4 +104,20 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Save_Mileage()
         time.sleep(.2)
+
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 

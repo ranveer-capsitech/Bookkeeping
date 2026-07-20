@@ -46,7 +46,7 @@ class Vat_Change:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='ALIS FITTINGS LTD' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -88,7 +88,14 @@ class Vat_Change:
         self.click_select_all_date = (By.XPATH, "//div[contains(@class,'ms-Callout')]//div[@data-is-focusable='true'][.//text()[normalize-space()='Select all']]//i[@data-icon-name='CheckMark']")
         self.first_option = (By.XPATH, "(//div[@data-is-focusable='true'][normalize-space()='Select all']/following-sibling::div[@data-is-focusable='true'])[1]")
         self.second_option = (By.XPATH, "//div[@data-is-focusable='true' and normalize-space()='06/04/2024']")
-        self.click_apply_button = (By.XPATH, "//button[contains(@class,'ms-Button--primary') and normalize-space()='Apply']")
+        # self.click_apply_button = (By.XPATH, "//button[contains(@class,'ms-Button--primary') and normalize-space()='Apply']")
+
+        self.click_apply_button = (
+            By.XPATH,
+            "//button[not(@disabled) and @aria-disabled!='true' "
+            "and (.//span[normalize-space()='Apply'] "
+            "or normalize-space(.)='Apply')]"
+        )
 
 
 
@@ -178,7 +185,7 @@ class Vat_Change:
 
 
 
-    def Enter_Company(self, company_name="ALIS FITTINGS LTD", timeout= 30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -376,17 +383,22 @@ class Vat_Change:
             code = wait.until(EC.visibility_of_element_located(self.enter_sort_code))
 
             self.sort_code_value = "112233"
+            time.sleep(.2)
 
             code.clear()
+            time.sleep(.2)
             code.send_keys(self.sort_code_value)
+            time.sleep(.2)
 
             driver.switch_to.active_element.send_keys(Keys.ENTER)
+            time.sleep(.2)
 
             print("Enter sort code successfully...!!")
 
         except Exception as e:
             print(f"Error on Click: {e}")
             raise
+
 
 
     def Click_Primary_Account(self):
@@ -815,20 +827,230 @@ class Vat_Change:
 
             time.sleep(2)
 
+    # def Select_First_Option(self):
+    #     driver = self.driver
+    #
+    #     wait = WebDriverWait(
+    #         driver,
+    #         40,
+    #         poll_frequency=0.3,
+    #         ignored_exceptions=(StaleElementReferenceException,)
+    #     )
+    #
+    #     def get_first_visible_option(d):
+    #         # Fluent UI dropdowns/callouts which are currently visible
+    #         containers = d.find_elements(
+    #             By.XPATH,
+    #             """
+    #             //div[
+    #                 @role='listbox'
+    #                 or contains(@class,'ms-Callout')
+    #                 or contains(@class,'ms-Dropdown-callout')
+    #                 or contains(@class,'ms-ContextualMenu')
+    #             ]
+    #             """
+    #         )
+    #
+    #         for container in containers:
+    #             try:
+    #                 if not container.is_displayed():
+    #                     continue
+    #
+    #                 # Find all possible selectable options inside visible popup
+    #                 options = container.find_elements(
+    #                     By.XPATH,
+    #                     """
+    #                     .//*[
+    #                         @role='option'
+    #                         or @role='menuitemcheckbox'
+    #                         or @data-is-focusable='true'
+    #                     ]
+    #                     """
+    #                 )
+    #
+    #                 for option in options:
+    #                     try:
+    #                         if not option.is_displayed():
+    #                             continue
+    #
+    #                         if not option.is_enabled():
+    #                             continue
+    #
+    #                         text = option.text.strip()
+    #
+    #                         # Ignore empty rows and Select all
+    #                         if not text:
+    #                             continue
+    #
+    #                         if text.lower() == "select all":
+    #                             continue
+    #
+    #                         # Ignore disabled options
+    #                         aria_disabled = option.get_attribute("aria-disabled")
+    #                         disabled = option.get_attribute("disabled")
+    #
+    #                         if aria_disabled == "true" or disabled is not None:
+    #                             continue
+    #
+    #                         return option
+    #
+    #                     except StaleElementReferenceException:
+    #                         continue
+    #
+    #             except StaleElementReferenceException:
+    #                 continue
+    #
+    #         return False
+    #
+    #     try:
+    #         option = wait.until(
+    #             get_first_visible_option,
+    #             message="No visible selectable option was found."
+    #         )
+    #
+    #         option_text = option.text.strip()
+    #
+    #         driver.execute_script(
+    #             """
+    #             arguments[0].scrollIntoView({
+    #                 block: 'center',
+    #                 inline: 'nearest'
+    #             });
+    #             """,
+    #             option
+    #         )
+    #
+    #         time.sleep(0.3)
+    #
+    #         # Re-find because Fluent UI may rerender after scrolling
+    #         option = wait.until(get_first_visible_option)
+    #
+    #         try:
+    #             option.click()
+    #
+    #         except (
+    #                 ElementClickInterceptedException,
+    #                 StaleElementReferenceException
+    #         ):
+    #             option = wait.until(get_first_visible_option)
+    #
+    #             driver.execute_script(
+    #                 """
+    #                 arguments[0].dispatchEvent(
+    #                     new MouseEvent('mousedown', {
+    #                         bubbles: true,
+    #                         cancelable: true,
+    #                         view: window
+    #                     })
+    #                 );
+    #
+    #                 arguments[0].dispatchEvent(
+    #                     new MouseEvent('mouseup', {
+    #                         bubbles: true,
+    #                         cancelable: true,
+    #                         view: window
+    #                     })
+    #                 );
+    #
+    #                 arguments[0].click();
+    #                 """,
+    #                 option
+    #             )
+    #
+    #         print(
+    #             f"First option selected successfully: {option_text}"
+    #         )
+    #
+    #     except TimeoutException:
+    #         driver.save_screenshot(
+    #             "select_first_option_timeout.png"
+    #         )
+    #
+    #         print("No visible option found in the opened filter.")
+    #         print("Current URL:", driver.current_url)
+    #
+    #         # Debug visible popup elements
+    #         visible_focusable = driver.find_elements(
+    #             By.XPATH,
+    #             "//*[@data-is-focusable='true']"
+    #         )
+    #
+    #         print(
+    #             "Total focusable elements found:",
+    #             len(visible_focusable)
+    #         )
+    #
+    #         for index, element in enumerate(visible_focusable):
+    #             try:
+    #                 if element.is_displayed():
+    #                     print(
+    #                         f"Visible element {index}: "
+    #                         f"text='{element.text.strip()}', "
+    #                         f"role='{element.get_attribute('role')}', "
+    #                         f"tag='{element.tag_name}'"
+    #                     )
+    #             except StaleElementReferenceException:
+    #                 pass
+    #
+    #         raise
+
+
+
     def Select_First_Option(self):
-        # try:
-            option = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.first_option))
-            time.sleep(.2)
-            option.click()
-            time.sleep(.2)
+        driver = self.driver
+        wait = WebDriverWait(driver, 40)
 
-            print("Select first option successfully........!! ")
+        def find_visible_option(d):
+            select_all_list = d.find_elements(
+                By.XPATH,
+                "//div[@data-is-focusable='true' and normalize-space()='Select all']"
+            )
 
-        # except Exception as e:
-        #     print(f"Error: {e}")
+            for select_all in select_all_list:
+                try:
+                    if not select_all.is_displayed():
+                        continue
 
-            time.sleep(2)
+                    options = select_all.find_elements(
+                        By.XPATH,
+                        "following-sibling::div[@data-is-focusable='true']"
+                    )
+
+                    for option in options:
+                        if option.is_displayed() and option.is_enabled():
+                            return option
+
+                except StaleElementReferenceException:
+                    continue
+
+            return False
+
+        try:
+            option = wait.until(find_visible_option)
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'nearest'});",
+                option
+            )
+
+            time.sleep(0.3)
+
+            try:
+                option.click()
+            except (
+                    ElementClickInterceptedException,
+                    StaleElementReferenceException
+            ):
+                option = wait.until(find_visible_option)
+                driver.execute_script("arguments[0].click();", option)
+
+            print(f"First option selected successfully: {option.text.strip()}")
+
+        except TimeoutException:
+            driver.save_screenshot("select_first_option_timeout.png")
+            print("No visible option found in the currently opened filter.")
+            raise
+
 
     def Second_Option(self):
         try:
@@ -845,20 +1067,200 @@ class Vat_Change:
 
             time.sleep(2)
 
+
+    # def Click_Apply_Button(self):
+    #     try:
+    #         apply_button = WebDriverWait(self.driver, 40).until(
+    #             EC.element_to_be_clickable(self.click_apply_button))
+    #         time.sleep(.2)
+    #         apply_button.click()
+    #         time.sleep(.2)
+    #
+    #         print("Click on apply button successfully........!! ")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #
+    #         time.sleep(2)
+
     def Click_Apply_Button(self):
-        try:
-            apply_button = WebDriverWait(self.driver, 40).until(
-                EC.element_to_be_clickable(self.click_apply_button))
-            time.sleep(.2)
-            apply_button.click()
-            time.sleep(.2)
+        driver = self.driver
 
-            print("Click on apply button successfully........!! ")
+        wait = WebDriverWait(
+            driver,
+            40,
+            poll_frequency=0.3,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
 
-        except Exception as e:
-            print(f"Error: {e}")
+        def find_visible_apply_button(d):
+            # Search all possible Apply buttons
+            buttons = d.find_elements(
+                By.XPATH,
+                """
+                //button[
+                    normalize-space(.)='Apply'
+                    or .//span[normalize-space()='Apply']
+                ]
+                |
+                //*[
+                    @role='button'
+                    and normalize-space(.)='Apply'
+                ]
+                """
+            )
 
-            time.sleep(2)
+            for button in buttons:
+                try:
+                    if not button.is_displayed():
+                        continue
+
+                    if not button.is_enabled():
+                        continue
+
+                    if button.get_attribute("aria-disabled") == "true":
+                        continue
+
+                    if button.get_attribute("disabled") is not None:
+                        continue
+
+                    return button
+
+                except StaleElementReferenceException:
+                    continue
+
+            return False
+
+        last_error = None
+
+        for attempt in range(1, 4):
+            try:
+                print(f"Apply button click attempt: {attempt}")
+
+                # Wait for loader before searching
+                self.wait_for_loader_to_disappear()
+
+                apply_button = wait.until(
+                    find_visible_apply_button,
+                    message="No visible and enabled Apply button found."
+                )
+
+                driver.execute_script(
+                    """
+                    arguments[0].scrollIntoView({
+                        block: 'center',
+                        inline: 'nearest'
+                    });
+                    """,
+                    apply_button
+                )
+
+                time.sleep(0.3)
+
+                self.wait_for_loader_to_disappear()
+
+                # Re-locate because Fluent UI/React may rerender
+                apply_button = wait.until(find_visible_apply_button)
+
+                try:
+                    apply_button.click()
+
+                except (
+                        ElementClickInterceptedException,
+                        StaleElementReferenceException
+                ):
+                    apply_button = wait.until(find_visible_apply_button)
+
+                    driver.execute_script(
+                        """
+                        const element = arguments[0];
+
+                        element.dispatchEvent(
+                            new MouseEvent('mousedown', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            })
+                        );
+
+                        element.dispatchEvent(
+                            new MouseEvent('mouseup', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            })
+                        );
+
+                        element.click();
+                        """,
+                        apply_button
+                    )
+
+                print("Clicked Apply button successfully.")
+
+                # Optional: confirm popup closes after Apply
+                wait.until(
+                    lambda d: not any(
+                        element.is_displayed()
+                        for element in d.find_elements(
+                            By.XPATH,
+                            """
+                            //button[
+                                normalize-space(.)='Apply'
+                                or .//span[normalize-space()='Apply']
+                            ]
+                            """
+                        )
+                    )
+                )
+
+                print("Filter popup closed successfully.")
+                return
+
+            except (
+                    TimeoutException,
+                    StaleElementReferenceException,
+                    ElementClickInterceptedException
+            ) as error:
+                last_error = error
+
+                print(
+                    f"Attempt {attempt} failed: "
+                    f"{type(error).__name__}: {error}"
+                )
+
+                driver.save_screenshot(
+                    f"apply_button_attempt_{attempt}.png"
+                )
+
+                time.sleep(1)
+
+        # Final debugging
+        print("Current URL:", driver.current_url)
+
+        all_buttons = driver.find_elements(By.TAG_NAME, "button")
+
+        print("Visible buttons on page:")
+
+        for index, button in enumerate(all_buttons):
+            try:
+                if button.is_displayed():
+                    print(
+                        f"{index}: "
+                        f"text='{button.text.strip()}', "
+                        f"id='{button.get_attribute('id')}', "
+                        f"disabled='{button.get_attribute('disabled')}', "
+                        f"aria-disabled='{button.get_attribute('aria-disabled')}'"
+                    )
+            except StaleElementReferenceException:
+                continue
+
+        driver.save_screenshot("apply_button_final_error.png")
+
+        raise TimeoutException(
+            "Unable to click visible Apply button after 3 attempts. "
+            f"Last error: {last_error}"
+        )
 
 #---------------------------------------Description---------------------------------------------------------------------
 

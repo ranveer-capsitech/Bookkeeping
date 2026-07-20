@@ -78,7 +78,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice")
 
     def test_05_Add_New_Invoice(self):
@@ -105,6 +104,9 @@ class Login(unittest.TestCase):
 
         client_section.Click_Save()
         time.sleep(2)
+
+    #-------------------------------------------------------------------------------------------------------------------
+
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
@@ -129,6 +131,42 @@ class Login(unittest.TestCase):
         client_section.Change_Pagination()
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
+
+        client_section.Click_Three_Dot()
+        time.sleep(.2)
+        client_section.Click_Clone()
+        time.sleep(.2)
+        client_section.Clone_Save()
+        time.sleep(.5)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Three_Dot()
+        time.sleep(.2)
+        client_section.Bad_Debts()
+        time.sleep(.2)
+        client_section.Bad_Debts_Save()
+        time.sleep(2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Download_Invoice()
+        time.sleep(.2)
+
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
+
 
 
 

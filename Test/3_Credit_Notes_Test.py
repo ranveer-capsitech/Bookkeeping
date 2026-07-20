@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from configReader import ConfigReader
-from Pages.Client_SellPage import ClientSell
+
 from Pages.Credit_NotesPage import Credit_Notes
 from Pages.LoginPage import loginPage
 import pytest
@@ -88,8 +88,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         credit_notes_section.Add_Attachment()
         time.sleep(.2)
-        # credit_notes_section.Enter_Discount()
-        # time.sleep(.2)
+        credit_notes_section.Enter_Discount()
+        time.sleep(.2)
         credit_notes_section.Click_Enter_Notes()
         time.sleep(.3)
         credit_notes_section.Enter_Notes()
@@ -104,6 +104,50 @@ class Login(unittest.TestCase):
         # time.sleep(.2)
         credit_notes_section.Click_Save_Button()
         time.sleep(.2)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        credit_notes_section.Enter_Search()
+        time.sleep(.5)
+        credit_notes_section.Remove_Search()
+        time.sleep(.2)
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        credit_notes_section.wait_for_spinner_to_disappear()
+        time.sleep(.2)
+
+        credit_notes_section.Change_Date_Calendar()
+        time.sleep(1)
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        credit_notes_section.Select_Filter()
+        time.sleep(.2)
+        # credit_notes_section.Hide_Reports()
+        # time.sleep(.2)
+        # credit_notes_section.Change_Pagination()
+        # credit_notes_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
+
+        credit_notes_section.Download_Invoice()
+        time.sleep(2)
+
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 
 

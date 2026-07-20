@@ -2,7 +2,8 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from Detail_Explain_Current_Account_Page import Detail_Explain_Current_Account
+
+from Pages.Detail_Explain_Current_Account_Page import Detail_Explain_Current_Account
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
 import pytest
@@ -209,7 +210,7 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Click_Save_Manual_Transaction()
         time.sleep(.2)
-        #
+
 
         # ---------------------------------------------------------------------------------------------------------------
 
@@ -220,17 +221,21 @@ class Login(unittest.TestCase):
         client_section.Click_Contact_Dropdown_For_Money_Out()
         time.sleep(1)
         # client_section.Click_Attachment_Icon()
-        # time.sleep(1)
+#         # time.sleep(1)
         # client_section.Drag_Drop_File()
-        # time.sleep(1)
+#         # time.sleep(1)
         client_section.wait_for_loader_to_disappear()
         time.sleep(1)
         client_section.Select_Claims()
         time.sleep(1)
         client_section.Enter_Allocated_Amount()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
         client_section.Click_Match()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
 
         # ------------------------------------------------
         #
@@ -263,14 +268,14 @@ class Login(unittest.TestCase):
     #     f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> Current Account >> Money In")
     # def test_26_Go_Client_Sell(self):
     #     client_section = Detail_Explain_Current_Account(driver=self.driver)
-    #     time.sleep(.2)
+#     #     time.sleep(.2)
     #     #
     #     client_section.Select_Search()
-    #     time.sleep(5)
+#     #     time.sleep(5)
     #     client_section.Enter_Company()
-    #     time.sleep(.2)
+#     #     time.sleep(.2)
     #     client_section.Click_Company()
-    #     time.sleep(.2)
+#     #     time.sleep(.2)
 
         client_section.Click_Input()
         time.sleep(.2)
@@ -330,50 +335,50 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
         # client_section.wait_for_loader_to_disappear()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Account()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Select_Bank()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Enter_Account_no()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # client_section.Sort_Code()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # client_section.Click_Primary_Account()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Save_Banking()
-        # time.sleep(1)
+#         # time.sleep(1)
         #
         # client_section.Click_Added_Bank()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
 
 
         # client_section.Click_Import()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # client_section.Click_Templet()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # client_section.Click_Upload_File()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Upload_Import()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # client_section.Click_Next()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         #
         # client_section.wait_for_loader_to_disappear()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.Click_Back_Button()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         #
         # client_section.wait_for_loader_to_disappear()
-        # time.sleep(.2)
+#         # time.sleep(.2)
         # -------------------------------------------------------------------------------------------------------------------
 
         client_section.Add_Manual_Transaction()
@@ -431,8 +436,12 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Enter_Allocated_Amount()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
         client_section.Click_Match()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(1)
 
         # ------------------------------------------------
 
@@ -456,5 +465,19 @@ class Login(unittest.TestCase):
 
 
 
+    @classmethod
+    def tearDownClass(cls):
+        """
+        This method runs once after all test methods finish.
+        """
+
+        if hasattr(cls, "driver"):
+            cls.driver.quit()
+
+        print("Browser closed successfully.")
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 

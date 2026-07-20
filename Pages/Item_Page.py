@@ -1,6 +1,8 @@
 
 from faker import Faker
 import platform, time
+
+from selenium.common import TimeoutException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -38,7 +40,7 @@ class Items:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
         self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
@@ -66,7 +68,7 @@ class Items:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="1ST LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -176,7 +178,7 @@ class Items:
 
 
     def Enter_Name(self):
-        try:
+        # try:
             enter_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_name))
             time.sleep(.2)
             enter_name.clear()
@@ -187,8 +189,8 @@ class Items:
             print(f" Entered Name: {random_first_name}")
             print("Enter name successfully.....!!")
             time.sleep(2)
-        except Exception as e:
-            print(f" Error on entering name: {e}")
+        # except Exception as e:
+        #     print(f" Error on entering name: {e}")
 
     def Enter_Unit_Price_Pur(self):
         try:
@@ -255,7 +257,7 @@ class Items:
             create_item.click()
             time.sleep(.2)
 
-            update_message = WebDriverWait(self.driver, 10).until(
+            update_message = WebDriverWait(self.driver, 40).until(
                 EC.visibility_of_element_located(
                     (By.XPATH, "//*[contains(text(),'Item created successfully')]"))
             )
@@ -269,6 +271,17 @@ class Items:
         #     print(f"Error: {e}")
         #
         #     time.sleep(2)
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
 
 
 

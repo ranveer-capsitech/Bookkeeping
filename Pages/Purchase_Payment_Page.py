@@ -223,19 +223,32 @@ class Purchase_Payment:
         except Exception as e:
             print(f" Could not select Account type: {e}")
 
-
     def Enter_Amount(self):
         try:
             enter_amount = WebDriverWait(self.driver, 30).until(
-                EC.visibility_of_element_located(self.enter_amount))
-            time.sleep(.2)
+                EC.visibility_of_element_located(self.enter_amount)
+            )
+
+            time.sleep(0.2)
+
+            # Click the field
+            enter_amount.click()
+            time.sleep(0.2)
+
+            # Select all and clear
+            enter_amount.send_keys(Keys.CONTROL + "a")
+            time.sleep(0.2)
+            enter_amount.send_keys(Keys.DELETE)
+            time.sleep(0.2)
+
+            # Enter new amount
             enter_amount.send_keys("100")
-            time.sleep(.2)
+            time.sleep(0.2)
 
-            print("Click on payment successfully....!!")
+            print("Amount entered successfully....!!")
+
         except Exception as e:
-            print(f"Error on click:{e}")
-
+            print(f"Error while entering amount: {e}")
 
     def Save_payment(self):
         try:

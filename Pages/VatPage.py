@@ -1099,6 +1099,7 @@ class Vat:
             pyautogui.write(r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx")
             time.sleep(2)
             pyautogui.press("enter")
+            time.sleep(2)
 
             print("Import VAT return file uploaded successfully....!!")
 
@@ -1808,57 +1809,174 @@ class Vat:
 
 
 
+    # def Click_Review_Mail_New_Tab(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #         old_tabs = self.driver.window_handles.copy()
+    #
+    #         # switch to iframe first
+    #         wait.until(EC.frame_to_be_available_and_switch_to_it(self.review_iframe))
+    #         time.sleep(0.5)
+    #
+    #         actions = ActionChains(self.driver)
+    #
+    #
+    #         actions.key_down(Keys.CONTROL).perform()
+    #         time.sleep(0.5)
+    #
+    #         # now find review button/link
+    #         review = wait.until(
+    #             EC.visibility_of_element_located(self.review_mail)
+    #         )
+    #
+    #         # scroll to element
+    #         self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", review)
+    #         time.sleep(0.5)
+    #
+    #         # CTRL + click
+    #         actions = ActionChains(self.driver)
+    #         actions.key_down(Keys.CONTROL)
+    #         actions.move_to_element(review)
+    #         actions.click(review)
+    #         actions.key_up(Keys.CONTROL)
+    #         actions.perform()
+    #
+    #         # back to main content
+    #         self.driver.switch_to.default_content()
+    #
+    #         # wait for new tab
+    #         wait.until(lambda d: len(d.window_handles) > len(old_tabs))
+    #         self.driver.switch_to.window(self.driver.window_handles[-1])
+    #         time.sleep(1)
+    #
+    #         print("Review mail link opened successfully in new tab....!!")
+    #         print("Current URL:", self.driver.current_url)
+    #
+    #     except Exception as e:
+    #         try:
+    #             ActionChains(self.driver).key_up(Keys.CONTROL).perform()
+    #         except:
+    #             pass
+    #         self.driver.switch_to.default_content()
+    #         print(f"Error on CTRL+Click Review mail: {e}")
+    #         raise
+
     def Click_Review_Mail_New_Tab(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 40)
+
+        original_window = driver.current_window_handle
+        old_windows = set(driver.window_handles)
+
         try:
-            wait = WebDriverWait(self.driver, 30)
-            old_tabs = self.driver.window_handles.copy()
+            # Always start from main document
+            driver.switch_to.default_content()
 
-            # switch to iframe first
-            wait.until(EC.frame_to_be_available_and_switch_to_it(self.review_iframe))
-            time.sleep(0.5)
-
-            actions = ActionChains(self.driver)
-
-
-            actions.key_down(Keys.CONTROL).perform()
-            time.sleep(0.5)
-
-            # now find review button/link
-            review = wait.until(
-                EC.visibility_of_element_located(self.review_mail)
+            # Switch to iframe
+            wait.until(
+                EC.frame_to_be_available_and_switch_to_it(
+                    self.review_iframe
+                )
             )
 
-            # scroll to element
-            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", review)
-            time.sleep(0.5)
+            # Locate the review link/button
+            review = wait.until(
+                EC.presence_of_element_located(
+                    self.review_mail
+                )
+            )
 
-            # CTRL + click
-            actions = ActionChains(self.driver)
-            actions.key_down(Keys.CONTROL)
-            actions.move_to_element(review)
-            actions.click(review)
-            actions.key_up(Keys.CONTROL)
-            actions.perform()
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                review
+            )
 
-            # back to main content
-            self.driver.switch_to.default_content()
+            time.sleep(0.3)
 
-            # wait for new tab
-            wait.until(lambda d: len(d.window_handles) > len(old_tabs))
-            self.driver.switch_to.window(self.driver.window_handles[-1])
-            time.sleep(1)
+            # Try to get URL from href
+            review_url = review.get_attribute("href")
 
-            print("Review mail link opened successfully in new tab....!!")
-            print("Current URL:", self.driver.current_url)
+            if review_url and review_url.strip():
+                # Most reliable approach for parallel execution
+                driver.execute_script(
+                    "window.open(arguments[0], '_blank');",
+                    review_url
+                )
+
+            else:
+                # If it is a button without href, click it normally
+                try:
+                    review.click()
+                except (StaleElementReferenceException, Exception):
+                    review = wait.until(
+                        EC.presence_of_element_located(
+                            self.review_mail
+                        )
+                    )
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        review
+                    )
+
+            # Return to main document
+            driver.switch_to.default_content()
+
+            # Wait for either a new tab or same-tab navigation
+            try:
+                wait.until(
+                    lambda d: (
+                            len(set(d.window_handles) - old_windows) > 0
+                            or d.current_window_handle != original_window
+                    )
+                )
+            except TimeoutException:
+                # Check whether the click navigated in the same tab
+                if driver.current_window_handle == original_window:
+                    driver.save_screenshot(
+                        "review_mail_no_new_tab.png"
+                    )
+                    raise TimeoutException(
+                        "Review Mail action completed, but no new tab was detected."
+                    )
+
+            # Identify only the newly created window
+            new_windows = set(driver.window_handles) - old_windows
+
+            if new_windows:
+                new_window = new_windows.pop()
+                driver.switch_to.window(new_window)
+
+                wait.until(
+                    lambda d: d.execute_script(
+                        "return document.readyState"
+                    ) in ("interactive", "complete")
+                )
+
+                print(
+                    "Review mail opened successfully in a new tab."
+                )
+                print("Current URL:", driver.current_url)
+
+            else:
+                print(
+                    "Review mail opened in the current tab."
+                )
+                print("Current URL:", driver.current_url)
 
         except Exception as e:
-            try:
-                ActionChains(self.driver).key_up(Keys.CONTROL).perform()
-            except:
-                pass
-            self.driver.switch_to.default_content()
-            print(f"Error on CTRL+Click Review mail: {e}")
+            driver.save_screenshot(
+                "review_mail_open_error.png"
+            )
+            print(
+                f"Error while opening Review Mail: {e}"
+            )
             raise
+
+        finally:
+            try:
+                driver.switch_to.default_content()
+            except Exception:
+                pass
 
 
     def Click_Get_OTP(self):

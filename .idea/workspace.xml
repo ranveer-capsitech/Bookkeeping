@@ -5,17 +5,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Details explain saving and current account">
+      <change afterPath="$PROJECT_DIR$/Pages/Find_And_Match_Lock_Page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/28_Find_And_Match_Lock_Test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Test/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomationReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/AutomationReport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Details_Explain_Saving_Account_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Details_Explain_Saving_Account_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomationReport.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Details_Explain_Saving_Account_Page.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Banking_Change_Vat_Date_Shorting_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Change_Vat_Date_Shorting_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyIn_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyIn_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyOut_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyOut_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Detail_Explain_Current_Account_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Detail_Explain_Current_Account_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Details_Explain_Filtering_Function_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Details_Explain_Filtering_Function_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Dividend_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Dividend_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Estimates_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Estimates_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/ExpenseclaimsPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Mileage_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Mileage_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/PurchasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/PurchasePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Credit_Notes_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Purchase_Payment_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Purchase_Payment_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Receipts_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Receipts_Page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/VatPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/VatPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/10_Purchase_Payment_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/10_Purchase_Payment_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/11_Reimbursements_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/11_Reimbursements_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/12_Mileage_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/12_Mileage_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/13_Expenseclaims_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/14_Refund_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/14_Refund_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/15_Journals_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/15_Journals_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/16_Asset_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/16_Asset_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/17_Dividend_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/17_Dividend_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/18_3_Banking_Change_Vat_Date_Shorting_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_3_Banking_Change_Vat_Date_Shorting_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/19_Budget_manager_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/1_Login_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/1_Login_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/20_Add_Customer_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/24_Banking_Detailed_MoneyIn_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/24_Banking_Detailed_MoneyIn_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/25_Detail_Explain_Current_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/25_Detail_Explain_Current_Account_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/26_Details_Explain_Saving_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/26_Details_Explain_Saving_Account_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/27_Details_Explain_Filtering_Function_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/27_Details_Explain_Filtering_Function_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/3_Credit_Notes_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/4_Estimates_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/5_Receipt_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/5_Receipt_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/6_Item_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/6_Item_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/7_Purchase_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/7_Purchase_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/8_Purchase_Credit_Notes_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/9_Purchase_PO_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/9_Purchase_PO_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_select_debug.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/pytest_report.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,134 +100,137 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 16_Asset_Test.Login.test_19_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_23_Banking.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_25_Setting.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 24_Banking_Detailed_MoneyIn_Test.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 25_Detail_Explain_Current_Account_Test.Login.test_26_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_06_Add_New_Credit.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_07_Go_Client_Purchase.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_08_Go_Purchase_CreditNote.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_09_Go_Purchase_PO.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_12_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_14_Reimbursement.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 10_Journals_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 10_Purchase_Payment_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 11_Dividend_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 11_Reimbursements_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 12_Banking_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 12_Journals_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 12_Mileage_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 13_Asset_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 13_Expenseclaims_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 14_Dividend_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 14_Refund_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 15_Banking_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 15_Journals_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 16_Asset_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 16_VAT_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 17_Dividend_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18.1_Banking_Creditcard_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18.3_Banking_Change_Vat_Date_Shorting_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_1_Banking_Creditcard_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_2_Banking_SavingAccount_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_3_Banking_Change_Vat_Date_Shorting_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_Banking_Current_Account_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_Banking_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 18_Mileage_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 19_Budget_manager_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 19_VAT_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 1_Login_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 1_Test_Login.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 20_Add_Customer_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 21_Add_Suppliers.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 21_Add_Suppliers_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 22_Vat_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 23_Banking_Detailed_Explaination_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 23_Banking_Detailed_MoneyOut_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 24_Banking_Detailed_MoneyIn_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 25_Detail_Explain_Current_Account_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 26_Details_Explain_Saving_Account_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 27_Details_Explain_Filtering_Function_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 29_Reimbursements_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 2_ClientSell_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 2_Test_ClientSell.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 39_Refund_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 3_Credit_Notes_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 3_Test_Credit_Notes.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 4_Estimates_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 4_Test_Estimates.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 5_Receipt_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 5_Test_Receipt.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 6_Item_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 6_Test_Item.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 71_Purchase_Credit_Notes_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 72_Purchase_PO_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 7_Purchase_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 7_Test_Purchase.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 8_Expenseclaims_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 8_Purchase_Credit_Notes_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 9_Asset_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in 9_Purchase_PO_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in VAT_Test.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Add_Customer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Add_Suppliers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Assets_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_Change_Vat_Date_Shorting_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_Creditcard_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_Detailed_Explaination_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_Detailed_MoneyIn_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_Detailed_MoneyOut_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Banking_SavingAccount_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Budget_manager_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Client_SellPage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Credit_NotesPage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Detail_Explain_Current_Account_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Dividend_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ExpenseclaimsPage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Item_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.LoginPage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Purchase_PO_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Reimbursements_Page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.VatPage.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CT_USER/PycharmProjects/Bookkeeping&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for 11_Dividend_Test.Login.test_13_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 16_Asset_Test.Login.test_19_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_23_Banking.executor": "Run",
+    "Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_25_Setting.executor": "Run",
+    "Python tests.Python tests for 18_Banking_Test.Login.test_23_Banking.executor": "Run",
+    "Python tests.Python tests for 18_Banking_Test.Login.test_24_Credit.executor": "Run",
+    "Python tests.Python tests for 18_Banking_Test.Login.test_25_Setting.executor": "Run",
+    "Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 24_Banking_Detailed_MoneyIn_Test.Login.test_04_Go_Client_Sell.executor": "Run",
+    "Python tests.Python tests for 25_Detail_Explain_Current_Account_Test.Login.test_26_Go_Client_Sell.executor": "Run",
+    "Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Credit.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_05_Add_New_Invoice.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_06_Add_New_Credit.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_07_Add_New_Estimates.executor": "Run",
+    "Python tests.Python tests for 2_Test_ClientSell.Login.test_08_Add_New_Receipts.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_09_Go_Purchase_PO.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_10_Go_Payments.executor": "Run",
+    "Python tests.Python tests for 7_Purchase_Test.Login.test_11_Create_New_Item.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_07_Go_Client_Purchase.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_08_Go_Purchase_CreditNote.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_09_Go_Purchase_PO.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Iteam.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Create_New_Item.executor": "Run",
+    "Python tests.Python tests for 7_Test_Purchase.Login.test_10_Go_Payments.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_12_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_14_Reimbursement.executor": "Run",
+    "Python tests.Python tests for 8_Expenseclaims_Test.Login.test_15_Refunds.executor": "Run",
+    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_12_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 8_Test_Expenseclaims.Login.test_13_Mileage.executor": "Run",
+    "Python tests.Python tests for 9_Asset_Test.Login.test_13_Expense_claims.executor": "Run",
+    "Python tests.Python tests for 9_Asset_Test.Login.test_14_Add_Disposed_asset.executor": "Run",
+    "Python tests.Python tests in 10_Journals_Test.py.executor": "Run",
+    "Python tests.Python tests in 10_Purchase_Payment_Test.py.executor": "Run",
+    "Python tests.Python tests in 11_Dividend_Test.py.executor": "Run",
+    "Python tests.Python tests in 11_Reimbursements_Test.py.executor": "Run",
+    "Python tests.Python tests in 12_Banking_Test.py.executor": "Run",
+    "Python tests.Python tests in 12_Journals_Test.py.executor": "Run",
+    "Python tests.Python tests in 12_Mileage_Test.py.executor": "Run",
+    "Python tests.Python tests in 13_Asset_Test.py.executor": "Run",
+    "Python tests.Python tests in 13_Expenseclaims_Test.py.executor": "Run",
+    "Python tests.Python tests in 14_Dividend_Test.py.executor": "Run",
+    "Python tests.Python tests in 14_Refund_Test.py.executor": "Run",
+    "Python tests.Python tests in 15_Banking_Test.py.executor": "Run",
+    "Python tests.Python tests in 15_Journals_Test.py.executor": "Run",
+    "Python tests.Python tests in 16_Asset_Test.py.executor": "Run",
+    "Python tests.Python tests in 16_VAT_Test.py.executor": "Run",
+    "Python tests.Python tests in 17_Dividend_Test.py.executor": "Run",
+    "Python tests.Python tests in 18.1_Banking_Creditcard_Test.py.executor": "Run",
+    "Python tests.Python tests in 18.3_Banking_Change_Vat_Date_Shorting_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_1_Banking_Creditcard_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_2_Banking_SavingAccount_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_3_Banking_Change_Vat_Date_Shorting_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_Banking_Current_Account_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_Banking_Test.py.executor": "Run",
+    "Python tests.Python tests in 18_Mileage_Test.py.executor": "Run",
+    "Python tests.Python tests in 19_Budget_manager_Test.py.executor": "Run",
+    "Python tests.Python tests in 19_VAT_Test.py.executor": "Run",
+    "Python tests.Python tests in 1_Login_Test.py.executor": "Run",
+    "Python tests.Python tests in 1_Test_Login.py.executor": "Run",
+    "Python tests.Python tests in 20_Add_Customer_Test.py.executor": "Run",
+    "Python tests.Python tests in 21_Add_Suppliers.py.executor": "Run",
+    "Python tests.Python tests in 21_Add_Suppliers_Test.py.executor": "Run",
+    "Python tests.Python tests in 22_Vat_Test.py.executor": "Run",
+    "Python tests.Python tests in 23_Banking_Detailed_Explaination_Test.py.executor": "Run",
+    "Python tests.Python tests in 23_Banking_Detailed_MoneyOut_Test.py.executor": "Run",
+    "Python tests.Python tests in 24_Banking_Detailed_MoneyIn_Test.py.executor": "Run",
+    "Python tests.Python tests in 25_Detail_Explain_Current_Account_Test.py.executor": "Run",
+    "Python tests.Python tests in 26_Details_Explain_Saving_Account_Test.py.executor": "Run",
+    "Python tests.Python tests in 27_Details_Explain_Filtering_Function_Test.py.executor": "Run",
+    "Python tests.Python tests in 28_Find_And_Match_Lock_Test.py.executor": "Run",
+    "Python tests.Python tests in 29_Reimbursements_Test.py.executor": "Run",
+    "Python tests.Python tests in 2_ClientSell_Test.py.executor": "Run",
+    "Python tests.Python tests in 2_Test_ClientSell.py.executor": "Run",
+    "Python tests.Python tests in 2_Test_Select_Bookkeeping.py.executor": "Run",
+    "Python tests.Python tests in 39_Refund_Test.py.executor": "Run",
+    "Python tests.Python tests in 3_Credit_Notes_Test.py.executor": "Run",
+    "Python tests.Python tests in 3_Test_Credit_Notes.py.executor": "Run",
+    "Python tests.Python tests in 4_Estimates_Test.py.executor": "Run",
+    "Python tests.Python tests in 4_Test_Estimates.py.executor": "Run",
+    "Python tests.Python tests in 5_Receipt_Test.py.executor": "Run",
+    "Python tests.Python tests in 5_Test_Receipt.py.executor": "Run",
+    "Python tests.Python tests in 6_Item_Test.py.executor": "Run",
+    "Python tests.Python tests in 6_Test_Item.py.executor": "Run",
+    "Python tests.Python tests in 71_Purchase_Credit_Notes_Test.py.executor": "Run",
+    "Python tests.Python tests in 72_Purchase_PO_Test.py.executor": "Run",
+    "Python tests.Python tests in 7_Purchase_Test.py.executor": "Run",
+    "Python tests.Python tests in 7_Test_Purchase.py.executor": "Run",
+    "Python tests.Python tests in 8_Expenseclaims_Test.py.executor": "Run",
+    "Python tests.Python tests in 8_Purchase_Credit_Notes_Test.py.executor": "Run",
+    "Python tests.Python tests in 9_Asset_Test.py.executor": "Run",
+    "Python tests.Python tests in 9_Purchase_PO_Test.py.executor": "Run",
+    "Python tests.Python tests in VAT_Test.py.executor": "Run",
+    "Python.Add_Customer.executor": "Run",
+    "Python.Add_Suppliers.executor": "Run",
+    "Python.Assets_Page.executor": "Run",
+    "Python.Banking_Change_Vat_Date_Shorting_Page.executor": "Run",
+    "Python.Banking_Creditcard_Page.executor": "Run",
+    "Python.Banking_Detailed_Explaination_Page.executor": "Run",
+    "Python.Banking_Detailed_MoneyIn_Page.executor": "Run",
+    "Python.Banking_Detailed_MoneyOut_Page.executor": "Run",
+    "Python.Banking_SavingAccount_Page.executor": "Run",
+    "Python.Budget_manager_Page.executor": "Run",
+    "Python.Client_SellPage.executor": "Run",
+    "Python.Credit_NotesPage.executor": "Run",
+    "Python.Detail_Explain_Current_Account_Page.executor": "Run",
+    "Python.Dividend_Page.executor": "Run",
+    "Python.ExpenseclaimsPage.executor": "Run",
+    "Python.Item_Page.executor": "Run",
+    "Python.LoginPage.executor": "Run",
+    "Python.PurchasePage.executor": "Debug",
+    "Python.Purchase_PO_Page.executor": "Run",
+    "Python.Receipts_Page.executor": "Run",
+    "Python.Reimbursements_Page.executor": "Run",
+    "Python.VatPage.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/CT_USER/PycharmProjects/Bookkeeping",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable"
   }
-}</component>
+}]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings module-name="BOOKKEEPING" is-module-sdk="true">
@@ -197,8 +245,33 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING\Pages" />
       <recent name="C:\Users\CT_USER\PycharmProjects\BOOKKEEPING" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\CT_USER\PycharmProjects\Bookkeeping\Test" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.PurchasePage">
+    <configuration name="PurchasePage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOOKKEEPING" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Pages" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Pages/PurchasePage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for 16_Asset_Test.Login.test_19_Expense_claims" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -226,21 +299,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;18_Banking_Current_Account_Test.Login.test_23_Banking&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for 18_Banking_Current_Account_Test.Login.test_25_Setting" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="BOOKKEEPING" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;18_Banking_Current_Account_Test.Login.test_25_Setting&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -276,11 +334,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.PurchasePage" />
         <item itemvalue="Python tests.Python tests for 25_Detail_Explain_Current_Account_Test.Login.test_26_Go_Client_Sell" />
         <item itemvalue="Python tests.Python tests for 24_Banking_Detailed_MoneyIn_Test.Login.test_04_Go_Client_Sell" />
         <item itemvalue="Python tests.Python tests for 16_Asset_Test.Login.test_19_Expense_claims" />
         <item itemvalue="Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_23_Banking" />
-        <item itemvalue="Python tests.Python tests for 18_Banking_Current_Account_Test.Login.test_25_Setting" />
       </list>
     </recent_temporary>
   </component>
@@ -298,14 +356,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Dividend">
-      <option name="closed" value="true" />
-      <created>1764155922292</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1764155922292</updated>
     </task>
     <task id="LOCAL-00018" summary="Dividend">
       <option name="closed" value="true" />
@@ -691,7 +741,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782897783189</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Details explain saving and current account">
+      <option name="closed" value="true" />
+      <created>1783510945126</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1783510945127</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -732,5 +790,15 @@
     <MESSAGE value="Update code according regression" />
     <MESSAGE value="Details explain saving and current account" />
     <option name="LAST_COMMIT_MESSAGE" value="Details explain saving and current account" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
