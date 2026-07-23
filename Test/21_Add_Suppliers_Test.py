@@ -87,6 +87,7 @@ class Login(unittest.TestCase):
         client_section.Click_On_Add_Suppliers()
         time.sleep(.2)
 
+
         client_section.Enter_Suppliers_Name()
         time.sleep(.2)
         client_section.Click_Billing_Field()

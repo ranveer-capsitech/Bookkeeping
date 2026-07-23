@@ -63,6 +63,19 @@ class Login(unittest.TestCase):
 
 
     def test_04_Go_Client_Sell(self):
+        """
+               Complete dependent workflow:
+               1. Search company
+               2. Select company
+               3. Open Sell section
+               4. Create a new invoice
+               5. Save invoice-- By: - Ranveer
+               6. check search
+               7. calendar
+               8 shorting
+               9. Bad Debts
+
+               """
         client_section = ClientSell(driver=self.driver)
         time.sleep(.2)
 

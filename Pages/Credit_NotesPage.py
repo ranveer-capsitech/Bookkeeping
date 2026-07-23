@@ -709,6 +709,40 @@ class Credit_Notes:
         except Exception as e:
             print(f"Error on click:{e}")
 
+    def wait_for_page_ready(self, timeout=20):
+        wait = WebDriverWait(self.driver, timeout)
+
+        # Wait for the browser document.
+        wait.until(
+            lambda driver: driver.execute_script(
+                "return document.readyState"
+            ) == "complete"
+        )
+
+        # Wait for Fluent UI overlay.
+        wait.until(
+            EC.invisibility_of_element_located(
+                (
+                    By.XPATH,
+                    "//div[contains(@class,'ms-Overlay') "
+                    "and not(contains(@style,'display: none'))]"
+                )
+            )
+        )
+
+        # Wait for common loaders/spinners.
+        wait.until(
+            EC.invisibility_of_element_located(
+                (
+                    By.XPATH,
+                    "//*[contains(@class,'spinner') "
+                    "or contains(@class,'Spinner') "
+                    "or contains(@class,'loader') "
+                    "or contains(@class,'Loader')]"
+                )
+            )
+        )
+
 
 
 

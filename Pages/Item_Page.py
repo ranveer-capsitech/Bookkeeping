@@ -204,7 +204,7 @@ class Items:
 
             time.sleep(0.2)
 
-            enter_pur.send_keys("100")
+            enter_pur.send_keys("1000")
             time.sleep(0.2)
 
 
@@ -223,7 +223,7 @@ class Items:
 
             time.sleep(.2)
 
-            enter_pur.send_keys("100")
+            enter_pur.send_keys("1000")
             time.sleep(.2)
             print("Enter Unit Price Sell Successfully.....!!")
         except Exception as e:

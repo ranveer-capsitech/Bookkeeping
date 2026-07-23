@@ -83,6 +83,9 @@ class ClientSell:
         self.click_pound_icon = (By.XPATH, "(//*[@data-automationid='DetailsRowCell']//button[contains(@id,'btnReceipt')])[1]")
 
 
+        self.change_quantity = (By.XPATH, "//th[normalize-space()='Qty.']/following::input[@type='number'][1]")
+
+
 
 
 
@@ -728,6 +731,33 @@ class ClientSell:
             print(" Click on Pound icon successfully.....! ")
         except Exception as e:
             print(f"Error on click:{e}")
+
+
+
+    def Change_Quantity(self):
+        try:
+            quantity = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.change_quantity))
+            time.sleep(.2)
+            quantity.click()
+            time.sleep(.2)
+            quantity.send_keys(Keys.CONTROL,"a")
+            time.sleep(.2)
+            quantity.send_keys(Keys.BACKSPACE)
+            time.sleep(.2)
+            quantity.send_keys("2")
+            time.sleep(.2)
+            quantity.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            print("Quantity changed successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+
+
+
+
+
 
 
 

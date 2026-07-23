@@ -1,5 +1,7 @@
 from faker import Faker
 import time
+
+from jinja2.filters import sync_do_sum
 from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
     ElementClickInterceptedException
 from selenium.webdriver import Keys, ActionChains
@@ -110,7 +112,13 @@ class ClientPurchase:
 
         self.click_pound_icon = (By.XPATH, "(//*[@data-automationid='DetailsRowCell']//button[contains(@id,'btn-btnPayment')])[1]")
 
-        self.enter_amount = (By.XPATH, "//input[@name='availableAmount']")
+        self.enter_amount_payment = (By.XPATH, "//input[@name='availableAmount']")
+        self.setting_icon = (By.XPATH, "//button[@title='Settings']")
+        self.add_discount = (By.XPATH, "//input[@name='discount']")
+        self.click_green_tick = (By.XPATH, "//button[.//i[@data-icon-name='CheckMark']]")
+
+        self.change_quantity = (By.XPATH, "//th[normalize-space()='Qty.']/following::input[@type='number'][1]")
+
 
 
 #------------------------------------------Method-----------------------------------------------------------------------
@@ -292,8 +300,11 @@ class ClientPurchase:
             control = wait.until(EC.visibility_of_element_located(self.add_discount))
             time.sleep(.2)
             control.click()
+
             time.sleep(.2)
-            control.send_keys("10")
+            control.send_keys(Keys.BACKSPACE)
+            time.sleep(.2)
+            control.send_keys("200")
             time.sleep(.2)
             print("Discount added successfully....!!")
         except Exception as e:
@@ -372,7 +383,7 @@ class ClientPurchase:
         try:
             amount = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.net_amount))
             time.sleep(.2)
-            amount.send_keys("100")
+            amount.send_keys("1000")
             time.sleep(.2)
             print("Enter amount successfully....!!")
         except Exception as e:
@@ -396,7 +407,7 @@ class ClientPurchase:
         time.sleep(0.4)
         save_button.click()
         time.sleep(0.4)
-        print("Invoice created successfully")
+        print("Click on Save button  successfully")
         # try:
         #     update_message = WebDriverWait(self.driver, 10).until(
         #         EC.visibility_of_element_located(
@@ -676,7 +687,7 @@ class ClientPurchase:
 
             try:
                 driver = self.driver
-                wait = WebDriverWait(driver, 15)
+                wait = WebDriverWait(driver, 20)
 
 
                 dropdown = wait.until(EC.element_to_be_clickable(self.click_item_for_invoice_po))
@@ -699,7 +710,7 @@ class ClientPurchase:
 
     def Save_PO(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 30)
 
         save_btn = wait.until(EC.element_to_be_clickable(self.save_po))
 
@@ -721,7 +732,7 @@ class ClientPurchase:
     def Payment_Section(self):
 
         try:
-            payment_section = WebDriverWait(self.driver, 10).until(
+            payment_section = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.payment))
             time.sleep(.2)
             payment_section.click()
@@ -733,7 +744,7 @@ class ClientPurchase:
 
     def Click_Payment(self):
         try:
-            payment = WebDriverWait(self.driver, 20).until(
+            payment = WebDriverWait(self.driver, 30).until(
                 EC.visibility_of_element_located(self.click_payment))
             time.sleep(.2)
             payment.click()
@@ -746,7 +757,7 @@ class ClientPurchase:
 
     def Paid_To_Supplier(self):
         d = self.driver
-        w = WebDriverWait(d, 20)
+        w = WebDriverWait(d, 30)
 
 
         control = w.until(EC.element_to_be_clickable((
@@ -772,41 +783,60 @@ class ClientPurchase:
         print("Select Supplier successfully!")
 
 
-    def Select_Account(self):
+
+    def Select_Account_Payment(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 15)
+            wait = WebDriverWait(driver, 30)
 
 
             supplier_dropdown = wait.until(EC.element_to_be_clickable(self.account))
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", supplier_dropdown )
             supplier_dropdown.click()
             time.sleep(0.5)
-            active = driver.switch_to.active_element
-            time.sleep(.2)
-            active.send_keys(Keys.ENTER)
-            time.sleep(.2)
+            # supplier_dropdown.send_keys('Monzo')
+            time.sleep(0.5)
+
+            # active = driver.switch_to.active_element
+            # time.sleep(.4)
+            # active.send_keys(Keys.ENTER)
+            time.sleep(.3)
             print("Select Account type successfully!")
         except Exception as e:
             print(f" Could not select Account type: {e}")
 
 
-    def Enter_Amount(self):
+
+    def Enter_Amount_Payment(self):
         try:
-            enter_amount = WebDriverWait(self.driver, 20).until(
-                EC.visibility_of_element_located(self.enter_amount))
-            time.sleep(.2)
-            enter_amount.send_keys("100")
-            time.sleep(.2)
+            enter_amount = WebDriverWait(self.driver, 30).until(
+                EC.visibility_of_element_located(self.enter_amount_payment)
+            )
 
-            print("Click on payment successfully....!!")
+            time.sleep(0.2)
+
+            # Click the field
+            enter_amount.click()
+            time.sleep(0.2)
+
+            # Select all and clear
+            enter_amount.send_keys(Keys.CONTROL + "a")
+            time.sleep(0.2)
+            enter_amount.send_keys(Keys.DELETE)
+            time.sleep(0.2)
+
+            # Enter new amount
+            enter_amount.send_keys("1000")
+            time.sleep(0.2)
+
+            print("Amount entered successfully....!!")
+
         except Exception as e:
-            print(f"Error on click:{e}")
-
+            print(f"Error while entering amount: {e}")
 
     def Save_payment(self):
         try:
-          save_paymt = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.save_payment))
+          save_paymt = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_payment))
           time.sleep(.2)
           save_paymt.click()
           time.sleep(.2)
@@ -821,7 +851,7 @@ class ClientPurchase:
     def Item_Section(self):
 
         try:
-            item_section = WebDriverWait(self.driver, 10).until(
+            item_section = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.item))
             time.sleep(.2)
             item_section.click()
@@ -833,7 +863,7 @@ class ClientPurchase:
 
     def Click_on_item(self):
         try:
-            click_item = WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.click_add_item))
+            click_item = WebDriverWait(self.driver,30).until(EC.element_to_be_clickable(self.click_add_item))
             time.sleep(.2)
             click_item.click()
             time.sleep(.2)
@@ -844,7 +874,7 @@ class ClientPurchase:
 
     def Enter_Name(self):
         try:
-            name_el = WebDriverWait(self.driver, 10).until(
+            name_el = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.enter_name)
             )
 
@@ -869,7 +899,7 @@ class ClientPurchase:
 
     def Enter_Description_For_Purchases(self):
         try:
-            pur_des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.pur_description))
+            pur_des = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.pur_description))
             time.sleep(.2)
             pur_des.send_keys("Only for testing")
             time.sleep(.2)
@@ -880,7 +910,7 @@ class ClientPurchase:
 
     def Enter_Description_For_Sell(self):
         try:
-            pur_des = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.sell_description))
+            pur_des = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.sell_description))
             time.sleep(.2)
             pur_des.send_keys("Only for testing")
             time.sleep(.2)
@@ -891,7 +921,7 @@ class ClientPurchase:
 
     def Enter_Unit_Price_Purchases(self):
         try:
-            pur_price = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_pur_price))
+            pur_price = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_pur_price))
             time.sleep(.2)
             pur_price.send_keys("100")
             time.sleep(.2)
@@ -902,7 +932,7 @@ class ClientPurchase:
 
     def Enter_Unit_Price_Sell(self):
         try:
-            sell_price = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_sell_price))
+            sell_price = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_sell_price))
             time.sleep(.2)
             sell_price.send_keys("100")
             time.sleep(.2)
@@ -913,13 +943,13 @@ class ClientPurchase:
 
     def Create_Item(self):
         try:
-            item = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_on_create))
+            item = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_on_create))
             time.sleep(.2)
             item.click()
             time.sleep(.2)
 
 
-            update_message = WebDriverWait(self.driver, 10).until(
+            update_message = WebDriverWait(self.driver, 20).until(
                 EC.visibility_of_element_located(
                     (By.XPATH, "//*[contains(text(),'Items created successfully')]"))
             )
@@ -937,13 +967,14 @@ class ClientPurchase:
 
     def Click_Pound_Icon(self):
         try:
-            pound_icon = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.click_pound_icon))
+            pound_icon = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.click_pound_icon))
             time.sleep(.2)
             pound_icon.click()
             time.sleep(.2)
             print("Click on Pound Icon successfully....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
 
     def Select_Account(self):
         try:
@@ -994,13 +1025,153 @@ class ClientPurchase:
             time.sleep(0.2)
 
             # Enter new amount
-            enter_amount.send_keys("100")
+            enter_amount.send_keys("1000")
             time.sleep(0.2)
 
             print("Amount entered successfully....!!")
 
         except Exception as e:
             print(f"Error while entering amount: {e}")
+
+
+    def Click_Setting_Icon(self):
+        try:
+            setting_icon = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.setting_icon ))
+            time.sleep(.2)
+            setting_icon.click()
+            time.sleep(.2)
+            print("Click on Setting Icon successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Enter_Discount(self):
+        driver = self.driver
+        wait = WebDriverWait(self.driver, 30)
+
+        try:
+            control = wait.until(EC.visibility_of_element_located(self.add_discount))
+            time.sleep(.2)
+            control.click()
+            time.sleep(.2)
+            control.send_keys("10")
+            time.sleep(.2)
+            print("Discount added successfully....!!")
+        except Exception as e:
+
+            print(f"Error on Click : {e}")
+
+
+    def Click_Green_Tick(self):
+        try:
+            green_tick = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.click_green_tick))
+            time.sleep(.2)
+            green_tick.click()
+            time.sleep(.2)
+            print("Click on Green tick Icon successfully....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Select_Account_Payment_lock(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        try:
+            account_input = wait.until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//label[normalize-space()='Account']"
+                        "/following::input[@role='combobox'][1]"
+                    )
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                account_input
+            )
+
+            account_input.click()
+
+            account_input.send_keys(Keys.CONTROL, "a")
+            account_input.send_keys(Keys.BACKSPACE)
+
+            account_input.send_keys("Monzo")
+
+            # Wait until Monzo becomes the focused option
+            wait.until(
+                lambda d: "Monzo" in (
+                    d.find_element(
+                        By.ID,
+                        "aria-context"
+                    ).text
+                )
+            )
+
+            account_input.send_keys(Keys.ARROW_DOWN)
+            account_input.send_keys(Keys.ENTER)
+
+            # Verify selection
+            selected_value = wait.until(
+                EC.visibility_of_element_located(
+                    (
+                        By.XPATH,
+                        "//label[normalize-space()='Account']"
+                        "/following::div[contains(@class,'rs-single-value')][1]"
+                    )
+                )
+            )
+
+            assert "Monzo" in selected_value.text, (
+                f"Monzo was not selected. Current value: "
+                f"{selected_value.text}"
+            )
+
+            print(
+                f"Account selected successfully: "
+                f"{selected_value.text}"
+            )
+
+        except Exception as error:
+            driver.save_screenshot(
+                "select_monzo_account_failure.png"
+            )
+
+            raise AssertionError(
+                f"Could not select Monzo account: {error}"
+            ) from error
+
+    def Change_Quantity(self):
+        try:
+            quantity = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.change_quantity))
+            time.sleep(.2)
+            quantity.click()
+            time.sleep(.2)
+            quantity.send_keys(Keys.CONTROL,"a")
+            time.sleep(.2)
+            quantity.send_keys(Keys.BACKSPACE)
+            time.sleep(.2)
+            quantity.send_keys("2")
+            time.sleep(.2)
+            quantity.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            print("Quantity changed successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
