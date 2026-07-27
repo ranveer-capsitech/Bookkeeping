@@ -18,11 +18,18 @@ from Pages.LoginPage import loginPage
 
 class Login(unittest.TestCase):
 
+
     @classmethod
     def setUpClass(cls):
         """
         This method runs only once before all test methods
         inside this class.
+
+        preconditions -
+        1. Add User
+        2. Add item
+        3. Supplier
+        4. Customer
         """
 
         chrome_options = Options()
@@ -102,7 +109,9 @@ class Login(unittest.TestCase):
     @pytest.mark.description(
         " Select company, create a bank account and add manual transactions"
     )
-    def test_28_1_Add_New_Current_Bank_Find_And_match_with_lock(self):
+
+
+    def test_28_01_Add_New_Current_Bank_Find_And_match_with_lock(self):
         """
         Complete dependent workflow:
         1. Search company
@@ -159,10 +168,21 @@ class Login(unittest.TestCase):
         client_section.Click_Added_Bank()
         time.sleep(.2)
 
+        # client_section.Click_Manual()
+        # time.sleep(.2)
 
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Import()
+        time.sleep(.2)
+        # client_section.Click_Templet()
+        # time.sleep(.2)
+        client_section.Click_Upload()
+        time.sleep(.2)
 
-
-        client_section.Click_Manual()
+        client_section.Upload_Import()
+        time.sleep(.2)
+        client_section.Click_Next()
         time.sleep(.2)
 
         client_section.wait_for_loader_to_disappear()
@@ -170,46 +190,46 @@ class Login(unittest.TestCase):
 
         # client_section.Add_Manual_Transaction()
         # time.sleep(1)
-        for i in range(3):
-            print(f"Money Out Transaction {i + 1}")
-
-            client_section.Add_Manual_Transaction()
-            time.sleep(1)
-
-            client_section.Enter_Date()
-            time.sleep(1)
-
-            client_section.Enter_Description()
-            time.sleep(1)
-
-            client_section.Enter_Money_Out()
-            time.sleep(1)
-
-            client_section.Click_Save_Manual_Transaction()
-
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(0.2)
-
-        # ---------------- Money In: 3 entries ----------------
-        for i in range(3):
-            print(f"Money In Transaction {i + 1}")
-
-            client_section.Add_Manual_Transaction()
-            time.sleep(1)
-
-            client_section.Enter_Date()
-            time.sleep(1)
-
-            client_section.Enter_Description()
-            time.sleep(1)
-
-            client_section.Enter_Money_In()
-            time.sleep(1)
-
-            client_section.Click_Save_Manual_Transaction()
-
-            client_section.wait_for_loader_to_disappear()
-            time.sleep(0.2)
+        # for i in range(3):
+        #     print(f"Money Out Transaction {i + 1}")
+        #
+        #     client_section.Add_Manual_Transaction()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Date()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Description()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Money_Out()
+        #     time.sleep(1)
+        #
+        #     client_section.Click_Save_Manual_Transaction()
+        #
+        #     client_section.wait_for_loader_to_disappear()
+        #     time.sleep(0.2)
+        #
+        # # ---------------- Money In: 3 entries ----------------
+        # for i in range(3):
+        #     print(f"Money In Transaction {i + 1}")
+        #
+        #     client_section.Add_Manual_Transaction()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Date()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Description()
+        #     time.sleep(1)
+        #
+        #     client_section.Enter_Money_In()
+        #     time.sleep(1)
+        #
+        #     client_section.Click_Save_Manual_Transaction()
+        #
+        #     client_section.wait_for_loader_to_disappear()
+        #     time.sleep(0.2)
 
 
 
@@ -223,7 +243,7 @@ class Login(unittest.TestCase):
 
 
 
-    def test_28_2_Add_New_Sale_Invoice_Find_And_match_with_lock(self):
+    def test_28_02_Add_New_Sale_Invoice_Find_And_match_with_lock(self):
         """
         Complete dependent workflow:
         1. Search company
@@ -291,7 +311,10 @@ class Login(unittest.TestCase):
 
         client_sell_page.Click_Pound_Icon()
         time.sleep(.2)
+        client_sell_page.Select_Account_For_Sell()
+        time.sleep(.2)
         client_sell_page.Click_Save()
+        time.sleep(.2)
         print("Receipt Created Successfully.....")
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -303,7 +326,7 @@ class Login(unittest.TestCase):
             "Create and save a new credit note"
         )
 
-    def test_28_3_Add_New_Credit_Note_Find_And_match_with_lock(self):
+    def test_28_03_Add_New_Credit_Note_Find_And_match_with_lock(self):
         """
             Complete dependent workflow:
             1. Search company
@@ -323,6 +346,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         credit_notes_section.Invoice_ref()
         time.sleep(.2)
+        credit_notes_section.Change_CRN_Quantity()
+        time.sleep(.2)
         credit_notes_section.Add_Attachment()
         time.sleep(.2)
         credit_notes_section.Enter_Discount()
@@ -333,6 +358,10 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         credit_notes_section.Save_Credit_Notes()
         time.sleep(.5)
+
+        credit_notes_section.Select_Account_CRN()
+        time.sleep(.2)
+
         credit_notes_section.Click_Save_Button()
         time.sleep(.2)
         credit_notes_section.wait_for_loader_to_disappear()
@@ -349,7 +378,7 @@ class Login(unittest.TestCase):
     )
 
 
-    def test_28_4_Add_New_Purchase_Invoice_Find_And_match_with_lock(self):
+    def test_28_04_Add_New_Purchase_Invoice_Find_And_match_with_lock(self):
         """
         Complete dependent workflow:
         1. Search company
@@ -389,6 +418,8 @@ class Login(unittest.TestCase):
         time.sleep(2)
         purchase_sell_page.Save_Services()
         time.sleep(.2)
+
+
         purchase_sell_page.wait_for_loader_to_disappear()
         time.sleep(0.5)
         purchase_sell_page.Click_Pound_Icon()
@@ -411,8 +442,6 @@ class Login(unittest.TestCase):
 
 
 
-
-
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> Input >>Expense claims"
     )
@@ -421,7 +450,7 @@ class Login(unittest.TestCase):
     )
 
 
-    def test_28_5_Add_New_Expense_Claims_Find_And_match_with_lock(self):
+    def test_28_05_Add_New_Expense_Claims_Find_And_match_with_lock(self):
         """
         Complete dependent workflow:
         1. Search company
@@ -464,21 +493,21 @@ class Login(unittest.TestCase):
         #---------------------------------------------------------------------------------------------------------------
 
     @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> go for Client >> expense-claims >> reimbursement"
+        "Login >> Admin Dashboard >> Bookkeeping >> go for Client >> expense-claims >> Reimbursements"
     )
     @pytest.mark.description(
-        "Select company and create a new reimbursement"
+        "Select company and create a new Reimbursements"
     )
 
 
-    def test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock(self):
+    def test_28_06_Add_New_Reimbursement_Claims_Find_And_match_with_lock(self):
         """
         Complete dependent workflow:
         1. Search company
         2. Select company
         3. Open Expense claims
-        4. Create reimbursement
-        5. Save reimbursement- By: - Ranveer
+        4. CreateReimbursements
+        5. Save Reimbursements- By: - Ranveer
         """
         client_section = Find_And_Match_Lock(
             driver=self.driver
@@ -511,6 +540,420 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Save_Refund()
         time.sleep(.2)
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Bank >> find and match"
+    )
+    @pytest.mark.description(
+        " Select company, select created bank account and find and match the transaction "
+    )
+    def test_28_07_Select_Current_Bank_Find_And_match_with_lock(self):
+
+        client_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+        client_section.Banking_Section()
+        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Adde_Bank_Account()
+        time.sleep(.2)
+
+        #----------1st des--------------------------------
+
+        client_section.Click_Receipt_with_Bank_Charge()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Contact_Dropdown_For_Money_In()
+        time.sleep(.2)
+        client_section.Select_Receipts()
+        time.sleep(.2)
+        client_section.Select_Settle()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+        # ----------2nd des--------------------------------
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Click_Sales_Return()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Contact_Dropdown_For_Money_Out()
+        time.sleep(.2)
+
+        client_section.Select_Receipts()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+      #--------------------------3rd Dec--------------------------------------------------------
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+        client_section.Click_Payment()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+        #----------------4th payment due --------------------------------------------------------------
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section. Click_Payment_Due()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Contact_Dropdown_For_Money_Out_2nd()
+        time.sleep(.2)
+        client_section.Select_Receipts()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+    #---------------------------5th----------------------------------------------------------------------
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Reimbursement()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Contact_Dropdown_For_Money_Out_3nd()
+        time.sleep(.2)
+        client_section.Select_Receipts()
+        time.sleep(.2)
+        client_section.Select_Settle_Reimbursement()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+    #---------------------------6th-----------------------------------------------------------------------
+
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_Refund()
+        time.sleep(.2)
+        client_section.Click_Find_Match()
+        time.sleep(.2)
+        client_section.Click_Contact_Dropdown_For_Money_Out_2nd()
+        time.sleep(.2)
+        client_section.Select_Receipts()
+        time.sleep(.2)
+        client_section.Click_Match()
+        time.sleep(.2)
+
+    #-----------------------------------lock invoice-------------------------------------------------------------
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Invoice >> Verify the lock is showing or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in input module."
+    )
+    def test_28_08_lock_verification_invoice(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open Sales
+                4. verify that lock is showing or not
+
+                """
+
+        client_sell_page = ClientSell(
+            driver=self.driver
+        )
+
+        client_sell_page.Click_Input()
+        time.sleep(0.5)
+
+        client_sell_page.Click_Sales()
+        time.sleep(0.5)
+
+        client_sell_page.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Sales section opened successfully.")
+
+        client_sell_page.Click_On_Lock_Button()
+        time.sleep(.2)
+        client_sell_page.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+#--------------------------------------------------lock Credit Note---------------------------------------------------------------
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Credit Note >> Verify the lock is showing or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in input module."
+    )
+    def test_28_09_lock_verification_credit_note(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open credit note
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Credit_Notes(driver=self.driver)
+        time.sleep(.2)
+
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+
+        credit_notes_section.Click_Credit_Notes()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Sales section opened successfully.")
+
+        credit_notes_section.Click_On_Lock_Button_Credit()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Receipts >> Verify the lock is showing or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in input module."
+    )
+    def test_28_10_lock_verification_receipts(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open Receipts
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+
+        credit_notes_section.Click_Receipts()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Receipts section opened successfully for verify lock.")
+
+        credit_notes_section.Click_On_Lock_Button_Receipts()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+    # ------------------------------------------------------------------------------------------------------------------------
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>purchases >> Verify the lock is showing or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in input module.")
+
+
+
+
+
+    def test_28_11_lock_verification_purchases(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open Purchases
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+
+        credit_notes_section.Click_Purchases()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Purchases section opened successfully for verify lock.")
+
+
+
+        credit_notes_section.Click_On_Lock_Button_Purchases()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Purchases >>Payment >>>  Verify the lock is showing or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in input module."
+    )
+
+
+    def test_28_12_lock_verification_payment(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> payment
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Click_Input()
+        time.sleep(0.5)
+        credit_notes_section.Click_Payment()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+
+
+        print("Payment section opened successfully for verify lock.")
+
+        credit_notes_section.Click_First_Lock_Payment()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+        print("Payment section opened successfully and  verify  lock for supplier.")
+        credit_notes_section.Click_Second_Lock_Payment()
+        time.sleep(.2)
+        credit_notes_section.Click_Second_Lock_Payment()
+        time.sleep(.2)
+        print("Payment section opened successfully and  verify  lock.")
+
+
+    def test_28_13_lock_verification_payment_Expense_claims(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Expense_claims
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Click_Expense_Claims()
+        time.sleep(0.5)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+
+        print("Expense section opened successfully for verify lock.")
+
+    def test_28_14_lock_verification_payment_Reimbursements(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Reimbursements
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Reimbursed_Section()
+        time.sleep(0.5)
+
+        credit_notes_section.Click_On_Lock_Button_Reimbursed()
+        time.sleep(.2)
+
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+
+        print("Expense section opened successfully for verify lock.")
+
+
+    def test_28_15_lock_verification_payment_Refunds(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Refunds
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Refunds_Section()
+        time.sleep(0.5)
+
+        credit_notes_section.Click_On_Lock_Button_Refund()
+        time.sleep(.5)
+
+
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        print("Refund section opened successfully for verify lock.")
+
+
+    def test_28_16_Un_Explain
+
+
+
+
+
+
 
 
 

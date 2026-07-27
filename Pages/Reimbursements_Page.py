@@ -55,7 +55,8 @@ class Reimbursement:
         #self.method = (By.XPATH, "//label[normalize-space()='Method']/following::div[contains(@class,'rs-placeholder')][1]")
         self.reimbursed_amount = (By.XPATH, "//label[normalize-space()='Amount']/following::input[@type='text'][1]")
         self.enter_notes = (By.XPATH, "//label[normalize-space()='Note :']/following::input[@name='notes'][1]")
-        self.save_reimbursement = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+        # self.save_reimbursement = (By.XPATH, "//span[normalize-space()='Save']/ancestor::button")
+        self.save_reimbursement = (By.XPATH, "(//button[@type='submit'])[1]")
 #-----------------------------------------------------------------------------------------------------------------------
 
     def Select_Search(self):
@@ -264,10 +265,38 @@ class Reimbursement:
             time.sleep(0.2)
             amount.send_keys("100")
             time.sleep(.3)
+            amount.send_keys(Keys.TAB)
+            time.sleep(.2)
             print("Click on reimbursed amount successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
 
+    # def Enter_Amount(self, amount="100"):
+    #     wait = WebDriverWait(self.driver, 30)
+    #
+    #     amount_input = wait.until(
+    #         EC.element_to_be_clickable((
+    #             By.XPATH,
+    #             "//div[contains(@class,'ms-Modal-scrollableContent')]"
+    #             "//input[@type='number' or "
+    #             "contains(@name,'amount') or "
+    #             "contains(@id,'amount')]"
+    #         ))
+    #     )
+    #
+    #     amount_input.click()
+    #     amount_input.send_keys(Keys.CONTROL, "a")
+    #     amount_input.send_keys(Keys.BACKSPACE)
+    #     amount_input.send_keys(amount)
+    #     amount_input.send_keys(Keys.TAB)
+    #
+    #     entered_value = amount_input.get_attribute("value")
+    #
+    #     if not entered_value:
+    #         raise AssertionError("Reimbursement amount was not entered.")
+    #
+    #     print(f"Reimbursement amount entered: {entered_value}")
+    #
 
 
     def Enter_Notes(self):
@@ -288,17 +317,116 @@ class Reimbursement:
             save_reb.click()
             time.sleep(.2)
 
-            # update_message = WebDriverWait(self.driver, 10).until(
-            #     EC.visibility_of_element_located(
-            #         (By.XPATH, "//*[contains(normalize-space(), 'Reimbursement saved successfully with number')]"))
-            # )
-            #
-            # # Assert the presence of the success message
-            # assert update_message, "Reimbursement saved successfully"
+
 
             print("Test Case 11 - Pass: Reimbursement saved successfully.")
 
         # except Exception as e:
         #     print(f"Error: {e}")
-        #
-        #     time.sleep(2)
+
+            time.sleep(5)
+
+    # def Save_Reimbursement(self):
+    #     driver = self.driver
+    #
+    #     wait = WebDriverWait(
+    #         driver,
+    #         40,
+    #         poll_frequency=0.3,
+    #         ignored_exceptions=(StaleElementReferenceException,)
+    #     )
+    #
+    #     modal_locator = (
+    #         By.CSS_SELECTOR,
+    #         "div.ms-Modal-scrollableContent"
+    #     )
+    #
+    #     save_locator = (
+    #         By.XPATH,
+    #         "//div[contains(@class,'ms-Modal-scrollableContent')]"
+    #         "//button[@type='submit' and not(@disabled)]"
+    #         "[.//span[normalize-space()='Save']]"
+    #     )
+    #
+    #     try:
+    #         # Wait for the exact Save button inside the reimbursement modal
+    #         save_button = wait.until(
+    #             EC.element_to_be_clickable(save_locator)
+    #         )
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             save_button
+    #         )
+    #
+    #         # Check browser-level required-field validation
+    #         invalid_fields = driver.execute_script("""
+    #             return Array.from(
+    #                 document.querySelectorAll(
+    #                     '.ms-Modal-scrollableContent input:invalid, ' +
+    #                     '.ms-Modal-scrollableContent textarea:invalid, ' +
+    #                     '.ms-Modal-scrollableContent select:invalid'
+    #                 )
+    #             ).filter(element => element.offsetParent !== null);
+    #         """)
+    #
+    #         if invalid_fields:
+    #             raise AssertionError(
+    #                 f"{len(invalid_fields)} required field(s) are invalid."
+    #             )
+    #
+    #         save_button.click()
+    #
+    #         print("Save button clicked. Waiting for server response...")
+    #
+    #         # A successful save should close the reimbursement modal
+    #         wait.until(
+    #             EC.invisibility_of_element_located(modal_locator)
+    #         )
+    #
+    #         # Wait for loading indicators to disappear
+    #         wait.until(
+    #             EC.invisibility_of_element_located((
+    #                 By.CSS_SELECTOR,
+    #                 ".ms-Spinner, .ms-Overlay"
+    #             ))
+    #         )
+    #
+    #         print(
+    #             "Test Case 11 - Pass: "
+    #             "Reimbursement saved and modal closed successfully."
+    #         )
+    #
+    #     except TimeoutException as error:
+    #         # Collect visible validation or server error messages
+    #         error_elements = driver.find_elements(
+    #             By.XPATH,
+    #             "//*[contains(@class,'error') or "
+    #             "contains(@class,'Error') or "
+    #             "@role='alert']"
+    #         )
+    #
+    #         visible_errors = []
+    #
+    #         for element in error_elements:
+    #             try:
+    #                 if element.is_displayed() and element.text.strip():
+    #                     visible_errors.append(element.text.strip())
+    #             except StaleElementReferenceException:
+    #                 continue
+    #
+    #         driver.save_screenshot(
+    #             "Save_Reimbursement_Failure.png"
+    #         )
+    #
+    #         if visible_errors:
+    #             raise AssertionError(
+    #                 "Reimbursement was not saved. Errors: "
+    #                 + " | ".join(dict.fromkeys(visible_errors))
+    #             ) from error
+    #
+    #         raise AssertionError(
+    #             "Save was clicked, but the reimbursement modal did not "
+    #             "close. The server may not have accepted the request. "
+    #             "Screenshot saved as Save_Reimbursement_Failure.png."
+    #         ) from error

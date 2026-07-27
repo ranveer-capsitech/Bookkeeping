@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Details explain saving and current account">
-      <change afterPath="$PROJECT_DIR$/Pages/Add_User_Page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/29_Add_New_User_Test.py" afterDir="false" />
+    <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="Details explain saving and current account with lock functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Client_SellPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Client_SellPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Credit_NotesPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Find_And_Match_Lock_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Find_And_Match_Lock_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Item_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Item_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/PurchasePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/PurchasePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/14_Refund_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/14_Refund_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/21_Add_Suppliers_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/22_Vat_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/22_Vat_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Reimbursements_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/28_Find_And_Match_Lock_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/28_Find_And_Match_Lock_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/2_ClientSell_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +63,16 @@
     &quot;Python tests.Python tests for 22_Vat_Test.Login.test_15_Expense_claims.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 24_Banking_Detailed_MoneyIn_Test.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 25_Detail_Explain_Current_Account_Test.Login.test_26_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_07_Select_Current_Bank_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_1_Add_New_Current_Bank_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_2_Add_New_Purchase_Invoice_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_2_Add_New_Sale_Invoice_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_3_Add_New_Credit_Note_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_3_Add_New_Expense_Claims_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_4_Add_New_Purchase_Invoice_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_5_Add_New_Expense_Claims_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_7_Select_Current_Bank_Find_And_match_with_lock.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 2_ClientSell_Test.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 2_Test_ClientSell.Login.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for 2_Test_ClientSell.Login.test_04_Go_Client_Sell.executor&quot;: &quot;Run&quot;,
@@ -216,7 +212,22 @@
       <recent name="C:\Users\CT_USER\PycharmProjects\Bookkeeping\Test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock">
+  <component name="RunManager">
+    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_07_Select_Current_Bank_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="BOOKKEEPING" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_07_Select_Current_Bank_Find_And_match_with_lock&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_1_Add_New_Current_Bank_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
@@ -232,7 +243,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_2_Add_New_Sale_Invoice_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_3_Add_New_Credit_Note_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,7 +254,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_2_Add_New_Sale_Invoice_Find_And_match_with_lock&quot;" />
+      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_3_Add_New_Credit_Note_Find_And_match_with_lock&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -262,7 +273,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_5_Add_New_Expense_Claims_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_7_Select_Current_Bank_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="BOOKKEEPING" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -273,32 +284,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_5_Add_New_Expense_Claims_Find_And_match_with_lock&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="BOOKKEEPING" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock&quot;" />
+      <option name="_new_target" value="&quot;28_Find_And_Match_Lock_Test.Login.test_28_7_Select_Current_Bank_Find_And_match_with_lock&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_6_Add_New_Reimbursement_Claims_Find_And_match_with_lock" />
+        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_07_Select_Current_Bank_Find_And_match_with_lock" />
         <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_1_Add_New_Current_Bank_Find_And_match_with_lock" />
-        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_5_Add_New_Expense_Claims_Find_And_match_with_lock" />
+        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_7_Select_Current_Bank_Find_And_match_with_lock" />
+        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_3_Add_New_Credit_Note_Find_And_match_with_lock" />
         <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_4_Add_New_Purchase_Invoice_Find_And_match_with_lock" />
-        <item itemvalue="Python tests.Python tests for 28_Find_And_Match_Lock_Test.Login.test_28_2_Add_New_Sale_Invoice_Find_And_match_with_lock" />
       </list>
     </recent_temporary>
   </component>
@@ -316,14 +312,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00019" summary="VAT-Return">
-      <option name="closed" value="true" />
-      <created>1764316199251</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1764316199251</updated>
     </task>
     <task id="LOCAL-00020" summary="Allure Report">
       <option name="closed" value="true" />
@@ -709,7 +697,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784558218566</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Details explain saving and current account with lock functionality">
+      <option name="closed" value="true" />
+      <created>1784788406289</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1784788406289</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -724,7 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Journals" />
     <MESSAGE value="Dividend" />
     <MESSAGE value="VAT-Return" />
     <MESSAGE value="Allure Report" />
@@ -749,7 +744,8 @@
     <MESSAGE value="clean-up" />
     <MESSAGE value="Update code according regression" />
     <MESSAGE value="Details explain saving and current account" />
-    <option name="LAST_COMMIT_MESSAGE" value="Details explain saving and current account" />
+    <MESSAGE value="Details explain saving and current account with lock functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Details explain saving and current account with lock functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

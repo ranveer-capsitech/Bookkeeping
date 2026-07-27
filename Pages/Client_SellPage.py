@@ -84,6 +84,9 @@ class ClientSell:
 
 
         self.change_quantity = (By.XPATH, "//th[normalize-space()='Qty.']/following::input[@type='number'][1]")
+        self.verify_sell_invoice_lock = (By.XPATH, "//button[@id='btn-btnEdit']")
+        self.click_on_close  = (By.XPATH, "//button[@title='Close']")
+
 
 
 
@@ -752,6 +755,105 @@ class ClientSell:
         except Exception as e:
             print(f"Error on click:{e}")
 
+
+    def Select_Account_For_Sell(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 20)
+
+        try:
+            account_input = wait.until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//label[normalize-space()='Account']"
+                        "/following::input[@role='combobox'][1]"
+                    )
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                account_input
+            )
+
+            account_input.click()
+
+            account_input.send_keys(Keys.CONTROL, "a")
+            account_input.send_keys(Keys.BACKSPACE)
+
+            account_input.send_keys("Monzo")
+
+            # Wait until Monzo becomes the focused option
+            wait.until(
+                lambda d: "Monzo" in (
+                    d.find_element(
+                        By.ID,
+                        "aria-context"
+                    ).text
+                )
+            )
+
+            account_input.send_keys(Keys.ARROW_DOWN)
+            account_input.send_keys(Keys.ENTER)
+
+            # Verify selection
+            selected_value = wait.until(
+                EC.visibility_of_element_located(
+                    (
+                        By.XPATH,
+                        "//label[normalize-space()='Account']"
+                        "/following::div[contains(@class,'rs-single-value')][1]"
+                    )
+                )
+            )
+
+            assert "Monzo" in selected_value.text, (
+                f"Monzo was not selected. Current value: "
+                f"{selected_value.text}"
+            )
+
+            print(
+                f"Account selected successfully: "
+                f"{selected_value.text}"
+            )
+
+        except Exception as error:
+            driver.save_screenshot(
+                "select_monzo_account_failure.png"
+            )
+
+            raise AssertionError(
+                f"Could not select Monzo account: {error}"
+            ) from error
+
+
+
+#--------------------------------Verify cell invoice lock---------------------------------------------------------------
+
+
+
+
+    def Click_On_Lock_Button(self):
+        try:
+            lock = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.verify_sell_invoice_lock))
+            time.sleep(.2)
+            lock .click()
+            time.sleep(.5)
+            print(" Verify - "
+                  "Invoice is locked .....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
+    def Click_On_Close_Icon(self):
+        try:
+            close = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_on_close))
+            time.sleep(.2)
+            close .click()
+            time.sleep(.5)
+            print("Details lock pop up close successfully.....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
 
 
 

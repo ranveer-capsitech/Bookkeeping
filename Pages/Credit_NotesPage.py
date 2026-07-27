@@ -4,7 +4,7 @@ import pyautogui
 from faker import Faker
 import time
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, StaleElementReferenceException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -73,6 +73,11 @@ class Credit_Notes:
         self.pagination = (By.XPATH, "//div[@role='combobox']")
 
         self.click_download_icon = (By.XPATH, "(//button[.//i[@data-icon-name='BkInstallation']])[1]")
+
+        self.change_quantity_crn = (By.XPATH, "//th[normalize-space()='Qty.']/following::input[@type='number'][1]")
+
+        self.verify_credit_invoice_lock = (By.XPATH, "//button[@id='btn-btnDependencies']")
+        self.click_on_close = (By.XPATH, "//button[@title='Close']")
 
     #-----------------------------------------Methods-----------------------------------------------------------------------
 
@@ -742,6 +747,205 @@ class Credit_Notes:
                 )
             )
         )
+
+    def Change_CRN_Quantity(self):
+        try:
+            quantity = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.change_quantity_crn))
+            time.sleep(.2)
+            quantity.click()
+            time.sleep(.2)
+            quantity.send_keys(Keys.CONTROL, "a")
+            time.sleep(.2)
+            quantity.send_keys(Keys.BACKSPACE)
+            time.sleep(.2)
+            quantity.send_keys("1")
+            time.sleep(.2)
+            quantity.send_keys(Keys.ENTER)
+            time.sleep(.2)
+            print("Quantity changed successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Select_Account_CRN(self):
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        account_input_locator = (
+            By.XPATH,
+            "//div[contains(@class,'ms-Modal-scrollableContent')]"
+            "//input[@role='combobox' "
+            "and @aria-haspopup='true']"
+        )
+
+        # React Select option IDs contain "-option-"
+        monzo_option_locator = (
+            By.XPATH,
+            "//div[contains(@id,'-option-') "
+            "and contains(normalize-space(.), "
+            "'Monzo - Current')]"
+        )
+
+        try:
+            account_input = wait.until(
+                EC.element_to_be_clickable(
+                    account_input_locator
+                )
+            )
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                account_input
+            )
+
+            account_input.click()
+
+            # Clear existing text
+            account_input.send_keys(Keys.CONTROL, "a")
+            account_input.send_keys(Keys.BACKSPACE)
+
+            # Search for Monzo
+            account_input.send_keys("Monzo")
+
+            try:
+                # The options menu is rendered outside the modal
+                monzo_option = WebDriverWait(
+                    driver,
+                    10,
+                    poll_frequency=0.2
+                ).until(
+                    EC.element_to_be_clickable(
+                        monzo_option_locator
+                    )
+                )
+
+                driver.execute_script(
+                    """
+                    arguments[0].scrollIntoView({
+                        block: 'nearest'
+                    });
+                    """,
+                    monzo_option
+                )
+
+                # Normal Selenium click
+                try:
+                    monzo_option.click()
+
+                except Exception:
+                    # Fallback if another element intercepts the click
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        monzo_option
+                    )
+
+            except TimeoutException:
+                # Keyboard fallback for React Select
+                print(
+                    "Direct Monzo option locator was not found. "
+                    "Using keyboard selection."
+                )
+
+                account_input.send_keys(Keys.ARROW_DOWN)
+                account_input.send_keys(Keys.ENTER)
+
+            # Check selection inside the same React Select container
+            def get_selected_monzo(current_driver):
+                try:
+                    current_input = current_driver.find_element(
+                        *account_input_locator
+                    )
+
+                    select_container = current_input.find_element(
+                        By.XPATH,
+                        "./ancestor::div["
+                        "contains(@class,'rs-container')][1]"
+                    )
+
+                    container_text = (
+                        select_container.text.strip()
+                    )
+
+                    if "Monzo" in container_text:
+                        return container_text
+
+                    return False
+
+                except (
+                        StaleElementReferenceException,
+                        TimeoutException
+                ):
+                    return False
+
+            selected_account = wait.until(
+                get_selected_monzo,
+                message=(
+                    "Monzo option was clicked, but it was not "
+                    "displayed as the selected account."
+                )
+            )
+
+            print(
+                "Account selected successfully: "
+                f"{selected_account}"
+            )
+
+            return selected_account
+
+        except Exception as error:
+            driver.save_screenshot(
+                "select_monzo_account_failure.png"
+            )
+
+            print(
+                "Could not select Monzo account."
+            )
+            print(
+                f"Error type: {type(error).__name__}"
+            )
+            print(
+                f"Error details: {repr(error)}"
+            )
+
+            raise
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+    def Click_On_Lock_Button_Credit(self):
+        try:
+            lock = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.verify_credit_invoice_lock))
+            time.sleep(.2)
+            lock.click()
+            time.sleep(.5)
+            print(" Verify - "
+                  "Invoice is locked .....! ")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_On_Close_Icon(self):
+        try:
+            close = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_on_close))
+            time.sleep(.2)
+            close.click()
+            time.sleep(.5)
+            print("Details lock pop up close successfully.....!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+
 
 
 
