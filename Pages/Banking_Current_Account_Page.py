@@ -44,7 +44,8 @@ class Banking:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='ALIS FITTINGS LTD' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company_for_main = (By.XPATH, "//a[@title='RTR LTD' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -206,7 +207,7 @@ class Banking:
 
 
 
-    def Enter_Company(self, company_name="ALIS FITTINGS LTD", timeout= 30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -2011,6 +2012,68 @@ class Banking:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
+    def Enter_Company_For_Main(self, company_name="RTR LTD", timeout= 30, os=None):
+
+        driver = self.driver
+        wait = WebDriverWait(driver, timeout)
+
+        xpaths = [
+            "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']",
+            "//input[@id='SearchBox33' and @role='searchbox']"
+        ]
+
+        last_exc = None
+        for xp in xpaths:
+            try:
+                el = wait.until(EC.presence_of_element_located((By.XPATH, xp)))
+                wait.until(EC.visibility_of(el))
+
+                try:
+                    wait.until(EC.element_to_be_clickable((By.XPATH, xp)))
+                    el.click()
+                except Exception:
+                    driver.execute_script("arguments[0].click();", el)
+
+                try:
+                    el.clear()
+                except Exception:
+                    pass
+                el.send_keys(company_name)
+
+                time.sleep(0.2)
+                el.send_keys(Keys.ENTER)
+
+                time.sleep(0.5)
+                print(f"Entered '{company_name}' using XPath: {xp}")
+                return True
+
+            except Exception as e:
+                last_exc = e
+                continue
+
+        try:
+            path = os.path.join(os.getcwd(), "enter_company_failure.png")
+            driver.save_screenshot(path)
+            print("Enter_Company: FAILED — screenshot saved to", path)
+        except Exception:
+            pass
+
+        print("Enter_Company: FAILED. Last exception:", repr(last_exc))
+        return False
+
+
+    def Click_Company_For_Main(self):
+        try:
+            click_on_selected_company = WebDriverWait(self.driver,30).until(EC.presence_of_element_located(self.click_company_for_main))
+            time.sleep(.3)
+            click_on_selected_company.click()
+            time.sleep(.2)
+            print("Click on company successfully....!!")
+        except Exception as e:
+            print(f"Enter on click: {e}")
+            time.sleep(.5)
+
 
 
 

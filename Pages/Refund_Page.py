@@ -272,9 +272,22 @@ class Refund:
             # # Assert the presence of the success message
             # assert update_message, "Reimbursement saved successfully"
 
-            print("Test Case 14  - Pass: Refund saved successfully.")
+            print("Test Case   - Pass: Refund saved successfully.")
 
         except Exception as e:
             print(f"Error: {e}")
 
             time.sleep(2)
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
+
+

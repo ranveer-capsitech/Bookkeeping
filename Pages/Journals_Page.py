@@ -1,6 +1,7 @@
 from faker import Faker
 import time
 
+from selenium.common import TimeoutException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -280,6 +281,17 @@ class Journals:
                 print(f"Error: {e}")
 
                 time.sleep(2)
+
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
 
 
 

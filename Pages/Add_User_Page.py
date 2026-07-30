@@ -276,6 +276,35 @@ class User:
         except Exception as e:
             print(f"Error on Click:{e}")
 
+    def wait_for_blockers_to_disappear(self, timeout=30):
+        blockers = [
+            (By.XPATH, "//*[contains(@class,'spinner')]"),
+            (By.XPATH, "//*[contains(@class,'Spinner')]"),
+            (By.XPATH, "//*[contains(@class,'loading')]"),
+            (By.XPATH, "//*[contains(@class,'Loading')]"),
+            (By.XPATH, "//div[contains(@class,'ms-Overlay')]"),
+        ]
+
+        for blocker in blockers:
+            try:
+                WebDriverWait(self.driver, timeout).until(
+                    EC.invisibility_of_element_located(blocker)
+                )
+            except:
+                pass
+    def wait_for_loader_to_disappear(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                )
+            )
+        except TimeoutException:
+            pass
+
+
+
 
 
 

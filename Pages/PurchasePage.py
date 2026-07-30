@@ -114,11 +114,16 @@ class ClientPurchase:
 
         self.enter_amount_payment = (By.XPATH, "//input[@name='availableAmount']")
         self.setting_icon = (By.XPATH, "//button[@title='Settings']")
-        self.add_discount = (By.XPATH, "//input[@name='discount']")
+        self.add_cash_discount = (By.XPATH, "//input[@name='discount']")
         self.click_green_tick = (By.XPATH, "//button[.//i[@data-icon-name='CheckMark']]")
 
         self.change_quantity = (By.XPATH, "//th[normalize-space()='Qty.']/following::input[@type='number'][1]")
 
+        self.pound_icon =self.pound_icon = (
+    By.XPATH,
+    "(//*[@data-automationid='DetailsRowCell']"
+    "//button[contains(@id,'btn-btnPayment')])[1]"
+)
 
 
 #------------------------------------------Method-----------------------------------------------------------------------
@@ -290,26 +295,28 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error in upload: {e}")
 
-
-
-    def Enter_Discount(self):
-        driver = self.driver
+    def Enter_Cash_Discount(self):
         wait = WebDriverWait(self.driver, 30)
 
         try:
-            control = wait.until(EC.visibility_of_element_located(self.add_discount))
-            time.sleep(.2)
+            control = wait.until(
+                EC.element_to_be_clickable(self.add_cash_discount)
+            )
+
             control.click()
 
+            # Select and remove the existing value
+            control.send_keys(Keys.CONTROL, "a")
             time.sleep(.2)
             control.send_keys(Keys.BACKSPACE)
-            time.sleep(.2)
-            control.send_keys("200")
-            time.sleep(.2)
-            print("Discount added successfully....!!")
-        except Exception as e:
 
-            print(f"Error on Click : {e}")
+            # Enter the new value
+            control.send_keys("200")
+
+            print("Cash Discount added successfully!")
+
+        except Exception as e:
+            print(f"Error while entering Cash Discount: {e}")
 
 
     def Click_Enter_Notes(self):
@@ -964,16 +971,72 @@ class ClientPurchase:
 
             time.sleep(2)
 
-
     def Click_Pound_Icon(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
         try:
-            pound_icon = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.click_pound_icon))
-            time.sleep(.2)
-            pound_icon.click()
-            time.sleep(.2)
-            print("Click on Pound Icon successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+            self.wait_for_loader_to_disappear()
+
+            payment_button = wait.until(
+                EC.element_to_be_clickable(
+                    self.pound_icon
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                payment_button
+            )
+
+            try:
+                payment_button.click()
+
+            except (
+                    ElementClickInterceptedException,
+                    StaleElementReferenceException
+            ):
+                # Locate it again after DOM refresh.
+                payment_button = wait.until(
+                    EC.presence_of_element_located(
+                        self.pound_icon
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    payment_button
+                )
+
+            print("Payment £ button clicked successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "click_payment_button_failure.png"
+            )
+
+            print(
+                f"Could not click payment button: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
+
+
+    # def Click_Pound_Icon(self):
+    #     try:
+    #         pound_icon = WebDriverWait(self.driver,20).until(EC.visibility_of_element_located(self.click_pound_icon))
+    #         time.sleep(.2)
+    #         pound_icon.click()
+    #         time.sleep(.2)
+    #         print("Click on Pound Icon successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
 
 
     def Select_Account(self):
@@ -1071,19 +1134,38 @@ class ClientPurchase:
         except Exception as e:
             print(f"Error on click:{e}")
 
-
-    def Select_Account_Payment_lock(self):
+    def Select_Account_Payment_lock(
+            self,
+            account_name="Monzo"
+    ):
         driver = self.driver
-        wait = WebDriverWait(driver, 20)
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        account_input_locator = (
+            By.XPATH,
+            "("
+            "//*[self::label or self::span or self::div]"
+            "[normalize-space()='Account']"
+            "/following::input[@role='combobox'][1]"
+            ")[last()]"
+        )
+
+        account_option_locator = (
+            By.XPATH,
+            "//*[contains(@id,'-option-') and "
+            f"contains(normalize-space(.),'{account_name}')]"
+        )
 
         try:
             account_input = wait.until(
-                EC.element_to_be_clickable(
-                    (
-                        By.XPATH,
-                        "//label[normalize-space()='Account']"
-                        "/following::input[@role='combobox'][1]"
-                    )
+                EC.visibility_of_element_located(
+                    account_input_locator
                 )
             )
 
@@ -1092,55 +1174,160 @@ class ClientPurchase:
                 account_input
             )
 
-            account_input.click()
+            wait.until(
+                EC.element_to_be_clickable(
+                    account_input_locator
+                )
+            ).click()
+
+            # Locate it again because clicking can refresh React DOM.
+            account_input = wait.until(
+                EC.visibility_of_element_located(
+                    account_input_locator
+                )
+            )
 
             account_input.send_keys(Keys.CONTROL, "a")
             account_input.send_keys(Keys.BACKSPACE)
+            account_input.send_keys(account_name)
 
-            account_input.send_keys("Monzo")
-
-            # Wait until Monzo becomes the focused option
-            wait.until(
-                lambda d: "Monzo" in (
-                    d.find_element(
-                        By.ID,
-                        "aria-context"
-                    ).text
-                )
-            )
-
-            account_input.send_keys(Keys.ARROW_DOWN)
-            account_input.send_keys(Keys.ENTER)
-
-            # Verify selection
-            selected_value = wait.until(
-                EC.visibility_of_element_located(
-                    (
-                        By.XPATH,
-                        "//label[normalize-space()='Account']"
-                        "/following::div[contains(@class,'rs-single-value')][1]"
+            try:
+                account_option = WebDriverWait(
+                    driver,
+                    10,
+                    poll_frequency=0.2
+                ).until(
+                    EC.element_to_be_clickable(
+                        account_option_locator
                     )
                 )
+
+                try:
+                    account_option.click()
+
+                except (
+                        ElementClickInterceptedException,
+                        StaleElementReferenceException
+                ):
+                    account_option = wait.until(
+                        EC.presence_of_element_located(
+                            account_option_locator
+                        )
+                    )
+
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        account_option
+                    )
+
+            except TimeoutException:
+                # React Select keyboard fallback.
+                account_input = driver.find_element(
+                    *account_input_locator
+                )
+                account_input.send_keys(Keys.ARROW_DOWN)
+                account_input.send_keys(Keys.ENTER)
+
+            # Verify the selected account.
+            selected_account_locator = (
+                By.XPATH,
+                "//*[contains(@class,'rs-single-value') and "
+                f"contains(normalize-space(.),'{account_name}')]"
             )
 
-            assert "Monzo" in selected_value.text, (
-                f"Monzo was not selected. Current value: "
-                f"{selected_value.text}"
+            selected_account = wait.until(
+                EC.visibility_of_element_located(
+                    selected_account_locator
+                )
             )
 
             print(
-                f"Account selected successfully: "
-                f"{selected_value.text}"
+                "Payment account selected successfully: "
+                f"{selected_account.text}"
             )
+
+            return selected_account.text
 
         except Exception as error:
             driver.save_screenshot(
-                "select_monzo_account_failure.png"
+                "select_payment_account_failure.png"
             )
 
             raise AssertionError(
-                f"Could not select Monzo account: {error}"
+                f"Could not select '{account_name}' account: "
+                f"{type(error).__name__}: {error}"
             ) from error
+
+
+    # def Select_Account_Payment_lock(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 20)
+    #
+    #     try:
+    #         account_input = wait.until(
+    #             EC.element_to_be_clickable(
+    #                 (
+    #                     By.XPATH,
+    #                     "//label[normalize-space()='Account']"
+    #                     "/following::input[@role='combobox'][1]"
+    #                 )
+    #             )
+    #         )
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             account_input
+    #         )
+    #
+    #         account_input.click()
+    #
+    #         account_input.send_keys(Keys.CONTROL, "a")
+    #         account_input.send_keys(Keys.BACKSPACE)
+    #
+    #         account_input.send_keys("Monzo")
+    #
+    #         # Wait until Monzo becomes the focused option
+    #         wait.until(
+    #             lambda d: "Monzo" in (
+    #                 d.find_element(
+    #                     By.ID,
+    #                     "aria-context"
+    #                 ).text
+    #             )
+    #         )
+    #
+    #         account_input.send_keys(Keys.ARROW_DOWN)
+    #         account_input.send_keys(Keys.ENTER)
+    #
+    #         # Verify selection
+    #         selected_value = wait.until(
+    #             EC.visibility_of_element_located(
+    #                 (
+    #                     By.XPATH,
+    #                     "//label[normalize-space()='Account']"
+    #                     "/following::div[contains(@class,'rs-single-value')][1]"
+    #                 )
+    #             )
+    #         )
+    #
+    #         assert "Monzo" in selected_value.text, (
+    #             f"Monzo was not selected. Current value: "
+    #             f"{selected_value.text}"
+    #         )
+    #
+    #         print(
+    #             f"Account selected successfully: "
+    #             f"{selected_value.text}"
+    #         )
+    #
+    #     except Exception as error:
+    #         driver.save_screenshot(
+    #             "select_monzo_account_failure.png"
+    #         )
+    #
+    #         raise AssertionError(
+    #             f"Could not select Monzo account: {error}"
+    #         ) from error
 
     def Change_Quantity(self):
         try:
@@ -1159,6 +1346,8 @@ class ClientPurchase:
             print("Quantity changed successfully......!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
+
 
 
 

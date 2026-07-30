@@ -104,6 +104,7 @@ class Login(unittest.TestCase):
         client_section.Click_Save_Button()
         time.sleep(.2)
 
+
     @classmethod
     def tearDownClass(cls):
         """

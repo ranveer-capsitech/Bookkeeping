@@ -430,15 +430,12 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         purchase_sell_page.Click_Setting_Icon()
         time.sleep(.2)
-        purchase_sell_page.Enter_Discount()
+        purchase_sell_page.Enter_Cash_Discount()
         time.sleep(.2)
         purchase_sell_page.Click_Green_Tick()
         time.sleep(.2)
         purchase_sell_page.Save_Services()
         time.sleep(.2)
-
-
-
 
 
 
@@ -536,7 +533,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Refund_from()
         time.sleep(.2)
-        client_section.Select_Account()
+        client_section.Select_Account_Refund()
         time.sleep(.2)
         client_section.Save_Refund()
         time.sleep(.2)
@@ -559,7 +556,7 @@ class Login(unittest.TestCase):
         client_section.Click_Adde_Bank_Account()
         time.sleep(.2)
 
-        #----------1st des--------------------------------
+        # #----------1st des--------------------------------
 
         client_section.Click_Receipt_with_Bank_Charge()
         time.sleep(.2)
@@ -569,12 +566,13 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Receipts()
         time.sleep(.2)
+
         client_section.Select_Settle()
         time.sleep(.2)
         client_section.Click_Match()
         time.sleep(.2)
 
-        # ----------2nd des--------------------------------
+        # # ----------2nd des--------------------------------
 
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
@@ -596,12 +594,12 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-        client_section.Click_Payment()
+        client_section.Click_Payment_Find_Match()
         time.sleep(.2)
         client_section.Click_Find_Match()
-        time.sleep(.2)
+        time.sleep(.3)
         client_section.Click_Match()
-        time.sleep(.2)
+        time.sleep(.3)
 
         #----------------4th payment due --------------------------------------------------------------
 
@@ -630,8 +628,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Receipts()
         time.sleep(.2)
-        client_section.Select_Settle_Reimbursement()
-        time.sleep(.2)
+        # client_section.Select_Settle_Reimbursement()
+        # time.sleep(.2)
         client_section.Click_Match()
         time.sleep(.2)
 
@@ -643,7 +641,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Find_Match()
         time.sleep(.2)
-        client_section.Click_Contact_Dropdown_For_Money_Out_2nd()
+        client_section.Click_Contact_Dropdown_For_Money_Out_6th()
         time.sleep(.2)
         client_section.Select_Receipts()
         time.sleep(.2)
@@ -838,8 +836,8 @@ class Login(unittest.TestCase):
         credit_notes_section = Find_And_Match_Lock(driver=self.driver)
         time.sleep(.2)
 
-        credit_notes_section.Click_Input()
-        time.sleep(0.5)
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
         credit_notes_section.Click_Payment()
         time.sleep(.2)
         time.sleep(0.5)
@@ -947,7 +945,69 @@ class Login(unittest.TestCase):
         print("Refund section opened successfully for verify lock.")
 
 
-    def test_28_16_Un_Explain
+
+    def test_28_16_Un_Explain_All(self):
+        """
+                        Complete dependent workflow:
+                        1. Search company
+                        2. Select company
+                        3. Banking >> Add bank
+                        4. Un_Explain_All
+
+                        """
+
+        un_explain = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+        un_explain.Banking_Section()
+        time.sleep(.2)
+
+        un_explain.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        un_explain.Click_Added_bank_for_Unexplain()
+        time.sleep(.2)
+        un_explain. Click_Explain()
+        time.sleep(.2)
+        un_explain.Select_All_Explain_Entries()
+        time.sleep(.2)
+        un_explain.Unexplain_all_checked_transactions()
+        time.sleep(.2)
+        un_explain.Click_Yes_For_Confirmation()
+        time.sleep(.2)
+
+    @pytest.mark.navigation(
+            "Login >> Admin Dashboard >> Bookkeeping >> Input >>Invoice >> Verify the value un-lock  or not"
+        )
+    @pytest.mark.description(
+            " Select company, Verify the lock in input module.")
+
+    def test_28_17_Verify_Unlock_in_all_Section(self):
+        """
+                        Complete dependent workflow:
+                        1. Search company
+                        2. Select company
+                        3. check all module
+                        4. check uncheck
+
+                        """
+        client_sell_page = ClientSell(
+            driver=self.driver
+        )
+
+        client_sell_page.Click_Input()
+        time.sleep(0.5)
+
+        client_sell_page.Click_Sales()
+        time.sleep(0.5)
+
+        client_sell_page.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Sales section opened successfully.")
+
+        client_sell_page.Click_On_Lock_Button()
+        time.sleep(.2)
+        client_sell_page.Click_On_Close_Icon()
+        time.sleep(.2)
 
 
 
@@ -956,9 +1016,242 @@ class Login(unittest.TestCase):
 
 
 
+# --------------------------------------------------Check unlock Credit Note---------------------------------------------------------------
 
-    @classmethod
-    def tearDownClass(cls):
+
+
+
+    @pytest.mark.navigation(
+            "Login >> Admin Dashboard >> Bookkeeping >> Input >>Credit Note >> Verify the Unlock or not"
+        )
+    @pytest.mark.description(
+            " Select company, Verify the lock in input module."
+        )
+    def test_28_18_Un_lock_verification_credit_note(self):
+            """
+                    Complete dependent workflow:
+                    1. Search company
+                    2. Select company
+                    3. Open credit note
+                    4. verify that un-lock is showing or not
+
+                    """
+
+            credit_notes_section = Credit_Notes(driver=self.driver)
+            time.sleep(.2)
+
+            # credit_notes_section.Click_Input()
+            # time.sleep(0.5)
+
+            credit_notes_section.Click_Credit_Notes()
+            time.sleep(.2)
+            time.sleep(0.5)
+
+            credit_notes_section.wait_for_loader_to_disappear()
+            time.sleep(0.5)
+
+            print("Sales section opened successfully.")
+
+            credit_notes_section.Click_On_Lock_Button_Credit()
+            time.sleep(.2)
+            credit_notes_section.Click_On_Close_Icon()
+            time.sleep(.2)
+
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Receipts >> Verify the Un lock  or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the un_lock in receipts module."
+    )
+    def test_28_19_Un_lock_verification_receipts(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open Receipts
+                4. verify that Un-lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+
+        credit_notes_section.Click_Receipts()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Receipts section opened successfully for verify  un-lock.")
+
+        credit_notes_section.Click_On_Lock_Button_Receipts()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>purchases >> Verify the Un-lock is or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in purchases module.")
+    def test_28_20_Un_lock_verification_purchases(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open Purchases
+                4. verify that un lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+
+        credit_notes_section.Click_Purchases()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        credit_notes_section.wait_for_loader_to_disappear()
+        time.sleep(0.5)
+
+        print("Purchases section opened successfully for verify  un-lock.")
+
+        credit_notes_section.Click_On_Lock_Button_Purchases()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+
+
+    @pytest.mark.navigation(
+        "Login >> Admin Dashboard >> Bookkeeping >> Input >>Purchases >>Payment >>>  Verify the un-lock  or not"
+    )
+    @pytest.mark.description(
+        " Select company, Verify the lock in payment module."
+    )
+    def test_28_21_Un_lock_verification_payment(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> payment
+                4. verify that lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Click_Input()
+        time.sleep(0.5)
+        credit_notes_section.Click_Payment()
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        print("Payment section opened successfully for verify un-lock.")
+
+        credit_notes_section.Click_First_Lock_Payment()
+        time.sleep(.2)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+        print("Payment section opened successfully and  verify  un-lock for supplier.")
+        credit_notes_section.Click_Second_Lock_Payment()
+        time.sleep(.2)
+        credit_notes_section.Click_Second_Lock_Payment()
+        time.sleep(.2)
+        print("Payment section opened successfully and  verify   un-lock.")
+
+    def test_28_22_Un_lock_verification_payment_Expense_claims(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Expense_claims
+                4. verify that  un-lock or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Click_Expense_Claims()
+        time.sleep(0.5)
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        print("Expense section opened successfully for verify  un-lock.")
+
+    def test_28_23_Un_lock_verification_payment_Reimbursements(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Reimbursements
+                4. verify that Un_lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Reimbursed_Section()
+        time.sleep(0.5)
+
+        credit_notes_section.Click_On_Lock_Button_Reimbursed()
+        time.sleep(.2)
+
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        print("Expense section opened successfully for Un_lock .")
+
+    def test_28_24_Un_lock_verification_payment_Refunds(self):
+        """
+                Complete dependent workflow:
+                1. Search company
+                2. Select company
+                3. Open purchases >> Refunds
+                4. verify that Un_lock is showing or not
+
+                """
+
+        credit_notes_section = Find_And_Match_Lock(driver=self.driver)
+        time.sleep(.2)
+
+        credit_notes_section.Refunds_Section()
+        time.sleep(0.5)
+
+        credit_notes_section.Click_On_Lock_Button_Refund()
+        time.sleep(.5)
+
+        credit_notes_section.Click_On_Close_Icon()
+        time.sleep(.2)
+
+        time.sleep(.2)
+        time.sleep(0.5)
+
+        print("Refund section opened successfully for verify Un_lock.")
+
+
+@classmethod
+def tearDownClass(cls):
         """
         This method runs once after all test methods finish.
         """
@@ -971,3 +1264,4 @@ class Login(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

@@ -40,7 +40,7 @@ class Find_And_Match_Lock:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='DAP CARS LIMITED' and contains(@href,'/books/clients/')]")
 
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
@@ -146,6 +146,19 @@ class Find_And_Match_Lock:
 
         self.click_lock_refunds = (By.XPATH, "(//div[@data-automation-key='action-leads']//button[.//i[@data-icon-name='Lock']])[1]")
 
+        self.click_payment_find_math = (By.XPATH,"//div[contains(@class,'td') and @title='Payment' and normalize-space()='Payment']")
+
+        self.click_explain = (By.XPATH, "//button[@role='tab' and @data-id='banking-explain']")
+        self.select_all_explain_entries = (By.XPATH, "//div[contains(@class,'tr')][.//div[contains(@class,'td') and normalize-space()='Sales Return']]//input[@type='checkbox']")
+        self.unexplain_all_checked_transactions = (By.XPATH, "//button[@type='button' and @title='Unexplain all checked transactions']")
+        self.click_yes_for_confirmation = (By.XPATH, "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Yes']]")
+        self.click_added_bank_for_unexplain = (By.XPATH, "(//div[contains(@class,'bank-header')]/ancestor::div[contains(@style,'cursor: pointer')][1])[1]")
+
+
+
+
+
+
 
 
 
@@ -163,7 +176,7 @@ class Find_And_Match_Lock:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="DAP CARS LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -753,9 +766,9 @@ class Find_And_Match_Lock:
             time.sleep(0.2)
 
             active = driver.switch_to.active_element
-            # active.send_keys("KM Consultancy Limited (Steven Phillip)")
+            active.send_keys("Anthony")
             # active.send_keys(Keys.ARROW_DOWN)
-            # time.sleep(0.2)
+            time.sleep(0.2)
             # active.send_keys(Keys.ARROW_DOWN)
             # time.sleep(0.2)
 
@@ -792,9 +805,9 @@ class Find_And_Match_Lock:
             time.sleep(0.2)
 
             active = driver.switch_to.active_element
-            # active.send_keys("KM Consultancy Limited (Steven Phillip)")
+            active.send_keys("Anthony")
             # active.send_keys(Keys.ARROW_DOWN)
-            # time.sleep(0.2)
+            time.sleep(0.2)
             # active.send_keys(Keys.ARROW_DOWN)
             # time.sleep(0.2)
 
@@ -1137,39 +1150,190 @@ class Find_And_Match_Lock:
 
         raise TimeoutException("Refund from dropdown se option select")
 
-    def Select_Account(self):
+    def Select_Account_Refund(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 30)
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+                NoSuchElementException,
+            )
+        )
+
+        # Account combobox located through its stable label.
+        # Do not use the dynamic react-select ID.
+        account_input_locator = (
+            By.XPATH,
+            "//label[normalize-space()='Account']"
+            "/parent::div//input[@role='combobox']"
+        )
+
+        # React Select renders the options dynamically.
+        monzo_option_locator = (
+            By.XPATH,
+            "//label[normalize-space()='Account']"
+            "/parent::div"
+            "//div[contains(@class,'rs-single-value') "
+            "and contains(normalize-space(.),'Monzo - Current')]"
+            # "//*[@role='option' "
+            # "and contains(normalize-space(.),'Monzo - Current')]"
+        )
 
         try:
-
-            account = wait.until(
-                EC.element_to_be_clickable(self.refund_account)
+            # Wait until the Account input is visible and clickable
+            account_input = wait.until(
+                EC.element_to_be_clickable(
+                    account_input_locator
+                )
             )
 
             driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                account
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                account_input
             )
-            time.sleep(0.2)
+
+            # Click the Account dropdown
+            try:
+                account_input.click()
+
+            except (
+                    ElementClickInterceptedException,
+                    ElementNotInteractableException
+            ):
+                driver.execute_script(
+                    "arguments[0].click();",
+                    account_input
+                )
+
+            # Select and clear any existing search text/value
+            account_input.send_keys(Keys.CONTROL, "a")
+            account_input.send_keys(Keys.BACKSPACE)
+
+            # Search for the required account
+            account_input.send_keys("Monzo")
 
             try:
-                account.click()
-            except Exception:
-                driver.execute_script("arguments[0].click();", account)
+                # Wait for the visible Monzo option
+                monzo_option = WebDriverWait(
+                    driver,
+                    10,
+                    poll_frequency=0.2,
+                    ignored_exceptions=(
+                        StaleElementReferenceException,
+                    )
+                ).until(
+                    EC.element_to_be_clickable(
+                        monzo_option_locator
+                    )
+                )
 
-            time.sleep(0.2)
+                driver.execute_script(
+                    """
+                    arguments[0].scrollIntoView({
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                    """,
+                    monzo_option
+                )
 
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            active.send_keys(Keys.ENTER)
-            time.sleep(0.2)
+                # Select the option
+                try:
+                    monzo_option.click()
 
-            print("Refund account selected successfully....!!")
-        except Exception as e:
-            print(f"Error on Click Refund account: {e}")
+                except (
+                        ElementClickInterceptedException,
+                        ElementNotInteractableException
+                ):
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        monzo_option
+                    )
 
+            except TimeoutException:
+                print(
+                    "Direct Monzo option was not found. "
+                    "Using keyboard selection."
+                )
+
+                # React may replace the input after typing,
+                # so locate it again
+                account_input = wait.until(
+                    EC.element_to_be_clickable(
+                        account_input_locator
+                    )
+                )
+
+                account_input.send_keys(Keys.ARROW_DOWN)
+                account_input.send_keys(Keys.ENTER)
+
+            # Verify that Monzo is selected
+            def verify_monzo_selection(current_driver):
+                try:
+                    current_input = current_driver.find_element(
+                        *account_input_locator
+                    )
+
+                    select_container = current_input.find_element(
+                        By.XPATH,
+                        "./ancestor::div["
+                        "contains(@class,'rs-container')][1]"
+                    )
+
+                    selected_text = select_container.text.strip()
+
+                    if "Monzo" in selected_text:
+                        return selected_text
+
+                    return False
+
+                except (
+                        StaleElementReferenceException,
+                        NoSuchElementException
+                ):
+                    return False
+
+            selected_account = wait.until(
+                verify_monzo_selection,
+                message=(
+                    "Monzo option was clicked, but it was not "
+                    "displayed as the selected Account."
+                )
+            )
+
+            print(
+                "Account selected successfully: "
+                f"{selected_account}"
+            )
+
+            return selected_account
+
+        except Exception as error:
+            driver.save_screenshot(
+                "select_monzo_account_failure.png"
+            )
+
+            account_inputs = driver.find_elements(
+                *account_input_locator
+            )
+
+            print("Could not select Monzo account.")
+            print(
+                f"Account inputs found: {len(account_inputs)}"
+            )
+            print(f"Current URL: {driver.current_url}")
+            print(f"Error type: {type(error).__name__}")
+            print(f"Error details: {repr(error)}")
+
+            raise
 
     def Save_Refund(self):
         try:
@@ -1536,7 +1700,7 @@ class Find_And_Match_Lock:
         bank_card_locator = (
             By.XPATH,
             "(//div[contains(@style,'cursor: pointer')]"
-            "[.//label[contains(normalize-space(.),'T.H. LIMITED')]]"
+            "[.//label[contains(normalize-space(.),'DAP CARS LIMITED')]]"
             "[.//*[contains("
             "translate("
             "concat(@alt,' ',@src,' ',@title,' ',@aria-label),"
@@ -1595,7 +1759,7 @@ class Find_And_Match_Lock:
                 EC.element_to_be_clickable(self.payment))
             time.sleep(.2)
             pay.click()
-            time.sleep(.2)
+            time.sleep(.3)
 
             print("Clicked on Payment Description successfully  .....!! ")
 
@@ -1642,8 +1806,8 @@ class Find_And_Match_Lock:
             time.sleep(0.2)
 
             active = driver.switch_to.active_element
-            # active.send_keys("KM Consultancy Limited (Steven Phillip)")
-            active.send_keys(Keys.ARROW_DOWN)
+            active.send_keys("Jessica")
+            # active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.2)
             # active.send_keys(Keys.ARROW_DOWN)
             # time.sleep(0.2)
@@ -1682,10 +1846,10 @@ class Find_And_Match_Lock:
             time.sleep(0.2)
 
             active = driver.switch_to.active_element
-            # active.send_keys("KM Consultancy Limited (Steven Phillip)")
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.2)
-            active.send_keys(Keys.ARROW_DOWN)
+            active.send_keys("Natasha")
+            # active.send_keys(Keys.ARROW_DOWN)
+            # time.sleep(0.2)
+            # active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.2)
 
             time.sleep(2)
@@ -1871,9 +2035,9 @@ class Find_And_Match_Lock:
             print(f"Error on click:{e}")
 
 
-    def Click_Payment(self):
+    def Click_Payment_Find_Match(self):
         try:
-            pay= WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_payment))
+            pay= WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_payment_find_math))
             time.sleep(.2)
             pay.click()
             time.sleep(.2)
@@ -1952,9 +2116,313 @@ class Find_And_Match_Lock:
         except Exception as e:
             print(f"Error on click:{e}")
 
+    def Click_Contact_Dropdown_For_Money_Out_6th(self):
+
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            contact = wait.until(EC.element_to_be_clickable(self.click_contact_dropdown))
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                contact
+            )
+            time.sleep(0.2)
+
+            try:
+                contact.click()
+            except ElementClickInterceptedException:
+
+                driver.execute_script("arguments[0].click();", contact)
+
+            time.sleep(0.2)
+
+            active = driver.switch_to.active_element
+            active.send_keys("Natasha")
+            # active.send_keys(Keys.ARROW_DOWN)
+            time.sleep(0.2)
+            # active.send_keys(Keys.ARROW_DOWN)
+            # time.sleep(0.2)
+
+            time.sleep(2)
+            active.send_keys(Keys.ENTER)
+            time.sleep(1)
+
+            print("Contact selected successfully....!!")
+
+        except Exception as e:
+            print(f"Error in Select_Bank: {e}")
+            time.sleep(0.2)
 
 
+    # def Click_Explain(self):
+    #     try:
+    #         un_explain = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_explain))
+    #         time.sleep(.2)
+    #         un_explain.click()
+    #         time.sleep(.5)
+    #         print(" Click on the Un_Explain Section")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
 
+    def Click_Explain(self):
+        explain_tab_locator = (
+            By.XPATH,
+            "//button[@role='tab' "
+            "and @data-id='banking-explain']"
+        )
+
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        try:
+            self.wait_for_loader_to_disappear()
+
+            explain_tab = wait.until(
+                EC.element_to_be_clickable(
+                    explain_tab_locator
+                )
+            )
+
+            self.driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                explain_tab
+            )
+
+            try:
+                explain_tab.click()
+
+            except ElementClickInterceptedException:
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    explain_tab
+                )
+
+            # Confirm that the Explained tab is selected
+            wait.until(
+                lambda driver: (
+                        driver.find_element(
+                            *explain_tab_locator
+                        ).get_attribute("aria-selected") == "true"
+                )
+            )
+
+            print(
+                "Clicked on the Explained section successfully."
+            )
+
+            return True
+
+        except TimeoutException as error:
+            self.driver.save_screenshot(
+                "click_explained_timeout.png"
+            )
+
+            print(
+                "Explained tab was not clickable or did not "
+                "become selected within 30 seconds."
+            )
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "click_explained_failure.png"
+            )
+
+            print(
+                f"Could not click the Explained tab. "
+                f"Error type: {type(error).__name__}"
+            )
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+    def Select_All_Explain_Entries(self):
+        wait = WebDriverWait(self.driver, 30)
+
+        checkbox_input_locator = (
+            By.XPATH,
+            "//*[@id='explanation-table']"
+            "//div[contains(@class,'header')]"
+            "//input[@type='checkbox']"
+        )
+
+        checkbox_label_locator = (
+            By.XPATH,
+            "//*[@id='explanation-table']"
+            "//div[contains(@class,'header')]"
+            "//input[@type='checkbox']"
+            "/following-sibling::label"
+        )
+
+        try:
+            self.wait_for_loader_to_disappear()
+
+            checkbox_input = wait.until(
+                EC.presence_of_element_located(
+                    checkbox_input_locator
+                )
+            )
+
+            if not checkbox_input.is_selected():
+                checkbox_label = wait.until(
+                    EC.element_to_be_clickable(
+                        checkbox_label_locator
+                    )
+                )
+
+                try:
+                    checkbox_label.click()
+
+                except ElementClickInterceptedException:
+                    self.driver.execute_script(
+                        "arguments[0].click();",
+                        checkbox_label
+                    )
+
+            # Confirm that checkbox is selected
+            wait.until(
+                lambda driver: driver.find_element(
+                    *checkbox_input_locator
+                ).is_selected()
+            )
+
+            print(
+                "All Explained entries selected successfully."
+            )
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "select_all_explained_failure.png"
+            )
+
+            print(
+                "Failed inside Select_All_Explain_Entries."
+            )
+            print(f"Error type: {type(error).__name__}")
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+    def Unexplain_all_checked_transactions(self):
+        wait = WebDriverWait(self.driver, 30)
+
+        unexplain_button_locator = (
+            By.XPATH,
+            "//button[@type='button' "
+            "and @title="
+            "'Unexplain all checked transactions']"
+        )
+
+        try:
+            unexplain_button = wait.until(
+                EC.element_to_be_clickable(
+                    unexplain_button_locator
+                )
+            )
+
+            try:
+                unexplain_button.click()
+
+            except ElementClickInterceptedException:
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    unexplain_button
+                )
+
+            print(
+                "Clicked Unexplain all checked "
+                "transactions successfully."
+            )
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "unexplain_all_failure.png"
+            )
+
+            print(
+                "Failed inside "
+                "Unexplain_all_checked_transactions."
+            )
+            print(f"Error type: {type(error).__name__}")
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+    def Click_Yes_For_Confirmation(self):
+        wait = WebDriverWait(self.driver, 30)
+
+        yes_button_locator = (
+            By.XPATH,
+            "//button[contains(@class,'ms-Button--primary') "
+            "and .//span[normalize-space()='Yes']]"
+        )
+
+        try:
+            yes_button = wait.until(
+                EC.element_to_be_clickable(
+                    yes_button_locator
+                )
+            )
+
+            try:
+                yes_button.click()
+
+            except ElementClickInterceptedException:
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    yes_button
+                )
+
+            # Confirm dialog closes
+            wait.until(
+                EC.invisibility_of_element_located(
+                    yes_button_locator
+                )
+            )
+
+            self.wait_for_loader_to_disappear()
+
+            print(
+                "Clicked Yes confirmation successfully."
+            )
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "click_yes_confirmation_failure.png"
+            )
+
+            print(
+                "Failed inside Click_Yes_For_Confirmation."
+            )
+            print(f"Error type: {type(error).__name__}")
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+    def Click_Added_bank_for_Unexplain(self):
+        try:
+            added_bank_unexplain = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_added_bank_for_unexplain))
+            time.sleep(.2)
+            added_bank_unexplain.click()
+            time.sleep(.5)
+            print(" Click on added_bank_un_explain successfully.....!")
+        except Exception as e:
+            print(f"Error on click:{e}")
 
 
 

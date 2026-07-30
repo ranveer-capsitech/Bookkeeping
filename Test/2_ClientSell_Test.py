@@ -110,10 +110,10 @@ class Login(unittest.TestCase):
 
         client_section.Enter_Discount()
         time.sleep(.3)
-        client_section.Click_Enter_Notes()
-        time.sleep(.3)
-        client_section.Enter_Notes()
-        time.sleep(.3)
+        # client_section.Click_Enter_Notes()
+        # time.sleep(.3)
+        # client_section.Enter_Notes()
+        # time.sleep(.3)
 
         client_section.Click_Save()
         time.sleep(2)

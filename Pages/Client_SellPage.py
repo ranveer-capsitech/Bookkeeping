@@ -37,7 +37,7 @@ class ClientSell:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
@@ -47,6 +47,10 @@ class ClientSell:
 #---------------------------------------------invoice-------------- ----------------------------------------------------
 
         self.invoice = (By.XPATH, "(//span[contains(text(),'Invoice')])[1]")
+        self.click_invoice_section = (
+            By.XPATH,
+            "//button[@role='tab' and .//span[normalize-space()='Invoices']]"
+        )
         self.select_customer = (By.XPATH, "//div[contains(text(),'Contact name')]")
         self.click_item_for_invoice = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/div[2]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
         self.table = (By.XPATH," (//div[contains(text(),'Tables')])[1]")
@@ -108,7 +112,7 @@ class ClientSell:
             print(f"Error on click:{e}")
 
 
-    def Enter_Company(self, company_name="RDX LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -210,6 +214,22 @@ class ClientSell:
             print("Click on Add invoice button successfully....!!")
         except Exception as e:
             print(f"Error on Click : {e}")
+
+    def Invoice_Section(self):
+        try:
+            section = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_invoice_section))
+            time.sleep(.2)
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                section
+            )
+
+            section.click()
+
+            print("Clicked on the Invoices tab successfully.")
+        except Exception as e:
+            print(f"Error on Click : {e}")
+
 
 
 
@@ -611,33 +631,90 @@ class ClientSell:
         except Exception as e:
             print(f"Error: {e}")
     #
+    # def Change_Pagination(self):
+    #     wait = WebDriverWait(self.driver, 20)
+    #
+    #     dropdown = wait.until(
+    #         EC.element_to_be_clickable(self.pagination)
+    #     )
+    #
+    #     # First option
+    #     dropdown.click()
+    #     time.sleep(0.2)
+    #     pyautogui.press("down")
+    #     time.sleep(0.2)
+    #     pyautogui.press("enter")
+    #
+    #     time.sleep(5)
+    #
+    #     # Second option
+    #     dropdown.click()
+    #     time.sleep(0.2)
+    #     pyautogui.press("down")
+    #     time.sleep(0.2)
+    #
+    #     pyautogui.press("enter")
+    #     time.sleep(5)
+    #
+    #
+    #     print("Change Pagination functionality  is working fine.")
     def Change_Pagination(self):
         wait = WebDriverWait(self.driver, 20)
 
-        dropdown = wait.until(
-            EC.element_to_be_clickable(self.pagination)
-        )
+        try:
+            self.wait_for_loader_to_disappear()
 
-        # First option
-        dropdown.click()
-        time.sleep(0.2)
-        pyautogui.press("down")
-        time.sleep(0.2)
-        pyautogui.press("enter")
+            pagination_elements = self.driver.find_elements(
+                *self.pagination
+            )
 
-        time.sleep(5)
+            if not pagination_elements:
+                print(
+                    "Pagination dropdown is not available. "
+                    "There may not be enough records for pagination."
+                )
+                return False
 
-        # Second option
-        dropdown.click()
-        time.sleep(0.2)
-        pyautogui.press("down")
-        time.sleep(0.2)
+            # Select the next pagination option
+            dropdown = wait.until(
+                EC.element_to_be_clickable(self.pagination)
+            )
 
-        pyautogui.press("enter")
-        time.sleep(5)
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                dropdown
+            )
 
+            dropdown.click()
+            dropdown.send_keys(Keys.ARROW_DOWN)
+            dropdown.send_keys(Keys.ENTER)
 
-        print("Change Pagination functionality  is working fine.")
+            self.wait_for_loader_to_disappear()
+
+            # Locate the element again because the page may have re-rendered
+            dropdown = wait.until(
+                EC.element_to_be_clickable(self.pagination)
+            )
+
+            dropdown.click()
+            dropdown.send_keys(Keys.ARROW_DOWN)
+            dropdown.send_keys(Keys.ENTER)
+
+            self.wait_for_loader_to_disappear()
+
+            print("Pagination functionality is working correctly.")
+            return True
+
+        except TimeoutException:
+            self.driver.save_screenshot(
+                "pagination_failure.png"
+            )
+
+            print(
+                "Pagination dropdown was found but was not clickable. "
+                "Check the locator, loader, and available record count."
+            )
+            raise
 #-----------------------------------------------------------------------------------------------------------------------
 
 
