@@ -1,0 +1,35 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Selected Customer is : T.H. LIMITED (Lori)
+File uploaded successfully.......!
+Discount added successfully....!!
+Clicked on Save button successfully
+Error in Click_Save: TimeoutException - Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff62f7f3fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff62f7f4000+14980]
+	chromedriver!(No symbol) [0x7ff62f33793d]
+	chromedriver!(No symbol) [0x7ff62f391aad]
+	chromedriver!(No symbol) [0x7ff62f391dac]
+	chromedriver!(No symbol) [0x7ff62f3e27d7]
+	chromedriver!(No symbol) [0x7ff62f3df39b]
+	chromedriver!(No symbol) [0x7ff62f38401c]
+	chromedriver!(No symbol) [0x7ff62f384f43]
+	chromedriver!GetHandleVerifier [0x7ff62fdd7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff62fdd1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff62fdf7115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff62f811dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff62f81a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff62f7fd744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff62f7fd8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff62f7e1447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+

@@ -1,0 +1,22 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on credit section successfully......!!
+Click for add credit  successfully....!!
+ Customer selected successfully for Credit Note......!!
+Invoice reference selected successfully......!!
+File uploaded successfully.......!
+Discount applied successfully....!!
+Click on enter notes  successfully....!!
+Notes added successfully....!!
+click on save credit note successfully....!!
+ Test Case -4 : Pass :  Credit note saved successfully for Sales...!
+Enter Search value  successfully........!! 
+Search functionality reset  successfully........!! 
+Changed date successfully in calendar.
+Shorting functionality is working fine.
+ Download file successfully.....! 

@@ -1,0 +1,22 @@
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Selected Customer is : Alex (Alex)
+File uploaded successfully.......!
+Discount added successfully....!!
+Click on enter notes  successfully....!!
+Notes added successfully....!!
+Test Case 2 - Pass: Invoice created successfully
+Enter Search value  successfully........!! 
+Search functionality reset  successfully........!! 
+Changed date successfully in calendar.
+Shorting functionality is working fine.
+ Hide Report Section successfully.....!!
+Again showing Report Section successfully.....!!
+Change Pagination functionality  is working fine.
+Click on Three dot successfully.....! 
+Click on clone option successfully.....! 
+Save clone invoice successfully.......
+Click on Three dot successfully.....! 
+Click on Bad Debts option successfully.....! 
+Save Bad Debts invoice successfully.......
+ download file successfully.....! 

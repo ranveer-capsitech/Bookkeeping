@@ -1,0 +1,39 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+click on item successfully....!!
+Click on add item icon successfully.....!!
+ Error on entering name: Message: invalid element state: Element is not currently interactable and may not be manipulated
+  (Session info: chrome=149.0.7827.115)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff62f7f3fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff62f7f4000+14980]
+	chromedriver!(No symbol) [0x7ff62f33793d]
+	chromedriver!(No symbol) [0x7ff62f33f8b1]
+	chromedriver!(No symbol) [0x7ff62f342875]
+	chromedriver!(No symbol) [0x7ff62f34293f]
+	chromedriver!(No symbol) [0x7ff62f388da2]
+	chromedriver!(No symbol) [0x7ff62f3ba3ca]
+	chromedriver!(No symbol) [0x7ff62f3857c6]
+	chromedriver!(No symbol) [0x7ff62f3df39b]
+	chromedriver!(No symbol) [0x7ff62f38401c]
+	chromedriver!(No symbol) [0x7ff62f384f43]
+	chromedriver!GetHandleVerifier [0x7ff62fdd7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff62fdd1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff62fdf7115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff62f811dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff62f81a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff62f7fd744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff62f7fd8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff62f7e1447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Enter purchases description successfully.....!!
+Enter sale description successfully.....!!
+Enter Unit Price Successfully......!!
+Enter Unit Price Sell Successfully.....!!

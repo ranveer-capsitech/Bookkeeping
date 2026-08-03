@@ -1,0 +1,105 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Credit card selected successfully....!!
+Bank selected successfully....!!
+Credit card number entered successfully!
+Test Case  -   Pass: Credit card saved successfully.
+Error: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff764193fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff764194000+14980]
+	chromedriver!(No symbol) [0x7ff763cd793d]
+	chromedriver!(No symbol) [0x7ff763cdf8b1]
+	chromedriver!(No symbol) [0x7ff763ce2875]
+	chromedriver!(No symbol) [0x7ff763ce293f]
+	chromedriver!(No symbol) [0x7ff763d33e90]
+	chromedriver!(No symbol) [0x7ff763d25eb1]
+	chromedriver!(No symbol) [0x7ff763d5a3ca]
+	chromedriver!(No symbol) [0x7ff763d257c6]
+	chromedriver!(No symbol) [0x7ff763d7f39b]
+	chromedriver!(No symbol) [0x7ff763d2401c]
+	chromedriver!(No symbol) [0x7ff763d24f43]
+	chromedriver!GetHandleVerifier [0x7ff764777591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff764771902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff764797115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff7641b1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff7641ba82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff76419d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff76419d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff764181447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff764193fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff764194000+14980]
+	chromedriver!(No symbol) [0x7ff763cd793d]
+	chromedriver!(No symbol) [0x7ff763d31aad]
+	chromedriver!(No symbol) [0x7ff763d31dac]
+	chromedriver!(No symbol) [0x7ff763d827d7]
+	chromedriver!(No symbol) [0x7ff763d7f39b]
+	chromedriver!(No symbol) [0x7ff763d2401c]
+	chromedriver!(No symbol) [0x7ff763d24f43]
+	chromedriver!GetHandleVerifier [0x7ff764777591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff764771902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff764797115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff7641b1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff7641ba82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff76419d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff76419d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff764181447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff764193fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff764194000+14980]
+	chromedriver!(No symbol) [0x7ff763cd793d]
+	chromedriver!(No symbol) [0x7ff763d31aad]
+	chromedriver!(No symbol) [0x7ff763d31dac]
+	chromedriver!(No symbol) [0x7ff763d827d7]
+	chromedriver!(No symbol) [0x7ff763d7f39b]
+	chromedriver!(No symbol) [0x7ff763d2401c]
+	chromedriver!(No symbol) [0x7ff763d24f43]
+	chromedriver!GetHandleVerifier [0x7ff764777591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff764771902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff764797115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff7641b1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff7641ba82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff76419d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff76419d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff764181447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error while uploading file: TimeoutException - Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff764193fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff764194000+14980]
+	chromedriver!(No symbol) [0x7ff763cd793d]
+	chromedriver!(No symbol) [0x7ff763d31aad]
+	chromedriver!(No symbol) [0x7ff763d31dac]
+	chromedriver!(No symbol) [0x7ff763d827d7]
+	chromedriver!(No symbol) [0x7ff763d7f39b]
+	chromedriver!(No symbol) [0x7ff763d2401c]
+	chromedriver!(No symbol) [0x7ff763d24f43]
+	chromedriver!GetHandleVerifier [0x7ff764777591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff764771902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff764797115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff7641b1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff7641ba82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff76419d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff76419d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff764181447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+

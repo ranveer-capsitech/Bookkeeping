@@ -1,0 +1,3 @@
+Test case - 1 : Pass: Login successfully....!!
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!

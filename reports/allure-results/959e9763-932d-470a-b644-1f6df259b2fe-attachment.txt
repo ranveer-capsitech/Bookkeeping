@@ -1,0 +1,136 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  vat return section successfully....!!
+Enable MTD is not available, so clicking Reauthorized...
+Click on Reauthorized section successfully....!!
+Click on Continue button successfully....!!
+Click on Sign in to the HMRC online service button successfully....!!
+Clicked on user credentials and switched to new tab successfully....!!
+Current URL: https://developer.service.hmrc.gov.uk/api-test-user
+Page scrolled down successfully on new tab....!!
+Click on Radio button of organization successfully....!!
+Click on create button successfully....!!
+User ID is: 676811817220
+Password is: 18ha1ETnJdWC
+Raw Date: 2022-07-20
+Formatted Date: 20:07:2022
+Vat Registration Number: 259487604
+User ID is: 676811817220
+Password is: 18ha1ETnJdWC
+Raw Date: 2022-07-20
+Formatted Date: 20:07:2022
+Vat Registration Number: 259487604
+Switched back to parent/original tab successfully....!!
+Closed extra tab: A9F5E0AA8090FE93DDB6795015096FCD
+User ID entered successfully: 676811817220
+Password entered successfully: 18ha1ETnJdWC
+Click on signIn button successfully....!!
+Click on Permission button successfully....!!
+Stored VAT page URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Current URL after redirect: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Expected URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Returned to expected VAT page successfully....!!
+Loader disappeared successfully.....!!
+Click on edit button successfully....!!
+VAT Registration Date entered successfully: 20/07/2022
+VAT Registration Number entered successfully: 259487604
+Click on save button successfully....!!
+Click on Vat return button successfully....!!
+Select Obligation successfully...!!
+Test Case 20 - Pass: Vat saved successfully.
+Page refreshed successfully....!!
+Click on edit vat return section successfully....!!
+Import VAT return file uploaded successfully....!!
+Click on Send button successfully....!!
+Reviewer selected successfully....!!
+Remarks entered successfully....!!
+Attachment file added successfully....!!
+Click on save request successfully....!!
+Click on Review request successfully....!!
+Click on download working button successfully....!!
+Click on Reject  button successfully....!!
+Reason selected successfully
+Remark entered: only for testing
+Click on Reject  reason button successfully....!!
+Click on send again button successfully....!!
+Reviewer selected successfully....!!
+Remarks entered successfully....!!
+Attachment file added successfully....!!
+Click on save request successfully....!!
+Click on Review request successfully....!!
+Click on Next button successfully....!!
+Click on approve button successfully....!!
+Click on Yes button successfully....!!
+Click on E-Sign button successfully....!!
+Loader disappeared successfully.....!!
+Pending in page text: True
+Pending elements: 28
+Visible pending: 28
+Clicked Pending successfully.....!!
+Selected dropdown option successfully.....!!
+Enter Remark successfully.....!!
+Click on Submit button for  e Sign successfully....!!
+Click on Back button successfully....!!
+Click on edit vat return section successfully....!!
+Click on Send button successfully....!!
+Reviewer selected successfully....!!
+Remarks entered successfully....!!
+Attachment file added successfully....!!
+Click on save request successfully....!!
+Click on Review request successfully....!!
+Click on Next button successfully....!!
+Click on approve button successfully....!!
+Click on Yes button successfully....!!
+Click on E-Sign button successfully....!!
+Pending in page text: True
+Pending elements: 28
+Visible pending: 28
+Clicked Pending successfully.....!!
+Selected Send option successfully....!!
+Enter Remark successfully.....!!
+Click on Submit button for  e Sign successfully....!!
+Click on send mail button successfully....!!
+Change mail from successfully....!!
+Review mail opened successfully in a new tab.
+Current URL: https://test.actingoffice.com/10/links/clients/69de4259c96697e503b34acd/signatures/6a5de3812f404696c6363468/f65c9d41-26c3-4144-88ee-6b95a42dc6d2
+Click on Get OTP successfully....!!
+OTP entered successfully....!!
+Click on proceed securely successfully....!!
+Click on Accept button successfully....!!
+Enter Name for signature successfully....!!
+Click on Sign Button successfully....!!
+Click on Okay button successfully....!!
+Switched back to previous tab successfully....!!
+Clicked on cross button successfully....!!
+Page refreshed successfully....!!
+Click on Submit Button successfully....!!
+Click on Submit Button successfully....!!
+Click on Yes button successfully....!!
+Click  response downloaded  successfully....!!
+Click  cancel button of Vat submission successfully....!!
+Click  on back button successfully....!!
+Click on three dot Button successfully....!!
+Click on Download report successfully....!!
+Clicked on first Mail icon button successfully.
+Change mail from successfully....!!
+Click on Send button successfully....!!
+Click on send anyway button successfully....!!
+Test case - 2: Pass: Click an active employee section successfully.....!
+Click  on CRM Section button successfully....!!
+Loader disappeared successfully.....!!
+Click  on E- Signature button successfully....!!
+Search entered successfully with company name: T.H. LIMITED
+Click  on 1st ref successfully....!!
+Click_Title_Company attempt: 1
+Locator //a[normalize-space(@title)='T.H. LIMITED'] found: 1
+Click on company title successfully: T.H. LIMITED
+Click  on document section successfully....!!
+Click  on vat return folder section successfully....!!
+Click  on Year folder section successfully....!!
+Click  on period folder section successfully....!!
+Click  on first and open file preview successfully....!!
+File downloaded successfully....!!

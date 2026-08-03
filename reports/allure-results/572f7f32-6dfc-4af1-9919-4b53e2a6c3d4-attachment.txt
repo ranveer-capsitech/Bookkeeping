@@ -1,0 +1,93 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  vat return section successfully....!!
+Enable MTD is not available, so clicking Reauthorized...
+Click on Reauthorized section successfully....!!
+Click on Continue button successfully....!!
+Click on Sign in to the HMRC online service button successfully....!!
+Clicked on user credentials and switched to new tab successfully....!!
+Current URL: https://developer.service.hmrc.gov.uk/api-test-user
+Page scrolled down successfully on new tab....!!
+Click on Radio button of organization successfully....!!
+Click on create button successfully....!!
+User ID is: 586010803219
+Password is: WAag1GUhbcKJ
+Raw Date: 2012-04-16
+Formatted Date: 16:04:2012
+Vat Registration Number: 692491208
+User ID is: 586010803219
+Password is: WAag1GUhbcKJ
+Raw Date: 2012-04-16
+Formatted Date: 16:04:2012
+Vat Registration Number: 692491208
+Switched back to parent/original tab successfully....!!
+Closed extra tab: 5A60C403B2EFDD37D227EAE5403ABB56
+User ID entered successfully: 586010803219
+Password entered successfully: WAag1GUhbcKJ
+Click on signIn button successfully....!!
+Click on Permission button successfully....!!
+Stored VAT page URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Current URL after redirect: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Expected URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Returned to expected VAT page successfully....!!
+Click on edit button successfully....!!
+VAT Registration Date entered successfully: 16/04/2012
+VAT Registration Number entered successfully: 692491208
+Save found: True True
+Button text: 
+Save
+Outer HTML: <button type="button" class="ms-Button ms-Button--primary root-805" data-is-focusable="true"><span class="ms-Button-flexContainer flexContainer-574" data-automationid="splitbuttonprimary"><i data-icon-name="save" aria-hidden="true" class="ms-Icon root-89 css-450 ms-Button-icon icon-576" style="font-family: FabricMDL2Icons-0;"></i><span class="ms-Button-textContainer textContainer-575"><span class="ms-Button-label label-716" id="id__361">Save</span></span></span></button>
+Assertion passed: 'Setting updated successfully' message displayed successfully....!!
+Click on Vat return button successfully....!!
+Select Obligation successfully...!!
+Test Case 20 - Pass: Vat saved successfully.
+Page refreshed successfully....!!
+Click on edit vat return section successfully....!!
+Import VAT return file uploaded successfully....!!
+Click on Send button successfully....!!
+Reviewer selected successfully....!!
+Remarks entered successfully....!!
+Attachment file added successfully....!!
+Click on save request successfully....!!
+Click on Review request successfully....!!
+Click on download working button successfully....!!
+Click on Reject  button successfully....!!
+Reason selected successfully
+Remark entered: only for testing
+Click on Reject  reason button successfully....!!
+Click on send again button successfully....!!
+Reviewer selected successfully....!!
+Remarks entered successfully....!!
+Attachment file added successfully....!!
+Click on save request successfully....!!
+Click on Review request successfully....!!
+Click on Next button successfully....!!
+Click on approve button successfully....!!
+Click on Yes button successfully....!!
+Click on E-Sign button successfully....!!
+Click on send mail button successfully....!!
+Change mail from successfully....!!
+Review mail link opened successfully in new tab....!!
+Current URL: https://test.actingoffice.com/10/links/clients/69de4259c96697e503b34acd/signatures/69e0c1a77c6a4c35e2a32f90/1748c169-cd26-4505-8723-14bc8595d404
+Click on Get OTP successfully....!!
+OTP entered successfully....!!
+Click on proceed securely successfully....!!
+Click on Accept button successfully....!!
+Enter Name for signature successfully....!!
+Click on Sign Button successfully....!!
+Click on Okay button successfully....!!
+Switched back to previous tab successfully....!!
+Clicked on cross button successfully....!!
+Page refreshed successfully....!!
+Click on Submit Button successfully....!!
+Click on Submit Button successfully....!!
+Click on Yes button successfully....!!
+Click  response downloaded  successfully....!!
+Click  cancel button of Vat submission successfully....!!
+Click  on back button successfully....!!
+Click on three dot Button successfully....!!
+Click on Download report successfully....!!

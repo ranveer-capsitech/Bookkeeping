@@ -1,0 +1,209 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Savings account selected successfully....!!
+Bank selected successfully....!!
+Account number entered successfully!
+Enter sort code successfully...!!
+Click on Primary Account successfully...!!
+Test Case  -   Pass: Current banks Account saved successfully.
+Looking for sort code: 11-22-33
+Click on added bank successfully.......!!!!!
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Click checkbox single element successfully.....!!
+Clicked on explain_1st button successfully.....!! 
+Clicked on this transaction button successfully.....!! 
+Click checkbox single element successfully.....!!
+Clicked on explain_1st button successfully.....!! 
+Clicked on All transaction button successfully.....!! 
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Clicked on this transaction button successfully.....!! 
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Select All similar head head successfully.....!! 
+Click on check box for simple entries successfully.....!! 
+Click on check box for simple entries successfully.....!! 
+Clicked on 2nd last entry checkbox successfully.
+Selected Sales - 1/1 successfully.
+Click on quick fill button and this functionality is running successfully.....!! 
+Click on selected all explain button successfully.....!! 
+Click on check box for simple entries successfully.....!! 
+Selected Sales - 1/1 successfully.
+Click on last visible explain successfully.....!!
+Click checkbox single element successfully.....!!
+Click Excluded Button successfully.....!! 
+Click on Yes button successfully and Account activated successfully....!!
+Select Excluded section successfully.....!! 
+Select 1st checkbox successfully.....!!
+Select second checkbox successfully.....!!
+Select delete icon successfully.....!! 
+Click on Yes button successfully for delete successfully....!!
+Select 1st checkbox successfully.....!!
+Click on Revive successfully.....!! 
+Click on Yes button successfully for delete successfully....!!
+Select Explained section successfully.....!! 
+Select 1st checkbox successfully.....!!
+Click on Un-explain all checked transactions icon successfully.....!! 
+Click on yes button for confirm to un-explain selected transaction successfully.....!!
+Select 1st checkbox successfully.....!!
+Click on Single explain translation successfully.....!!
+Click on yes button for confirm to un-explain selected transaction successfully.....!!
+Select Unexplained tab successfully.....! 
+Search entered successfully.....!!
+Click on check box for simple entries successfully.....!! 
+Click on three dot successfully.....!! 
+Click on Split successfully.....!! 
+Found money_out: £30.00
+Divided Value: 15.0
+Entered 15.00 in Money Out field
+Click on description button successfully.....!! 
+Selected 2nd account head option successfully
+Visible Money Out fields count: 1
+0 transactions.1.moneyOut 0.00
+Entered 15.00 in Money Out field
+Selected next account head option successfully
+Select vat successfully.....!! 
+Error: Message: element click intercepted: Element <button type="button" class="ms-Button ms-Button--primary root-1046" data-is-focusable="true">...</button> is not clickable at point (1335, 575). Other element would receive the click: <div class="rs-option option-718" aria-disabled="false" id="react-select-366-option-5" tabindex="-1">...</div>
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab9755]
+	chromedriver!(No symbol) [0x7ff6f2ab736a]
+	chromedriver!(No symbol) [0x7ff6f2ab46b7]
+	chromedriver!(No symbol) [0x7ff6f2ab3567]
+	chromedriver!(No symbol) [0x7ff6f2aa5f48]
+	chromedriver!(No symbol) [0x7ff6f2ada3ca]
+	chromedriver!(No symbol) [0x7ff6f2aa57c6]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error on search field: Message: element click intercepted: Element <input id="SearchBox1520" class="ms-SearchBox-field field-451" placeholder="Search" role="searchbox" value="Thames Water"> is not clickable at point (1431, 155). Other element would receive the click: <div aria-hidden="true" class="ms-Overlay ms-Overlay--dark root-1168"></div>
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab9755]
+	chromedriver!(No symbol) [0x7ff6f2ab736a]
+	chromedriver!(No symbol) [0x7ff6f2ab46b7]
+	chromedriver!(No symbol) [0x7ff6f2ab3567]
+	chromedriver!(No symbol) [0x7ff6f2aa5f48]
+	chromedriver!(No symbol) [0x7ff6f2ada3ca]
+	chromedriver!(No symbol) [0x7ff6f2aa57c6]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error: Message: element click intercepted: Element <button type="button" role="tab" aria-selected="false" id="Pivot1554-Tab0" class="ms-Button ms-Button--action ms-Button--command ms-Pivot-link link-1312" name="Explained" data-content="Explained" data-is-focusable="true" tabindex="-1">...</button> is not clickable at point (260, 205). Other element would receive the click: <div aria-hidden="true" class="ms-Overlay ms-Overlay--dark root-1168"></div>
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab9755]
+	chromedriver!(No symbol) [0x7ff6f2ab736a]
+	chromedriver!(No symbol) [0x7ff6f2ab46b7]
+	chromedriver!(No symbol) [0x7ff6f2ab3567]
+	chromedriver!(No symbol) [0x7ff6f2aa5f48]
+	chromedriver!(No symbol) [0x7ff6f2ada3ca]
+	chromedriver!(No symbol) [0x7ff6f2aa57c6]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Error on search field: Message: element click intercepted: Element <input id="SearchBox1520" class="ms-SearchBox-field field-451" placeholder="Search" role="searchbox" value="Thames Water"> is not clickable at point (1431, 155). Other element would receive the click: <div aria-hidden="true" class="ms-Overlay ms-Overlay--dark root-1168"></div>
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab9755]
+	chromedriver!(No symbol) [0x7ff6f2ab736a]
+	chromedriver!(No symbol) [0x7ff6f2ab46b7]
+	chromedriver!(No symbol) [0x7ff6f2ab3567]
+	chromedriver!(No symbol) [0x7ff6f2aa5f48]
+	chromedriver!(No symbol) [0x7ff6f2ada3ca]
+	chromedriver!(No symbol) [0x7ff6f2aa57c6]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Click checkbox single element successfully.....!!
+Error: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab1aad]
+	chromedriver!(No symbol) [0x7ff6f2ab1dac]
+	chromedriver!(No symbol) [0x7ff6f2b027d7]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Click on yes button for confirm to un-explain selected transaction successfully.....!!

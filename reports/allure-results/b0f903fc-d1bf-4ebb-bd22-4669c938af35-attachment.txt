@@ -1,0 +1,14 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  dividends section successfully....!!
+Click on Add dividends  successfully....!!
+Authorised director selected successfully....!!
+Type selected successfully....!!
+Enter share value successfully....!!
+Enter payment date successfully...!!
+Asset saved successfully.
+ Test Case 18 - Pass: Dividends created successfully.

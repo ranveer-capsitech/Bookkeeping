@@ -1,0 +1,50 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Savings account selected successfully....!!
+Bank selected successfully....!!
+Account number entered successfully!
+Enter sort code successfully...!!
+Click on Primary Account successfully...!!
+Test Case  -   Pass: Current banks Account saved successfully.
+Looking for sort code: 11-22-33
+Click on added bank successfully.......!!!!!
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Clicked on Back button successfully.....!!
+Changed date successfully in calendar.
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting old to new successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting new to old successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+Error while selecting first option: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff61b7d3fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff61b7d4000+14980]
+	chromedriver!(No symbol) [0x7ff61b31793d]
+	chromedriver!(No symbol) [0x7ff61b371aad]
+	chromedriver!(No symbol) [0x7ff61b371dac]
+	chromedriver!(No symbol) [0x7ff61b3c27d7]
+	chromedriver!(No symbol) [0x7ff61b3bf39b]
+	chromedriver!(No symbol) [0x7ff61b36401c]
+	chromedriver!(No symbol) [0x7ff61b364f43]
+	chromedriver!GetHandleVerifier [0x7ff61bdb7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff61bdb1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff61bdd7115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff61b7f1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff61b7fa82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff61b7dd744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff61b7dd8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff61b7c1447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+

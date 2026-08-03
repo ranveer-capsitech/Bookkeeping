@@ -1,0 +1,81 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'ALIS FITTINGS LTD' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Bank selected successfully....!!
+Account number entered successfully!
+Enter sort code successfully...!!
+Click on Primary Account successfully...!!
+Test Case  -   Pass: Current banks Account saved successfully.
+Looking for sort code: 11-22-33
+Click on added bank successfully.......!!!!!
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Click checkbox single element successfully.....!!
+Clicked on explain_1st button successfully.....!! 
+Clicked on this transaction button successfully.....!! 
+Click checkbox single element successfully.....!!
+Clicked on explain_1st button successfully.....!! 
+Clicked on All transaction button successfully.....!! 
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Clicked on this transaction button successfully.....!! 
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Select All similar head head successfully.....!! 
+Click on check box for simple entries successfully.....!! 
+Clicked on 2nd last entry checkbox successfully.
+Selected Sales - 1/1 successfully.
+Click on quick fill button and this functionality is running successfully.....!! 
+Click on selected all explain button successfully.....!! 
+Click on check box for simple entries successfully.....!! 
+Selected Sales - 1/1 successfully.
+Click on last visible explain successfully.....!!
+Click checkbox single element successfully.....!!
+Click Excluded Button successfully.....!! 
+Click on Yes button successfully and Account activated successfully....!!
+Select Excluded section successfully.....!! 
+Select 1st checkbox successfully.....!!
+Select second checkbox successfully.....!!
+Select delete icon successfully.....!! 
+Click on Yes button successfully for delete successfully....!!
+Select 1st checkbox successfully.....!!
+Click on Revive successfully.....!! 
+Click on Yes button successfully for delete successfully....!!
+Select Explained section successfully.....!! 
+Select 1st checkbox successfully.....!!
+Click on Un Explained icon successfully.....!! 
+Select 1st checkbox successfully.....!!
+Click on Single explain translation successfully.....!!
+Clicked single unexplain and confirmed successfully.....!!
+Select Unexplained tab successfully.....! 
+Search entered successfully.....!!
+Click on check box for simple entries successfully.....!! 
+Click on three dot successfully.....!! 
+Click on Split successfully.....!! 
+Found money_out: £30.00
+Divided Value: 15.0
+Entered 15.00 in Money Out field
+Click on description button successfully.....!! 
+Selected 2nd account head option successfully
+Visible Money Out fields count: 1
+0 transactions.1.moneyOut 0.00
+Entered 15.00 in Money Out field
+Selected next account head option successfully
+Select vat successfully.....!! 
+Click on Split button successfully.....!! 
+Search entered successfully.....!!
+Select Explained section successfully.....!! 
+Search entered successfully.....!!
+Click checkbox single element successfully.....!!
+Click on Un Explained icon successfully.....!! 
+Click on yes button for confirm to un-explain selected transaction successfully.....!!

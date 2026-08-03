@@ -1,0 +1,65 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Savings account selected successfully....!!
+Bank selected successfully....!!
+Account number entered successfully!
+Enter sort code successfully...!!
+Click on Primary Account successfully...!!
+Test Case  -   Pass: Current banks Account saved successfully.
+Looking for sort code: 11-22-33
+Click on added bank successfully.......!!!!!
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Clicked on Back button successfully.....!!
+Changed date successfully in calendar.
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting old to new successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting new to old successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+First option selected successfully: 
+03/01/2025
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked on Description filter icon successfully........!! 
+Clicked on data shorting A to Z successfully showing........!! 
+Clicked on Description filter icon successfully........!! 
+Clicked on data shorting z to a successfully showing........!! 
+Clicked on Description filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+First option selected successfully: 
+BP MOTOR FUEL LIMITED-
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked on Money Out filter icon successfully........!! 
+Clicked on data shorting small to largest successfully showing........!! 
+Clicked on Money Out filter icon successfully........!! 
+Clicked on data shorting largest to small  successfully showing........!! 
+Clicked on Money Out filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+First option selected successfully: 
+£0.00
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked money in  filter icon successfully........!! 
+Clicked on data shorting small to largest successfully showing........!! 
+Clicked money in  filter icon successfully........!! 
+Clicked on data shorting largest to small  successfully showing........!! 
+Clicked money in  filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+First option selected successfully: 
+£0.00
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Enter Search value  successfully........!! 
+Search functionality reset successfully.
+Magnifier icon clicked successfully

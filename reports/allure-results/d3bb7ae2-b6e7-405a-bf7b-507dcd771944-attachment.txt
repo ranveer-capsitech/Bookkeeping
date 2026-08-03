@@ -1,0 +1,73 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Credit card selected successfully....!!
+Bank selected successfully....!!
+Credit card number entered successfully!
+Test Case  -   Pass: Credit card saved successfully.
+Click on Credit account section successfully.
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Select Unexplained tab successfully.....! 
+Click on check box for simple entries successfully.....!! 
+Clicked on 2nd last entry checkbox successfully.
+Selected Sales - 1/1 successfully.
+Click on quick fill button and this functionality is running successfully.....!! 
+Click on selected all explain button successfully.....!! 
+Search entered successfully.....!!
+Click on check box for simple entries successfully.....!! 
+Click on three dot successfully.....!! 
+Click on Split successfully.....!! 
+Found money_out: £12.00
+Divided Value: 6.0
+Entered 6.00 in Money Out field
+Select vat successfully.....!! 
+Click on description button successfully.....!! 
+Visible Money Out fields count: 1
+0 transactions.1.moneyOut 0.00
+Entered 6.00 in Money Out field
+Selected next account head option successfully
+Select vat successfully.....!! 
+Click on Split button successfully.....!! 
+Click on Cross icon successfully.....! 
+Clicked on explain_1st button successfully.....!! 
+Click checkbox single element successfully.....!!
+Clicked Explain button
+Clicked Recommendation successfully
+Click checkbox single element successfully.....!!
+Error: Message: 
+
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Clicked on this transaction button successfully.....!! 
+Clicked 1st check box of similar transaction successfully.....!!
+Selected Sales - 1/1 successfully.
+Clicked Similar Section Explain Button successfully.....!!
+Select All similar head head successfully.....!! 
+Select Explained section successfully.....!! 
+Selected explained 1st entry successfully.....!!
+Clicked Unexplain icon successfully
+Click on Yes button successfully and Account activated successfully....!!
+Clicked Unexplained tab successfully
+Clicked first row checkbox successfully
+Clicked row exclude icon successfully
+Click on Yes button successfully and Account activated successfully....!!
+Clicked Excluded tab successfully
+Selected active tab 1st entry successfully.....!!
+Click on Revive successfully.....!! 
+Click on Yes button successfully and Account activated successfully....!!
+Clicked Unexplained tab successfully
+Selected active tab 1st entry successfully.....!!
+Clicked row exclude icon successfully
+Clicked select all checkbox successfully
+Clicked Exclude button successfully
+Clicked Excluded tab successfully

@@ -1,0 +1,33 @@
+Test case - 1 : Pass: Login successfully....!!
+Error on click Waffle icon: InvalidSessionIdException - Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff764193fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff764194000+14980]
+	chromedriver!(No symbol) [0x7ff763cd793d]
+	chromedriver!(No symbol) [0x7ff763cc33d0]
+	chromedriver!(No symbol) [0x7ff763cc332c]
+	chromedriver!(No symbol) [0x7ff763cc1b89]
+	chromedriver!(No symbol) [0x7ff763cc273f]
+	chromedriver!(No symbol) [0x7ff763cdd236]
+	chromedriver!(No symbol) [0x7ff763cddd7b]
+	chromedriver!(No symbol) [0x7ff763ce2875]
+	chromedriver!(No symbol) [0x7ff763ce293f]
+	chromedriver!(No symbol) [0x7ff763d3122a]
+	chromedriver!(No symbol) [0x7ff763d31dac]
+	chromedriver!(No symbol) [0x7ff763d827d7]
+	chromedriver!(No symbol) [0x7ff763d7f39b]
+	chromedriver!(No symbol) [0x7ff763d2401c]
+	chromedriver!(No symbol) [0x7ff763d24f43]
+	chromedriver!GetHandleVerifier [0x7ff764777591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff764771902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff764797115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff7641b1dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff7641ba82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff76419d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff76419d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff764181447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+

@@ -1,0 +1,18 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Click for select estimate  successfully....!!
+Click for add_estimates  successfully....!!
+ Customer selected successfully for Estimate!
+File uploaded successfully.......!
+Discount added successfully....!!
+Click on enter notes  successfully....!!
+Notes added successfully....!!
+ Test Case -5 :  Pass: -  Estimate  saved successfully.....!!
+ download file successfully.....! 
+Create Direct Invoice successfully.....! 
+ Direct invoice   saved from estimate section successfully.....!!

@@ -1,0 +1,17 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' 
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on purchases successfully....!!
+click on credit section successfully......!!
+Click for add credit  successfully....!!
+ Customer selected successfully for Credit Note!
+Invoice reference selected successfully!
+File uploaded successfully.......!
+Discount added successfully: 10
+Click on enter notes  successfully....!!
+Notes added successfully....!!
+click on save credit note successfully....!!
+ Duplicate entry is not detected

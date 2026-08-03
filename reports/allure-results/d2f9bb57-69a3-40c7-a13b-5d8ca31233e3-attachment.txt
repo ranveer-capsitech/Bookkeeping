@@ -1,0 +1,28 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Click on Client section successfully.....!!
+Click on Add Client section successfully.....!!
+Enter Customer name successfully......!!
+Click on cancel button successfully.....!!
+Click on Billing field successfully.....!!
+Enter building number successfully.....!!
+Enter Street successfully.....!!
+Enter city successfully.....!!
+Enter county successfully.....!!
+Enter country successfully.....!!
+Enter postcode successfully.....!!
+Click on contact person field successfully.....!!
+Name enters successfully.....!!
+Enter contact number successfully....!!
+Enter mail id successfully......!!
+Entered discount successfully!
+Enter vat successfully......!!
+Project tag selected using ENTER successfully!
+File uploaded successfully!
+customer saved successfully!
+Test Case 22  - Pass: Customer added successfully.

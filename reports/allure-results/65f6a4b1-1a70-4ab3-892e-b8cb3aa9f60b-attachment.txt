@@ -1,0 +1,14 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on purchases successfully....!!
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+File uploaded successfully.......!
+Discount added successfully....!!
+Enter amount successfully....!!
+Invoice created successfully
+Test Case -7 :  Pass:: Invoice created successfully.

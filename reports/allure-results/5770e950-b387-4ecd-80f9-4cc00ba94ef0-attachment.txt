@@ -1,0 +1,70 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Sales successfully....!!
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+Selected Customer is : KM Consultancy Limited (Steven Phillip)
+File uploaded successfully.......!
+Discount added successfully....!!
+Clicked on Save button successfully
+Test Case Create Invoice - Pass:
+Click on purchases successfully....!!
+Click on Add invoice button successfully....!!
+Customer selected successfully....!!
+File uploaded successfully.......!
+Discount added successfully....!!
+Enter amount successfully....!!
+Invoice created successfully
+Test Case - :  Pass:: Invoice created successfully.
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Credit card selected successfully....!!
+Bank selected successfully....!!
+Credit card number entered successfully!
+Test Case  -   Pass: Credit card saved successfully.
+Stale element detected. Retry 1/3
+Click on Credit account section successfully.
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Clicked on Back button successfully.....!! 
+Clicked on add manual transaction button successfully.....!! 
+Today's date entered successfully: 17/07/2026
+Description entered successfully: Manual transaction test
+Description entered successfully: 100
+Clicked on save button successfully.....!! 
+Clicked on add manual transaction button successfully.....!! 
+Today's date entered successfully: 17/07/2026
+Description entered successfully: Manual transaction test
+Description entered successfully: 100
+Clicked on save button successfully.....!! 
+Clicked on add manual transaction button successfully.....!! 
+Today's date entered successfully: 17/07/2026
+Description entered successfully: Manual transaction test
+Description entered successfully: 100
+Clicked on save button successfully.....!! 
+First transaction row clicked successfully.
+Clicked on Find match successfully.....!!
+Contact selected successfully....!!
+Claims selected successfully: INV-0003 | Sales Invoice | 30/06/2026 | £20.00
+Allocated amount entered successfully: 100
+Clicked on match button successfully.....!! 
+Click on Explain section successfully....!!
+Explain Contact selected successfully....!!
+Account head selected successfully....!!
+Explain disabled: None
+Explain aria-disabled: None
+Click on Explain submit button successfully....!!
+Clicked on Transfer section successfully.
+Transfer account selected successfully: Monzo - Current
+Transfer button displayed: True
+Transfer button enabled: True
+Transfer button disabled attr: None
+Transfer button text: Transfer
+Clicked on Transfer submit button successfully....!!

@@ -1,0 +1,87 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'RDX LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Click on  banking section successfully....!!
+Click on  account section successfully....!!
+Savings account selected successfully....!!
+Bank selected successfully....!!
+Account number entered successfully!
+Enter sort code successfully...!!
+Click on Primary Account successfully...!!
+Test Case  -   Pass: Current banks Account saved successfully.
+Looking for sort code: 11-22-33
+Click on added bank successfully.......!!!!!
+Clicked on Import button successfully.....!! 
+Clicked on templet  button successfully and templet downloaded .....!! 
+File uploaded successfully.....!!
+Clicked on Upload Import button successfully.....!! 
+Clicked on Next button successfully.....!!
+Clicked on Back button successfully.....!!
+Changed date successfully in calendar.
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting old to new successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Clicked on data shorting new to old successfully showing........!! 
+Clicked on data filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+Select first option successfully.
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked on Description filter icon successfully........!! 
+Clicked on data shorting A to Z successfully showing........!! 
+Clicked on Description filter icon successfully........!! 
+Clicked on data shorting z to a successfully showing........!! 
+Clicked on Description filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+Select first option successfully.
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked on Money Out filter icon successfully........!! 
+Clicked on data shorting small to largest successfully showing........!! 
+Clicked on Money Out filter icon successfully........!! 
+Clicked on data shorting largest to small  successfully showing........!! 
+Clicked on Money Out filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+Select first option successfully.
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Clicked money in  filter icon successfully........!! 
+Clicked on data shorting small to largest successfully showing........!! 
+Clicked money in  filter icon successfully........!! 
+Clicked on data shorting largest to small  successfully showing........!! 
+Clicked money in  filter icon successfully........!! 
+Click on select_all_date successfully........!! 
+Select first option successfully.
+Click on apply button successfully........!! 
+Clicked cross icon successfully........!! 
+Enter Search value  successfully........!! 
+Error: Message: element click intercepted: Element <i data-icon-name="Clear" aria-hidden="true" class="ms-Icon root-89 css-396 ms-Button-icon icon-949" style="font-family: FabricMDL2Icons;">...</i> is not clickable at point (1255, 425). Other element would receive the click: <div class="ms-Stack css-1336" style="z-index: 1; position: relative; flex-wrap: nowrap;">...</div>
+  (Session info: chrome=149.0.7827.115); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6f2f13fa5+14925]
+	chromedriver!GetHandleVerifier [0x7ff6f2f14000+14980]
+	chromedriver!(No symbol) [0x7ff6f2a5793d]
+	chromedriver!(No symbol) [0x7ff6f2ab9755]
+	chromedriver!(No symbol) [0x7ff6f2ab736a]
+	chromedriver!(No symbol) [0x7ff6f2ab46b7]
+	chromedriver!(No symbol) [0x7ff6f2ab3567]
+	chromedriver!(No symbol) [0x7ff6f2aa5f48]
+	chromedriver!(No symbol) [0x7ff6f2ada3ca]
+	chromedriver!(No symbol) [0x7ff6f2aa57c6]
+	chromedriver!(No symbol) [0x7ff6f2aff39b]
+	chromedriver!(No symbol) [0x7ff6f2aa401c]
+	chromedriver!(No symbol) [0x7ff6f2aa4f43]
+	chromedriver!GetHandleVerifier [0x7ff6f34f7591+5f7f11]
+	chromedriver!GetHandleVerifier [0x7ff6f34f1902+5f2282]
+	chromedriver!GetHandleVerifier [0x7ff6f3517115+617a95]
+	chromedriver!GetHandleVerifier [0x7ff6f2f31dce+3274e]
+	chromedriver!GetHandleVerifier [0x7ff6f2f3a82c+3b1ac]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d744+1e0c4]
+	chromedriver!GetHandleVerifier [0x7ff6f2f1d8d4+1e254]
+	chromedriver!GetHandleVerifier [0x7ff6f2f01447+1dc7]
+	KERNEL32!BaseThreadInitThunk [0x7ffb423be957+17]
+	ntdll!RtlUserThreadStart [0x7ffb435a7c1c+2c]
+
+Magnifier icon clicked successfully

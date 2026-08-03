@@ -1,0 +1,50 @@
+Test case - 2: Pass: Click an active employee section successfully.....!
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered 'T.H. LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on  vat return section successfully....!!
+Enable MTD is not available, so clicking Reauthorized...
+Click on Reauthorized section successfully....!!
+Click on Continue button successfully....!!
+Click on Sign in to the HMRC online service button successfully....!!
+Clicked on user credentials and switched to new tab successfully....!!
+Current URL: https://developer.service.hmrc.gov.uk/api-test-user
+Page scrolled down successfully on new tab....!!
+Click on Radio button of organization successfully....!!
+Click on create button successfully....!!
+User ID is: 604811777647
+Password is: NyjwZ52GdLKZ
+Raw Date: 2006-04-16
+Formatted Date: 16:04:2006
+Vat Registration Number: 573141161
+User ID is: 604811777647
+Password is: NyjwZ52GdLKZ
+Raw Date: 2006-04-16
+Formatted Date: 16:04:2006
+Vat Registration Number: 573141161
+Switched back to parent/original tab successfully....!!
+Closed extra tab: ED127CF64ED869716667FC35705114FF
+User ID entered successfully: 604811777647
+Password entered successfully: NyjwZ52GdLKZ
+Click on signIn button successfully....!!
+Click on Permission button successfully....!!
+Stored VAT page URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Current URL after redirect: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Expected URL: https://test.actingoffice.com/books/clients/69de4259c96697e503b34acd/vatreturn
+Returned to expected VAT page successfully....!!
+Click on edit button successfully....!!
+VAT Registration Date entered successfully: 16/04/2006
+VAT Registration Number entered successfully: 573141161
+Save found: True True
+Button text: 
+Save
+Outer HTML: <button type="button" class="ms-Button ms-Button--primary root-805" data-is-focusable="true"><span class="ms-Button-flexContainer flexContainer-574" data-automationid="splitbuttonprimary"><i data-icon-name="save" aria-hidden="true" class="ms-Icon root-89 css-450 ms-Button-icon icon-576" style="font-family: FabricMDL2Icons-0;"></i><span class="ms-Button-textContainer textContainer-575"><span class="ms-Button-label label-639" id="id__514">Save</span></span></span></button>
+Assertion passed: 'Setting updated successfully' message displayed successfully....!!
+Click on Vat return button successfully....!!
+Select Obligation successfully...!!
+Test Case 20 - Pass: Vat saved successfully.
+Page refreshed successfully....!!
+Click on edit vat return section successfully....!!
+Error on Import Click/File Upload: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.

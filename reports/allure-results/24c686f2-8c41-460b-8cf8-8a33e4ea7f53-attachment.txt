@@ -1,0 +1,18 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Expense Claims successfully....!!
+Select directors successfully....!!
+Enter remark successfully..... 
+File uploaded successfully.......!
+Enter bill number successfully..... 
+Enter Description successfully....!!
+Select account successfully..... 
+Base amount entered successfully....!!
+VAT selected successfully!
+Expense Saved successfully............!!!
+No popup detected → continuing...

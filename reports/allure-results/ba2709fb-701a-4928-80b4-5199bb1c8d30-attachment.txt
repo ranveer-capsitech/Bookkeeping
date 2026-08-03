@@ -1,0 +1,17 @@
+Clicked on Waffle icon successfully.
+Test case - 3: Pass: Click an Bookkeeping section successfully.....!
+Click on search field successfully.....! 
+Entered '1ST LIMITED' using XPath: //div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']
+Click on company successfully....!!
+Input drop down open successfully....!!
+Click on Expense claims successfully....!!
+Click on Mileages Section successfully....!!
+Click on Mileages successfully....!!
+Select directors successfully....!!
+Enter remark for mileage successfully....!!
+Engine type entered successfully....!!
+Enter Description successfully....!!
+Enter mileage successfully....!!
+Rate entered successfully....!!
+Save button clicked Successfully.....!
+Test Case : 12 - Pass: Mileage saved successfully.
