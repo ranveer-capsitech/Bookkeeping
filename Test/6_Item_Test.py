@@ -68,36 +68,36 @@ class Login(unittest.TestCase):
 
     def test_09_Add_New_Item(self):
         client_section = Items(driver=self.driver)
+
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
+
         client_section.Click_Input()
-        time.sleep(.2)
         client_section.Click_Sales()
-        time.sleep(.2)
+
         client_section.Item()
-        time.sleep(.2)
         client_section.Add_Item()
-        time.sleep(2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear(
+            timeout=10
+        )
+
         client_section.Enter_Name()
-        time.sleep(5)
         client_section.Purchases_Description()
-        time.sleep(5)
         client_section.Sales_Description()
-        time.sleep(10)
+
         client_section.Enter_Unit_Price_Pur()
-        time.sleep(.2)
         client_section.Enter_Unit_Price_Sell()
-        time.sleep(20)
+
         client_section.Create()
-        time.sleep(.2)
+
         client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+
+        print(
+            "Add Item workflow completed successfully."
+        )
+
 
 
     @classmethod

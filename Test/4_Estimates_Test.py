@@ -64,54 +64,41 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> Estimates ")
 
     def test_07_Add_New_Estimates(self):
-        client_section = Estimates(driver=self.driver)
-        time.sleep(.2)
-        client_section.Select_Search()
-        time.sleep(5)
-        client_section.Enter_Company()
-        time.sleep(.2)
-        client_section.Click_Company()
-        time.sleep(.2)
-        client_section.Click_Input()
-        time.sleep(.2)
-        client_section.Click_Sales()
-        time.sleep(.2)
 
-        client_section.Select_Estimates()
-        time.sleep(.2)
-        client_section.Add_Estimates()
-        time.sleep(.2)
-        client_section.Select_Customer_for_Estimate()
-        time.sleep(.2)
-        client_section.Select_item()
-        time.sleep(.2)
-        client_section.Add_Attachment()
-        time.sleep(.2)
-        client_section.Enter_Discount()
-        time.sleep(.2)
-        client_section.Click_Enter_Notes()
-        time.sleep(.2)
-        client_section.Enter_Notes()
-        time.sleep(.2)
+            client_section = Estimates(driver=self.driver)
 
+            client_section.Select_Search()
+            client_section.Enter_Company()
+            client_section.Click_Company()
 
-        client_section.Click_Save_Estimation()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+            client_section.Click_Input()
+            client_section.Click_Sales()
 
-        client_section.Download_Invoice()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+            client_section.Select_Estimates()
+            client_section.Add_Estimates()
 
-        client_section.Create_Direct_Invoice()
-        time.sleep(.2)
-        client_section.Save_Direct_Invoice()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+            client_section.Select_Customer_for_Estimate()
+            client_section.Select_item()
 
+            client_section.Add_Attachment()
+            client_section.Enter_Discount()
+
+            client_section.Click_Enter_Notes()
+            client_section.Enter_Notes()
+
+            client_section.Click_Save_Estimation()
+            client_section.wait_for_loader_to_disappear()
+
+            client_section.Download_Invoice()
+            client_section.wait_for_loader_to_disappear()
+
+            client_section.Create_Direct_Invoice()
+            client_section.Save_Direct_Invoice()
+            client_section.wait_for_loader_to_disappear()
+
+            print(
+                "Estimate workflow completed successfully."
+            )
 
     @classmethod
     def tearDownClass(cls):

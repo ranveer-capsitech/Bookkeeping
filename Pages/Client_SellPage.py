@@ -9,6 +9,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.common.exceptions import (
+    TimeoutException,
+    StaleElementReferenceException,
+    ElementClickInterceptedException,
+    ElementNotInteractableException,
+)
+
 
 fake = Faker()
 random_first_name = fake.first_name()
@@ -658,62 +665,214 @@ class ClientSell:
     #
     #
     #     print("Change Pagination functionality  is working fine.")
+    # def Change_Pagination(self):
+    #     wait = WebDriverWait(self.driver, 20)
+    #
+    #     try:
+    #         self.wait_for_loader_to_disappear()
+    #
+    #         pagination_elements = self.driver.find_elements(
+    #             *self.pagination
+    #         )
+    #
+    #         if not pagination_elements:
+    #             print(
+    #                 "Pagination dropdown is not available. "
+    #                 "There may not be enough records for pagination."
+    #             )
+    #             return False
+    #
+    #         # Select the next pagination option
+    #         dropdown = wait.until(
+    #             EC.element_to_be_clickable(self.pagination)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             dropdown
+    #         )
+    #
+    #         dropdown.click()
+    #         dropdown.send_keys(Keys.ARROW_DOWN)
+    #         dropdown.send_keys(Keys.ENTER)
+    #
+    #         self.wait_for_loader_to_disappear()
+    #
+    #         # Locate the element again because the page may have re-rendered
+    #         dropdown = wait.until(
+    #             EC.element_to_be_clickable(self.pagination)
+    #         )
+    #
+    #         dropdown.click()
+    #         dropdown.send_keys(Keys.ARROW_DOWN)
+    #         dropdown.send_keys(Keys.ENTER)
+    #
+    #         self.wait_for_loader_to_disappear()
+    #
+    #         print("Pagination functionality is working correctly.")
+    #         return True
+    #
+    #     except TimeoutException:
+    #         self.driver.save_screenshot(
+    #             "pagination_failure.png"
+    #         )
+    #
+    #         print(
+    #             "Pagination dropdown was found but was not clickable. "
+    #             "Check the locator, loader, and available record count."
+    #         )
+    #         raise
     def Change_Pagination(self):
-        wait = WebDriverWait(self.driver, 20)
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            25,
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        def get_visible_pagination(current_driver):
+            """
+            Return the first visible and enabled pagination element.
+            """
+            elements = current_driver.find_elements(*self.pagination)
+
+            for element in elements:
+                try:
+                    if element.is_displayed() and element.is_enabled():
+                        return element
+                except StaleElementReferenceException:
+                    continue
+
+            return False
+
+        def select_next_option():
+            """
+            Open the pagination dropdown and select the next option.
+            """
+            for attempt in range(1, 4):
+                try:
+                    dropdown = wait.until(
+                        get_visible_pagination,
+                        message="No visible pagination dropdown found."
+                    )
+
+                    driver.execute_script(
+                        """
+                        arguments[0].scrollIntoView({
+                            block: 'center',
+                            inline: 'center'
+                        });
+                        """,
+                        dropdown
+                    )
+
+                    try:
+                        dropdown.click()
+
+                    except (
+                            ElementClickInterceptedException,
+                            ElementNotInteractableException
+                    ):
+                        driver.execute_script(
+                            "arguments[0].click();",
+                            dropdown
+                        )
+
+                    # Send both keys in one operation.
+                    # This avoids using the old element after React re-renders.
+                    ActionChains(driver) \
+                        .send_keys(Keys.ARROW_DOWN) \
+                        .send_keys(Keys.ENTER) \
+                        .perform()
+
+                    self.wait_for_loader_to_disappear()
+
+                    return True
+
+                except StaleElementReferenceException:
+                    print(
+                        f"Pagination element became stale. "
+                        f"Retrying attempt {attempt}/3."
+                    )
+
+                except TimeoutException:
+                    if attempt == 3:
+                        raise
+
+            return False
 
         try:
             self.wait_for_loader_to_disappear()
 
-            pagination_elements = self.driver.find_elements(
+            pagination_elements = driver.find_elements(
                 *self.pagination
             )
 
-            if not pagination_elements:
+            visible_elements = []
+
+            for element in pagination_elements:
+                try:
+                    if element.is_displayed():
+                        visible_elements.append(element)
+                except StaleElementReferenceException:
+                    continue
+
+            if not visible_elements:
                 print(
                     "Pagination dropdown is not available. "
-                    "There may not be enough records for pagination."
+                    "The current result set may not contain enough records."
                 )
                 return False
 
-            # Select the next pagination option
-            dropdown = wait.until(
-                EC.element_to_be_clickable(self.pagination)
+            # First pagination change
+            select_next_option()
+
+            # Re-check because the pagination control may disappear
+            # after changing the page size.
+            if not get_visible_pagination(driver):
+                print(
+                    "Pagination dropdown is no longer displayed after "
+                    "the first selection."
+                )
+                return True
+
+            # Second pagination change
+            select_next_option()
+
+            print(
+                "Pagination functionality is working correctly."
             )
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
-                dropdown
-            )
-
-            dropdown.click()
-            dropdown.send_keys(Keys.ARROW_DOWN)
-            dropdown.send_keys(Keys.ENTER)
-
-            self.wait_for_loader_to_disappear()
-
-            # Locate the element again because the page may have re-rendered
-            dropdown = wait.until(
-                EC.element_to_be_clickable(self.pagination)
-            )
-
-            dropdown.click()
-            dropdown.send_keys(Keys.ARROW_DOWN)
-            dropdown.send_keys(Keys.ENTER)
-
-            self.wait_for_loader_to_disappear()
-
-            print("Pagination functionality is working correctly.")
             return True
 
-        except TimeoutException:
-            self.driver.save_screenshot(
+        except TimeoutException as error:
+            driver.save_screenshot(
+                "pagination_timeout.png"
+            )
+
+            print(
+                "Pagination dropdown was not available or clickable "
+                "within the expected time."
+            )
+            print(f"Error details: {repr(error)}")
+
+            raise
+
+        except Exception as error:
+            driver.save_screenshot(
                 "pagination_failure.png"
             )
 
             print(
-                "Pagination dropdown was found but was not clickable. "
-                "Check the locator, loader, and available record count."
+                f"Pagination validation failed. "
+                f"Error type: {type(error).__name__}"
             )
+            print(f"Error details: {repr(error)}")
+
             raise
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -931,6 +1090,29 @@ class ClientSell:
             print("Details lock pop up close successfully.....!!")
         except Exception as e:
             print(f"Error on click:{e}")
+
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
 
 
 

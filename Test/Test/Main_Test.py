@@ -2,25 +2,24 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
-from Add_Customer import Add_Customer
-from Add_Suppliers import Add_Supplier
-from Add_User_Page import User
-from Assets_Page import Asset
-from Banking_Current_Account_Page import Banking
-from Credit_NotesPage import Credit_Notes
-from Dividend_Page import Dividend
-from Estimates_page import Estimates
-from ExpenseclaimsPage import Expenseclaims
-from Item_Page import Items
-from Journals_Page import Journals
-from Mileage_Page import Mileage
-from Purchase_Credit_Notes_Page import Purchase_PO
-from Purchase_PO_Page import Purchase_Order
-from Purchase_Payment_Page import Purchase_Payment
-from Receipts_Page import Receipts
-from Refund_Page import Refund
-from Reimbursements_Page import Reimbursement
+from Pages.Add_Customer import Add_Customer
+from Pages.Add_Suppliers import Add_Supplier
+from Pages.Add_User_Page import User
+from Pages.Assets_Page import Asset
+from Pages.Banking_Current_Account_Page import Banking
+from Pages.Credit_NotesPage import Credit_Notes
+from Pages.Dividend_Page import Dividend
+from Pages.Estimates_page import Estimates
+from Pages.ExpenseclaimsPage import Expenseclaims
+from Pages.Item_Page import Items
+from Pages.Journals_Page import Journals
+from Pages.Mileage_Page import Mileage
+from Pages.Purchase_Credit_Notes_Page import  Purchase_CN
+from Pages.Purchase_PO_Page import Purchase_Order
+from Pages.Purchase_Payment_Page import Purchase_Payment
+from Pages.Receipts_Page import Receipts
+from Pages.Refund_Page import Refund
+from Pages.Reimbursements_Page import Reimbursement
 from configReader import ConfigReader
 from Pages.Client_SellPage import ClientSell
 from Pages.LoginPage import loginPage
@@ -44,10 +43,10 @@ class Login(unittest.TestCase):
 
         # Call login once setup is done
         cls.login()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
+    #
+    # @classmethod
+    # def tearDownClass(cls):
+    #     cls.driver.quit()
 
     @classmethod
     def login(cls):
@@ -80,7 +79,6 @@ class Login(unittest.TestCase):
 
 
 
-
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> select banking section")
 
@@ -99,17 +97,17 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
         client_section.Select_Search()
-        time.sleep(5)
+        time.sleep(2)
         client_section.Enter_Company_For_Main()
         time.sleep(.2)
         client_section.Click_Company_For_Main()
-        time.sleep(.2)
-        time.sleep(3)
-        client_section.Click_Input()
-        time.sleep(.2)
+        time.sleep(.3)
 
-        client_section.Banking_Section()
-        time.sleep(.2)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+
+        # client_section.Banking_Section()
+        # time.sleep(.2)
 
         client_section.wait_for_loader_to_disappear()
 
@@ -126,47 +124,47 @@ class Login(unittest.TestCase):
         "set it as the primary account, and save it. "
 
     )
-    def test_03_complete_add_current_bank_account_workflow(self):
-
-        """
-        Complete Add Current Bank Account workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Banking section
-        5. Wait for the Banking page to load
-        6. Click Add Account
-        7. Select the bank
-        8. Enter the account number
-        9. Enter the sort code
-        10. Set the account as the primary account
-        11. Save the bank account
-        12. Wait for the save operation to complete
-        13. Verify that the current account was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        client_section = Banking(driver=self.driver)
-        time.sleep(.2)
-
-
-        client_section.Account()
-        time.sleep(.2)
-
-        client_section.Select_Bank()
-        time.sleep(.2)
-
-        client_section.Enter_Account_no()
-        time.sleep(.2)
-        client_section.Sort_Code()
-        time.sleep(.2)
-        client_section.Click_Primary_Account()
-        time.sleep(.2)
-
-        client_section.Save_Banking()
-        time.sleep(1)
+    # def test_03_complete_add_current_bank_account_workflow(self):
+    #
+    #     """
+    #     Complete Add Current Bank Account workflow:
+    #
+    #     1. Search for a company
+    #     2. Select the company
+    #     3. Open the Client Input section
+    #     4. Open the Banking section
+    #     5. Wait for the Banking page to load
+    #     6. Click Add Account
+    #     7. Select the bank
+    #     8. Enter the account number
+    #     9. Enter the sort code
+    #     10. Set the account as the primary account
+    #     11. Save the bank account
+    #     12. Wait for the save operation to complete
+    #     13. Verify that the current account was created successfully
+    #
+    #     Automated by: Ranveer Singh Sankhala
+    #     """
+    #
+    #     client_section = Banking(driver=self.driver)
+    #     time.sleep(.2)
+    #
+    #
+    #     client_section.Account()
+    #     time.sleep(.2)
+    #
+    #     client_section.Select_Bank()
+    #     time.sleep(.2)
+    #
+    #     client_section.Enter_Account_no()
+    #     time.sleep(.2)
+    #     client_section.Sort_Code()
+    #     time.sleep(.2)
+    #     client_section.Click_Primary_Account()
+    #     time.sleep(.2)
+    #
+    #     client_section.Save_Banking()
+    #     time.sleep(.2)
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -180,7 +178,7 @@ class Login(unittest.TestCase):
         "contact, bank, VAT and project details, attach a document, "
         "and save the customer."
     )
-
+#
     def test_04_complete_add_customer_workflow(self):
         """
         Complete Add Customer workflow:
@@ -210,63 +208,62 @@ class Login(unittest.TestCase):
         Automated by: Ranveer Singh Sankhala
         """
         client_section = Add_Customer(driver=self.driver)
-        time.sleep(.2)
 
 
         client_section.Click_Input()
-        time.sleep(.2)
+
         client_section.Click_Sales()
-        time.sleep(.2)
+
 
 
         client_section.Select_Client_Section()
-        time.sleep(.2)
+
         client_section.Click_On_Add_Customer()
-        time.sleep(.2)
+
         client_section.Enter_Customer_Name()
-        time.sleep(.2)
+
         client_section.Click_Cancel()
-        time.sleep(.2)
+
         client_section.Click_Billing_Field()
-        time.sleep(.2)
+
         client_section.Enter_Building()
-        time.sleep(.2)
+
         client_section.Enter_Street()
-        time.sleep(.2)
+
         client_section.Enter_City()
-        time.sleep(.2)
+
         client_section.Enter_County()
-        time.sleep(2)
+
         client_section.Select_Country()
-        time.sleep(2)
+
         client_section.Enter_Postcode()
-        time.sleep(2)
+
         client_section.Click_Contact_Person()
-        time.sleep(2)
+
         # client_section.First_Name()
-        time.sleep(2)
+
         client_section.Enter_Name()
-        time.sleep(2)
+
         client_section.Enter_Contact_Number()
-        time.sleep(2)
+
         client_section.Enter_Mail()
-        time.sleep(2)
+
         client_section.Select_Bank()
-        time.sleep(2)
+
         client_section.Discount()
-        time.sleep(2)
+
         client_section.Select_Vat()
-        time.sleep(2)
+
         client_section.Enter_Vat()
-        time.sleep(2)
+
         # client_section.Enter_EORI()
-        time.sleep(2)
+
         client_section.Project_tags()
-        time.sleep(2)
+
         client_section.Add_Attachment()
-        time.sleep(2)
+
         client_section.Save_customer()
-        time.sleep(2)
+
         client_section.wait_for_loader_to_disappear()
 
         print(
@@ -275,8 +272,8 @@ class Login(unittest.TestCase):
         )
 
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+# # #-----------------------------------------------------------------------------------------------------------------------
+#
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> "
         "Items >> Add Item"
@@ -286,6 +283,7 @@ class Login(unittest.TestCase):
         "sales descriptions, set purchase and selling prices, and "
         "create the new item."
     )
+
 
     def test_05_add_new_item(self):
         """
@@ -305,34 +303,36 @@ class Login(unittest.TestCase):
            Automated by: Ranveer Singh Sankhala
         """
 
-
         client_section = Items(driver=self.driver)
 
+
         client_section.Item()
-        time.sleep(.2)
         client_section.Add_Item()
-        time.sleep(2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+
+        client_section.wait_for_loader_to_disappear(
+            timeout=10
+        )
+
         client_section.Enter_Name()
-        time.sleep(5)
         client_section.Purchases_Description()
-        time.sleep(5)
         client_section.Sales_Description()
-        time.sleep(10)
+
         client_section.Enter_Unit_Price_Pur()
-        time.sleep(.2)
         client_section.Enter_Unit_Price_Sell()
-        time.sleep(20)
+
         client_section.Create()
-        time.sleep(.2)
+
         client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
 
-        print("Add Item workflow completed successfully.")
+        print(
+            "Add Item workflow completed successfully."
+        )
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+
+
+# ----------------------------------------------- Estimates-----------------------------------------------------------------
+
 
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> "
@@ -375,35 +375,29 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
         client_section.Select_Estimates()
-        time.sleep(.2)
         client_section.Add_Estimates()
-        time.sleep(.2)
+
         client_section.Select_Customer_for_Estimate()
-        time.sleep(.2)
         client_section.Select_item()
-        time.sleep(.2)
+
         client_section.Add_Attachment()
-        time.sleep(.2)
         client_section.Enter_Discount()
-        time.sleep(.2)
+
         client_section.Click_Enter_Notes()
-        time.sleep(.2)
         client_section.Enter_Notes()
-        time.sleep(.2)
 
         client_section.Click_Save_Estimation()
-        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
 
         client_section.Download_Invoice()
-        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
 
         client_section.Create_Direct_Invoice()
-        time.sleep(.2)
         client_section.Save_Direct_Invoice()
+        client_section.wait_for_loader_to_disappear()
+
+
+        client_section.Refresh_Page()
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
@@ -414,11 +408,14 @@ class Login(unittest.TestCase):
 
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+
+##-----------------------------------------------Sales >> Invoices-----------------------------------------------------------------
     @pytest.mark.navigation(
+
         "Login >> Admin Dashboard >> Bookkeeping >> "
         "Client >> Sales >> Invoices"
     )
+
     @pytest.mark.description(
         "Create and save a sales invoice, validate search, date filter, "
         "report visibility and pagination, clone the invoice, mark it "
@@ -507,6 +504,7 @@ class Login(unittest.TestCase):
         client_section.Hide_Reports()
         time.sleep(.2)
         client_section.Change_Pagination()
+
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
@@ -527,6 +525,8 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
         client_section.Download_Invoice()
+        time.sleep(.2)
+        client_section.Refresh_Page()
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
 
@@ -601,6 +601,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Download_Invoice()
         time.sleep(.2)
+        client_section.Refresh_Page()
+
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
@@ -611,7 +613,7 @@ class Login(unittest.TestCase):
 
 
 
-#----------------------------------------------------------------------------------------------------------------------
+# #----------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -706,6 +708,8 @@ class Login(unittest.TestCase):
 
         credit_notes_section.Download_Invoice()
         time.sleep(2)
+        credit_notes_section.Refresh_Page()
+        time.sleep(.2)
         credit_notes_section.wait_for_loader_to_disappear()
 
         print(
@@ -772,7 +776,7 @@ class Login(unittest.TestCase):
 
         client_section.Click_Purchase()
         time.sleep(.2)
-
+#
         client_section.Select_Suppliers_Section()
         time.sleep(.2)
 
@@ -824,6 +828,9 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Save_Suppliers()
         time.sleep(.2)
+        client_section.Refresh_Page()
+        time.sleep(.2)
+
         client_section.wait_for_loader_to_disappear()
 
         print(
@@ -881,6 +888,8 @@ class Login(unittest.TestCase):
         client_section.Enter_Notes()
         time.sleep(.2)
         client_section.Save_PO()
+        time.sleep(.2)
+        client_section.Refresh_Page()
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
 
@@ -944,6 +953,8 @@ class Login(unittest.TestCase):
         time.sleep(2)
         client_section.Save_Services()
         time.sleep(.2)
+        client_section.Refresh_Page()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
 
         print(
@@ -984,24 +995,25 @@ class Login(unittest.TestCase):
         client_section = Purchase_Payment(driver=self.driver)
         time.sleep(.2)
 
-
         client_section.Payment_Section()
-        time.sleep(.5)
         client_section.Click_Payment()
-        time.sleep(.2)
-        client_section.Paid_To_Supplier()
-        time.sleep(.2)
+
+        client_section.Paid_To_Supplier_Main()
         client_section.Select_Account()
-        time.sleep(.2)
         client_section.Enter_Amount()
-        time.sleep(.2)
         client_section.Save_payment()
+
+        client_section.wait_for_loader_to_disappear()
+
+
+        client_section.Refresh_Page()
         time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
         print(
             "Purchase Payment workflow completed successfully: "
             "supplier payment details entered and saved."
         )
+
 
     #----------------------------------------purchase_credit_note-------------------------------------------------------------
 
@@ -1014,6 +1026,7 @@ class Login(unittest.TestCase):
         "create a credit note with supplier, invoice reference, "
         "attachment, discount and notes, and save the credit note."
     )
+
     def test_14_complete_purchase_credit_note_workflow(self):
         """
         Complete Purchase Credit Note workflow:
@@ -1037,19 +1050,34 @@ class Login(unittest.TestCase):
           Automated by: Ranveer Singh Sankhala
         """
 
-        credit_note_page = Purchase_PO(driver=self.driver)
+        credit_note_page = Purchase_CN(driver=self.driver)
 
         credit_note_page.Click_Credit_Notes()
+        time.sleep(.2)
         credit_note_page.Add_Credit_Note()
+        time.sleep(.2)
         credit_note_page.Select_Suppiler_for_Credit_Note()
+        time.sleep(.2)
         credit_note_page.Invoice_ref()
+        time.sleep(.2)
         credit_note_page.Add_Attachment()
+        time.sleep(.2)
         credit_note_page.Enter_Discount()
+        time.sleep(.2)
         credit_note_page.Click_Enter_Notes()
+        time.sleep(.2)
         credit_note_page.Enter_Notes()
+        time.sleep(.2)
 
         credit_note_page.Save_Credit_Notes()
+        time.sleep(.2)
         credit_note_page.Click_Save_Button()
+        time.sleep(.2)
+        credit_note_page.Refresh_Page()
+
+        time.sleep(.2)
+
+
         credit_note_page.wait_for_loader_to_disappear()
 
         print(
@@ -1057,598 +1085,620 @@ class Login(unittest.TestCase):
             "credit note details were entered and saved."
         )
 
-
-
-
-
-#------------------------------------------Expense Claim Flow >> Add user-----------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Expense Claims >> Users >> Add User"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Expense Claims Users section, "
-        "create a new user with personal and NI details, and save "
-
-    )
-    def test_15_complete_add_expense_claim_user_workflow(self):
-        """
-        Complete Add Expense Claim User workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Expense Claims section
-        5. Open the Users section
-        6. Click Add User
-        7. Open the name field
-        8. Select the user's title
-        9. Enter the user's name
-        10. Enter the National Insurance number
-        11. Save the user
-        12. Wait for the save operation to complete
-        13. Verify that the user was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-        expense_claims_page = User(
-            driver=self.driver
-        )
-        time.sleep(.2)
-
-        expense_claims_page.Click_Expense_Claims()
-        time.sleep(.5)
-
-        expense_claims_page.User_Section()
-        time.sleep(.2)
-        expense_claims_page.Click_Add_User()
-        time.sleep(.2)
-        expense_claims_page.Click_Name_Field()
-        time.sleep(.2)
-        expense_claims_page.Select_Title()
-        time.sleep(.2)
-        expense_claims_page.Enter_name()
-        time.sleep(.2)
-
-        expense_claims_page.Enter_Ni_Number()
-        time.sleep(.2)
-        expense_claims_page.Save_User()
-        time.sleep(.2)
-        expense_claims_page.wait_for_loader_to_disappear()
-
-        print(
-            "Expense Claim User workflow completed successfully: "
-            "the new user was created and saved. "
-
-        )
-
-
-
-    #------------------------------------------Add Expense Claim--------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Expense Claims >> Add Expense Claim"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Expense Claims section, create "
-        "a new expense claim with claimant, bill, account, amount, "
-        "VAT and attachment details, and save the claim. "
-
-    )
-    def test_16_complete_expense_claim_workflow(self):
-        """
-        Complete Expense Claim workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Expense Claims section
-        5. Click Add Expense Claim
-        6. Select the director or claimant
-        7. Enter the claim remarks
-        8. Add an attachment
-        9. Enter the bill number
-        10. Enter the expense description
-        11. Select the expense account
-        12. Enter the base amount
-        13. Select the VAT option
-        14. Save the expense claim
-        15. Wait for the save operation to complete
-        16. Verify that the expense claim was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        client_section = Expenseclaims(driver=self.driver)
-        time.sleep(.2)
-        client_section.Click_Expense_Claims_Button()
-        time.sleep(.2)
-        client_section.Select_Directors()
-        time.sleep(.2)
-        client_section.Enter_Remark()
-        time.sleep(.2)
-        client_section.Add_Attachment()
-        time.sleep(.2)
-
-        client_section.Enter_Bill_No()
-        time.sleep(.2)
-        client_section.Enter_Description()
-        time.sleep(.2)
-        client_section.Select_Account()
-        time.sleep(.2)
-        client_section.Base_Amount()
-        time.sleep(.2)
-        client_section.Select_Vat()
-        time.sleep(10)
-        client_section.Save_Expense()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-
-        print(
-            "Expense Claim workflow completed successfully: "
-            "the expense claim was created and saved. "
-
-        )
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Expense Claims >> Mileage >> Add Mileage"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Mileage section, create a mileage "
-        "claim with claimant, journey, engine, distance and rate details, "
-        "and save the claim."
-    )
-    def test_17_complete_mileage_claim_workflow(self):
-        """
-        Complete Mileage Claim workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Expense Claims section
-        5. Open the Mileage section
-        6. Click Add Mileage
-        7. Select the director or claimant
-        8. Enter the mileage claim remarks
-        9. Select the engine type
-        10. Enter the journey description
-        11. Enter the mileage or distance
-        12. Select the mileage rate
-        13. Save the mileage claim
-        14. Wait for the save operation to complete
-        15. Verify that the mileage claim was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        client_section = Mileage(driver=self.driver)
-        time.sleep(.2)
-        client_section.Mileages_Section()
-        time.sleep(.2)
-        client_section.Click_Mileages()
-        time.sleep(.2)
-        client_section.Select_Directors()
-        time.sleep(.2)
-        client_section.Enter_Remark_Mileages()
-        time.sleep(.2)
-        client_section.Engine_Type()
-        time.sleep(.2)
-        client_section.Enter_Description_Mileage()
-        time.sleep(.2)
-        client_section.Mileage()
-        time.sleep(.2)
-        client_section.Select_Rate()
-        time.sleep(.2)
-        client_section.Save_Mileage()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-
-        print(
-            "Mileage Claim workflow completed successfully: "
-            "the mileage claim was created and saved. "
-
-        )
-
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Expense Claims >> Reimbursements"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Reimbursements section, create a "
-        "reimbursement by selecting the recipient and payment account, "
-        "enter the amount, and save it. "
-
-    )
-    def test_18_complete_reimbursement_workflow(self):
-        """
-        Complete Reimbursement workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Expense Claims section
-        5. Open the Reimbursements section
-        6. Click Add Reimbursement
-        7. Select the person to reimburse
-        8. Select the reimbursement payment account
-        9. Enter the reimbursement amount
-        10. Save the reimbursement
-        11. Wait for the save operation to complete
-        12. Verify that the reimbursement was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        client_section = Reimbursement(driver=self.driver)
-        time.sleep(.2)
-
-
-
-        client_section.Reimbursed_Section()
-        time.sleep(.2)
-        client_section.Click_Reimbursed()
-        time.sleep(.2)
-        client_section.Reimbursed_to()
-        time.sleep(.2)
-        client_section.Reimbursed_Account()
-        time.sleep(.2)
-        client_section.Enter_Amount()
-        time.sleep(.2)
-        # client_section.Enter_Notes()
-        # time.sleep(.2)
-        client_section.Save_Reimbursement()
-        time.sleep(.2)
-
-        client_section.wait_for_loader_to_disappear()
-
-        print(
-            "Reimbursement workflow completed successfully: "
-            "the reimbursement was created and saved. "
-
-        )
-
-
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Expense Claims >> Refunds"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Refunds section, create a refund "
-        "by selecting the refund source and account, and save it. "
-
-    )
-    def test_19_complete_refund_workflow(self):
-        """
-        Complete Refund workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Expense Claims section
-        5. Open the Refunds section
-        6. Click Add Refund
-        7. Select the person or source providing the refund
-        8. Select the account receiving the refund
-        9. Save the refund
-        10. Wait for the save operation to complete
-        11. Verify that the refund was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-        client_section = Refund(driver=self.driver)
-        time.sleep(.2)
-
-
-
-        client_section.Refunds_Section()
-        time.sleep(.2)
-        client_section.Click_Refunds()
-        time.sleep(.2)
-        client_section.Refund_from()
-        time.sleep(.2)
-        client_section.Select_Account()
-        time.sleep(.2)
-        client_section.Save_Refund()
-        time.sleep(.2)
-        client_section.wait_for_loader_to_disappear()
-
-        print(
-            "Refund workflow completed successfully: "
-            "the refund was created and saved. "
-        )
-
-    #-------------------------------------------------------------------------------------------------------------------
-
-
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Assets >> Add Asset"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Assets section, create a new asset "
-        "with purchase, account, supplier and rate details, and save it."
-    )
-    def test_19_complete_add_asset_workflow(self):
-        """
-        Complete Add Asset workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Assets section
-        5. Click Add Asset
-        6. Enter the asset name
-        7. Enter the purchase details
-        8. Select the asset account
-        9. Select the supplier
-        10. Enter the applicable rate
-        11. Save the asset
-        12. Wait for the save operation to complete
-        13. Verify that the asset was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        asset_page = Asset(driver=self.driver)
-
-
-
-        asset_page.Click_Asset()
-        time.sleep(0.2)
-
-        asset_page.Click_Add_Assets()
-        time.sleep(0.2)
-
-        asset_page.Asset_Name()
-        time.sleep(0.2)
-
-        asset_page.Purchase()
-        time.sleep(0.2)
-
-        asset_page.Select_Account()
-        time.sleep(0.2)
-
-        asset_page.Select_Supplier()
-        time.sleep(0.2)
-
-        asset_page.Enter_Rate()
-        time.sleep(0.2)
-
-        asset_page.Save_Asset()
-        asset_page.wait_for_loader_to_disappear()
-
-        print(
-            "Add Asset workflow completed successfully: "
-            "asset details were entered and saved."
-        )
-
-   #--------------------------------------------------------------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Assets >> Disposed Assets"
-    )
-    @pytest.mark.description(
-        "Open the Disposed Assets section, dispose of an existing asset "
-        "by entering the sales proceeds, payment method and customer "
-        "details, and save the disposal."
-    )
-    def test_20_complete_dispose_asset_workflow(self):
-        """
-        Complete Asset Disposal workflow:
-
-        1. Open the Disposed Assets section
-        2. Click Add Disposed Asset
-        3. Select the asset to be disposed
-        4. Enter the sales proceeds
-        5. Select the payment method
-        6. Select the customer
-        7. Save the asset disposal
-        8. Wait for the save operation to complete
-        9. Verify that the asset was disposed successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        asset_page = Asset(driver=self.driver)
-
-        asset_page.Disposed()
-        time.sleep(0.2)
-
-        asset_page.Add_Disposed()
-        time.sleep(0.2)
-
-        asset_page.Select_Asset()
-        time.sleep(0.2)
-
-        asset_page.Sales_proceeds()
-        time.sleep(0.2)
-
-        asset_page.Payment_Method()
-        time.sleep(0.2)
-
-        asset_page.Customer()
-        time.sleep(0.2)
-
-        asset_page.Save_Disposed()
-        time.sleep(.2)
-        asset_page.wait_for_loader_to_disappear()
-
-        print(
-            "Asset Disposal workflow completed successfully: "
-            "the selected asset was disposed and saved."
-        )
-
-    #--------------------------------------------Journal--------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Journals >> Add Journal"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Journals section, create a balanced "
-        "journal entry by selecting debit and credit accounts, enter the "
-        "journal reference and values, and save the journal."
-    )
-    def test_21_complete_add_journal_workflow(self):
-        """
-        Complete Add Journal workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Journals section
-        5. Click Add Journal
-        6. Enter the journal reference
-        7. Select the debit account
-        8. Enter the debit amount
-        9. Select the credit account
-        10. Enter the credit amount
-        11. Confirm that total debit equals total credit
-        12. Save the journal
-        13. Wait for the save operation to complete
-        14. Verify that the journal was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        journal_page = Journals(driver=self.driver)
-
-
-
-        journal_page.Click_Journals()
-        time.sleep(0.2)
-
-        journal_page.Click_Journals_Button()
-        time.sleep(0.2)
-
-        journal_page.Journal_Reference()
-        time.sleep(0.2)
-
-        # Debit entry
-        journal_page.Select_Account()
-        time.sleep(0.5)
-
-        journal_page.Enter_Value_IN_Debit()
-        time.sleep(0.5)
-
-        # Credit entry
-        journal_page.Select_Account()
-        time.sleep(0.2)
-
-        journal_page.Enter_Value_IN_Credit()
-        time.sleep(0.3)
-
-        journal_page.Save_Journal()
-        journal_page.wait_for_loader_to_disappear()
-
-        print(
-            "Journal workflow completed successfully: "
-            "balanced debit and credit entries were created and saved."
-        )
-
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-    @pytest.mark.navigation(
-        "Login >> Admin Dashboard >> Bookkeeping >> "
-        "Client >> Inputs >> Dividends >> Add Dividend"
-    )
-    @pytest.mark.description(
-        "Select a company, open the Dividends section, create a new "
-        "dividend by selecting the authorised director and dividend type, "
-        "enter the dividend per share and payment date, and save it."
-    )
-    def test_22_complete_add_dividend_workflow(self):
-        """
-        Complete Add Dividend workflow:
-
-        1. Search for a company
-        2. Select the company
-        3. Open the Client Input section
-        4. Open the Dividends section
-        5. Click Add Dividend
-        6. Select the authorised director
-        7. Select the dividend type
-        8. Select the share class, if applicable
-        9. Enter the dividend amount per share
-        10. Enter the dividend payment date
-        11. Save the dividend details
-        12. Confirm the final save operation
-        13. Wait for processing to complete
-        14. Verify that the dividend was created successfully
-
-        Automated by: Ranveer Singh Sankhala
-        """
-
-        dividend_page = Dividend(driver=self.driver)
-
-
-        dividend_page.Dividends_Section()
-        time.sleep(0.2)
-
-        dividend_page.Click_Dividends()
-        time.sleep(0.2)
-
-        dividend_page.Authorised_director()
-        time.sleep(0.2)
-
-        dividend_page.Select_Type()
-        time.sleep(0.2)
-
-        # Enable this step when a share class is required.
-        # dividend_page.Select_Class()
-        # time.sleep(0.2)
-
-        dividend_page.Dividend_Per_Share()
-        time.sleep(0.2)
-
-        dividend_page.Enter_Payment_Date()
-        time.sleep(0.2)
-
-        dividend_page.Save_Asset()
-        time.sleep(0.2)
-
-        dividend_page.Save()
-        dividend_page.wait_for_loader_to_disappear()
-
-        print(
-            "Dividend workflow completed successfully: "
-            "dividend details were entered and saved."
-        )
-
-
-
-
-
-
-    @classmethod
-    def tearDownClass(cls):
-        """
-        This method runs once after all test methods finish.
-        """
-
-        if hasattr(cls, "driver"):
-            cls.driver.quit()
-
-        print("Browser closed successfully.")
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-
-
-
+#
+#
+# #------------------------------------------Expense Claim Flow >> Add user-----------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Expense Claims >> Users >> Add User"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Expense Claims Users section, "
+#         "create a new user with personal and NI details, and save "
+#
+#     )
+#     def test_15_complete_add_expense_claim_user_workflow(self):
+#         """
+#         Complete Add Expense Claim User workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Expense Claims section
+#         5. Open the Users section
+#         6. Click Add User
+#         7. Open the name field
+#         8. Select the user's title
+#         9. Enter the user's name
+#         10. Enter the National Insurance number
+#         11. Save the user
+#         12. Wait for the save operation to complete
+#         13. Verify that the user was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#         expense_claims_page = User(
+#             driver=self.driver
+#         )
+#         time.sleep(.2)
+#
+#         expense_claims_page.Click_Expense_Claims()
+#         time.sleep(.5)
+#
+#         expense_claims_page.User_Section()
+#         time.sleep(.2)
+#         expense_claims_page.Click_Add_User()
+#         time.sleep(.2)
+#         expense_claims_page.Click_Name_Field()
+#         time.sleep(.2)
+#         expense_claims_page.Select_Title()
+#         time.sleep(.2)
+#         expense_claims_page.Enter_name()
+#         time.sleep(.2)
+#
+#         expense_claims_page.Enter_Ni_Number()
+#         time.sleep(.2)
+#         expense_claims_page.Save_User()
+#         time.sleep(.2)
+#         expense_claims_page.Refresh_Page()
+#         time.sleep(.2)
+#         expense_claims_page.wait_for_loader_to_disappear()
+#
+#
+#         print(
+#             "Expense Claim User workflow completed successfully: "
+#             "the new user was created and saved. "
+#
+#         )
+#
+#
+#
+#     #------------------------------------------Add Expense Claim--------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Expense Claims >> Add Expense Claim"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Expense Claims section, create "
+#         "a new expense claim with claimant, bill, account, amount, "
+#         "VAT and attachment details, and save the claim. "
+#
+#     )
+#     def test_16_complete_expense_claim_workflow(self):
+#         """
+#         Complete Expense Claim workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Expense Claims section
+#         5. Click Add Expense Claim
+#         6. Select the director or claimant
+#         7. Enter the claim remarks
+#         8. Add an attachment
+#         9. Enter the bill number
+#         10. Enter the expense description
+#         11. Select the expense account
+#         12. Enter the base amount
+#         13. Select the VAT option
+#         14. Save the expense claim
+#         15. Wait for the save operation to complete
+#         16. Verify that the expense claim was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         client_section = Expenseclaims(driver=self.driver)
+#         time.sleep(.2)
+#         client_section.Click_Expense_Claims_Tab()
+#         time.sleep(.2)
+#         client_section.Click_Expense_Claims_Button()
+#         time.sleep(.2)
+#         client_section.Select_Directors()
+#         time.sleep(.2)
+#         client_section.Enter_Remark()
+#         time.sleep(.2)
+#         client_section.Add_Attachment()
+#         time.sleep(.2)
+#
+#         client_section.Enter_Bill_No()
+#         time.sleep(.2)
+#         client_section.Enter_Description()
+#         time.sleep(.2)
+#         client_section.Select_Account()
+#         time.sleep(.2)
+#         client_section.Base_Amount()
+#         time.sleep(.2)
+#         client_section.Select_Vat()
+#         time.sleep(5)
+#         client_section.Save_Expense()
+#         time.sleep(.2)
+#         client_section.Refresh_Page()
+#         time.sleep(.1)
+#         client_section.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Expense Claim workflow completed successfully: "
+#             "the expense claim was created and saved. "
+#
+#         )
+#
+# #-----------------------------------------------------------------------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Expense Claims >> Mileage >> Add Mileage"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Mileage section, create a mileage "
+#         "claim with claimant, journey, engine, distance and rate details, "
+#         "and save the claim."
+#     )
+#     def test_17_complete_mileage_claim_workflow(self):
+#         """
+#         Complete Mileage Claim workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Expense Claims section
+#         5. Open the Mileage section
+#         6. Click Add Mileage
+#         7. Select the director or claimant
+#         8. Enter the mileage claim remarks
+#         9. Select the engine type
+#         10. Enter the journey description
+#         11. Enter the mileage or distance
+#         12. Select the mileage rate
+#         13. Save the mileage claim
+#         14. Wait for the save operation to complete
+#         15. Verify that the mileage claim was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         client_section = Mileage(driver=self.driver)
+#         time.sleep(.2)
+#         client_section.Mileages_Section()
+#         time.sleep(.2)
+#         client_section.Click_Mileages()
+#         time.sleep(.2)
+#         client_section.Select_Directors()
+#         time.sleep(.2)
+#         client_section.Enter_Remark_Mileages()
+#         time.sleep(.2)
+#         client_section.Engine_Type()
+#         time.sleep(.2)
+#         client_section.Enter_Description_Mileage()
+#         time.sleep(.2)
+#         client_section.Mileage()
+#         time.sleep(.2)
+#         client_section.Select_Rate()
+#         time.sleep(.2)
+#         client_section.Save_Mileage()
+#         time.sleep(.2)
+#         client_section.Refresh_Page()
+#         time.sleep(.2)
+#         client_section.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Mileage Claim workflow completed successfully: "
+#             "the mileage claim was created and saved. "
+#
+#         )
+#
+#
+# #-----------------------------------------------------------------------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Expense Claims >> Reimbursements"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Reimbursements section, create a "
+#         "reimbursement by selecting the recipient and payment account, "
+#         "enter the amount, and save it. "
+#
+#     )
+#     def test_18_complete_reimbursement_workflow(self):
+#         """
+#         Complete Reimbursement workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Expense Claims section
+#         5. Open the Reimbursements section
+#         6. Click Add Reimbursement
+#         7. Select the person to reimburse
+#         8. Select the reimbursement payment account
+#         9. Enter the reimbursement amount
+#         10. Save the reimbursement
+#         11. Wait for the save operation to complete
+#         12. Verify that the reimbursement was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         client_section = Reimbursement(driver=self.driver)
+#         time.sleep(.2)
+#
+#
+#
+#         client_section.Reimbursed_Section()
+#         time.sleep(.2)
+#         client_section.Click_Reimbursed()
+#         time.sleep(.2)
+#         client_section.Reimbursed_to()
+#         time.sleep(.2)
+#         client_section.Reimbursed_Account()
+#         time.sleep(.2)
+#         client_section.Enter_Amount()
+#         time.sleep(.2)
+#         # client_section.Enter_Notes()
+#         # time.sleep(.2)
+#         client_section.Save_Reimbursement()
+#         time.sleep(.2)
+#         client_section.Refresh_Page()
+#         time.sleep(.2)
+#
+#         client_section.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Reimbursement workflow completed successfully: "
+#             "the reimbursement was created and saved. "
+#
+#         )
+#
+#
+#
+# #-----------------------------------------------Expense Claims >> Refunds-----------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Expense Claims >> Refunds"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Refunds section, create a refund "
+#         "by selecting the refund source and account, and save it. "
+#
+#     )
+#     def test_19_complete_refund_workflow(self):
+#         """
+#         Complete Refund workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Expense Claims section
+#         5. Open the Refunds section
+#         6. Click Add Refund
+#         7. Select the person or source providing the refund
+#         8. Select the account receiving the refund
+#         9. Save the refund
+#         10. Wait for the save operation to complete
+#         11. Verify that the refund was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#         client_section = Refund(driver=self.driver)
+#         time.sleep(.2)
+#
+#
+#
+#         client_section.Refunds_Section()
+#         time.sleep(.2)
+#         client_section.Click_Refunds()
+#         time.sleep(.2)
+#         client_section.Refund_from()
+#         time.sleep(.2)
+#         client_section.Select_Account()
+#         time.sleep(.2)
+#         client_section.Save_Refund()
+#         time.sleep(.2)
+#         client_section.Refresh_Page()
+#         client_section.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Refund workflow completed successfully: "
+#             "the refund was created and saved. "
+#         )
+#
+# #     #-------------------------------------------------------------------------------------------------------------------
+#
+#
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Assets >> Add Asset"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Assets section, create a new asset "
+#         "with purchase, account, supplier and rate details, and save it."
+#     )
+#     def test_19_complete_add_asset_workflow(self):
+#         """
+#         Complete Add Asset workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Assets section
+#         5. Click Add Asset
+#         6. Enter the asset name
+#         7. Enter the purchase details
+#         8. Select the asset account
+#         9. Select the supplier
+#         10. Enter the applicable rate
+#         11. Save the asset
+#         12. Wait for the save operation to complete
+#         13. Verify that the asset was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         asset_page = Asset(driver=self.driver)
+#
+#
+#
+#         asset_page.Click_Asset()
+#         time.sleep(0.2)
+#
+#         asset_page.Click_Add_Assets()
+#         time.sleep(0.2)
+#
+#         asset_page.Asset_Name()
+#         time.sleep(0.2)
+#
+#         asset_page.Purchase()
+#         time.sleep(0.2)
+#
+#         asset_page.Select_Account()
+#         time.sleep(0.2)
+#
+#         asset_page.Select_Supplier()
+#         time.sleep(0.2)
+#
+#         asset_page.Enter_Rate()
+#         time.sleep(0.2)
+#
+#         asset_page.Save_Asset()
+#         time.sleep(.2)
+#         asset_page.Refresh_Page()
+#         asset_page.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Add Asset workflow completed successfully: "
+#             "asset details were entered and saved."
+#         )
+#
+#
+#
+#
+#
+# #    #--------------------------------------------------------------------------------------------------------------------
+# #
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Assets >> Disposed Assets"
+#     )
+#     @pytest.mark.description(
+#         "Open the Disposed Assets section, dispose of an existing asset "
+#         "by entering the sales proceeds, payment method and customer "
+#         "details, and save the disposal."
+#     )
+#     def test_20_complete_dispose_asset_workflow(self):
+#         """
+#         Complete Asset Disposal workflow:
+#
+#         1. Open the Disposed Assets section
+#         2. Click Add Disposed Asset
+#         3. Select the asset to be disposed
+#         4. Enter the sales proceeds
+#         5. Select the payment method
+#         6. Select the customer
+#         7. Save the asset disposal
+#         8. Wait for the save operation to complete
+#         9. Verify that the asset was disposed successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         asset_page = Asset(driver=self.driver)
+#
+#         asset_page.Disposed()
+#         time.sleep(0.2)
+#
+#         asset_page.Add_Disposed()
+#         time.sleep(0.2)
+#
+#         asset_page.Select_Asset()
+#         time.sleep(0.2)
+#
+#         asset_page.Sales_proceeds()
+#         time.sleep(0.2)
+#
+#         asset_page.Payment_Method()
+#         time.sleep(0.2)
+#
+#         asset_page.Customer()
+#         time.sleep(0.2)
+#
+#         asset_page.Save_Disposed()
+#         time.sleep(.2)
+#         asset_page.Refresh_Page()
+#         time.sleep(.2)
+#         asset_page.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Asset Disposal workflow completed successfully: "
+#             "the selected asset was disposed and saved."
+#         )
+#
+#
+#
+# #     #--------------------------------------------Journal--------------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Journals >> Add Journal"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Journals section, create a balanced "
+#         "journal entry by selecting debit and credit accounts, enter the "
+#         "journal reference and values, and save the journal."
+#     )
+#     def test_21_complete_add_journal_workflow(self):
+#         """
+#         Complete Add Journal workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Journals section
+#         5. Click Add Journal
+#         6. Enter the journal reference
+#         7. Select the debit account
+#         8. Enter the debit amount
+#         9. Select the credit account
+#         10. Enter the credit amount
+#         11. Confirm that total debit equals total credit
+#         12. Save the journal
+#         13. Wait for the save operation to complete
+#         14. Verify that the journal was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         journal_page = Journals(driver=self.driver)
+#
+#
+#
+#         journal_page.Click_Journals()
+#         time.sleep(0.2)
+#
+#         journal_page.Click_Journals_Button()
+#         time.sleep(0.2)
+#
+#         journal_page.Journal_Reference()
+#         time.sleep(0.2)
+#
+#         # Debit entry
+#         journal_page.Select_Account()
+#         time.sleep(0.5)
+#
+#         journal_page.Enter_Value_IN_Debit()
+#         time.sleep(0.5)
+#
+#         # Credit entry
+#         journal_page.Select_Account()
+#         time.sleep(0.2)
+#
+#         journal_page.Enter_Value_IN_Credit()
+#         time.sleep(0.3)
+#
+#         journal_page.Save_Journal()
+#         time.sleep(.2)
+#         journal_page.Refresh_Page()
+#
+#         journal_page.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Journal workflow completed successfully: "
+#             "balanced debit and credit entries were created and saved."
+#         )
+#
+#
+# # #-----------------------------------------------------------------------------------------------------------------------
+#
+#     @pytest.mark.navigation(
+#         "Login >> Admin Dashboard >> Bookkeeping >> "
+#         "Client >> Inputs >> Dividends >> Add Dividend"
+#     )
+#     @pytest.mark.description(
+#         "Select a company, open the Dividends section, create a new "
+#         "dividend by selecting the authorised director and dividend type, "
+#         "enter the dividend per share and payment date, and save it."
+#     )
+#     def test_22_complete_add_dividend_workflow(self):
+#         """
+#         Complete Add Dividend workflow:
+#
+#         1. Search for a company
+#         2. Select the company
+#         3. Open the Client Input section
+#         4. Open the Dividends section
+#         5. Click Add Dividend
+#         6. Select the authorised director
+#         7. Select the dividend type
+#         8. Select the share class, if applicable
+#         9. Enter the dividend amount per share
+#         10. Enter the dividend payment date
+#         11. Save the dividend details
+#         12. Confirm the final save operation
+#         13. Wait for processing to complete
+#         14. Verify that the dividend was created successfully
+#
+#         Automated by: Ranveer Singh Sankhala
+#         """
+#
+#         dividend_page = Dividend(driver=self.driver)
+#
+#
+#         dividend_page.Dividends_Section()
+#         time.sleep(0.2)
+#
+#         dividend_page.Click_Dividends()
+#         time.sleep(0.2)
+#
+#         dividend_page.Authorised_director()
+#         time.sleep(0.2)
+#
+#         dividend_page.Select_Type()
+#         time.sleep(0.2)
+#
+#         # Enable this step when a share class is required.
+#         # dividend_page.Select_Class()
+#         # time.sleep(0.2)
+#
+#         dividend_page.Dividend_Per_Share()
+#         time.sleep(0.2)
+#
+#         dividend_page.Enter_Payment_Date()
+#         time.sleep(0.2)
+#
+#         dividend_page.Save_Asset()
+#         time.sleep(0.2)
+#
+#         dividend_page.Save()
+#         dividend_page.wait_for_loader_to_disappear()
+#
+#         print(
+#             "Dividend workflow completed successfully: "
+#             "dividend details were entered and saved."
+#         )
+#
+#
+#
+#
+#
+#
+#
+#     @classmethod
+#     def tearDownClass(cls):
+#         """
+#         This method runs once after all test methods finish.
+#         """
+#
+#         if hasattr(cls, "driver"):
+#             cls.driver.quit()
+#
+#         print("Browser closed successfully.")
+#
+#
+# if __name__ == "__main__":
+#     unittest.main()
+#
+#

@@ -205,6 +205,52 @@ class Purchase_Payment:
         time.sleep(0.5)
         print("Select Supplier successfully!")
 
+    def Paid_To_Supplier_Main(self):
+        try:
+            control = self.wait.until(
+                EC.element_to_be_clickable(
+                    self.paid_to_supplier
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                control
+            )
+
+            control.click()
+
+            supplier_input = self.wait.until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//label[normalize-space()='Paid to']"
+                        "/following::div[contains(@class,'rs-input-container')]"
+                        "//input[1]"
+                    )
+                )
+            )
+
+            supplier_input.click()
+            supplier_input.send_keys(
+                Keys.ARROW_DOWN
+            )
+            supplier_input.send_keys(
+                Keys.ENTER
+            )
+
+            print(
+                "Supplier selected successfully."
+            )
+
+            return True
+
+        except Exception as error:
+            raise AssertionError(
+                f"Could not select supplier: "
+                f"{type(error).__name__}: {error}"
+            ) from error
+
 
     def Select_Account(self):
         try:
@@ -257,18 +303,61 @@ class Purchase_Payment:
           save_paymt.click()
           time.sleep(.2)
 
-          print(" Test Case -10 :  Pass:  Payment saved successfully....!!")
+          print(" Test Case  :  Pass:  Payment saved successfully....!!")
         except Exception as e:
           print(f"Error on click:{e}")
 
-    def wait_for_loader_to_disappear(self):
+    def wait_for_loader_to_disappear(
+            self,
+            timeout=8
+    ):
+        loader_locator = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'Spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'Loading') or "
+            "contains(@class,'ms-Spinner') or "
+            "contains(@class,'ms-Overlay') or "
+            "contains(@class,'ant-spin-spinning')"
+            "]"
+        )
+
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
                 EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                    loader_locator
                 )
             )
+
         except TimeoutException:
             pass
+
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
 

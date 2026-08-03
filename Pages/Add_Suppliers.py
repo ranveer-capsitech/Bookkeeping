@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException, InvalidSessionIdException
 
+
 fake = Faker()
 random_first_name = fake.first_name()
 random_last_name = fake.last_name()
@@ -241,16 +242,117 @@ class Add_Supplier:
 
 
 
-    def Enter_Suppliers_Name(self):
+    # def Enter_Suppliers_Name(self):
+    #     try:
+    #         supplier_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_supplier_name))
+    #         time.sleep(.2)
+    #         supplier_name.send_keys(full_name)
+    #         time.sleep(.2)
+    #         print("Enter Suppliers name successfully......!! ")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.5)
+
+    def Enter_Suppliers_Name(self, supplier_value="Jessica"):
+        driver = self.driver
+
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
         try:
-            supplier_name = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_supplier_name))
-            time.sleep(.2)
-            supplier_name.send_keys(full_name)
-            time.sleep(.2)
-            print("Enter Suppliers name successfully......!! ")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.5)
+            # Wait until field is visible and enabled
+            supplier_name = wait.until(
+                EC.element_to_be_clickable(
+                    self.enter_supplier_name
+                )
+            )
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                supplier_name
+            )
+
+            supplier_name.click()
+
+            # Remove existing/random value
+            supplier_name.send_keys(Keys.CONTROL, "a")
+            supplier_name.send_keys(Keys.BACKSPACE)
+
+            # Enter fixed supplier name
+            supplier_name.send_keys(supplier_value)
+
+            # Verify immediately after typing
+            entered_value = supplier_name.get_attribute("value").strip()
+
+            if entered_value != supplier_value:
+                raise AssertionError(
+                    f"Supplier name was not entered correctly. "
+                    f"Expected: '{supplier_value}', "
+                    f"Actual: '{entered_value}'"
+                )
+
+            # Trigger blur/change event
+            supplier_name.send_keys(Keys.TAB)
+
+            # Locate field again because React may re-render it
+            supplier_name = wait.until(
+                EC.visibility_of_element_located(
+                    self.enter_supplier_name
+                )
+            )
+
+            # Verify value after TAB/re-render
+            wait.until(
+                lambda d: (
+                        d.find_element(
+                            *self.enter_supplier_name
+                        ).get_attribute("value").strip()
+                        == supplier_value
+                )
+            )
+
+            final_value = supplier_name.get_attribute(
+                "value"
+            ).strip()
+
+            print(
+                f"Supplier name entered and verified successfully: "
+                f"{final_value}"
+            )
+
+            return True
+
+        except TimeoutException as error:
+            self.safe_screenshot(
+                "supplier_name_timeout.png"
+            )
+
+            raise AssertionError(
+                "Supplier name field was not available or "
+                "the entered value disappeared after typing."
+            ) from error
+
+        except Exception as error:
+            self.safe_screenshot(
+                "supplier_name_error.png"
+            )
+
+            raise AssertionError(
+                f"Could not enter supplier name: "
+                f"{type(error).__name__}: {error}"
+            ) from error
 
     def Click_Billing_Field(self):
         try:
@@ -725,6 +827,29 @@ class Add_Supplier:
             )
         except TimeoutException:
             pass
+
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
 
 
 

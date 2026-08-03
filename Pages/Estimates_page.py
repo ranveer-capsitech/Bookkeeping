@@ -400,6 +400,29 @@ class Estimates:
             time.sleep(0.4)
             print(" Direct invoice   saved from estimate section successfully.....!!")
 
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
+
 
 
 

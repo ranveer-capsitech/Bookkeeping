@@ -45,7 +45,7 @@ class Banking:
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
         self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
-        self.click_company_for_main = (By.XPATH, "//a[@title='RTR LTD' and contains(@href,'/books/clients/')]")
+        self.click_company_for_main = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -163,9 +163,6 @@ class Banking:
 #-----------------Change date-------------------------------------------------------------------------------------------
         self.enter_from_date = (By.XPATH, "//input[@name='fromDate']")
         self.enter_to_date = (By.XPATH, "//input[@name='toDate']")
-
-
-
 
 
 
@@ -494,8 +491,6 @@ class Banking:
 #------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
     def Save_Credit_card(self):
 
         try:
@@ -612,7 +607,6 @@ class Banking:
             print(f"Error: {e}")
 
             time.sleep(2)
-
 
 
 
@@ -2013,7 +2007,8 @@ class Banking:
             print(f"Error: {e}")
             time.sleep(2)
 
-    def Enter_Company_For_Main(self, company_name="RTR LTD", timeout= 30, os=None):
+
+    def Enter_Company_For_Main(self, company_name="T.H. LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)
@@ -2073,16 +2068,4 @@ class Banking:
         except Exception as e:
             print(f"Enter on click: {e}")
             time.sleep(.5)
-
-
-
-
-
-
-
-
-
-
-
-
 

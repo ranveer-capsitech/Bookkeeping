@@ -47,6 +47,7 @@ class Expenseclaims:
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_expense_claims = (By.XPATH, "(//div[contains(text(),'Expense claims')])[1]")
 
+
 #----------------------------------------------expense_claims-----------------------------------------------------------
 
         self.click_expense_claims_button = (By.XPATH, "//button[.//span[normalize-space()='Expense']]")
@@ -63,6 +64,11 @@ class Expenseclaims:
         self.vat = (By.XPATH, "(//th[normalize-space()='VAT']/ancestor::table[1]//tbody/tr[1]//div[contains(@class,'rs-input-container')])[2]")
         self.save_expense = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
         self.save_expense_click = (By.XPATH, "//div[@role='dialog']//button[@title='Claim expense with reimbursement']//span[normalize-space()='Save']")
+
+        self.expense_claims_tab = (
+            By.XPATH,
+            "//button[@role='tab' and @name='Expense claims']"
+        )
 
 
 
@@ -432,4 +438,71 @@ class Expenseclaims:
             )
         except TimeoutException:
             pass
+
+    def Click_Expense_Claims_Tab(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        try:
+            expense_claims_tab = wait.until(
+                EC.element_to_be_clickable(
+                    self.expense_claims_tab
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                expense_claims_tab
+            )
+
+            expense_claims_tab.click()
+
+            # Verify that the correct tab is selected.
+            wait.until(
+                lambda driver: driver.find_element(
+                    *self.expense_claims_tab
+                ).get_attribute("aria-selected") == "true"
+            )
+
+            print(
+                "Expense Claims tab clicked successfully."
+            )
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "expense_claims_tab_click_failure.png"
+            )
+
+            raise AssertionError(
+                f"Could not open Expense Claims tab: {error}"
+            ) from error
+
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
 

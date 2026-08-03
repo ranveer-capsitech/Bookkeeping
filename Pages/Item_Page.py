@@ -265,23 +265,43 @@ class Items:
             # Assert the presence of the success message
             assert update_message, "Items created successfully"
 
-            print("Test Case -6 :  Pass: Items created successfully.")
+            print("Test Case  :  Pass: Items created successfully.")
 
         # except Exception as e:
         #     print(f"Error: {e}")
         #
         #     time.sleep(2)
 
-    def wait_for_loader_to_disappear(self):
+
+
+    def wait_for_loader_to_disappear(
+            self,
+            timeout=10
+    ):
+        loader = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'Spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'Loading') or "
+            "contains(@class,'ms-Spinner') or "
+            "contains(@class,'ms-Overlay')"
+            "]"
+        )
+
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
                 EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                    loader
                 )
             )
+
         except TimeoutException:
             pass
-
 
 

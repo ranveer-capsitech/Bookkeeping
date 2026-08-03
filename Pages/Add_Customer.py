@@ -24,12 +24,38 @@ random_indian_phone_1 = fake.phone_number()
 dob = fake.date_of_birth(minimum_age=18)
 formatted_dob = dob.strftime('%d/%m/%Y')
 
+#
+# class Add_Customer:
+#
+#     def __init__(self, driver):
+#         self.wait = WebDriverWait(driver, 50)
+#         self.driver = driver
 
 class Add_Customer:
 
     def __init__(self, driver):
-        self.wait = WebDriverWait(driver, 50)
         self.driver = driver
+
+        self.wait = WebDriverWait(
+            driver,
+            15,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        self.short_wait = WebDriverWait(
+            driver,
+            5,
+            poll_frequency=0.2
+        )
+
+        self.long_wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.3
+        )
 
 #------------------------ WebElements of admin for Client sell.---------------------------------------------------------
 
@@ -152,7 +178,7 @@ class Add_Customer:
 
     def Click_Input(self):
             try:
-                input = WebDriverWait(self.driver, 30).until(
+                input = WebDriverWait(self.driver, 40).until(
                     EC.visibility_of_element_located(self.click_input_drop_down))
                 time.sleep(.2)
                 input.click()
@@ -164,7 +190,7 @@ class Add_Customer:
 
     def Click_Sales(self):
             try:
-                sales = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_sales))
+                sales = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.click_sales))
                 time.sleep(.2)
                 sales.click()
                 time.sleep(.2)
@@ -178,7 +204,7 @@ class Add_Customer:
 
     def Select_Client_Section(self):
         try:
-            client_section = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_customers))
+            client_section = WebDriverWait(self.driver, 40).until(EC.visibility_of_element_located(self.click_customers))
             time.sleep(.2)
             client_section.click()
             time.sleep(.2)
@@ -190,7 +216,7 @@ class Add_Customer:
 
     def Click_On_Add_Customer(self):
         try:
-            add_customer = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.add_customer_button))
+            add_customer = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.add_customer_button))
             time.sleep(.2)
             add_customer.click()
             time.sleep(.2)
@@ -199,76 +225,202 @@ class Add_Customer:
             print(f"Error on Click:{e}")
             time.sleep(.2)
 
-    def wait_for_blockers_to_disappear(self, timeout=40):
-        blockers = [
-            (By.XPATH, "//*[contains(@class,'spinner')]"),
-            (By.XPATH, "//*[contains(@class,'Spinner')]"),
-            (By.XPATH, "//*[contains(@class,'loading')]"),
-            (By.XPATH, "//*[contains(@class,'Loading')]"),
-            (By.XPATH, "//div[contains(@class,'ms-Overlay') and contains(@class,'ms-Overlay--dark')]"),
-        ]
+    def wait_for_blockers_to_disappear(
+            self,
+            timeout=8
+    ):
+        blocker_locator = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'Spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'Loading') or "
+            "contains(@class,'ms-Overlay')"
+            "]"
+        )
 
-        for blocker in blockers:
+        try:
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
+                EC.invisibility_of_element_located(
+                    blocker_locator
+                )
+            )
+
+        except TimeoutException:
+            print(
+                "Loader was still detected after timeout; "
+                "continuing with element wait."
+            )
+
+    # def Enter_Customer_Name(self, customer_name="Anthony"):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         # Wait for spinner/overlay before touching input
+    #         self.wait_for_blockers_to_disappear()
+    #
+    #         enter_customer_name = wait.until(
+    #             EC.presence_of_element_located(self.enter_customer_name)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             enter_customer_name
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         # Re-wait after scroll
+    #         self.wait_for_blockers_to_disappear()
+    #
+    #         enter_customer_name = wait.until(
+    #             EC.element_to_be_clickable(self.enter_customer_name)
+    #         )
+    #
+    #         try:
+    #             ActionChains(self.driver).move_to_element(enter_customer_name).pause(0.3).click().perform()
+    #         except ElementClickInterceptedException:
+    #             self.wait_for_blockers_to_disappear()
+    #             self.driver.execute_script("arguments[0].focus();", enter_customer_name)
+    #             self.driver.execute_script("arguments[0].click();", enter_customer_name)
+    #
+    #         enter_customer_name.send_keys(Keys.CONTROL, "a")
+    #         enter_customer_name.send_keys(Keys.BACKSPACE)
+    #         enter_customer_name.send_keys(customer_name)
+    #
+    #         time.sleep(2)
+    #
+    #         # Select first suggestion using keyboard
+    #         enter_customer_name.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(0.5)
+    #         enter_customer_name.send_keys(Keys.ENTER)
+    #
+    #         print("Enter Customer name successfully......!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error on Enter_Customer_Name: {type(e).__name__} - {e}")
+    #         self.driver.save_screenshot("enter_customer_name_error.png")
+    #         raise
+
+
+    def Enter_Customer_Name(
+            self,
+            customer_name="Anthony"
+    ):
+        driver = self.driver
+        wait = WebDriverWait(
+            driver,
+            15,
+            poll_frequency=0.2
+        )
+
+        try:
+            # Wait only for the main blocking overlay
             try:
-                WebDriverWait(self.driver, timeout).until(
-                    EC.invisibility_of_element_located(blocker)
+                WebDriverWait(
+                    driver,
+                    5,
+                    poll_frequency=0.2
+                ).until(
+                    EC.invisibility_of_element_located(
+                        (
+                            By.XPATH,
+                            "//*[contains(@class,'ms-Overlay') "
+                            "or contains(@class,'ms-Spinner')]"
+                        )
+                    )
                 )
             except TimeoutException:
                 pass
 
-    def Enter_Customer_Name(self, customer_name="T.H. LIMITED"):
-        try:
-            wait = WebDriverWait(self.driver, 40)
-
-            # Wait for spinner/overlay before touching input
-            self.wait_for_blockers_to_disappear()
-
-            enter_customer_name = wait.until(
-                EC.presence_of_element_located(self.enter_customer_name)
+            customer_input = wait.until(
+                EC.element_to_be_clickable(
+                    self.enter_customer_name
+                )
             )
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                enter_customer_name
-            )
-
-            time.sleep(0.5)
-
-            # Re-wait after scroll
-            self.wait_for_blockers_to_disappear()
-
-            enter_customer_name = wait.until(
-                EC.element_to_be_clickable(self.enter_customer_name)
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                customer_input
             )
 
             try:
-                ActionChains(self.driver).move_to_element(enter_customer_name).pause(0.3).click().perform()
+                customer_input.click()
+
             except ElementClickInterceptedException:
-                self.wait_for_blockers_to_disappear()
-                self.driver.execute_script("arguments[0].focus();", enter_customer_name)
-                self.driver.execute_script("arguments[0].click();", enter_customer_name)
+                driver.execute_script(
+                    "arguments[0].click();",
+                    customer_input
+                )
 
-            enter_customer_name.send_keys(Keys.CONTROL, "a")
-            enter_customer_name.send_keys(Keys.BACKSPACE)
-            enter_customer_name.send_keys(customer_name)
+            customer_input.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
+            customer_input.send_keys(
+                Keys.BACKSPACE
+            )
+            customer_input.send_keys(
+                customer_name
+            )
 
-            time.sleep(2)
+            # Verify typed value instead of waiting 2 seconds
+            wait.until(
+                lambda current_driver: (
+                        current_driver.find_element(
+                            *self.enter_customer_name
+                        ).get_attribute("value").strip()
+                        == customer_name
+                )
+            )
 
-            # Select first suggestion using keyboard
-            enter_customer_name.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.5)
-            enter_customer_name.send_keys(Keys.ENTER)
+            # Locate input again in case React re-rendered it
+            customer_input = wait.until(
+                EC.element_to_be_clickable(
+                    self.enter_customer_name
+                )
+            )
 
-            print("Enter Customer name successfully......!!")
+            customer_input.send_keys(
+                Keys.ARROW_DOWN
+            )
+            customer_input.send_keys(
+                Keys.ENTER
+            )
 
-        except Exception as e:
-            print(f"Error on Enter_Customer_Name: {type(e).__name__} - {e}")
-            self.driver.save_screenshot("enter_customer_name_error.png")
-            raise
+            print(
+                f"Customer name entered successfully: "
+                f"{customer_name}"
+            )
+
+            return True
+
+        except Exception as error:
+            try:
+                driver.save_screenshot(
+                    "enter_customer_name_error.png"
+                )
+            except Exception:
+                pass
+
+            raise AssertionError(
+                f"Could not enter customer name: "
+                f"{type(error).__name__}: {error}"
+            ) from error
 
     def Click_Cancel(self):
         try:
-            cancel = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_cancel))
+            cancel = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.click_cancel))
             time.sleep(.2)
             cancel.click()
             time.sleep(.2)
@@ -283,18 +435,18 @@ class Add_Customer:
 
     def Click_Billing_Field(self):
         try:
-            click_address = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_billing_field))
+            click_address = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.click_billing_field))
             time.sleep(.2)
             click_address.click()
             time.sleep(.2)
             print("Click on Billing field successfully.....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def Enter_Building(self):
         try:
-            building = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_building_no))
+            building = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_building_no))
             time.sleep(.2)
             building.click()
             time.sleep(.2)
@@ -303,11 +455,11 @@ class Add_Customer:
             print("Enter building number successfully.....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def Enter_Street(self):
         try:
-            street = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_street))
+            street = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_street))
             time.sleep(.2)
             street.click()
             time.sleep(.2)
@@ -316,11 +468,11 @@ class Add_Customer:
             print("Enter Street successfully.....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def Enter_City(self):
         try:
-            city = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_city))
+            city = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_city))
             time.sleep(.2)
             city.click()
             time.sleep(.2)
@@ -329,12 +481,12 @@ class Add_Customer:
             print("Enter city successfully.....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
 
     def Enter_County(self):
         try:
-            county = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(self.enter_county))
+            county = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_county))
             time.sleep(.2)
             county.click()
             time.sleep(.2)
@@ -348,7 +500,7 @@ class Add_Customer:
 
     def Select_Country(self):
         try:
-            country = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.select_country))
+            country = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.select_country))
             time.sleep(.2)
             country.click()
             time.sleep(.2)
@@ -360,11 +512,11 @@ class Add_Customer:
 
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def Enter_Postcode(self):
         try:
-            postcode = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.postcode))
+            postcode = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.postcode))
             time.sleep(.2)
             postcode.click()
             time.sleep(.2)
@@ -374,23 +526,23 @@ class Add_Customer:
 
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def Click_Contact_Person(self):
         try:
-            contact_person = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_contact_person))
+            contact_person = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.click_contact_person))
             time.sleep(.2)
             contact_person.click()
             time.sleep(.2)
             print("Click on contact person field successfully.....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
-            time.sleep(.5)
+            time.sleep(.2)
 
     def First_Name(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 30)
+            wait = WebDriverWait(driver, 40)
 
             first = wait.until(EC.element_to_be_clickable(self.first_name))
 
@@ -416,10 +568,10 @@ class Add_Customer:
 
     def Enter_Name(self):
         try:
-            enter_name =  WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.name))
+            enter_name =  WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.name))
             time.sleep(.2)
             enter_name.click()
-            time.sleep(.5)
+            time.sleep(.2)
             enter_name.send_keys(random_first_name)
             time.sleep(.2)
             enter_name.send_keys(Keys.ENTER)
@@ -432,7 +584,7 @@ class Add_Customer:
 
     def Enter_Contact_Number(self):
         try:
-            contact_number = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.contact_number))
+            contact_number = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.contact_number))
             time.sleep(.2)
             contact_number.send_keys("9680962177")
             time.sleep(.2)
@@ -443,7 +595,7 @@ class Add_Customer:
 
     def Enter_Mail(self):
         try:
-            mail = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_mail))
+            mail = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_mail))
             time.sleep(.2)
             mail.send_keys("teamtesting@abc.com")
             time.sleep(.2)
@@ -454,7 +606,7 @@ class Add_Customer:
 
     def Select_Bank(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 30)
+        wait = WebDriverWait(driver, 40)
 
         # click dropdown indicator arrow (more reliable than clicking input)
         arrow = wait.until(EC.element_to_be_clickable(
@@ -474,7 +626,7 @@ class Add_Customer:
 
     def Discount(self):
         try:
-            wait = WebDriverWait(self.driver, 30)
+            wait = WebDriverWait(self.driver, 40)
 
             dis = wait.until(EC.element_to_be_clickable(self.discount))
 
@@ -496,7 +648,7 @@ class Add_Customer:
 
     def Select_Vat(self):
         driver = self.driver
-        wait = WebDriverWait(driver, 30)
+        wait = WebDriverWait(driver, 40)
 
 
         arrow = wait.until(EC.element_to_be_clickable(
@@ -517,7 +669,7 @@ class Add_Customer:
 
     def Enter_Vat(self):
         try:
-            vat = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_vat))
+            vat = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_vat))
             time.sleep(.2)
             vat.send_keys("987654321")
             time.sleep(.2)
@@ -529,7 +681,7 @@ class Add_Customer:
 
     def Enter_EORI(self):
         try:
-            eori = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.enter_eori))
+            eori = WebDriverWait(self.driver,40).until(EC.visibility_of_element_located(self.enter_eori))
             time.sleep(.2)
             eori.send_keys("GB123456789000")
             time.sleep(.2)
@@ -541,7 +693,7 @@ class Add_Customer:
     def Project_tags(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 30)
+            wait = WebDriverWait(driver, 40)
 
             control = wait.until(EC.element_to_be_clickable(
                 (By.XPATH, "//label[normalize-space()='Project tags']/following::div[contains(@class,'rs-control')][1]")
@@ -576,7 +728,7 @@ class Add_Customer:
     def Add_Attachment(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 30)
+            wait = WebDriverWait(driver, 40)
 
             #  Click attachment icon(Rv)
             attach_icon = wait.until(EC.element_to_be_clickable(
@@ -605,7 +757,7 @@ class Add_Customer:
 
     def Save_customer(self):
         try:
-            wait = WebDriverWait(self.driver, 30)
+            wait = WebDriverWait(self.driver, 40)
 
             save = wait.until(EC.element_to_be_clickable(self.save_customer))
             time.sleep(.2)
@@ -620,7 +772,7 @@ class Add_Customer:
             # # Assert the presence of the success message
             # assert update_message, "Budget fields updated successfully."
 
-            print("Test Case 22  - Pass: Customer added successfully.")
+            print("Test Case  - Pass: Customer added successfully.")
 
         except Exception as e:
             print(f"Enter on click:{e}")
@@ -628,7 +780,7 @@ class Add_Customer:
 
     def wait_for_loader_to_disappear(self):
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(self.driver, 40).until(
                 EC.invisibility_of_element_located(
                     (By.XPATH,
                      "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")

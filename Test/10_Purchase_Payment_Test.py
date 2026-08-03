@@ -68,37 +68,30 @@ class Login(unittest.TestCase):
 
 
     def test_13_Go_Payments(self):
-        client_section = Purchase_Payment(driver=self.driver)
-        time.sleep(.2)
+        client_section = Purchase_Payment(
+            driver=self.driver
+        )
 
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
-        time.sleep(3)
+
         client_section.Click_Input()
-        time.sleep(.2)
         client_section.Click_Purchases()
 
-
-        time.sleep(.5)
-        time.sleep(.2)
-
         client_section.Payment_Section()
-        time.sleep(.5)
         client_section.Click_Payment()
-        time.sleep(.2)
-        client_section.Paid_To_Supplier()
-        time.sleep(.2)
-        client_section.Select_Account()
-        time.sleep(.2)
-        client_section.Enter_Amount()
-        time.sleep(.2)
-        client_section.Save_payment()
-        time.sleep(.2)
 
+        client_section.Paid_To_Supplier()
+        client_section.Select_Account()
+        client_section.Enter_Amount()
+        client_section.Save_payment()
+
+        client_section.wait_for_loader_to_disappear()
+
+        print(
+            "Purchase payment workflow completed successfully."
+        )
     #-------------------------------------------------------------------------------------------------------------------
 
 

@@ -27,7 +27,7 @@ dob = fake.date_of_birth(minimum_age=18)
 formatted_dob = dob.strftime('%d/%m/%Y')
 
 
-class Purchase_PO:
+class Purchase_CN:
 
     def __init__(self, driver):
         self.wait = WebDriverWait(driver, 50)
@@ -44,8 +44,10 @@ class Purchase_PO:
 
 # ---------------------------------------------Credit notes--------------------------------------------------------------
 
-        self.click_credit_notes = (By.XPATH,
-                                   "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[2]/span[1]")
+        # self.click_credit_notes = (By.XPATH,
+        #                            "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[2]/span[1]")
+
+        self.click_credit_notes = (By.XPATH, "//button[@role='tab' and @data-id='credit-notes']")
         self.credit_notes = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Credit note']")
         self.supplier_name = (By.XPATH, "//div[contains(text(),'Supplier name')]")
         self.invoice_ref_no = (By.XPATH,
@@ -485,7 +487,7 @@ class Purchase_PO:
 
                 time.sleep(.2)
                 driver.back()
-                time.sleep(.10)
+                time.sleep(.5)
 
             else:
               print(" Test Case -: Pass : Purchase credit note saved successfully....!")
@@ -506,6 +508,30 @@ class Purchase_PO:
         except TimeoutException:
             pass
 
+
+
+    def Refresh_Page(self):
+        try:
+            self.driver.refresh()
+
+            WebDriverWait(self.driver, 30).until(
+                lambda driver: driver.execute_script(
+                    "return document.readyState"
+                ) == "complete"
+            )
+
+            print("Page refreshed successfully.")
+
+        except Exception as error:
+            self.driver.save_screenshot(
+                "page_refresh_failure.png"
+            )
+
+            print(
+                f"Page refresh failed: "
+                f"{type(error).__name__}: {error}"
+            )
+            raise
 
 
 

@@ -40,7 +40,7 @@ class Find_And_Match_Lock:
 
         self.search = (By.XPATH, "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH,"//a[@title='DAP CARS LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH,"//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
 
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
@@ -117,7 +117,7 @@ class Find_And_Match_Lock:
                               "//input[@name='invoices.0']/preceding-sibling::div[contains(@class,'rs-control')][1]")
 
         self.select_settle = (By.XPATH, "//div[contains(text(),'Settle')]")
-        self.click_match = (By.XPATH, "//span[contains(text(),'Match')]")
+        self.click_match = (By.XPATH, "//button[.//span[normalize-space()='Match']]")
 
 #----------------------------------------------------------------------------------------------------
         self.sales_return = (By.XPATH, "//div[@title='Sales Return']")
@@ -176,7 +176,7 @@ class Find_And_Match_Lock:
             except Exception as e:
                 print(f"Error on click:{e}")
 
-    def Enter_Company(self, company_name="DAP CARS LIMITED", timeout=30, os=None):
+    def Enter_Company(self, company_name="T.H. LIMITED", timeout=30, os=None):
 
             driver = self.driver
             wait = WebDriverWait(driver, timeout)
@@ -1672,18 +1672,24 @@ class Find_And_Match_Lock:
             raise
 
     def Click_Match(self):
-            # try:
-            match = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_match))
-            time.sleep(1)
-            match.click()
-            time.sleep(1)
 
-            print("Clicked on match button successfully.....!! ")
+        wait = WebDriverWait(self.driver, 30)
 
-            # except Exception as e:
-            #     print(f"Error: {e}")
+        match_button = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_match
+                )
+        )
 
-            time.sleep(2)
+        self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                match_button
+        )
+
+        match_button.click()
+
+        print("Match button clicked successfully.")
+
 
     def Click_Adde_Bank_Account(self):
         driver = self.driver
@@ -1700,7 +1706,7 @@ class Find_And_Match_Lock:
         bank_card_locator = (
             By.XPATH,
             "(//div[contains(@style,'cursor: pointer')]"
-            "[.//label[contains(normalize-space(.),'DAP CARS LIMITED')]]"
+            "[.//label[contains(normalize-space(.),'T.H. LIMITED')]]"
             "[.//*[contains("
             "translate("
             "concat(@alt,' ',@src,' ',@title,' ',@aria-label),"

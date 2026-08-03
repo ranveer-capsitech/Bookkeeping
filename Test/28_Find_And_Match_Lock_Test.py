@@ -6,11 +6,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-from Client_SellPage import ClientSell
-from Credit_NotesPage import Credit_Notes
-from ExpenseclaimsPage import Expenseclaims
-from PurchasePage import ClientPurchase
-from Find_And_Match_Lock_Page import Find_And_Match_Lock
+from Pages.Client_SellPage import ClientSell
+from Pages.Credit_NotesPage import Credit_Notes
+from Pages.ExpenseclaimsPage import Expenseclaims
+from Pages.PurchasePage import ClientPurchase
+from Pages.Find_And_Match_Lock_Page import Find_And_Match_Lock
 
 from configReader import ConfigReader
 from Pages.LoginPage import loginPage
@@ -524,7 +524,6 @@ class Login(unittest.TestCase):
         # time.sleep(.2)
         client_section.Save_Reimbursement()
         time.sleep(.2)
-
 
 
         client_section.Refunds_Section()

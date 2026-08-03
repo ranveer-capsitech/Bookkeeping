@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from Pages.Purchase_Credit_Notes_Page import Purchase_PO
+from Pages.Purchase_Credit_Notes_Page import  Purchase_CN
 from configReader import ConfigReader
 
 from Pages.LoginPage import loginPage
@@ -67,7 +67,7 @@ class Login(unittest.TestCase):
 
 
     def test_11_Go_Purchase_CreditNote(self):
-        client_section = Purchase_PO(driver=self.driver)
+        client_section =  Purchase_CN(driver=self.driver)
         time.sleep(.2)
 
         client_section.Select_Search()

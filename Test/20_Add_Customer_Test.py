@@ -67,72 +67,54 @@ class Login(unittest.TestCase):
 
 
     def test_04_Go_Client_Sell(self):
-        client_section = Add_Customer(driver=self.driver)
-        time.sleep(.2)
 
-        client_section. Select_Search()
-        time.sleep(5)
-        client_section.Enter_Company()
-        time.sleep(.2)
-        client_section.Click_Company()
-        time.sleep(.2)
-        client_section.Click_Input()
-        time.sleep(.2)
-        client_section.Click_Sales()
-        time.sleep(.2)
+            client_section = Add_Customer(
+                driver=self.driver
+            )
 
+            client_section.Select_Search()
+            client_section.Enter_Company()
+            client_section.Click_Company()
 
+            client_section.Click_Input()
+            client_section.Click_Sales()
 
+            client_section.Select_Client_Section()
+            client_section.Click_On_Add_Customer()
 
-        client_section.Select_Client_Section()
-        time.sleep(.2)
-        client_section.Click_On_Add_Customer()
-        time.sleep(.2)
-        client_section.Enter_Customer_Name()
-        time.sleep(.2)
-        client_section.Click_Cancel()
-        time.sleep(.2)
-        client_section.Click_Billing_Field()
-        time.sleep(.2)
-        client_section.Enter_Building()
-        time.sleep(.2)
-        client_section.Enter_Street()
-        time.sleep(.2)
-        client_section.Enter_City()
-        time.sleep(.2)
-        client_section.Enter_County()
-        time.sleep(2)
-        client_section.Select_Country()
-        time.sleep(2)
-        client_section.Enter_Postcode()
-        time.sleep(2)
-        client_section.Click_Contact_Person()
-        time.sleep(2)
-        # client_section.First_Name()
-        time.sleep(2)
-        client_section.Enter_Name()
-        time.sleep(2)
-        client_section.Enter_Contact_Number()
-        time.sleep(2)
-        client_section.Enter_Mail()
-        time.sleep(2)
-        client_section.Select_Bank()
-        time.sleep(2)
-        client_section.Discount()
-        time.sleep(2)
-        client_section.Select_Vat()
-        time.sleep(2)
-        client_section.Enter_Vat()
-        time.sleep(2)
-        # client_section.Enter_EORI()
-        time.sleep(2)
-        client_section.Project_tags()
-        time.sleep(2)
-        client_section.Add_Attachment()
-        time.sleep(2)
-        client_section.Save_customer()
-        time.sleep(2)
+            client_section.Enter_Customer_Name(
+                "Anthony"
+            )
 
+            # Remove this if it closes the customer form
+            client_section.Click_Cancel()
+
+            client_section.Click_Billing_Field()
+            client_section.Enter_Building()
+            client_section.Enter_Street()
+            client_section.Enter_City()
+            client_section.Enter_County()
+            client_section.Select_Country()
+            client_section.Enter_Postcode()
+
+            client_section.Click_Contact_Person()
+            client_section.Enter_Name()
+            client_section.Enter_Contact_Number()
+            client_section.Enter_Mail()
+
+            client_section.Select_Bank()
+            client_section.Discount()
+            client_section.Select_Vat()
+            client_section.Enter_Vat()
+
+            client_section.Project_tags()
+            client_section.Add_Attachment()
+            client_section.Save_customer()
+            client_section.wait_for_loader_to_disappear()
+
+            print(
+                "Customer workflow completed successfully."
+            )
 
 
 
