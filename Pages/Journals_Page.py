@@ -1,7 +1,7 @@
 from faker import Faker
 import time
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -56,6 +56,13 @@ class Journals:
         self.debit = (By.XPATH, "//input[@id='items.0.debit']")
         self.credit = (By.XPATH, "//input[contains(@id,'credit') and contains(@id,'1')]")
         self.save_journal = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
+
+        self.journals_menu = (
+            By.XPATH,
+            "//a[@id='Journals' "
+            "and @aria-label='Journals' "
+            "and contains(@href,'/inputs/journals')]"
+        )
 
 #------------------------------------------------Method-----------------------------------------------------------------
 
@@ -145,16 +152,85 @@ class Journals:
             print(f"Error on click:{e}")
 
 
+    # def Click_Journals(self):
+    #     try:
+    #         click_journal = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.journals))
+    #         time.sleep(.2)
+    #         click_journal.click()
+    #         time.sleep(.2)
+    #         print("Click on journal section successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.2)
+
     def Click_Journals(self):
+        driver = self.driver
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
         try:
-            click_journal = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.journals))
-            time.sleep(.2)
-            click_journal.click()
-            time.sleep(.2)
-            print("Click on journal section successfully....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+            self.wait_for_loader_to_disappear()
+            self.wait_for_overlay_to_disappear()
+
+            journals_menu = wait.until(
+                EC.presence_of_element_located(
+                    self.journals_menu
+                )
+            )
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                journals_menu
+            )
+
+            journals_menu = wait.until(
+                EC.element_to_be_clickable(
+                    self.journals_menu
+                )
+            )
+
+            try:
+                journals_menu.click()
+
+            except ElementClickInterceptedException:
+                self.wait_for_overlay_to_disappear()
+
+                journals_menu = wait.until(
+                    EC.element_to_be_clickable(
+                        self.journals_menu
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    journals_menu
+                )
+
+            wait.until(
+                EC.url_contains("/inputs/journals")
+            )
+
+            print("Journals section opened successfully.")
+
+        except Exception as error:
+            driver.save_screenshot(
+                "journals_navigation_failure.png"
+            )
+
+            raise AssertionError(
+                f"Could not open Journals section: {error}"
+            ) from error
 
 
     def Click_Journals_Button(self):
@@ -293,6 +369,32 @@ class Journals:
             )
         except TimeoutException:
             pass
+
+    def wait_for_overlay_to_disappear(self, timeout=30):
+        overlay_locator = (
+            By.CSS_SELECTOR,
+            ".ms-Overlay.ms-Overlay--dark"
+        )
+
+        try:
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
+                EC.invisibility_of_element_located(
+                    overlay_locator
+                )
+            )
+
+        except TimeoutException as error:
+            self.driver.save_screenshot(
+                "overlay_not_closed.png"
+            )
+
+            raise AssertionError(
+                "The modal overlay did not disappear."
+            ) from error
 
     def Refresh_Page(self):
         try:

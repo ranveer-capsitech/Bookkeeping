@@ -94,6 +94,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Account()
         time.sleep(.2)
+        client_section.Enter_Refund_Amount()
+        time.sleep(.2)
         client_section.Save_Refund()
         time.sleep(.2)
 

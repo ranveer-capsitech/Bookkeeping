@@ -44,7 +44,7 @@ class Banking:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
         self.click_company_for_main = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
@@ -204,7 +204,7 @@ class Banking:
 
 
 
-    def Enter_Company(self, company_name="T.H. LIMITED", timeout= 30, os=None):
+    def Enter_Company(self, company_name="1ST LIMITED", timeout= 30, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)

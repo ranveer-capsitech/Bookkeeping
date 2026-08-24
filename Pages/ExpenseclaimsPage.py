@@ -60,7 +60,7 @@ class Expenseclaims:
         self.account = (By.XPATH, "//*[normalize-space()='Account']/following::input[@role='combobox'][1]")
 
 
-        self.base_amount = (By.XPATH, "(//table[.//th[normalize-space()='Base amount']]   //tbody/tr[1]   //td[count(//th[normalize-space()='Base amount']/preceding-sibling::th)+1]   //input[contains(@class,'ms-TextField-field')] )[1]")
+        self.base_amount = (By.XPATH, "//td[@data-label='Base amount']//input[@type='text']")
         self.vat = (By.XPATH, "(//th[normalize-space()='VAT']/ancestor::table[1]//tbody/tr[1]//div[contains(@class,'rs-input-container')])[2]")
         self.save_expense = (By.XPATH, "//button[.//span[normalize-space()='Save']]")
         self.save_expense_click = (By.XPATH, "//div[@role='dialog']//button[@title='Claim expense with reimbursement']//span[normalize-space()='Save']")

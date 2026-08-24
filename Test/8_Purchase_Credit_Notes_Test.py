@@ -63,46 +63,34 @@ class Login(unittest.TestCase):
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on purchase >> credit notes")
-
-
-
     def test_11_Go_Purchase_CreditNote(self):
-        client_section =  Purchase_CN(driver=self.driver)
-        time.sleep(.2)
+        client_section = Purchase_CN(driver=self.driver)
 
+        # Open company
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
+
+        # Open Purchase Credit Notes
         client_section.Click_Input()
-        time.sleep(.2)
         client_section.Click_Purchases()
-
-
-        time.sleep(.5)
-
         client_section.Click_Credit_Notes()
-        time.sleep(.5)
         client_section.Add_Credit_Note()
-        time.sleep(.2)
+
+        # Fill credit note form
         client_section.Select_Suppiler_for_Credit_Note()
-        time.sleep(.2)
         client_section.Invoice_ref()
-        time.sleep(.2)
         client_section.Add_Attachment()
-        time.sleep(.2)
         client_section.Enter_Discount()
-        time.sleep(.2)
         client_section.Click_Enter_Notes()
-        time.sleep(.2)
         client_section.Enter_Notes()
-        time.sleep(.2)
+
+        # Save credit note
         client_section.Save_Credit_Notes()
-        time.sleep(.2)
         client_section.Click_Save_Button()
-        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+
+        print("Purchase credit note workflow completed successfully.")
 
 
     @classmethod

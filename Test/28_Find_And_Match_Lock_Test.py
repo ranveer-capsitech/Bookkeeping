@@ -253,7 +253,7 @@ class Login(unittest.TestCase):
         5. Save invoice
         """
 
-        client_sell_page = ClientSell(
+        client_sell_page = Find_And_Match_Lock(
             driver=self.driver
         )
 
@@ -438,7 +438,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> Input >>Expense claims"
     )
@@ -537,12 +536,14 @@ class Login(unittest.TestCase):
         client_section.Save_Refund()
         time.sleep(.2)
 
+
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> Input >>Bank >> find and match"
     )
     @pytest.mark.description(
         " Select company, select created bank account and find and match the transaction "
     )
+
     def test_28_07_Select_Current_Bank_Find_And_match_with_lock(self):
 
         client_section = Find_And_Match_Lock(driver=self.driver)
@@ -837,7 +838,7 @@ class Login(unittest.TestCase):
 
         # credit_notes_section.Click_Input()
         # time.sleep(0.5)
-        credit_notes_section.Click_Payment()
+        credit_notes_section.Click_Payments()
         time.sleep(.2)
         time.sleep(0.5)
 
@@ -850,8 +851,8 @@ class Login(unittest.TestCase):
         credit_notes_section.Click_On_Close_Icon()
         time.sleep(.2)
         print("Payment section opened successfully and  verify  lock for supplier.")
-        credit_notes_section.Click_Second_Lock_Payment()
-        time.sleep(.2)
+        # credit_notes_section.Click_Second_Lock_Payment()
+        # time.sleep(.2)
         credit_notes_section.Click_Second_Lock_Payment()
         time.sleep(.2)
         print("Payment section opened successfully and  verify  lock.")
@@ -987,6 +988,7 @@ class Login(unittest.TestCase):
                         3. check all module
                         4. check uncheck
 
+
                         """
         client_sell_page = ClientSell(
             driver=self.driver
@@ -1010,13 +1012,7 @@ class Login(unittest.TestCase):
 
 
 
-
-
-
-
-
 # --------------------------------------------------Check unlock Credit Note---------------------------------------------------------------
-
 
 
 
@@ -1152,9 +1148,9 @@ class Login(unittest.TestCase):
         credit_notes_section = Find_And_Match_Lock(driver=self.driver)
         time.sleep(.2)
 
-        credit_notes_section.Click_Input()
-        time.sleep(0.5)
-        credit_notes_section.Click_Payment()
+        # credit_notes_section.Click_Input()
+        # time.sleep(0.5)
+        credit_notes_section.Click_Payments()
         time.sleep(.2)
         time.sleep(0.5)
 
@@ -1251,6 +1247,7 @@ class Login(unittest.TestCase):
 
 @classmethod
 def tearDownClass(cls):
+
         """
         This method runs once after all test methods finish.
         """

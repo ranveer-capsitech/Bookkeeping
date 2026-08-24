@@ -54,7 +54,11 @@ class Dividend:
         self.select_class = (By.XPATH,"//div[@id='react-select-8-placeholder' and text()='Select']")
         self.dividend_per_share = (By.XPATH, "//label[text()='Dividend per share']/following::input[1]")
         self.payment = (By.XPATH, "//label[text()='Payment date']/following::input[1]")
-        self.save_dividends = (By.XPATH, "//button[@title='Save without journals']")
+        self.save_dividends = (
+            By.XPATH,
+            "//button[@title='Save without journals' "
+            "and .//span[normalize-space()='Save']]"
+        )
         self.save_anyway = (By.XPATH, "//span[contains(text(),'Save anyway')]")
 
 
@@ -390,7 +394,7 @@ class Dividend:
             print(f"Error: {e}")
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+
 
     def Save(self):
         try:
@@ -398,7 +402,7 @@ class Dividend:
             time.sleep(.2)
             save.click()
             time.sleep(.2)
-            print(" Test Case 18 - Pass: Dividends created successfully.")
+            print(" Test Case - Pass: Dividends created successfully.")
         except Exception as e:
             print(f"Error: {e}")
 
@@ -418,7 +422,7 @@ class Dividend:
 
 
 
-
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 

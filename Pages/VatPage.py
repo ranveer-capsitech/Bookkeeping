@@ -42,7 +42,7 @@ class Vat:
         self.search = (By.XPATH,
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
-        self.click_company = (By.XPATH, "//a[@title='T.H. LIMITED' and contains(@href,'/books/clients/')]")
+        self.click_company = (By.XPATH, "//a[@title='DARSAH LTD' and contains(@href,'/books/clients/')]")
         self.click_input_drop_down = (By.XPATH,
                                       "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
 
@@ -242,7 +242,7 @@ class Vat:
             print(f"Error on click:{e}")
 
 
-    def Enter_Company(self, company_name="T.H. LIMITED", timeout=12, os=None):
+    def Enter_Company(self, company_name="DARSAH LTD", timeout=12, os=None):
 
         driver = self.driver
         wait = WebDriverWait(driver, timeout)

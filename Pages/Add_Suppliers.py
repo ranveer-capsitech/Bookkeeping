@@ -112,6 +112,7 @@ class Add_Supplier:
                                      "//label[normalize-space()='Country']/following::input[contains(@id,'react-select') and contains(@id,'-input')][1]")
 
 
+
 #-----------------------------------------------------Methods----------------------------------------------------------------------------------------------------------------
 
 
@@ -227,16 +228,69 @@ class Add_Supplier:
             time.sleep(.2)
 
 
+    # def Click_On_Add_Suppliers(self):
+    #     try:
+    #         add_suppliers = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.add_suppliers_button))
+    #         time.sleep(.2)
+    #         add_suppliers.click()
+    #         time.sleep(.2)
+    #         print("Click on Add suppliers section successfully.....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.2)
+
     def Click_On_Add_Suppliers(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
         try:
-            add_suppliers = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.add_suppliers_button))
-            time.sleep(.2)
-            add_suppliers.click()
-            time.sleep(.2)
-            print("Click on Add suppliers section successfully.....!!")
-        except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+            self.wait_for_loader_to_disappear()
+
+            add_button = wait.until(
+                EC.element_to_be_clickable(
+                    self.add_suppliers_button
+                )
+            )
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center',
+                    inline: 'center'
+                });
+                """,
+                add_button
+            )
+
+            try:
+                add_button.click()
+
+            except ElementClickInterceptedException:
+                driver.execute_script(
+                    "arguments[0].click();",
+                    add_button
+                )
+
+            # Wait for supplier form to appear
+            wait.until(
+                EC.presence_of_element_located(
+                    self.enter_supplier_name
+                )
+            )
+
+            # Wait for form loader to finish
+            self.wait_for_loader_to_disappear()
+
+            print("Add Supplier form opened successfully.")
+
+        except Exception as error:
+            self.safe_screenshot(
+                "open_add_supplier_form_error.png"
+            )
+
+            raise AssertionError(
+                f"Could not open Add Supplier form: {error}"
+            ) from error
 
 
 
@@ -811,22 +865,55 @@ class Add_Supplier:
             # # Assert the presence of the success message
             # assert update_message, "Budget fields updated successfully."
 
-            print("Test Case 23  - Pass: Supplier added successfully.")
+            print("Test Case  - Pass: Supplier added successfully.")
 
         except Exception as e:
             print(f"Enter on click:{e}")
             time.sleep(.5)
 
-    def wait_for_loader_to_disappear(self):
+    def wait_for_loader_to_disappear(self, timeout=30):
+        loader_locator = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'ms-Spinner') or "
+            "contains(@class,'ant-spin-spinning')"
+            "]"
+        )
+
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
                 EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
+                    loader_locator
                 )
             )
-        except TimeoutException:
-            pass
+
+        except TimeoutException as error:
+            self.driver.save_screenshot(
+                "supplier_loader_timeout.png"
+            )
+
+            raise AssertionError(
+                "The loader did not disappear before interacting "
+                "with the supplier form."
+            ) from error
+
+    def safe_screenshot(self, file_name):
+        try:
+            self.driver.save_screenshot(file_name)
+            print(f"Screenshot saved: {file_name}")
+        except Exception as screenshot_error:
+            print(
+                f"Could not save screenshot: "
+                f"{screenshot_error}"
+            )
+
+
 
     def Refresh_Page(self):
         try:

@@ -304,7 +304,7 @@ class Asset:
             except Exception as e:
                 print(f"Error on Click Account: {e}")
 
-    def Select_Supplier(self):
+    def Select_Supplier_Assets(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
 
@@ -337,7 +337,7 @@ class Asset:
         except Exception as e:
             print(f"Error on Click Account: {e}")
 
-    def Enter_Rate(self):
+    def Enter_Rate_Assets(self):
         try:
             enter_rate = WebDriverWait(self.driver, 30).until(
                     EC.visibility_of_element_located(self.rate))
@@ -349,29 +349,50 @@ class Asset:
                 print(f"Error on click:{e}")
                 time.sleep(.2)
 
-
     def Save_Asset(self):
+        wait = WebDriverWait(self.driver, 30)
 
-            try:
-                save_ref = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_asset))
-                time.sleep(.2)
-                save_ref.click()
-                time.sleep(.2)
+        save_button = wait.until(
+            EC.element_to_be_clickable((
+                By.XPATH,
+                "//div[contains(@class,'ms-Dialog-main')]//button[@title='Save']"
+            ))
+        )
 
-                # update_message = WebDriverWait(self.driver, 10).until(
-                #     EC.visibility_of_element_located(
-                #         (By.XPATH, "//*[contains(normalize-space(), 'Asset saved successfully with number')]"))
-                # )
-                #
-                # # Assert the presence of the success message
-                # assert update_message, "Reimbursement saved successfully"
+        save_button.click()
 
-                print("Test Case 16 - Pass: Asset saved successfully.")
+        wait.until(
+            EC.invisibility_of_element_located((
+                By.XPATH,
+                "//div[contains(@class,'ms-Dialog-main')]"
+            ))
+        )
 
-            except Exception as e:
-                print(f"Error: {e}")
+        print("PASS: Asset saved successfully.")
 
-                time.sleep(2)
+
+    # def Save_Asset(self):
+    #
+    #         try:
+    #             save_ref = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_asset))
+    #             time.sleep(.2)
+    #             save_ref.click()
+    #             time.sleep(.2)
+    #
+    #             # update_message = WebDriverWait(self.driver, 10).until(
+    #             #     EC.visibility_of_element_located(
+    #             #         (By.XPATH, "//*[contains(normalize-space(), 'Asset saved successfully with number')]"))
+    #             # )
+    #             #
+    #             # # Assert the presence of the success message
+    #             # assert update_message, "Reimbursement saved successfully"
+    #
+    #             print("Test Case 16 - Pass: Asset saved successfully.")
+    #
+    #         except Exception as e:
+    #             print(f"Error: {e}")
+    #
+    #             time.sleep(2)
 
     def wait_for_loader_to_disappear(self):
         try:

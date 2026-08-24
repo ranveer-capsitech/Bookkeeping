@@ -69,39 +69,31 @@ class Login(unittest.TestCase):
 
     def test_12_Go_Purchase_PO(self):
         client_section = Purchase_Order(driver=self.driver)
-        time.sleep(.2)
 
+        # Open company
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
-        time.sleep(3)
-        client_section.Click_Input()
-        time.sleep(.2)
-        client_section.Click_Purchases()
 
-        time.sleep(.5)
-        time.sleep(.2)
+        # Open Purchase Order section
+        client_section.Click_Input()
+        client_section.Click_Purchases()
         client_section.Purchase_Order()
-        time.sleep(.5)
         client_section.Click_Purchase_Order()
-        time.sleep(.2)
+
+        # Fill purchase order
         client_section.Select_Contact_Name()
-        time.sleep(.2)
         client_section.Add_Attachment()
-        time.sleep(.2)
         client_section.Click_Item_For_Invoice()
-        time.sleep(.2)
         client_section.Enter_Discount()
-        time.sleep(.2)
         client_section.Click_Enter_Notes()
-        time.sleep(.2)
         client_section.Enter_Notes()
-        time.sleep(.2)
+
+        # Save purchase order
         client_section.Save_PO()
-        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+
+        print("Purchase Order workflow completed successfully.")
 
 
     @classmethod

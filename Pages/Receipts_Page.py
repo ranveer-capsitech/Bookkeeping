@@ -45,7 +45,7 @@ class Receipts:
         self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
 
         self.receipts = (By.XPATH,
-                         "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[4]/span[1]/span[1]/span[1]")
+                         "//button[@role='tab' and @data-id='receipts' and .//span[normalize-space()='Receipts']]")
 
         self.add_receipts = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Receipt']")
         self.select_receive_from = (By.XPATH,
@@ -373,6 +373,8 @@ class Receipts:
     #     )
     #
     #     print("Receipt saved successfully.")
+
+
     def Save_Receipt(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
@@ -485,16 +487,33 @@ class Receipts:
         except Exception as e:
             print(f"Error on click:{e}")
 
-    def wait_for_loader_to_disappear(self):
-        try:
-            WebDriverWait(self.driver, 30).until(
-                EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
-                )
+    def wait_for_loader_to_disappear(self, timeout=30):
+        loader_locator = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'ms-Spinner') or "
+            "contains(@class,'ant-spin-spinning')"
+            "]"
+        )
+
+        WebDriverWait(
+            self.driver,
+            timeout,
+            poll_frequency=0.2
+        ).until(
+            EC.invisibility_of_element_located(
+                loader_locator
             )
-        except TimeoutException:
-            pass
+        )
+
+    def save_screenshot(self, file_name):
+        try:
+            self.driver.save_screenshot(file_name)
+            print(f"Screenshot saved: {file_name}")
+        except Exception as error:
+            print(f"Could not save screenshot: {error}")
 
     def Refresh_Page(self):
         try:

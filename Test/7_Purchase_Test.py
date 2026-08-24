@@ -63,45 +63,31 @@ class Login(unittest.TestCase):
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on purchase")
-
-
     def test_10_Go_Client_Purchase(self):
         client_section = ClientPurchase(driver=self.driver)
-        time.sleep(.2)
+
+        # Open company
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
-        time.sleep(3)
+
+        # Open Purchases section
         client_section.Click_Input()
-        time.sleep(.2)
-
         client_section.Click_Purchases()
-        time.sleep(.5)
-        time.sleep(.2)
 
+        # Create purchase invoice
         client_section.Add_Invoice()
-        time.sleep(.2)
         client_section.Select_Customer()
-        time.sleep(.2)
-
         client_section.Add_Attachment()
-        time.sleep(.2)
         client_section.Enter_Discount()
-        time.sleep(.2)
-        # client_section.Click_Enter_Notes()
-        # time.sleep(.2)
-        # client_section.Enter_Notes()
-        # time.sleep(.2)
-
         client_section.Select_item_purchase()
-        time.sleep(.5)
         client_section.Enter_amount()
-        time.sleep(2)
+
+        # Save invoice
         client_section.Save_Services()
-        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+
+        print("Client purchase workflow completed successfully.")
 
 
     @classmethod

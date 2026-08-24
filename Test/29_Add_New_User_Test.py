@@ -102,46 +102,35 @@ class Login(unittest.TestCase):
         Complete dependent workflow:
         1. Search company
         2. Select company
-        3. Open Expense claims
+        3. Open Expense Claims
         4. Create new user
-        5. Save user-- By: - Ranveer
+        5. Save user
         """
 
-        expense_claims_page = User(
-            driver=self.driver
-        )
-        time.sleep(.2)
+        expense_claims_page = User(driver=self.driver)
+
+        # Open company
         expense_claims_page.Select_Search()
-        time.sleep(5)
         expense_claims_page.Enter_Company()
-        time.sleep(.5)
         expense_claims_page.Click_Company()
-        time.sleep(.2)
+
+        # Open Expense Claims
         expense_claims_page.Click_Input()
-        time.sleep(.2)
         expense_claims_page.Click_Expense_Claims()
-        time.sleep(.5)
 
-
+        # Create user
         expense_claims_page.User_Section()
-        time.sleep(.2)
         expense_claims_page.Click_Add_User()
-        time.sleep(.2)
         expense_claims_page.Click_Name_Field()
-        time.sleep(.2)
         expense_claims_page.Select_Title()
-        time.sleep(.2)
         expense_claims_page.Enter_name()
-        time.sleep(.2)
-
         expense_claims_page.Enter_Ni_Number()
-        time.sleep(.2)
+
+        # Save user
         expense_claims_page.Save_User()
-        time.sleep(.2)
+        expense_claims_page.wait_for_loader_to_disappear()
 
-
-
-
+        print("New user created successfully.")
 
     @classmethod
     def tearDownClass(cls):

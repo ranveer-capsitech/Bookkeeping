@@ -1,4 +1,0 @@
-Click on Add invoice button successfully....!!
-Customer selected successfully....!!
-Invoice created successfully
-Test Case -4 :  Pass: Invoice created successfully.

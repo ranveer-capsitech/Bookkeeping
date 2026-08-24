@@ -372,7 +372,7 @@ class Mileage:
                     # )
                     #
                     # assert update_message, "Mileage saved successfully"
-                    print("Test Case : 12 - Pass: Mileage saved successfully.")
+                    print("Test Case : - Pass: Mileage saved successfully.")
 
             except Exception as e:
                 print(f"Error in Save_Expense: {e}")

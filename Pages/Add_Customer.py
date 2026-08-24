@@ -725,34 +725,64 @@ class Add_Customer:
 
 
 
+    # def Add_Attachment(self):
+    #     try:
+    #         driver = self.driver
+    #         wait = WebDriverWait(driver, 40)
+    #
+    #         #  Click attachment icon(Rv)
+    #         attach_icon = wait.until(EC.element_to_be_clickable(
+    #             (By.XPATH, "//i[@data-icon-name='Attachment']")
+    #         ))
+    #         driver.execute_script("arguments[0].click();", attach_icon)
+    #
+    #         #  Wait for file input to appear(Rv)
+    #         file_input = wait.until(EC.presence_of_element_located(
+    #             (By.XPATH, "//input[@type='file']")
+    #         ))
+    #         time.sleep(.5)
+    #
+    #         #  Upload file(Rv)
+    #         file_input.send_keys(
+    #             r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
+    #
+    #         )
+    #         time.sleep(.2)
+    #
+    #         print("File uploaded successfully!")
+    #
+    #     except Exception as e:
+    #         print(f"Error in upload: {e}")
+
     def Add_Attachment(self):
         try:
             driver = self.driver
-            wait = WebDriverWait(driver, 40)
+            wait = WebDriverWait(driver, 20)
 
-            #  Click attachment icon(Rv)
-            attach_icon = wait.until(EC.element_to_be_clickable(
-                (By.XPATH, "//i[@data-icon-name='Attachment']")
-            ))
-            driver.execute_script("arguments[0].click();", attach_icon)
+            file_path = r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
 
-            #  Wait for file input to appear(Rv)
-            file_input = wait.until(EC.presence_of_element_located(
-                (By.XPATH, "//input[@type='file']")
-            ))
-            time.sleep(.5)
-
-            #  Upload file(Rv)
-            file_input.send_keys(
-                r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx"
-
+            file_inputs = driver.find_elements(
+                By.XPATH,
+                "//input[@type='file']"
             )
-            time.sleep(.2)
+
+            if not file_inputs:
+                raise Exception(
+                    "File input is not available before clicking attachment icon"
+                )
+
+            file_input = file_inputs[0]
+
+            file_input.send_keys(file_path)
+
+            time.sleep(.5)
 
             print("File uploaded successfully!")
 
         except Exception as e:
             print(f"Error in upload: {e}")
+            raise
+
 
 
     def Save_customer(self):

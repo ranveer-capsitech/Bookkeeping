@@ -85,9 +85,9 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Select_Account()
         time.sleep(.2)
-        client_section.Select_Supplier()
+        client_section.Select_Supplier_Assets()
         time.sleep(.2)
-        client_section.Enter_Rate()
+        client_section.Enter_Rate_Assets()
         time.sleep(.2)
         client_section.Save_Asset()
         time.sleep(.2)
@@ -103,7 +103,7 @@ class Login(unittest.TestCase):
         # time.sleep(.2)
         #
         # client_section.Click_Asset()
-        time.sleep(.2)
+        # time.sleep(.2)
 
         client_section.Disposed()
         time.sleep(.2)

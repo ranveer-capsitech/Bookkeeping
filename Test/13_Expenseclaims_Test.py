@@ -64,51 +64,36 @@ class Login(unittest.TestCase):
 
     @pytest.mark.navigation("Login >> Admin Dashboard >> Bookkeeping >> Client ")
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> expense-claims")
-
-
     def test_15_Expense_claims(self):
         client_section = Expenseclaims(driver=self.driver)
-        time.sleep(.2)
+
+        # Open company
         client_section.Select_Search()
-        time.sleep(5)
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
-        time.sleep(3)
+
+        # Open Expense Claims
         client_section.Click_Input()
-        time.sleep(.2)
-
         client_section.Click_Expense_Claims()
-        time.sleep(.5)
-        time.sleep(.2)
-
-
         client_section.Click_Expense_Claims_Button()
-        time.sleep(.2)
+
+        # Fill claim details
         client_section.Select_Directors()
-        time.sleep(.2)
         client_section.Enter_Remark()
-        time.sleep(.2)
         client_section.Add_Attachment()
-        time.sleep(.2)
 
-
+        # Fill expense details
         client_section.Enter_Bill_No()
-        time.sleep(.2)
         client_section.Enter_Description()
-        time.sleep(.2)
         client_section.Select_Account()
-        time.sleep(.2)
         client_section.Base_Amount()
-        time.sleep(.2)
         client_section.Select_Vat()
-        time.sleep(10)
+
+        # Save expense
         client_section.Save_Expense()
-        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
 
-
-
+        print("Expense claim created successfully.")
 
 
 

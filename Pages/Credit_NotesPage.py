@@ -45,6 +45,11 @@ class Credit_Notes:
 
         self.click_input_drop_down = (By.XPATH,"//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+        self.credit_notes_tab_main = (
+            By.XPATH,
+            "//button[@role='tab' and @data-id='credit-notes' "
+            "and .//span[normalize-space()='Credit notes']]"
+        )
 
         self.click_credit_notes = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[2]/span[1]")
         self.credit_notes = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Credit note']")
@@ -182,6 +187,17 @@ class Credit_Notes:
         try:
             click_credit_notes = WebDriverWait(self.driver, 30).until(
                 EC.element_to_be_clickable(self.click_credit_notes))
+            time.sleep(.2)
+            click_credit_notes.click()
+            time.sleep(.2)
+            print("click on credit section successfully......!!")
+        except Exception as e:
+            print(f"Error on click:{e}")
+
+    def Click_Credit_Notes_Main(self):
+        try:
+            click_credit_notes = WebDriverWait(self.driver, 30).until(
+                EC.element_to_be_clickable(self.credit_notes_tab_main))
             time.sleep(.2)
             click_credit_notes.click()
             time.sleep(.2)

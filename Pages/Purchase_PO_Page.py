@@ -61,6 +61,14 @@ class Purchase_Order:
 
 
         self.save_po = (By.XPATH, "//button[.//span[normalize-space(text())='Save']]")
+        self.contact_name_input = (
+            By.XPATH,
+            "//label["
+            "contains(normalize-space(),'Contact name') or "
+            "contains(normalize-space(),'Supplier')"
+            "]/following::input[@role='combobox'][1]"
+        )
+
 
 
 
@@ -177,16 +185,70 @@ class Purchase_Order:
                 print(f"Error on click:{e}")
 
     def Click_Purchase_Order(self):
-            try:
-                purchase_order = WebDriverWait(self.driver, 30).until(
-                    EC.visibility_of_element_located(self.click_purchase_order))
-                time.sleep(.2)
-                purchase_order.click()
-                time.sleep(.2)
+        driver = self.driver
+        wait = WebDriverWait(driver, 25)
 
-                print("Click on purchase order successfully....!!")
-            except Exception as e:
-                print(f"Error on click:{e}")
+        try:
+            self.wait_for_loader_to_disappear()
+
+            add_po_button = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_purchase_order
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                add_po_button
+            )
+
+            try:
+                add_po_button.click()
+            except ElementClickInterceptedException:
+                self.wait_for_loader_to_disappear()
+
+                add_po_button = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_purchase_order
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    add_po_button
+                )
+
+            # Wait until form is actually open
+            wait.until(
+                EC.presence_of_element_located(
+                    self.contact_name_input
+                )
+            )
+
+            self.wait_for_loader_to_disappear()
+
+            print("Purchase Order form opened successfully.")
+
+        except Exception as error:
+            driver.save_screenshot(
+                "open_purchase_order_form_failure.png"
+            )
+
+            raise AssertionError(
+                f"Could not open Purchase Order form: {error}"
+            ) from error
+
+    # def Click_Purchase_Order(self):
+    #         try:
+    #             purchase_order = WebDriverWait(self.driver, 30).until(
+    #                 EC.visibility_of_element_located(self.click_purchase_order))
+    #             time.sleep(.2)
+    #             purchase_order.click()
+    #             time.sleep(.2)
+    #
+    #             print("Click on purchase order successfully....!!")
+    #         except Exception as e:
+    #             print(f"Error on click:{e}")
 
     def Select_Contact_Name(self):
             d = self.driver
@@ -351,18 +413,37 @@ class Purchase_Order:
                 driver.execute_script("arguments[0].click();", save_btn)
 
             time.sleep(1)
-            print("Test Case -09 :  Pass:  Purchase Order saved successfully!")
+            print("Test Case  :  Pass:  Purchase Order saved successfully!")
 
-    def wait_for_loader_to_disappear(self):
+    def wait_for_loader_to_disappear(self, timeout=25):
+        loader = (
+            By.XPATH,
+            "//*["
+            "contains(@class,'spinner') or "
+            "contains(@class,'loading') or "
+            "contains(@class,'ms-Spinner') or "
+            "contains(@class,'ant-spin-spinning') or "
+            "contains(@class,'overlay')"
+            "]"
+        )
+
         try:
-            WebDriverWait(self.driver, 30).until(
-                EC.invisibility_of_element_located(
-                    (By.XPATH,
-                     "//*[contains(@class,'spinner') or contains(@class,'loading') or contains(@class,'ms-Spinner')]")
-                )
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
+                EC.invisibility_of_element_located(loader)
             )
-        except TimeoutException:
-            pass
+
+        except TimeoutException as error:
+            self.driver.save_screenshot(
+                "purchase_order_loader_timeout.png"
+            )
+
+            raise AssertionError(
+                "Loader or overlay did not disappear."
+            ) from error
 
     def Refresh_Page(self):
         try:

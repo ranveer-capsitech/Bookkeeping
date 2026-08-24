@@ -125,7 +125,6 @@ class Login(unittest.TestCase):
         time.sleep(.3)
 
 
-
         client_section.Store_Current_Vat_Page_URL()
 
         client_section.Verify_And_Return_To_Expected_Vat_Page()
@@ -133,7 +132,7 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-#------------------------------------------------------HMRC completed---------------------------------------------------
+#------------------------------------------------------HMRC Completed---------------------------------------------------
 
         client_section.Click_Edit()
         time.sleep(.3)
@@ -144,7 +143,7 @@ class Login(unittest.TestCase):
         client_section.Click_Save()
         time.sleep(2)
 
-#------------------------------edit vat details ----------------------------------------------------------------------------
+#------------------------------Edit vat details ----------------------------------------------------------------------------
 
 
         client_section.Click_VAT_return()

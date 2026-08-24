@@ -581,6 +581,7 @@ class ClientSell:
             except TimeoutException:
                 pass
 
+
     def Select_Filter(self):
         wait = WebDriverWait(self.driver, 20)
 
@@ -1061,6 +1062,8 @@ class ClientSell:
             raise AssertionError(
                 f"Could not select Monzo account: {error}"
             ) from error
+
+
 
 
 

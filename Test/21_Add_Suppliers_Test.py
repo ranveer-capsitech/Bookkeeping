@@ -65,76 +65,55 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for supplier >> click on sell>> click on add supplier section")
 
 
-
     def test_04_Go_Supplier(self):
         client_section = Add_Supplier(driver=self.driver)
-        time.sleep(.2)
 
-        client_section. Select_Search()
-        time.sleep(5)
+        # Open company
+        client_section.Select_Search()
         client_section.Enter_Company()
-        time.sleep(.2)
         client_section.Click_Company()
-        time.sleep(.2)
+
+        # Open supplier section
         client_section.Click_Input()
-        time.sleep(.2)
+
         client_section.Click_Purchase()
-        time.sleep(.2)
-
         client_section.Select_Suppliers_Section()
-        time.sleep(.2)
-
         client_section.Click_On_Add_Suppliers()
-        time.sleep(.2)
 
-
+        # Supplier details
         client_section.Enter_Suppliers_Name()
-        time.sleep(.2)
+
+        # Billing address
         client_section.Click_Billing_Field()
-        time.sleep(.2)
         client_section.Enter_Building()
-        time.sleep(.2)
         client_section.Enter_Street()
-        time.sleep(.2)
         client_section.Enter_City()
-        time.sleep(.2)
         client_section.Enter_County()
-        time.sleep(.2)
         client_section.Select_Country()
-        time.sleep(.2)
         client_section.Enter_Postcode()
-        time.sleep(.2)
+
+        # Contact details
         client_section.Click_Contact_Person()
-        time.sleep(.2)
-
         client_section.First_Name()
-        time.sleep(.2)
         client_section.Enter_Name()
-        time.sleep(.2)
         client_section.Enter_Contact_Number()
-        time.sleep(.2)
         client_section.Enter_Mail()
-        time.sleep(.2)
+
+        # Account and tax details
         client_section.Account_name()
-        time.sleep(.2)
         client_section.Select_Vat()
-        time.sleep(.2)
         client_section.Enter_Vat()
-        time.sleep(.2)
         client_section.Enter_EORI()
-        time.sleep(.2)
         client_section.Sort_Code()
-        time.sleep(.2)
         client_section.Account_Number()
-        time.sleep(.2)
         client_section.Project_tags()
-        time.sleep(.2)
+
+        # Attachment and save
         client_section.Add_Attachment()
-        time.sleep(.2)
         client_section.Save_Suppliers()
-        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
 
-
+        print("Supplier created successfully.")
 
     @classmethod
     def tearDownClass(cls):

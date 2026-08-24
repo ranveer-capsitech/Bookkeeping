@@ -63,76 +63,120 @@ class Login(unittest.TestCase):
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell>> credit_notes_section")
 
     def test_04_Go_Client_Sell(self):
+
         credit_notes_section = Credit_Notes(driver=self.driver)
-        time.sleep(.2)
 
+        # Open company
         credit_notes_section.Select_Search()
-        time.sleep(5)
         credit_notes_section.Enter_Company()
-        time.sleep(.2)
         credit_notes_section.Click_Company()
-        time.sleep(.2)
 
-
+        # Open Credit Notes
         credit_notes_section.Click_Input()
-        time.sleep(.2)
         credit_notes_section.Click_Sales()
-        time.sleep(.2)
         credit_notes_section.Click_Credit_Notes()
-        time.sleep(.2)
         credit_notes_section.Add_Credit_Note()
-        time.sleep(.2)
+
+        # Fill credit note form
         credit_notes_section.Select_Customer_for_Credit_Note()
-        time.sleep(.2)
         credit_notes_section.Invoice_ref()
-        time.sleep(.2)
         credit_notes_section.Add_Attachment()
-        time.sleep(.2)
         credit_notes_section.Enter_Discount()
-        time.sleep(.2)
         credit_notes_section.Click_Enter_Notes()
-        time.sleep(.3)
         credit_notes_section.Enter_Notes()
-        time.sleep(.2)
+
+        # Save credit note
         credit_notes_section.Save_Credit_Notes()
-        time.sleep(.2)
-        # credit_notes_section.Paid_From()
+        credit_notes_section.Click_Save_Button()
+        credit_notes_section.wait_for_loader_to_disappear()
+
+        # Validate listing
+        credit_notes_section.Enter_Search()
+        credit_notes_section.Remove_Search()
+        credit_notes_section.wait_for_loader_to_disappear()
+        credit_notes_section.wait_for_spinner_to_disappear()
+
+        # Validate date filter
+        credit_notes_section.Change_Date_Calendar()
+        credit_notes_section.wait_for_loader_to_disappear()
+
+        # Validate sorting/filter
+        credit_notes_section.Select_Filter()
+        credit_notes_section.wait_for_loader_to_disappear()
+
+        # Download credit note
+        credit_notes_section.Download_Invoice()
+
+        print("Credit note workflow completed successfully.")
+        # time.sleep(.2)
+        #
+        # credit_notes_section.Select_Search()
+        # time.sleep(5)
+        # credit_notes_section.Enter_Company()
+        # time.sleep(.2)
+        # credit_notes_section.Click_Company()
+        # time.sleep(.2)
+        #
+        #
+        # credit_notes_section.Click_Input()
+        # time.sleep(.2)
+        # credit_notes_section.Click_Sales()
+        # time.sleep(.2)
+        # credit_notes_section.Click_Credit_Notes()
+        # time.sleep(.2)
+        # credit_notes_section.Add_Credit_Note()
+        # time.sleep(.2)
+        # credit_notes_section.Select_Customer_for_Credit_Note()
+        # time.sleep(.2)
+        # credit_notes_section.Invoice_ref()
+        # time.sleep(.2)
+        # credit_notes_section.Add_Attachment()
+        # time.sleep(.2)
+        # credit_notes_section.Enter_Discount()
+        # time.sleep(.2)
+        # credit_notes_section.Click_Enter_Notes()
+        # time.sleep(.3)
+        # credit_notes_section.Enter_Notes()
         # time.sleep(.2)
         # credit_notes_section.Save_Credit_Notes()
         # time.sleep(.2)
-        # credit_notes_section.Paid_From()
+        # # credit_notes_section.Paid_From()
+        # # time.sleep(.2)
+        # # credit_notes_section.Save_Credit_Notes()
+        # # time.sleep(.2)
+        # # credit_notes_section.Paid_From()
+        # # time.sleep(.2)
+        # credit_notes_section.Click_Save_Button()
         # time.sleep(.2)
-        credit_notes_section.Click_Save_Button()
-        time.sleep(.2)
-
-        credit_notes_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
-
-        credit_notes_section.Enter_Search()
-        time.sleep(.5)
-        credit_notes_section.Remove_Search()
-        time.sleep(.2)
-        credit_notes_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
-        credit_notes_section.wait_for_spinner_to_disappear()
-        time.sleep(.2)
-
-        credit_notes_section.Change_Date_Calendar()
-        time.sleep(1)
-        credit_notes_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
-
-        credit_notes_section.Select_Filter()
-        time.sleep(.2)
-        # credit_notes_section.Hide_Reports()
-        # time.sleep(.2)
-        # credit_notes_section.Change_Pagination()
+        #
         # credit_notes_section.wait_for_loader_to_disappear()
         # time.sleep(.2)
-
-        credit_notes_section.Download_Invoice()
-        time.sleep(2)
-
+        #
+        # credit_notes_section.Enter_Search()
+        # time.sleep(.5)
+        # credit_notes_section.Remove_Search()
+        # time.sleep(.2)
+        # credit_notes_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
+        # credit_notes_section.wait_for_spinner_to_disappear()
+        # time.sleep(.2)
+        #
+        # credit_notes_section.Change_Date_Calendar()
+        # time.sleep(1)
+        # credit_notes_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
+        #
+        # credit_notes_section.Select_Filter()
+        # time.sleep(.2)
+        # # credit_notes_section.Hide_Reports()
+        # # time.sleep(.2)
+        # # credit_notes_section.Change_Pagination()
+        # # credit_notes_section.wait_for_loader_to_disappear()
+        # # time.sleep(.2)
+        #
+        # credit_notes_section.Download_Invoice()
+        # time.sleep(2)
+        #
 
 
 
