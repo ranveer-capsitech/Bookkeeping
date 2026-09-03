@@ -2222,6 +2222,7 @@ class Banking_Credit_card:
 
             print("Clicked on 2nd last entry checkbox successfully.")
 
+
     def Click_Quick_Fill(self):
             try:
                 quick = WebDriverWait(self.driver, 40).until(

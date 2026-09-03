@@ -48,10 +48,21 @@ class ClientSell:
 
 
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
-        self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
-        self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+        # self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
+        # self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
 
-#---------------------------------------------invoice-------------- ----------------------------------------------------
+        self.click_input_drop_down = (
+            By.XPATH,
+            "//a[@id='inputs' and @data-value='inputs']"
+        )
+
+        self.click_sales = (
+            By.XPATH,
+            "//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Sales']"
+        )
+
+        #---------------------------------------------invoice-------------- ----------------------------------------------------
 
         self.invoice = (By.XPATH, "(//span[contains(text(),'Invoice')])[1]")
         self.click_invoice_section = (
@@ -186,27 +197,184 @@ class ClientSell:
 #-----------------------------------------------------------------------------------------------------------------------
 
 
-    def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #     try:
+    #         input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    #
+    # def Click_Sales(self):
+    #     try:
+    #         sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
+    #         time.sleep(.2)
+    #         sales.click()
+    #         time.sleep(.2)
+    #         print("Click on Sales successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
+    #         time.sleep(.2)
 
+    def Click_Input(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+            input_locator = (
+                By.XPATH,
+                "//a[@id='inputs' and @data-value='inputs']"
+            )
+
+            # Always fetch fresh element
+            input_menu = wait.until(
+                EC.presence_of_element_located(
+                    input_locator
+                )
+            )
+
+            expanded = input_menu.get_attribute(
+                "aria-expanded"
+            )
+
+            print(
+                "Inputs before click aria-expanded:",
+                expanded
+            )
+
+            if expanded != "true":
+                # Fresh locate immediately before click
+                input_menu = wait.until(
+                    EC.element_to_be_clickable(
+                        input_locator
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    input_menu
+                )
+
+            # Verify Inputs actually expanded
+            wait.until(
+                lambda driver:
+                driver.find_element(
+                    *input_locator
+                ).get_attribute(
+                    "aria-expanded"
+                ) == "true"
+            )
+
+            print(
+                "Inputs dropdown opened successfully....!!"
+            )
+
+        except Exception as e:
+            print(
+                f"Error opening Inputs dropdown: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Click_Sales(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        # IMPORTANT:
+        # Directly locate clickable anchor.
+        sales_locator = (
+            By.XPATH,
+            "//a[.//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Sales']]"
+        )
+
         try:
-            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
-            time.sleep(.2)
-            sales.click()
-            time.sleep(.2)
-            print("Click on Sales successfully....!!")
+
+            # Wait until a fresh Sales <a> exists
+            wait.until(
+                EC.presence_of_element_located(
+                    sales_locator
+                )
+            )
+
+            # Re-find immediately before clicking
+            sales = wait.until(
+                EC.element_to_be_clickable(
+                    sales_locator
+                )
+            )
+
+            self.driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center'
+                });
+                """,
+                sales
+            )
+
+            # Re-fetch AGAIN because scrolling can also
+            # trigger Fluent UI rendering
+            sales = wait.until(
+                EC.element_to_be_clickable(
+                    sales_locator
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].click();",
+                sales
+            )
+
+            print(
+                "Sales section clicked successfully....!!"
+            )
+
+        except TimeoutException:
+
+            print(
+                "Sales menu was not available after "
+                "Inputs expansion."
+            )
+
+            # Debug current visible navigation
+            nav_items = self.driver.find_elements(
+                By.XPATH,
+                "//div[contains(@class,'ms-NavItemName')]"
+            )
+
+            print("Current navigation items:")
+
+            for item in nav_items:
+                try:
+                    if item.is_displayed():
+                        print(
+                            "-",
+                            item.text
+                        )
+                except StaleElementReferenceException:
+                    pass
+
+            raise
+
         except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+            print(
+                f"Error while clicking Sales: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
 
 

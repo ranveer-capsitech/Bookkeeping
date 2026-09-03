@@ -73,19 +73,31 @@ class Login(unittest.TestCase):
         )
 
         client_section.Select_Search()
+        time.sleep(1)
         client_section.Enter_Company()
+        time.sleep(.2)
         client_section.Click_Company()
+        time.sleep(.2)
 
-        client_section.Click_Input()
-        client_section.Click_Purchases()
+        # client_section.Click_Input()
+        # client_section.Click_Purchases()
+
+        client_section.Click_Input_Purchases()
+        time.sleep(.2)
 
         client_section.Payment_Section()
+        time.sleep(.2)
         client_section.Click_Payment()
+        time.sleep(.2)
 
         client_section.Paid_To_Supplier()
+        time.sleep(.2)
         client_section.Select_Account()
+        time.sleep(.2)
         client_section.Enter_Amount()
+        time.sleep(.2)
         client_section.Save_payment()
+        time.sleep(.2)
 
         client_section.wait_for_loader_to_disappear()
 
@@ -93,8 +105,6 @@ class Login(unittest.TestCase):
             "Purchase payment workflow completed successfully."
         )
     #-------------------------------------------------------------------------------------------------------------------
-
-
 
 
 

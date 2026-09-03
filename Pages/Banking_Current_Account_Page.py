@@ -624,27 +624,58 @@ class Banking:
 
             time.sleep(2)
 
+    # def Click_Upload(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #         file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
+    #
+    #         file_input = wait.until(
+    #             EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+    #         )
+    #
+    #
+    #
+    #         self.driver.execute_script("""
+    #             arguments[0].style.display = 'block';
+    #             arguments[0].style.visibility = 'visible';
+    #             arguments[0].style.opacity = 1;
+    #         """, file_input)
+    #
+    #         file_input.send_keys(file_path)
+    #
+    #         print("File uploaded successfully.....!!")
+    #
+    #     except Exception as e:
+    #         print(f"Error: {e}")
+    #         raise
+
     def Click_Upload(self):
         try:
             wait = WebDriverWait(self.driver, 40)
+
             file_path = r"C:\Users\CT_USER\Desktop\test\Demo Bank Statement.csv"
 
+            # Locate the actual WebElement
             file_input = wait.until(
-                EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
+                EC.presence_of_element_located(
+                    (
+                        By.XPATH,
+                        "//div[@role='dialog']"
+                        "[.//*[normalize-space()='Bank Transactions']]"
+                        "//input[@type='file' and @accept='.csv']"
+                    )
+                )
             )
 
-            self.driver.execute_script("""
-                arguments[0].style.display = 'block';
-                arguments[0].style.visibility = 'visible';
-                arguments[0].style.opacity = 1;
-            """, file_input)
+            print("CSV input found successfully.")
 
+            # No JavaScript required for file input
             file_input.send_keys(file_path)
 
-            print("File uploaded successfully.....!!")
+            print("Bank Statement uploaded successfully.....!!")
 
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Error in Click_Upload: {type(e).__name__} - {e}")
             raise
 
 

@@ -117,7 +117,7 @@ class Login(unittest.TestCase):
             client_section.Click_Import()
             time.sleep(.2)
             client_section.Click_Templet()
-            time.sleep(.2)
+            time.sleep(50)
             client_section.Click_Upload()
             time.sleep(.2)
             client_section.Upload_Import()

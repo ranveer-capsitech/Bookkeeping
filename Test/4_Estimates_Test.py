@@ -68,33 +68,54 @@ class Login(unittest.TestCase):
             client_section = Estimates(driver=self.driver)
 
             client_section.Select_Search()
+            time.sleep(0.5)
             client_section.Enter_Company()
+            time.sleep(0.5)
             client_section.Click_Company()
+            time.sleep(0.5)
 
             client_section.Click_Input()
+            time.sleep(0.5)
             client_section.Click_Sales()
+            time.sleep(0.5)
 
             client_section.Select_Estimates()
+            time.sleep(0.5)
             client_section.Add_Estimates()
+            time.sleep(0.5)
 
             client_section.Select_Customer_for_Estimate()
+            time.sleep(0.5)
             client_section.Select_item()
+            time.sleep(0.5)
 
             client_section.Add_Attachment()
+            time.sleep(0.5)
+
             client_section.Enter_Discount()
+            time.sleep(0.5)
 
             client_section.Click_Enter_Notes()
+            time.sleep(0.5)
             client_section.Enter_Notes()
+            time.sleep(0.5)
 
             client_section.Click_Save_Estimation()
+            time.sleep(0.5)
             client_section.wait_for_loader_to_disappear()
+            time.sleep(0.5)
 
             client_section.Download_Invoice()
+            time.sleep(0.5)
             client_section.wait_for_loader_to_disappear()
+            time.sleep(0.5)
 
             client_section.Create_Direct_Invoice()
+            time.sleep(0.5)
             client_section.Save_Direct_Invoice()
+            time.sleep(0.5)
             client_section.wait_for_loader_to_disappear()
+            time.sleep(0.5)
 
             print(
                 "Estimate workflow completed successfully."

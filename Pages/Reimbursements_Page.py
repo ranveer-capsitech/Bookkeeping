@@ -133,25 +133,116 @@ class Reimbursement:
 
     # -----------------------------------------------------------------------------------------------------------------------
 
-    def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #     try:
+    #         input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    # def Click_Expense_Claims(self):
+    #     try:
+    #         claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
+    #         time.sleep(.2)
+    #         claims.click()
+    #         time.sleep(.2)
+    #         print("Click on Expense claims successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
 
-    def Click_Expense_Claims(self):
+    def Click_Input_Expense(self):
+
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
         try:
-            claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
-            time.sleep(.2)
-            claims.click()
-            time.sleep(.2)
-            print("Click on Expense claims successfully....!!")
+            # -----------------------------
+            # STEP 1 : Open Inputs dropdown
+            # -----------------------------
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                input_arrow
+            )
+
+            # Fresh locate before click
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].click();",
+                input_arrow
+            )
+
+            print("Inputs dropdown arrow clicked....!!")
+
+            # -----------------------------
+            # STEP 2 : Wait for Purchases
+            # -----------------------------
+            expense = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_expense_claims
+                )
+            )
+
+            print("expense menu visible....!!")
+
+            # -----------------------------
+            # STEP 3 : Click immediately
+            # -----------------------------
+            expense = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_expense_claims
+                )
+            )
+
+            self.driver.execute_script(
+                """
+                const element = arguments[0];
+
+                const clickable =
+                    element.closest('a') ||
+                    element.closest('button') ||
+                    element;
+
+                clickable.click();
+                """,
+                expense
+            )
+
+            print("Click on Expense successfully....!!")
+
+        except TimeoutException:
+            print(
+                "Timeout: Inputs opened but "
+                "Expense menu was not available."
+            )
+            raise
+
         except Exception as e:
-            print(f"Error on Click:{e}")
+            print(
+                f"Error while opening Inputs/Expense: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
+
+
 
     def Reimbursed_Section(self):
         try:

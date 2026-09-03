@@ -2,7 +2,7 @@
 from faker import Faker
 import platform, time
 
-from selenium.common import TimeoutException
+from selenium.common import TimeoutException, StaleElementReferenceException
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -133,26 +133,219 @@ class Items:
 #-----------------------------------------------------------------------------------------------------------------------
 
 
-    def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #     try:
+    #         input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    #
+    # def Click_Sales(self):
+    #     try:
+    #         sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
+    #         time.sleep(.2)
+    #         sales.click()
+    #         time.sleep(.2)
+    #         print("Click on Sales successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
 
+    def Click_Input(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+            # Locate the actual dropdown chevron
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                input_arrow
+            )
+
+            # Re-find immediately before clicking
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            # Click ChevronDown directly
+            self.driver.execute_script(
+                "arguments[0].click();",
+                input_arrow
+            )
+
+            print("Inputs dropdown arrow clicked....!!")
+
+            # Wait for Sales submenu to REALLY appear
+            sales = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_sales
+                )
+            )
+
+            print(
+                "Inputs dropdown opened successfully - "
+                "Sales menu is visible....!!"
+            )
+
+        except TimeoutException:
+            print(
+                "Inputs arrow clicked, but Sales menu "
+                "did not become visible."
+            )
+
+            # Debug current state
+            try:
+                inputs = self.driver.find_element(
+                    By.ID,
+                    "inputs"
+                )
+
+                print(
+                    "Inputs aria-expanded:",
+                    inputs.get_attribute("aria-expanded")
+                )
+
+                print(
+                    "Inputs HTML:",
+                    inputs.get_attribute("outerHTML")
+                )
+
+            except Exception:
+                pass
+
+            raise
+
+        except Exception as e:
+            print(
+                f"Error opening Inputs dropdown: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Click_Sales(self):
+
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        input_arrow_locator = (
+            By.XPATH,
+            "//a[@id='inputs']//i[@data-icon-name='ChevronDown']"
+        )
+
+        sales_locator = (
+            By.XPATH,
+            "//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Sales']"
+        )
+
         try:
-            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
-            time.sleep(.2)
-            sales.click()
-            time.sleep(.2)
-            print("Click on Sales successfully....!!")
+
+            # -----------------------------------
+            # STEP 1 - Open Inputs
+            # -----------------------------------
+
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    input_arrow_locator
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                input_arrow
+            )
+
+            # Re-find before click because Fluent UI may refresh DOM
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    input_arrow_locator
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].click();",
+                input_arrow
+            )
+
+            print("Inputs dropdown arrow clicked....!!")
+
+            # -----------------------------------
+            # STEP 2 - Wait for Sales
+            # -----------------------------------
+
+            sales = wait.until(
+                EC.visibility_of_element_located(
+                    sales_locator
+                )
+            )
+
+            print("Sales menu visible....!!")
+
+            # -----------------------------------
+            # STEP 3 - Click Sales immediately
+            # -----------------------------------
+
+            # Re-find Sales immediately before click
+            sales = wait.until(
+                EC.visibility_of_element_located(
+                    sales_locator
+                )
+            )
+
+            # Perform finding parent + clicking in one JS operation
+            self.driver.execute_script(
+                """
+                var el = arguments[0];
+
+                var clickable =
+                    el.closest('a') ||
+                    el.closest('button') ||
+                    el;
+
+                clickable.click();
+                """,
+                sales
+            )
+
+            print("Sales section clicked successfully....!!")
+
+        except TimeoutException:
+
+            print(
+                "Timeout: Inputs opened but Sales "
+                "menu could not be clicked."
+            )
+
+            raise
+
         except Exception as e:
-            print(f"Error on Click:{e}")
+
+            print(
+                f"Error opening Inputs / Sales: "
+                f"{type(e).__name__} - {e}"
+            )
+
+            raise
+
 
     def Item(self):
         try:

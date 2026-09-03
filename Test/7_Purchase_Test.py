@@ -68,24 +68,40 @@ class Login(unittest.TestCase):
 
         # Open company
         client_section.Select_Search()
+        time.sleep(.2)
         client_section.Enter_Company()
+        time.sleep(.2)
         client_section.Click_Company()
+        time.sleep(.2)
 
         # Open Purchases section
-        client_section.Click_Input()
-        client_section.Click_Purchases()
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        # client_section.Click_Purchases()
+        # time.sleep(.2)
+
+        client_section.Click_Input_Purchases()
+        time.sleep(.2)
 
         # Create purchase invoice
         client_section.Add_Invoice()
+        time.sleep(.2)
         client_section.Select_Customer()
+        time.sleep(.2)
         client_section.Add_Attachment()
+        time.sleep(.2)
         client_section.Enter_Discount()
+        time.sleep(.2)
         client_section.Select_item_purchase()
+        time.sleep(.2)
         client_section.Enter_amount()
+        time.sleep(.2)
 
         # Save invoice
         client_section.Save_Services()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         print("Client purchase workflow completed successfully.")
 

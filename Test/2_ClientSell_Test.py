@@ -91,50 +91,80 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
+
     @pytest.mark.description(f"Go to Select Admin panel >> click Home >> click bookkeeping >> go for Client >> click on sell >> invoice")
+
 
     def test_05_Add_New_Invoice(self):
         client_section = ClientSell(driver=self.driver)
 
+
         # Create invoice
         client_section.Add_Invoice()
+        time.sleep(.2)
         client_section.Select_Customer_Keyboard()
+        time.sleep(.2)
         client_section.Add_Attachment()
+        time.sleep(.2)
         client_section.Select_item_sale()
+        time.sleep(.2)
         client_section.Enter_Discount()
+        time.sleep(.2)
         client_section.Click_Save()
+        time.sleep(.2)
 
         # Wait only until save processing completes
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         # Invoice listing validations
         client_section.Enter_Search()
+        time.sleep(.2)
         client_section.Remove_Search()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
         client_section.wait_for_spinner_to_disappear()
+        time.sleep(.2)
 
         client_section.Change_Date_Calendar()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         client_section.Select_Filter()
+        time.sleep(.2)
         client_section.Hide_Reports()
+        time.sleep(.2)
         client_section.Change_Pagination()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         # Clone invoice
         client_section.Click_Three_Dot()
+        time.sleep(.2)
         client_section.Click_Clone()
+        time.sleep(.2)
         client_section.Clone_Save()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         # Mark as bad debt
         client_section.Click_Three_Dot()
+        time.sleep(.2)
         client_section.Bad_Debts()
+        time.sleep(.2)
         client_section.Bad_Debts_Save()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         # Download invoice
+
         client_section.Download_Invoice()
+        time.sleep(.2)
 
         print("Invoice workflow completed successfully.")
 

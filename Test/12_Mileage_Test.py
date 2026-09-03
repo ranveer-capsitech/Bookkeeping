@@ -72,28 +72,38 @@ class Login(unittest.TestCase):
 
         # Open company
         client_section.Select_Search()
+        time.sleep(1)
         client_section.Enter_Company()
+        time.sleep(1)
         client_section.Click_Company()
+        time.sleep(1)
 
-        # Open Expense Claims
-        client_section.Click_Input()
-        client_section.Click_Expense_Claims()
 
-        # Open Mileage form
-        client_section.Mileages_Section()
+        client_section.Click_Input_Mileage()
+        time.sleep(.2)
+
         client_section.Click_Mileages()
+        time.sleep(.2)
 
         # Fill mileage details
         client_section.Select_Directors()
+        time.sleep(.2)
         client_section.Enter_Remark_Mileages()
+        time.sleep(.2)
         client_section.Engine_Type()
+        time.sleep(.2)
         client_section.Enter_Description_Mileage()
+        time.sleep(.2)
         client_section.Mileage()
+        time.sleep(.2)
         client_section.Select_Rate()
+        time.sleep(.2)
 
         # Save mileage
         client_section.Save_Mileage()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
 
         print("Mileage workflow completed successfully.")
 

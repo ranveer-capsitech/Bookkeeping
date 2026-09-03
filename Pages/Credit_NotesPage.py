@@ -43,8 +43,25 @@ class Credit_Notes:
         self.click_company = (By.XPATH, "//a[@title='RDX LIMITED' and contains(@href,'/books/clients/')]")
 
 
-        self.click_input_drop_down = (By.XPATH,"//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
-        self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+        # self.click_input_drop_down = (By.XPATH,"//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
+
+        self.click_input_drop_down = (
+            By.XPATH,
+            "//a[@id='inputs' and @data-value='inputs']"
+        )
+
+
+
+        # self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+
+        self.click_sales = (
+            By.XPATH,
+            "//a[@aria-label='Sales']"
+        )
+
+
+
+
         self.credit_notes_tab_main = (
             By.XPATH,
             "//button[@role='tab' and @data-id='credit-notes' "
@@ -161,26 +178,166 @@ class Credit_Notes:
 #------------------------------------------------------------------------------------------------------------------------
 
 
-    def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #     try:
+    #         input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
 
+    def Click_Input(self):
+        wait = WebDriverWait(self.driver, 30)
+
+        try:
+            # Find actual Inputs <a> element
+            input_menu = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_input_drop_down
+                )
+            )
+
+            # Check current state
+            expanded = input_menu.get_attribute("aria-expanded")
+            print("Inputs before click aria-expanded:", expanded)
+
+            # Click only when collapsed
+            if expanded != "true":
+
+                try:
+                    input_menu.click()
+
+                except StaleElementReferenceException:
+                    input_menu = wait.until(
+                        EC.element_to_be_clickable(
+                            self.click_input_drop_down
+                        )
+                    )
+                    input_menu.click()
+
+                except Exception:
+                    # Fresh locate before JS click
+                    input_menu = wait.until(
+                        EC.presence_of_element_located(
+                            self.click_input_drop_down
+                        )
+                    )
+
+                    self.driver.execute_script(
+                        "arguments[0].click();",
+                        input_menu
+                    )
+
+            # IMPORTANT:
+            # Re-locate because React may rebuild DOM
+            wait.until(
+                lambda driver:
+                driver.find_element(
+                    *self.click_input_drop_down
+                ).get_attribute("aria-expanded") == "true"
+            )
+
+            print("Inputs dropdown opened successfully....!!")
+
+        except Exception as e:
+            print(
+                f"Error opening Inputs dropdown: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Click_Sales(self):
+        wait = WebDriverWait(self.driver, 30)
+
         try:
-            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
-            time.sleep(.2)
+            sales = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_sales
+                )
+            )
+
             sales.click()
-            time.sleep(.2)
-            print("Click on Sales successfully....!!")
+
+            print("Sales section clicked successfully....!!")
+
+        except StaleElementReferenceException:
+
+            sales = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_sales
+                )
+            )
+
+            sales.click()
+
+            print("Sales section clicked successfully....!!")
+
         except Exception as e:
-            print(f"Error on Click:{e}")
+            print(
+                f"Error while clicking Sales: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
+
+
+
+
+    # def Click_Sales(self):
+    #     wait = WebDriverWait(self.driver, 30)
+    #
+    #     try:
+    #         sales = wait.until(
+    #             EC.element_to_be_clickable(
+    #                 self.click_sales
+    #             )
+    #         )
+    #
+    #         try:
+    #             sales.click()
+    #
+    #         except StaleElementReferenceException:
+    #             sales = wait.until(
+    #                 EC.element_to_be_clickable(
+    #                     self.click_sales
+    #                 )
+    #             )
+    #
+    #             sales.click()
+    #
+    #         # Verify Credit Notes option appears
+    #         wait.until(
+    #             EC.visibility_of_element_located(
+    #                 self.click_credit_notes
+    #             )
+    #         )
+    #
+    #         print("Sales section opened successfully....!!")
+    #
+    #     except Exception as e:
+    #         print(
+    #             f"Error while opening Sales: "
+    #             f"{type(e).__name__} - {e}"
+    #         )
+    #         raise
+
+
+
+
+
+
+
+    # def Click_Sales(self):
+    #     try:
+    #         sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
+    #         time.sleep(.2)
+    #         sales.click()
+    #         time.sleep(.2)
+    #         print("Click on Sales successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
 
 
     def Click_Credit_Notes(self):

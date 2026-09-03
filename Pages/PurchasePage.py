@@ -41,8 +41,21 @@ class ClientPurchase:
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
         self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
-        self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
-        self.click_purchases = (By.XPATH, "(//div[contains(text(),'Purchases')])[1]")
+
+
+
+        # self.click_purchases = (By.XPATH, "(//div[contains(text(),'Purchases')])[1]")
+
+        self.click_input_drop_down = (
+            By.XPATH,
+            "//a[@id='inputs']//i[@data-icon-name='ChevronDown']"
+        )
+
+        self.click_purchases = (
+            By.XPATH,
+            "//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Purchases']"
+        )
 
 #---------------------------------------------------invoice-------------------------------------------------------------
 
@@ -202,27 +215,114 @@ class ClientPurchase:
 
     # -----------------------------------------------------------------------------------------------------------------------
 
-    def Click_Input(self):
-         try:
-            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-         except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #      try:
+    #         input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #      except Exception as e:
+    #         print(f"Error on click:{e}")
 
 
+    # def Click_Purchases(self):
+    #     try:
+    #         sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_purchases))
+    #         time.sleep(.2)
+    #         sales.click()
+    #         time.sleep(.2)
+    #         print("Click on purchases successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
 
-    def Click_Purchases(self):
+    def Click_Input_Purchases(self):
+
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
         try:
-            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_purchases))
-            time.sleep(.2)
-            sales.click()
-            time.sleep(.2)
-            print("Click on purchases successfully....!!")
+            # -----------------------------
+            # STEP 1 : Open Inputs dropdown
+            # -----------------------------
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                input_arrow
+            )
+
+            # Fresh locate before click
+            input_arrow = wait.until(
+                EC.presence_of_element_located(
+                    self.click_input_drop_down
+                )
+            )
+
+            self.driver.execute_script(
+                "arguments[0].click();",
+                input_arrow
+            )
+
+            print("Inputs dropdown arrow clicked....!!")
+
+            # -----------------------------
+            # STEP 2 : Wait for Purchases
+            # -----------------------------
+            purchases = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_purchases
+                )
+            )
+
+            print("Purchases menu visible....!!")
+
+            # -----------------------------
+            # STEP 3 : Click immediately
+            # -----------------------------
+            purchases = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_purchases
+                )
+            )
+
+            self.driver.execute_script(
+                """
+                const element = arguments[0];
+
+                const clickable =
+                    element.closest('a') ||
+                    element.closest('button') ||
+                    element;
+
+                clickable.click();
+                """,
+                purchases
+            )
+
+            print("Click on Purchases successfully....!!")
+
+        except TimeoutException:
+            print(
+                "Timeout: Inputs opened but "
+                "Purchases menu was not available."
+            )
+            raise
+
         except Exception as e:
-            print(f"Error on Click:{e}")
+            print(
+                f"Error while opening Inputs/Purchases: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
 
 

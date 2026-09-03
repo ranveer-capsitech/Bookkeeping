@@ -144,11 +144,15 @@ class Login(unittest.TestCase):
             client_section.Select_2nd_Last_Entry()
             time.sleep(.2)
 
+            print("111111111111111111111111111111111111111111")
+
             client_section.Click_Last_Select()
             time.sleep(2)
+            print("222222222222222222222222222222222")
 
             client_section.Click_Quick_Fill()
             time.sleep(.2)
+            print("33333333333333333333333333333")
             client_section.wait_for_loader_to_disappear()
             time.sleep(.2)
             client_section.Selected_All_Explain_Icon()

@@ -62,19 +62,6 @@ class Find_And_Match_Lock:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         # -----------------------------------------------------------------------------------------------------------------------
 
         self.account = (By.XPATH, "//label[normalize-space()='Add account'] | //span[normalize-space()='Account']")
@@ -1220,6 +1207,7 @@ class Find_And_Match_Lock:
             print("Click on reimbursed successfully....!!")
         except Exception as e:
             print(f"Error on Click:{e}")
+
 
     def Reimbursed_to(self):
         driver = self.driver
@@ -2700,6 +2688,8 @@ class Find_And_Match_Lock:
 
             raise
 
+
+
     def Select_All_Explain_Entries(self):
         wait = WebDriverWait(self.driver, 30)
 
@@ -2767,6 +2757,8 @@ class Find_And_Match_Lock:
 
             raise
 
+
+
     def Unexplain_all_checked_transactions(self):
         wait = WebDriverWait(self.driver, 30)
 
@@ -2811,6 +2803,7 @@ class Find_And_Match_Lock:
             print(f"Error details: {repr(error)}")
 
             raise
+
 
     def Click_Yes_For_Confirmation(self):
         wait = WebDriverWait(self.driver, 30)
@@ -2863,6 +2856,7 @@ class Find_And_Match_Lock:
 
             raise
 
+
     def Click_Added_bank_for_Unexplain(self):
         try:
             added_bank_unexplain = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_added_bank_for_unexplain))
@@ -2872,19 +2866,6 @@ class Find_And_Match_Lock:
             print(" Click on added_bank_un_explain successfully.....!")
         except Exception as e:
             print(f"Error on click:{e}")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

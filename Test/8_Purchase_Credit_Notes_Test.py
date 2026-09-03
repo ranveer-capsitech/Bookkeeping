@@ -68,19 +68,33 @@ class Login(unittest.TestCase):
 
         # Open company
         client_section.Select_Search()
+        time.sleep(.2)
         client_section.Enter_Company()
+        time.sleep(.2)
         client_section.Click_Company()
+        time.sleep(.2)
 
         # Open Purchase Credit Notes
-        client_section.Click_Input()
-        client_section.Click_Purchases()
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        # client_section.Click_Purchases()
+
+        client_section.Click_Input_Purchases()
+        time.sleep(.2)
         client_section.Click_Credit_Notes()
+        time.sleep(.2)
         client_section.Add_Credit_Note()
+        time.sleep(.2)
 
         # Fill credit note form
         client_section.Select_Suppiler_for_Credit_Note()
+        time.sleep(.2)
         client_section.Invoice_ref()
+        time.sleep(.2)
         client_section.Add_Attachment()
+        time.sleep(.2)
+
+
         client_section.Enter_Discount()
         client_section.Click_Enter_Notes()
         client_section.Enter_Notes()

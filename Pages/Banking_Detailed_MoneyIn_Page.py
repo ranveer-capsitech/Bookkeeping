@@ -1040,19 +1040,66 @@ class Banking_detailed_money_in:
                     print(f"Error while clicking Next: {type(e).__name__} - {e}")
                     raise
 
+    # def Click_Back_Button(self):
+    #         try:
+    #             back_btn = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.back_button))
+    #             time.sleep(.2)
+    #             back_btn.click()
+    #             time.sleep(.2)
+    #
+    #             print("Clicked on Back button successfully.....!! ")
+    #
+    #         except Exception as e:
+    #             print(f"Error: {e}")
+    #
+    #             time.sleep(2)
+
     def Click_Back_Button(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 60)
+
+        try:
+            # Wait until loader/spinner disappears
+            self.wait_for_loader_to_disappear()
+
+            # Wait until your existing Back button is clickable
+            back_button = wait.until(
+                EC.element_to_be_clickable(self.back_button)
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                back_button
+            )
+
+            # Again check spinner before actual click
+            self.wait_for_loader_to_disappear()
+
             try:
-                back_btn = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.back_button))
-                time.sleep(.2)
-                back_btn.click()
-                time.sleep(.2)
+                back_button.click()
 
-                print("Clicked on Back button successfully.....!! ")
+            except ElementClickInterceptedException:
+                print("Back button click intercepted. Waiting for loader again...")
 
-            except Exception as e:
-                print(f"Error: {e}")
+                self.wait_for_loader_to_disappear()
 
-                time.sleep(2)
+                back_button = wait.until(
+                    EC.element_to_be_clickable(self.back_button)
+                )
+
+                back_button.click()
+
+            # Wait after navigation
+            self.wait_for_loader_to_disappear()
+
+            print("Bank Dashboard Back button clicked successfully.")
+
+        except Exception as e:
+            print(
+                f"Error in Click_Back_Button: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Add_Manual_Transaction(self):
             try:

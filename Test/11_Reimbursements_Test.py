@@ -68,27 +68,42 @@ class Login(unittest.TestCase):
 
     def test_17_Reimbursement(self):
         client_section = Reimbursement(driver=self.driver)
+        time.sleep(2)
 
         # Open company
         client_section.Select_Search()
+        time.sleep(.2)
         client_section.Enter_Company()
+        time.sleep(.2)
         client_section.Click_Company()
+        time.sleep(.2)
 
         # Open Expense Claims
-        client_section.Click_Input()
-        client_section.Click_Expense_Claims()
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        # client_section.Click_Expense_Claims()
+        # time.sleep(.2)
+
+        client_section.Click_Input_Expense()
+        time.sleep(.2)
 
         # Open Reimbursement form
         client_section.Reimbursed_Section()
+        time.sleep(.2)
         client_section.Click_Reimbursed()
+        time.sleep(.2)
 
         # Fill reimbursement details
         client_section.Reimbursed_to()
+        time.sleep(.2)
         client_section.Reimbursed_Account()
+        time.sleep(.2)
         client_section.Enter_Amount()
+        time.sleep(.2)
 
         # Save reimbursement
         client_section.Save_Reimbursement()
+        time.sleep(.2)
         client_section.wait_for_loader_to_disappear()
 
         print("Reimbursement workflow completed successfully.")

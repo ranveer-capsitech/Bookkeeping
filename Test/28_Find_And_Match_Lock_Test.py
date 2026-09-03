@@ -726,16 +726,13 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
-
-
-
     @pytest.mark.navigation(
         "Login >> Admin Dashboard >> Bookkeeping >> Input >>Receipts >> Verify the lock is showing or not"
     )
     @pytest.mark.description(
         " Select company, Verify the lock in input module."
     )
+
     def test_28_10_lock_verification_receipts(self):
         """
                 Complete dependent workflow:
@@ -776,9 +773,6 @@ class Login(unittest.TestCase):
         " Select company, Verify the lock in input module.")
 
 
-
-
-
     def test_28_11_lock_verification_purchases(self):
         """
                 Complete dependent workflow:
@@ -805,13 +799,10 @@ class Login(unittest.TestCase):
         print("Purchases section opened successfully for verify lock.")
 
 
-
         credit_notes_section.Click_On_Lock_Button_Purchases()
         time.sleep(.2)
         credit_notes_section.Click_On_Close_Icon()
         time.sleep(.2)
-
-
 
 
 
@@ -877,7 +868,6 @@ class Login(unittest.TestCase):
         time.sleep(.2)
 
 
-
         time.sleep(.2)
         time.sleep(0.5)
 
@@ -905,8 +895,6 @@ class Login(unittest.TestCase):
 
         credit_notes_section.Click_On_Close_Icon()
         time.sleep(.2)
-
-
 
         time.sleep(.2)
         time.sleep(0.5)
@@ -980,6 +968,8 @@ class Login(unittest.TestCase):
     @pytest.mark.description(
             " Select company, Verify the lock in input module.")
 
+
+
     def test_28_17_Verify_Unlock_in_all_Section(self):
         """
                         Complete dependent workflow:
@@ -987,9 +977,9 @@ class Login(unittest.TestCase):
                         2. Select company
                         3. check all module
                         4. check uncheck
-
-
                         """
+
+
         client_sell_page = ClientSell(
             driver=self.driver
         )
@@ -1012,7 +1002,7 @@ class Login(unittest.TestCase):
 
 
 
-# --------------------------------------------------Check unlock Credit Note---------------------------------------------------------------
+# --------------------------------------------------Check unlock Credit Note--------------------------------------------
 
 
 

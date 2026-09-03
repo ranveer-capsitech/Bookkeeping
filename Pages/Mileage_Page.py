@@ -42,13 +42,43 @@ class Mileage:
                        "//div[contains(@class,'ms-SearchBox-iconContainer')]/following-sibling::input[@placeholder='Search...']")
 
         self.click_company = (By.XPATH, "//a[@title='1ST LIMITED' and contains(@href,'/books/clients/')]")
-        self.click_input_drop_down = (By.XPATH,
-                                      "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
-        self.click_expense_claims = (By.XPATH, "(//div[contains(text(),'Expense claims')])[1]")
+        # self.click_input_drop_down = (By.XPATH,
+        #                               "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
+        # self.click_expense_claims = (By.XPATH, "(//div[contains(text(),'Expense claims')])[1]")
+
+        self.input_anchor = (
+            By.ID,
+            "inputs"
+        )
+
+        self.input_arrow = (
+            By.XPATH,
+            "//a[@id='inputs']//i[contains(@data-icon-name,'Chevron')]"
+        )
+
+        self.expense_claims = (
+            By.XPATH,
+            "(//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Expense claims'])[1]"
+        )
+
+        self.mileage_claims = (
+            By.XPATH,
+            "//*[normalize-space()='Mileage claims']"
+        )
+
+
+
 
 #----------------------------------------------mileage_claims-----------------------------------------------------------
 
-        self.mileages_section = (By.XPATH, "//button[@name='Mileage claims']")
+        # self.mileages_section = (By.XPATH, "//button[@name='Mileage claims']")
+
+        self.mileages_section = (
+            By.XPATH,
+            "//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Mileage']"
+        )
         self.click_add_mileages = (By.XPATH, "//button[@aria-label='btnAddMileageClaim']")
         self.select_directors_mileages = (By.XPATH,
                                           "//label[normalize-space()='User']/following::div[contains(@class,'rs-placeholder')][1]")
@@ -144,25 +174,250 @@ class Mileage:
 
     # -----------------------------------------------------------------------------------------------------------------------
 
-    def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+    # def Click_Input(self):
+    #     try:
+    #         input = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_input_drop_down))
+    #         time.sleep(.2)
+    #         input.click()
+    #         time.sleep(.2)
+    #         print("Input drop down open successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #
+    # def Click_Expense_Claims(self):
+    #     try:
+    #         claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
+    #         time.sleep(.2)
+    #         claims.click()
+    #         time.sleep(.2)
+    #         print("Click on Expense claims successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error on Click:{e}")
 
-    def Click_Expense_Claims(self):
+    def Click_Input_Mileage(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
         try:
-            claims = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_expense_claims))
-            time.sleep(.2)
-            claims.click()
-            time.sleep(.2)
-            print("Click on Expense claims successfully....!!")
+            # =========================================
+            # STEP 1 : Open Inputs properly
+            # =========================================
+
+            for attempt in range(1, 4):
+
+                input_menu = wait.until(
+                    EC.presence_of_element_located(
+                        self.input_anchor
+                    )
+                )
+
+                expanded = input_menu.get_attribute(
+                    "aria-expanded"
+                )
+
+                print(
+                    f"Inputs attempt {attempt} - "
+                    f"aria-expanded: {expanded}"
+                )
+
+                # Already opened
+                if expanded == "true":
+
+                    expense_count = len(
+                        driver.find_elements(
+                            *self.expense_claims
+                        )
+                    )
+
+                    if expense_count > 0:
+                        break
+
+                # Locate fresh arrow
+                input_arrow = wait.until(
+                    EC.presence_of_element_located(
+                        self.input_arrow
+                    )
+                )
+
+                driver.execute_script(
+                    """
+                    arguments[0].scrollIntoView({
+                        block:'center'
+                    });
+                    """,
+                    input_arrow
+                )
+
+                # Re-find immediately
+                input_arrow = driver.find_element(
+                    *self.input_arrow
+                )
+
+                # Real click first
+                try:
+                    input_arrow.click()
+
+                except Exception:
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        input_arrow
+                    )
+
+                print(
+                    "Inputs dropdown arrow clicked....!!"
+                )
+
+                # Wait maximum 5 sec for Expense claims
+                try:
+
+                    WebDriverWait(
+                        driver,
+                        5,
+                        poll_frequency=0.2,
+                        ignored_exceptions=(
+                            StaleElementReferenceException,
+                        )
+                    ).until(
+                        EC.visibility_of_element_located(
+                            self.expense_claims
+                        )
+                    )
+
+                    print(
+                        "Inputs dropdown opened successfully....!!"
+                    )
+
+                    break
+
+                except TimeoutException:
+
+                    print(
+                        f"Expense claims not visible "
+                        f"after attempt {attempt}"
+                    )
+
+                    # Continue next attempt
+
+            else:
+                raise TimeoutException(
+                    "Inputs dropdown did not open "
+                    "after 3 attempts."
+                )
+
+            # =========================================
+            # STEP 2 : Click Expense claims
+            # =========================================
+
+            expense = wait.until(
+                EC.visibility_of_element_located(
+                    self.expense_claims
+                )
+            )
+
+            print(
+                "Expense claims found:",
+                expense.text
+            )
+
+            # Fresh locate immediately before click
+            expense = driver.find_element(
+                *self.expense_claims
+            )
+
+            driver.execute_script(
+                """
+                const el = arguments[0];
+
+                const clickable =
+                    el.closest('a') ||
+                    el.closest('button') ||
+                    el;
+
+                clickable.click();
+                """,
+                expense
+            )
+
+            print(
+                "Expense claims clicked successfully....!!"
+            )
+
+            # =========================================
+            # STEP 3 : Verify Expense claims page
+            # =========================================
+
+            wait.until(
+                EC.url_contains(
+                    "/inputs/expense-claims"
+                )
+            )
+
+            print(
+                "Expense claims page opened successfully....!!"
+            )
+
+            # =========================================
+            # STEP 4 : Wait for Mileage claims tab
+            # =========================================
+
+            mileage = wait.until(
+                EC.visibility_of_element_located(
+                    self.mileage_claims
+                )
+            )
+
+            print(
+                "Mileage claims tab found....!!"
+            )
+
+            # =========================================
+            # STEP 5 : Click Mileage claims
+            # =========================================
+
+            mileage = wait.until(
+                EC.element_to_be_clickable(
+                    self.mileage_claims
+                )
+            )
+
+            try:
+                mileage.click()
+
+            except (
+                    StaleElementReferenceException,
+                    Exception
+            ):
+
+                mileage = wait.until(
+                    EC.presence_of_element_located(
+                        self.mileage_claims
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    mileage
+                )
+
+            print(
+                "Mileage claims clicked successfully....!!"
+            )
+
         except Exception as e:
-            print(f"Error on Click:{e}")
+
+            print(
+                f"Error navigating to Mileage claims: "
+                f"{type(e).__name__} - {e}"
+            )
+
+            raise
 
 
     def Mileages_Section(self):
