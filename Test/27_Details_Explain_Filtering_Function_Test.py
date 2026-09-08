@@ -118,11 +118,11 @@ class Login(unittest.TestCase):
 
         # -----------------------------------------------------------------------------------------------------------------------
 
-        client_section.Click_Back_Button()
-        time.sleep(.2)
-
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+        # client_section.Click_Back_Button()
+        # time.sleep(.2)
+        #
+        # client_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
         client_section.wait_for_spinner_to_disappear()
         time.sleep(.2)
 

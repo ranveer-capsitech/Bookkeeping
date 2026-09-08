@@ -1604,7 +1604,7 @@ class Banking_detailed_money_in:
                 time.sleep(0.2)
 
                 active = driver.switch_to.active_element
-                active.send_keys("Telephone & internet")
+                active.send_keys("Telephone and internet")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
 

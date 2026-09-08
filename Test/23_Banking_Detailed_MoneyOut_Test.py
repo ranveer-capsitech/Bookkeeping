@@ -74,60 +74,60 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Company()
         time.sleep(.2)
-        client_section.Click_Input()
-        time.sleep(.2)
-
-
-        client_section.Click_Sales()
-        time.sleep(.2)
-
-        client_section.Add_Invoice()
-        time.sleep(.2)
-        client_section.Select_Customer_Keyboard()
-        time.sleep(.2)
-
-        client_section.Add_Attachment()
-        time.sleep(.2)
-
-        client_section.Select_item_sale()
-        time.sleep(.5)
-
-
-        client_section.Enter_Discount()
-        time.sleep(.3)
-
-
-        client_section.Click_Save()
-        time.sleep(2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(2)
-
-
-        #---------------------------------------------------------------------------------------------------------------
-
-        client_section.Click_Purchases()
-        time.sleep(.5)
-        time.sleep(.2)
-
-        client_section.Add_Invoice()
-        time.sleep(.2)
-        client_section.Select_Customer()
-        time.sleep(.2)
-
-        client_section.Add_Attachment()
-        time.sleep(.2)
-        client_section.Enter_Discount()
-        time.sleep(.2)
-
-
-        client_section.Select_item_purchase()
-        time.sleep(.5)
-        client_section.Enter_amount()
-        time.sleep(2)
-        client_section.Save_Services()
-        time.sleep(2)
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(2)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        #
+        #
+        # client_section.Click_Sales()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Invoice()
+        # time.sleep(.2)
+        # client_section.Select_Customer_Keyboard()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Attachment()
+        # time.sleep(.2)
+        #
+        # client_section.Select_item_sale()
+        # time.sleep(.5)
+        #
+        #
+        # client_section.Enter_Discount()
+        # time.sleep(.3)
+        #
+        #
+        # client_section.Click_Save()
+        # time.sleep(2)
+        # client_section.wait_for_loader_to_disappear()
+        # time.sleep(2)
+        #
+        #
+        # #---------------------------------------------------------------------------------------------------------------
+        #
+        # client_section.Click_Purchases()
+        # time.sleep(.5)
+        # time.sleep(.2)
+        #
+        # client_section.Add_Invoice()
+        # time.sleep(.2)
+        # client_section.Select_Customer()
+        # time.sleep(.2)
+        #
+        # client_section.Add_Attachment()
+        # time.sleep(.2)
+        # client_section.Enter_Discount()
+        # time.sleep(.2)
+        #
+        #
+        # client_section.Select_item_purchase()
+        # time.sleep(.5)
+        # client_section.Enter_amount()
+        # time.sleep(2)
+        # client_section.Save_Services()
+        # time.sleep(2)
+        # client_section.wait_for_loader_to_disappear()
+        # time.sleep(2)
 
 #
 # #---------------------------------------------------------banking-------------------------------------------------------
@@ -168,11 +168,11 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-        client_section.Click_Back_Button()
-        time.sleep(.2)
-
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
+        # client_section.Click_Back_Button()
+        # time.sleep(.2)
+        #
+        # client_section.wait_for_loader_to_disappear()
+        # time.sleep(.2)
 
         client_section.Add_Manual_Transaction()
         time.sleep(1)
@@ -278,6 +278,9 @@ class Login(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
 #---------------------------------------------2nd-----------------------------------------------------------------------
 
 

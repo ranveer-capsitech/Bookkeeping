@@ -46,12 +46,10 @@ class Login(unittest.TestCase):
         loginpage.click_sign_in_button()
         time.sleep(5)
 
-
         loginpage.Click_On_Menu()
         time.sleep(2)
         loginpage.Click_Bookkeeping()
         time.sleep(2)
-
 
         if __name__ == "__main__":
             unittest.main()

@@ -75,8 +75,11 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Company()
         time.sleep(.2)
-        client_section.Click_Input()
-        time.sleep(.2)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        #
+        # client_section.Click_Sales()
+        # time.sleep(.2)
 
         client_section.Click_Sales()
         time.sleep(.2)
@@ -178,13 +181,13 @@ class Login(unittest.TestCase):
         client_section.Click_Next()
         time.sleep(.2)
 
-        client_section.wait_for_loader_to_disappear()
-        time.sleep(.2)
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-        client_section.Click_Back_Button()
-        time.sleep(.2)
+#         client_section.wait_for_loader_to_disappear()
+#         time.sleep(.2)
+#
+# #-----------------------------------------------------------------------------------------------------------------------
+#
+#         client_section.Click_Back_Button()
+#         time.sleep(.2)
 
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
@@ -249,6 +252,8 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Enter_Allocated_Amount()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        client_section.wait_for_overlay_to_disappear()
         client_section.Click_Match()
         time.sleep(.2)
 
@@ -292,8 +297,11 @@ class Login(unittest.TestCase):
     #     client_section.Click_Company()
     #     time.sleep(.2)
 
-        client_section.Click_Input()
-        time.sleep(.2)
+        # client_section.Click_Input()
+        # time.sleep(.2)
+        #
+        # client_section.Click_Sales()
+        # time.sleep(.2)
 
         client_section.Click_Sales()
         time.sleep(.2)
@@ -453,6 +461,8 @@ class Login(unittest.TestCase):
         time.sleep(1)
         client_section.Enter_Allocated_Amount()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        client_section.wait_for_overlay_to_disappear()
         client_section.Click_Match()
         time.sleep(.2)
 

@@ -69,7 +69,6 @@ class Mileage:
 
 
 
-
 #----------------------------------------------mileage_claims-----------------------------------------------------------
 
         # self.mileages_section = (By.XPATH, "//button[@name='Mileage claims']")
@@ -207,9 +206,8 @@ class Mileage:
 
         try:
             # =========================================
-            # STEP 1 : Open Inputs properly
+            # STEP 1 : Open Inputs dropdown
             # =========================================
-
             for attempt in range(1, 4):
 
                 input_menu = wait.until(
@@ -227,7 +225,6 @@ class Mileage:
                     f"aria-expanded: {expanded}"
                 )
 
-                # Already opened
                 if expanded == "true":
 
                     expense_count = len(
@@ -239,7 +236,7 @@ class Mileage:
                     if expense_count > 0:
                         break
 
-                # Locate fresh arrow
+                # Fresh arrow
                 input_arrow = wait.until(
                     EC.presence_of_element_located(
                         self.input_arrow
@@ -247,36 +244,41 @@ class Mileage:
                 )
 
                 driver.execute_script(
-                    """
-                    arguments[0].scrollIntoView({
-                        block:'center'
-                    });
-                    """,
+                    "arguments[0].scrollIntoView({block:'center'});",
                     input_arrow
                 )
 
-                # Re-find immediately
+                # Re-find immediately before click
                 input_arrow = driver.find_element(
                     *self.input_arrow
                 )
 
-                # Real click first
                 try:
                     input_arrow.click()
 
-                except Exception:
+                except StaleElementReferenceException:
+                    input_arrow = driver.find_element(
+                        *self.input_arrow
+                    )
+
                     driver.execute_script(
                         "arguments[0].click();",
                         input_arrow
                     )
 
-                print(
-                    "Inputs dropdown arrow clicked....!!"
-                )
+                except Exception:
+                    input_arrow = driver.find_element(
+                        *self.input_arrow
+                    )
 
-                # Wait maximum 5 sec for Expense claims
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        input_arrow
+                    )
+
+                print("Inputs dropdown arrow clicked....!!")
+
                 try:
-
                     WebDriverWait(
                         driver,
                         5,
@@ -297,13 +299,10 @@ class Mileage:
                     break
 
                 except TimeoutException:
-
                     print(
                         f"Expense claims not visible "
                         f"after attempt {attempt}"
                     )
-
-                    # Continue next attempt
 
             else:
                 raise TimeoutException(
@@ -312,45 +311,78 @@ class Mileage:
                 )
 
             # =========================================
-            # STEP 2 : Click Expense claims
+            # STEP 2 : Click Expense claims safely
             # =========================================
 
-            expense = wait.until(
-                EC.visibility_of_element_located(
-                    self.expense_claims
+            print("Expense claims found.")
+
+            expense_clicked = False
+
+            for attempt in range(1, 4):
+
+                try:
+                    # ALWAYS fresh locate
+                    expense = wait.until(
+                        EC.visibility_of_element_located(
+                            self.expense_claims
+                        )
+                    )
+
+                    driver.execute_script(
+                        "arguments[0].scrollIntoView({block:'center'});",
+                        expense
+                    )
+
+                    # Re-find AGAIN after scroll
+                    expense = wait.until(
+                        EC.visibility_of_element_located(
+                            self.expense_claims
+                        )
+                    )
+
+                    # Click in the SAME JS call
+                    driver.execute_script(
+                        """
+                        const el = arguments[0];
+
+                        const clickable =
+                            el.closest('a') ||
+                            el.closest('button') ||
+                            el;
+
+                        clickable.click();
+                        """,
+                        expense
+                    )
+
+                    expense_clicked = True
+
+                    print(
+                        "Expense claims clicked successfully....!!"
+                    )
+
+                    break
+
+                except StaleElementReferenceException:
+                    print(
+                        f"Expense claims became stale - "
+                        f"retry {attempt}/3"
+                    )
+
+                except Exception as e:
+                    print(
+                        f"Expense claims click retry {attempt}/3: "
+                        f"{type(e).__name__}"
+                    )
+
+            if not expense_clicked:
+                raise Exception(
+                    "Unable to click Expense claims "
+                    "after 3 attempts."
                 )
-            )
-
-            print(
-                "Expense claims found:",
-                expense.text
-            )
-
-            # Fresh locate immediately before click
-            expense = driver.find_element(
-                *self.expense_claims
-            )
-
-            driver.execute_script(
-                """
-                const el = arguments[0];
-
-                const clickable =
-                    el.closest('a') ||
-                    el.closest('button') ||
-                    el;
-
-                clickable.click();
-                """,
-                expense
-            )
-
-            print(
-                "Expense claims clicked successfully....!!"
-            )
 
             # =========================================
-            # STEP 3 : Verify Expense claims page
+            # STEP 3 : Wait for Expense claims page
             # =========================================
 
             wait.until(
@@ -368,7 +400,7 @@ class Mileage:
             # =========================================
 
             mileage = wait.until(
-                EC.visibility_of_element_located(
+                EC.element_to_be_clickable(
                     self.mileage_claims
                 )
             )
@@ -378,22 +410,26 @@ class Mileage:
             )
 
             # =========================================
-            # STEP 5 : Click Mileage claims
+            # STEP 5 : Click Mileage claims safely
             # =========================================
-
-            mileage = wait.until(
-                EC.element_to_be_clickable(
-                    self.mileage_claims
-                )
-            )
 
             try:
                 mileage.click()
 
-            except (
-                    StaleElementReferenceException,
-                    Exception
-            ):
+            except StaleElementReferenceException:
+
+                mileage = wait.until(
+                    EC.element_to_be_clickable(
+                        self.mileage_claims
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    mileage
+                )
+
+            except Exception:
 
                 mileage = wait.until(
                     EC.presence_of_element_located(
@@ -411,12 +447,10 @@ class Mileage:
             )
 
         except Exception as e:
-
             print(
                 f"Error navigating to Mileage claims: "
                 f"{type(e).__name__} - {e}"
             )
-
             raise
 
 

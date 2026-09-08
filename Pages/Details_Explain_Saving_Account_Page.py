@@ -49,7 +49,26 @@ class Detail_Explain_Savingt_Account:
         # self.select_business_name = (By.XPATH, "(//a[normalize-space()='290 CREW LIMITED'])[1]")
         self.click_input_drop_down = (By.XPATH, "//div[contains(@class, 'ms-NavItemName') and normalize-space(.)='Inputs']")
         self.click_purchase = (By.XPATH, "(//div[contains(text(),'Purchases')])[1]")
-        self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+        # self.click_sales = (By.XPATH, "(//div[contains(text(),'Sales')])[1]")
+
+        self.input_anchor = (
+            By.ID,
+            "inputs"
+        )
+
+        self.input_arrow = (
+            By.XPATH,
+            "//a[@id='inputs']//i[contains(@data-icon-name,'Chevron')]"
+        )
+
+        self.click_sales = (
+            By.XPATH,
+            "//div[contains(@class,'ms-NavItemName') "
+            "and normalize-space()='Sales']"
+        )
+
+
+
 
         self.click_suppliers = (By.XPATH, "//button[@role='tab'][.//span[normalize-space()='Suppliers']]")
         self.add_suppliers_button = (By.XPATH, "//span[normalize-space()='Supplier']")
@@ -354,28 +373,210 @@ class Detail_Explain_Savingt_Account:
                 print(f"Enter on click: {e}")
                 time.sleep(.5)
 
-
     def Click_Input(self):
-        try:
-            input = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_input_drop_down))
-            time.sleep(.2)
-            input.click()
-            time.sleep(.2)
-            print("Input drop down open successfully....!!")
-        except Exception as e:
-            print(f"Error on click:{e}")
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
 
+        try:
+            input_locator = (
+                By.XPATH,
+                "//a[@id='inputs' and @data-value='inputs']"
+            )
+
+            # Always fetch fresh element
+            input_menu = wait.until(
+                EC.presence_of_element_located(
+                    input_locator
+                )
+            )
+
+            expanded = input_menu.get_attribute(
+                "aria-expanded"
+            )
+
+            print(
+                "Inputs before click aria-expanded:",
+                expanded
+            )
+
+            if expanded != "true":
+                # Fresh locate immediately before click
+                input_menu = wait.until(
+                    EC.element_to_be_clickable(
+                        input_locator
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    input_menu
+                )
+
+            # Verify Inputs actually expanded
+            wait.until(
+                lambda driver:
+                driver.find_element(
+                    *input_locator
+                ).get_attribute(
+                    "aria-expanded"
+                ) == "true"
+            )
+
+            print(
+                "Inputs dropdown opened successfully....!!"
+            )
+
+        except Exception as e:
+            print(
+                f"Error opening Inputs dropdown: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Click_Sales(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
         try:
-            sales = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.click_sales))
-            time.sleep(.2)
-            sales.click()
-            time.sleep(.2)
-            print("Click on Sales successfully....!!")
+            # =====================================
+            # STEP 1: Make sure Inputs is opened
+            # =====================================
+            for attempt in range(1, 4):
+
+                input_menu = wait.until(
+                    EC.presence_of_element_located(
+                        self.input_anchor
+                    )
+                )
+
+                expanded = input_menu.get_attribute(
+                    "aria-expanded"
+                )
+
+                print(
+                    f"Inputs attempt {attempt} - "
+                    f"aria-expanded: {expanded}"
+                )
+
+                if expanded == "true":
+
+                    sales_count = len(
+                        driver.find_elements(
+                            *self.click_sales
+                        )
+                    )
+
+                    if sales_count > 0:
+                        break
+
+                # Fresh arrow
+                input_arrow = wait.until(
+                    EC.presence_of_element_located(
+                        self.input_arrow
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    input_arrow
+                )
+
+                # Re-find immediately before click
+                input_arrow = driver.find_element(
+                    *self.input_arrow
+                )
+
+                try:
+                    input_arrow.click()
+
+                except Exception:
+                    driver.execute_script(
+                        "arguments[0].click();",
+                        input_arrow
+                    )
+
+                print("Inputs dropdown arrow clicked....!!")
+
+                try:
+                    WebDriverWait(
+                        driver,
+                        5,
+                        poll_frequency=0.2,
+                        ignored_exceptions=(
+                            StaleElementReferenceException,
+                        )
+                    ).until(
+                        EC.visibility_of_element_located(
+                            self.click_sales
+                        )
+                    )
+
+                    print(
+                        "Inputs dropdown opened successfully....!!"
+                    )
+
+                    break
+
+                except TimeoutException:
+                    print(
+                        f"Sales not visible after "
+                        f"attempt {attempt}"
+                    )
+
+            else:
+                raise TimeoutException(
+                    "Inputs dropdown did not open "
+                    "after 3 attempts."
+                )
+
+            # =====================================
+            # STEP 2: Click Sales
+            # =====================================
+            sales = wait.until(
+                EC.visibility_of_element_located(
+                    self.click_sales
+                )
+            )
+
+            print("Sales menu found:", sales.text)
+
+            # Fresh locate just before click
+            sales = driver.find_element(
+                *self.click_sales
+            )
+
+            driver.execute_script(
+                """
+                const el = arguments[0];
+
+                const clickable =
+                    el.closest('a') ||
+                    el.closest('button') ||
+                    el;
+
+                clickable.click();
+                """,
+                sales
+            )
+
+            print("Sales clicked successfully....!!")
+
         except Exception as e:
-            print(f"Error on Click:{e}")
-            time.sleep(.2)
+            print(
+                f"Error while clicking Sales: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
 
     def Add_Invoice(self):
         try:
@@ -1183,48 +1384,164 @@ class Detail_Explain_Savingt_Account:
 
 
 
-    def Enter_Date(self):
-        try:
-            wait = WebDriverWait(self.driver, 30)
+    # def Enter_Date(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         today_date = datetime.now().strftime("%d/%m/%Y")
+    #
+    #         date_field = wait.until(
+    #             EC.presence_of_element_located((
+    #                 By.XPATH,
+    #                 # "//input[@name='transactions.0.date']"
+    #                  "//input[starts-with(@name,'transactions.') and contains(@name,'.date') and @placeholder='DD/MM/YYYY']"
+    #
+    #             ))
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             date_field
+    #         )
+    #
+    #         self.driver.execute_script("""
+    #             const input = arguments[0];
+    #             const value = arguments[1];
+    #
+    #             input.removeAttribute('readonly');
+    #             input.focus();
+    #
+    #             input.value = '';
+    #             input.dispatchEvent(new Event('input', { bubbles: true }));
+    #             input.dispatchEvent(new Event('change', { bubbles: true }));
+    #
+    #             input.value = value;
+    #             input.dispatchEvent(new Event('input', { bubbles: true }));
+    #             input.dispatchEvent(new Event('change', { bubbles: true }));
+    #
+    #             input.blur();
+    #         """, date_field, today_date)
+    #
+    #         print(f"Today's date entered successfully: {today_date}")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Enter_Date: {type(e).__name__} - {e}")
+    #         raise
 
+    def Enter_Date(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        date_locator = (
+            By.XPATH,
+            "//input[starts-with(@name,'transactions.') "
+            "and contains(@name,'.date') "
+            "and @placeholder='DD/MM/YYYY']"
+        )
+
+        try:
             today_date = datetime.now().strftime("%d/%m/%Y")
 
             date_field = wait.until(
-                EC.presence_of_element_located((
-                    By.XPATH,
-                    # "//input[@name='transactions.0.date']"
-                     "//input[starts-with(@name,'transactions.') and contains(@name,'.date') and @placeholder='DD/MM/YYYY']"
-
-                ))
+                EC.visibility_of_element_located(
+                    date_locator
+                )
             )
 
             self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                "arguments[0].scrollIntoView({block:'center'});",
                 date_field
             )
 
-            self.driver.execute_script("""
-                const input = arguments[0];
-                const value = arguments[1];
+            # Re-locate fresh element
+            date_field = wait.until(
+                EC.element_to_be_clickable(
+                    date_locator
+                )
+            )
 
-                input.removeAttribute('readonly');
-                input.focus();
+            try:
+                date_field.click()
 
-                input.value = '';
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('change', { bubbles: true }));
+                date_field.send_keys(
+                    Keys.CONTROL,
+                    "a"
+                )
 
-                input.value = value;
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('change', { bubbles: true }));
+                date_field.send_keys(
+                    Keys.BACKSPACE
+                )
 
-                input.blur();
-            """, date_field, today_date)
+                date_field.send_keys(
+                    today_date
+                )
 
-            print(f"Today's date entered successfully: {today_date}")
+                date_field.send_keys(
+                    Keys.TAB
+                )
+
+            except ElementNotInteractableException:
+
+                # Fallback only if normal Selenium typing fails
+                date_field = wait.until(
+                    EC.presence_of_element_located(
+                        date_locator
+                    )
+                )
+
+                self.driver.execute_script(
+                    """
+                    const input = arguments[0];
+                    const value = arguments[1];
+
+                    const setter =
+                        Object.getOwnPropertyDescriptor(
+                            HTMLInputElement.prototype,
+                            'value'
+                        ).set;
+
+                    setter.call(input, value);
+
+                    input.dispatchEvent(
+                        new Event('input', {
+                            bubbles: true
+                        })
+                    );
+
+                    input.dispatchEvent(
+                        new Event('change', {
+                            bubbles: true
+                        })
+                    );
+
+                    input.blur();
+                    """,
+                    date_field,
+                    today_date
+                )
+
+            # Verify value actually entered
+            wait.until(
+                lambda driver:
+                driver.find_element(
+                    *date_locator
+                ).get_attribute("value") == today_date
+            )
+
+            print(
+                f"Today's date entered successfully: "
+                f"{today_date}"
+            )
 
         except Exception as e:
-            print(f"Error in Enter_Date: {type(e).__name__} - {e}")
+            print(
+                f"Error in Enter_Date: "
+                f"{type(e).__name__} - {e}"
+            )
             raise
 
 
@@ -1545,6 +1862,8 @@ class Detail_Explain_Savingt_Account:
     #     # except Exception as e:
     #     #     print(f"Error: {e}")
 
+
+
     def Click_Match(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
@@ -1596,7 +1915,7 @@ class Detail_Explain_Savingt_Account:
             print(f"Error while clicking Match: {e}")
             raise
 
-            time.sleep(2)
+
 
     def Click_Attachment_Icon(self):
         try:
@@ -1733,7 +2052,7 @@ class Detail_Explain_Savingt_Account:
             time.sleep(0.2)
 
             active = driver.switch_to.active_element
-            active.send_keys("Telephone & internet")
+            active.send_keys("Telephone and internet")
             # active.send_keys(Keys.ARROW_DOWN)
             # time.sleep(0.2)
 
@@ -1971,6 +2290,28 @@ class Detail_Explain_Savingt_Account:
 
         except Exception as e:
             print(f"Error in Select_Account_Type: {type(e).__name__} - {e}")
+            raise
+
+    def wait_for_overlay_to_disappear(self, timeout=30):
+        try:
+            WebDriverWait(
+                self.driver,
+                timeout,
+                poll_frequency=0.2
+            ).until(
+                lambda driver: all(
+                    not overlay.is_displayed()
+                    for overlay in driver.find_elements(
+                        By.CSS_SELECTOR,
+                        "div.ms-Overlay"
+                    )
+                )
+            )
+
+            print("Overlay disappeared successfully....!!")
+
+        except TimeoutException:
+            print("Overlay is still visible after timeout.")
             raise
 
 

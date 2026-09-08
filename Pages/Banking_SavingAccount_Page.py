@@ -72,8 +72,10 @@ class Banking_Savings_account:
         self.click_this_transaction = (By.XPATH, "//div[contains(text(),'This transaction')]")
         self.click_with_all_recommendation = (By.XPATH,
                                               "//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Recommendation')]")
+
         self.click_1st_check_box_of_similar_transaction = (By.XPATH,
                                                            "(//div[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//label[contains(@class,'ms-Checkbox-label')])[1]")
+
         self.select_account_head = (By.XPATH,
                                     "(//*[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//div[contains(@class,'rs-control')])[1]")
         self.click_similar_section_explain_button = (By.XPATH,
@@ -97,8 +99,11 @@ class Banking_Savings_account:
                                     "(//div[contains(@class,'tr-focus')]//button[@id='btn-delete' and .//i[@data-icon-name='SyncOccurence']])[1]")
 
         self.click_explained_tab = (By.XPATH, "//button[@role='tab'][.//span[contains(normalize-space(),'Explained')]]")
+
         self.click_yes = (By.XPATH, "//span[contains(text(),'Yes')]")
+
         self.click_unexplain = (By.XPATH, "//button[@title='Unexplain all checked transactions']")
+
         self.explain_translation = (
             By.XPATH,
             "(//button[contains(@id,'btn-undoTrans') and .//i[@data-icon-name='Reply']])[1]"
@@ -125,6 +130,7 @@ class Banking_Savings_account:
 
         self.click_three_dot = (By.XPATH,
                                 "(//div[contains(@class,'tr-focus')][last()]//button[.//i[@data-icon-name='More']])[1]")
+
         self.click_split = (By.XPATH, "//button[@role='menuitem'][.//span[normalize-space()='Split']]")
 
         self.money_in_or_money_out = (By.XPATH,
@@ -132,6 +138,7 @@ class Banking_Savings_account:
 
         self.enter_money_in = (By.XPATH,
                                "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyIn')])[1]")
+
         self.enter_money_out = (By.XPATH,
                                 "(//div[@role='dialog' and .//*[normalize-space()='Explain transactions']]//input[contains(@name,'moneyOut')])[1]")
 
@@ -161,6 +168,16 @@ class Banking_Savings_account:
         self.select_vat = (By.XPATH, "//div[@role='dialog']//input[@name='transactions.1.vat']/ancestor::div[contains(@class,'rs-container')]")
 
         self.click_description = (By.XPATH, "//label[normalize-space()='Description']")
+
+        self.click_cash_coding = (
+            By.ID,
+            "bank-cashcoding"
+        )
+
+        self.toast_message = (
+            By.CSS_SELECTOR,
+            "div.ao-toast"
+        )
 
 
 
@@ -376,6 +393,7 @@ class Banking_Savings_account:
             print(f"Error on Enter_Account_no: {e}")
             time.sleep(0.2)
 
+
     def Select_Account_Type(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -471,6 +489,7 @@ class Banking_Savings_account:
 
             time.sleep(2)
 
+
     def Click_Added_Bank(self):
         try:
             wait = WebDriverWait(self.driver, 30)
@@ -506,6 +525,7 @@ class Banking_Savings_account:
             print(f"Error: {e}")
             raise
 
+
     def Click_Import(self):
         try:
             import_click = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_import))
@@ -519,6 +539,7 @@ class Banking_Savings_account:
             print(f"Error: {e}")
 
             time.sleep(2)
+
 
     def Click_Templet(self):
         try:
@@ -556,6 +577,7 @@ class Banking_Savings_account:
     #     except Exception as e:
     #         print(f"Error: {e}")
     #         raise
+
 
     def Click_Upload(self):
         try:
@@ -601,6 +623,7 @@ class Banking_Savings_account:
             print(f"Error: {e}")
 
             time.sleep(2)
+
 
     def Click_Next(self):
         for attempt in range(3):
@@ -722,6 +745,7 @@ class Banking_Savings_account:
 
 
     def Click_1st_Check_Box_Of_Similar_Transaction(self):
+
         wait = WebDriverWait(self.driver, 50)
 
         for attempt in range(3):
@@ -757,6 +781,7 @@ class Banking_Savings_account:
                 time.sleep(1)
 
         raise Exception("Unable to click 1st similar transaction checkbox after retries")
+
 
 
     def Select_Account_Head(self):
@@ -832,6 +857,8 @@ class Banking_Savings_account:
                 time.sleep(1)
 
         raise Exception("Unable to click 1st similar transaction checkbox after retries")
+
+
 
     def Click_Similar_Section_Explain_Button(self):
 
@@ -945,6 +972,7 @@ class Banking_Savings_account:
             print(f"Error while selecting Sales: {e}")
             raise
 
+
     def Click_Explain(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -999,6 +1027,7 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Click_First_Checkbox(self):
         try:
@@ -1654,6 +1683,90 @@ class Banking_Savings_account:
             except Exception as e:
                 print(f"Error: {e}")
                 time.sleep(2)
+
+    def Click_Cash_Coding(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+            # Wait until toast disappears
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Locate Cash Coding button
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            # Scroll safely
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                cash_coding
+            )
+
+            # Re-check toast after scrolling
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Fresh locate before click
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            try:
+                cash_coding.click()
+
+            except ElementClickInterceptedException:
+                print(
+                    "Cash Coding click intercepted. "
+                    "Waiting for toast again..."
+                )
+
+                wait.until(
+                    EC.invisibility_of_element_located(
+                        self.toast_message
+                    )
+                )
+
+                cash_coding = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_cash_coding
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    cash_coding
+                )
+
+            print(
+                "Cash Coding button clicked successfully....!!"
+            )
+
+        except Exception as e:
+            print(
+                f"Error while clicking Cash Coding: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
+
+
+
 
 
 

@@ -122,19 +122,15 @@ class Vat_Change:
 
         self.clear_data = (By.XPATH, "//i[@data-icon-name='Cancel' and @title='Clear sorts & filters']")
 
+        self.click_cash_coding = (
+            By.ID,
+            "bank-cashcoding"
+        )
 
-
-
-
-
-
-
-
-
-
-
-
-
+        self.toast_message = (
+            By.CSS_SELECTOR,
+            "div.ao-toast"
+        )
 
         self.change_vat = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[9]/div[1]/div[1]/div[1]/div[1]")
         self.change_vat_second = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[5]/div[1]/div[1]/div[1]/div[9]/div[1]/div[1]/div[1]/div[1]/div[1]")
@@ -1454,6 +1450,88 @@ class Vat_Change:
             print(f"Error: {e}")
 
             time.sleep(2)
+
+
+    def Click_Cash_Coding(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+            # Wait until toast disappears
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Locate Cash Coding button
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            # Scroll safely
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                cash_coding
+            )
+
+            # Re-check toast after scrolling
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Fresh locate before click
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            try:
+                cash_coding.click()
+
+            except ElementClickInterceptedException:
+                print(
+                    "Cash Coding click intercepted. "
+                    "Waiting for toast again..."
+                )
+
+                wait.until(
+                    EC.invisibility_of_element_located(
+                        self.toast_message
+                    )
+                )
+
+                cash_coding = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_cash_coding
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    cash_coding
+                )
+
+            print(
+                "Cash Coding button clicked successfully....!!"
+            )
+
+        except Exception as e:
+            print(
+                f"Error while clicking Cash Coding: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
 
 
 

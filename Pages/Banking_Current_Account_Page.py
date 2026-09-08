@@ -799,19 +799,95 @@ class Banking:
 
             time.sleep(2)
 
+    # def Click_With_All_Recommendation(self):
+    #     # try:
+    #         all_transaction = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_with_all_recommendation))
+    #         time.sleep(.2)
+    #         all_transaction.click()
+    #         time.sleep(.2)
+    #
+    #         print("Clicked on All transaction button successfully.....!! ")
+    #
+    #     # except Exception as e:
+    #     #     print(f"Error: {e}")
+    #
+    #         # time.sleep(2)
+
     def Click_With_All_Recommendation(self):
-        # try:
-            all_transaction = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_with_all_recommendation))
-            time.sleep(.2)
-            all_transaction.click()
-            time.sleep(.2)
 
-            print("Clicked on All transaction button successfully.....!! ")
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
 
-        # except Exception as e:
-        #     print(f"Error: {e}")
+        for attempt in range(3):
 
-            # time.sleep(2)
+            try:
+                self.wait_for_loader_to_disappear()
+
+                element = wait.until(
+                    EC.presence_of_element_located(
+                        self.click_with_all_recommendation
+                    )
+                )
+
+                driver.execute_script(
+                    """
+                    arguments[0].scrollIntoView({
+                        block: 'center',
+                        inline: 'center'
+                    });
+                    """,
+                    element
+                )
+
+                time.sleep(0.3)
+
+                # get a fresh reference
+                element = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_with_all_recommendation
+                    )
+                )
+
+                element.click()
+
+                print(
+                    "Clicked With All Recommendation successfully.....!!"
+                )
+                return
+
+            except StaleElementReferenceException:
+                print(
+                    f"With All Recommendation became stale. "
+                    f"Retry {attempt + 1}/3"
+                )
+                time.sleep(0.5)
+
+            except ElementClickInterceptedException:
+                print(
+                    f"Click intercepted. Retry {attempt + 1}/3"
+                )
+                time.sleep(0.5)
+
+            except TimeoutException:
+
+                print(
+                    "With All Recommendation not available/clickable."
+                )
+
+                print(
+                    "Elements found:",
+                    len(
+                        driver.find_elements(
+                            *self.click_with_all_recommendation
+                        )
+                    )
+                )
+
+                driver.save_screenshot(
+                    "reports/With_All_Recommendation_Error.png"
+                )
+
+                raise
 
     def Click_1st_Check_Box_Of_Similar_Transaction(self):
         wait = WebDriverWait(self.driver, 50)
