@@ -1,4 +1,5 @@
 import os
+import re
 
 from faker import Faker
 import time
@@ -62,8 +63,12 @@ class Estimates:
                           "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[3]/span[1]/span[1]/span[1]")
         self.add_estimates = (By.XPATH, "//span[contains(@class,'ms-Button-label') and text()='Estimate']")
         self.customer = (By.XPATH, "(//div[@id='react-select-2-placeholder'])[1]")
-        self.select_item_estimate = (By.XPATH,
-                                     "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
+        # self.select_item_estimate = (By.XPATH,
+        #                              "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]")
+
+
+        self.select_item_estimate = (By.XPATH, "//td[@data-label='Item']//input[@role='combobox']")
+
 
         self.add_discount = (By.XPATH, "//input[@name='discount']")
 
@@ -78,6 +83,8 @@ class Estimates:
         self.click_download_icon = (By.XPATH, "(//button[.//i[@data-icon-name='BkInstallation']])[1]")
 
         self.create_direct_invoice = (By.XPATH, "(//button[@id='btn-btnCreateInvoice'])[1]")
+
+        self.estimate_no = (By.XPATH, "//label[contains(normalize-space(.),'Estimate no.')]/following::input[1]")
 
 
 
@@ -405,9 +412,16 @@ class Estimates:
             wait = WebDriverWait(driver, 30)
 
             #  Click on the dropdown field
+            # field = wait.until(EC.element_to_be_clickable((
+            #     By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
+            # )))
+
             field = wait.until(EC.element_to_be_clickable((
-                By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
+                By.XPATH,
+                "//*[normalize-space()='Customer']/following::input[@role='combobox'][1]"
             )))
+
+
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", field)
             field.click()
             time.sleep(0.5)
@@ -533,36 +547,221 @@ class Estimates:
             print(f"Error on Click : {e}")
 
 
+    # def Click_Save_Estimation(self):
+    #
+    #
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         try:
+    #
+    #             wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
+    #         except:
+    #             pass
+    #
+    #         save_button = wait.until(
+    #         EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Save']/ancestor::button"))
+    #         )
+    #
+    #         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
+    #         time.sleep(0.4)
+    #         save_button.click()
+    #         time.sleep(0.4)
+    #         print(" Test Case -5 :  Pass: -  Estimate  saved successfully.....!!")
+
     def Click_Save_Estimation(self):
 
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
 
-            wait = WebDriverWait(self.driver, 30)
+        # -----------------------------
+        # Locators
+        # -----------------------------
+        save_locator = (
+            By.XPATH,
+            "//span[normalize-space()='Save']/ancestor::button"
+        )
 
-            try:
+        estimate_no_locator = (
+            By.XPATH,
+            "//label[contains(normalize-space(.),'Estimate no.')]/following::input[1]"
+        )
 
-                wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".ant-spin-spinning")))
-            except:
-                pass
+        duplicate_message_locator = (
+            By.XPATH,
+            "//*[contains(normalize-space(.),'Duplicate Estimate no')]"
+        )
 
-            save_button = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Save']/ancestor::button"))
+        # -----------------------------
+        # Wait for loader
+        # -----------------------------
+        try:
+            wait.until(
+                EC.invisibility_of_element_located(
+                    (By.CSS_SELECTOR, ".ant-spin-spinning")
+                )
+            )
+        except TimeoutException:
+            pass
+
+        # -----------------------------
+        # Click Save first time
+        # -----------------------------
+        save_button = wait.until(
+            EC.element_to_be_clickable(save_locator)
+        )
+
+        driver.execute_script(
+            "arguments[0].scrollIntoView({block:'center'});",
+            save_button
+        )
+
+        save_button.click()
+
+        print("Save button clicked.....!!")
+
+        # -----------------------------
+        # Check Duplicate Estimate error
+        # -----------------------------
+        try:
+            duplicate_error = WebDriverWait(driver, 5).until(
+                EC.visibility_of_element_located(
+                    duplicate_message_locator
+                )
             )
 
-            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_button)
-            time.sleep(0.4)
+            print(
+                "Duplicate Estimate number detected:",
+                duplicate_error.text
+            )
+
+            # -----------------------------
+            # Find Estimate Number field
+            # -----------------------------
+            estimate_input = wait.until(
+                EC.visibility_of_element_located(
+                    estimate_no_locator
+                )
+            )
+
+            current_estimate_no = (
+                    estimate_input.get_attribute("value")
+                    or estimate_input.text
+            ).strip()
+
+            print(
+                "Current Estimate No:",
+                current_estimate_no
+            )
+
+            # -----------------------------
+            # Increment Estimate Number
+            # Example:
+            # EST-0059 -> EST-0060
+            # -----------------------------
+            match = re.match(
+                r"^(.*?)(\d+)$",
+                current_estimate_no
+            )
+
+            if not match:
+                raise Exception(
+                    f"Unable to increment Estimate No: "
+                    f"{current_estimate_no}"
+                )
+
+            prefix = match.group(1)
+            number = match.group(2)
+
+            new_number = str(
+                int(number) + 1
+            ).zfill(len(number))
+
+            new_estimate_no = (
+                    prefix + new_number
+            )
+
+            print(
+                "New Estimate No:",
+                new_estimate_no
+            )
+
+            # -----------------------------
+            # Replace value
+            # -----------------------------
+            estimate_input.click()
+
+            estimate_input.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
+
+            estimate_input.send_keys(
+                Keys.BACKSPACE
+            )
+
+            estimate_input.send_keys(
+                new_estimate_no
+            )
+
+            estimate_input.send_keys(
+                Keys.TAB
+            )
+
+            print(
+                f"Estimate No updated from "
+                f"{current_estimate_no} "
+                f"to {new_estimate_no}"
+            )
+
+            # Wait for duplicate toast to disappear
+            try:
+                WebDriverWait(driver, 5).until(
+                    EC.invisibility_of_element_located(
+                        duplicate_message_locator
+                    )
+                )
+            except TimeoutException:
+                pass
+
+            # -----------------------------
+            # Re-find Save button
+            # -----------------------------
+            save_button = wait.until(
+                EC.element_to_be_clickable(
+                    save_locator
+                )
+            )
+
             save_button.click()
-            time.sleep(0.4)
-            print(" Test Case -5 :  Pass: -  Estimate  saved successfully.....!!")
+
+            print(
+                "Save button clicked again "
+                "with updated Estimate No.....!!"
+            )
+
+        except TimeoutException:
+
+            # No duplicate error found
+            print(
+                "No duplicate Estimate No. error found."
+            )
+
+        print(
+            "Test Case - 5 : Pass: "
+            "Estimate saved successfully.....!!"
+        )
+
+
 
     def Download_Invoice(self):
-        try:
+        # try:
             debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
             time.sleep(.2)
             debts.click()
             time.sleep(.5)
             print(" download file successfully.....! ")
-        except Exception as e:
-            print(f"Error on click:{e}")
+        # except Exception as e:
+        #     print(f"Error on click:{e}")
 
 
     def Create_Direct_Invoice(self):

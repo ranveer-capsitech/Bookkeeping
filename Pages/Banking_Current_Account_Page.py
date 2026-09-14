@@ -359,6 +359,7 @@ class Banking:
             time.sleep(0.2)
 
 
+
     def Enter_Account_no(self):
         driver = self.driver
         wait = WebDriverWait(driver, 15)
@@ -2068,7 +2069,8 @@ class Banking:
             print(f"Error: {type(e).__name__} - {e}")
             raise
 
-#------------------------------------------quick fill --------------------------------------------------------------------
+#------------------------------------------quick fill ------------------------------------------------------------------
+
 
     def Select_2nd_Last_Entry(self):
         wait = WebDriverWait(self.driver, 40)
@@ -2087,6 +2089,7 @@ class Banking:
         self.driver.execute_script("arguments[0].click();", checkbox)
 
         print("Clicked on 2nd last entry checkbox successfully.")
+
 
     def Click_Quick_Fill(self):
         try:
@@ -2175,4 +2178,5 @@ class Banking:
         except Exception as e:
             print(f"Enter on click: {e}")
             time.sleep(.5)
+
 

@@ -1051,6 +1051,7 @@ class Banking_Savings_account:
             print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
             raise
 
+
     def Click_Second_Checkbox(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1072,6 +1073,7 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error while selecting checkbox: {type(e).__name__} - {e}")
             raise
+
 
     def Click_Delete_Button(self):
         try:
@@ -1120,12 +1122,12 @@ class Banking_Savings_account:
             time.sleep(.2)
             yes.click()
             time.sleep(.2)
-
             print("Click on Yes button successfully and Account activated successfully....!!")
 
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Click_Yes_Delete(self):
         try:
@@ -1190,7 +1192,6 @@ class Banking_Savings_account:
             raise
 
 
-
     def Click_Yes_Confirm_To_Unexplain_Selected_Transaction(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1249,6 +1250,7 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error on search field: {e}")
 
+
     def Click_three_dot(self):
         try:
             dot = WebDriverWait(self.driver, 40).until(
@@ -1263,7 +1265,6 @@ class Banking_Savings_account:
             time.sleep(2)
 
 
-
     def Click_Split(self):
         try:
             split = WebDriverWait(self.driver, 40).until(
@@ -1276,7 +1277,6 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
-
 
 
 
@@ -1332,6 +1332,7 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error in Money_in_or_Money_out: {type(e).__name__} - {e}")
             raise
+
 
     def Fill_Split_Amount(self):
         try:
@@ -1436,8 +1437,6 @@ class Banking_Savings_account:
 
 
 
-
-
     def Fill_Split_Amount_Money_Out(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1518,17 +1517,6 @@ class Banking_Savings_account:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     def Select_Next_option_Second_Account_Head_Option(self):
         try:
             wait = WebDriverWait(self.driver, 40)
@@ -1570,6 +1558,7 @@ class Banking_Savings_account:
             print(f"Error: {type(e).__name__} - {e}")
             raise
 
+
     def Click_Split_Button(self):
 
             try:
@@ -1583,7 +1572,6 @@ class Banking_Savings_account:
             except Exception as e:
                 print(f"Error: {e}")
                 time.sleep(2)
-
 
 
 
@@ -1624,6 +1612,7 @@ class Banking_Savings_account:
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(2)
+
 
     def Click_Description(self):
         try:

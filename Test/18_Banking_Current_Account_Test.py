@@ -33,7 +33,6 @@ class Login(unittest.TestCase):
 
 
 
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -129,26 +128,17 @@ class Login(unittest.TestCase):
 
 
 
-
-
-
-
     # -----------------------------------------------------------------------------------------------------------------
-
-
-
 
 
         client_section.Click_Checkbox_Single_Element()
         time.sleep(.2)
 
 
-
         client_section.Click_Explain_1st()
         time.sleep(.2)
         client_section.Click_This_Transaction()
         time.sleep(.5)
-
 
 
         client_section.Click_Checkbox_Single_Element()
@@ -168,7 +158,7 @@ class Login(unittest.TestCase):
         time.sleep(2)
 
 
-        # -----------------------------------------
+    #-------------------------------------------------------------------------------------------------------------------
 
 
         client_section.Click_Similar_Section_Explain_Button()
@@ -197,6 +187,7 @@ class Login(unittest.TestCase):
 
 
 #----------------QUICK FILL------------------------------------------------
+
         client_section.Simple_Check_Box_Selection()
         time.sleep(2)
         client_section.wait_for_loader_to_disappear()
@@ -352,8 +343,9 @@ class Login(unittest.TestCase):
         client_section.Click_Yes_Confirm_To_Unexplain_Selected_Transaction()
         time.sleep(5)
 
-        @classmethod
-        def tearDownClass(cls):
+
+    @classmethod
+    def tearDownClass(cls):
             """
             This method runs once after all test methods finish.
             """

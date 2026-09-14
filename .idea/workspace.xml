@@ -6,24 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="57782122-33af-4a12-b826-3a6bdf5478f4" name="Changes" comment="reduce time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Change_Vat_Date_Shorting_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Change_Vat_Date_Shorting_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Creditcard_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Banking_Current_Account_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Current_Account_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyIn_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyIn_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyOut_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_Detailed_MoneyOut_Page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Banking_SavingAccount_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Banking_SavingAccount_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Detail_Explain_Current_Account_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Detail_Explain_Current_Account_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Details_Explain_Saving_Account_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Details_Explain_Saving_Account_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Mileage_Page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Mileage_Page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/15_Journals_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/15_Journals_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_1_Banking_Creditcard_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_2_Banking_SavingAccount_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/18_3_Banking_Change_Vat_Date_Shorting_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_3_Banking_Change_Vat_Date_Shorting_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/23_Banking_Detailed_MoneyOut_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/24_Banking_Detailed_MoneyIn_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/24_Banking_Detailed_MoneyIn_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/25_Detail_Explain_Current_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/25_Detail_Explain_Current_Account_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/26_Details_Explain_Saving_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/26_Details_Explain_Saving_Account_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/27_Details_Explain_Filtering_Function_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/27_Details_Explain_Filtering_Function_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Estimates_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Estimates_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/18_Banking_Current_Account_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/4_Estimates_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/4_Estimates_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/test_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/test_report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/select_monzo_account_failure.png" beforeDir="false" afterPath="$PROJECT_DIR$/select_monzo_account_failure.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,14 +267,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760701272374</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Test case of Budget manager.">
-      <option name="closed" value="true" />
-      <created>1770101951504</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1770101951504</updated>
     </task>
     <task id="LOCAL-00027" summary="Test case of Budget manager.">
       <option name="closed" value="true" />
@@ -671,7 +652,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788441379598</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="reduce time">
+      <option name="closed" value="true" />
+      <created>1788874327783</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1788874327784</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="UnknownFeatures">
