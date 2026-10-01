@@ -93,6 +93,7 @@ class ClientSell:
 
 
         self.hide_graph = (By.XPATH, "//button[@title='hide reports']//*[name()='svg']")
+        self.remove_hide = (By.XPATH,"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/button[1]/span[1]/i[1]")
         self.pagination = (By.XPATH, "//div[@role='combobox']")
 
 
@@ -800,7 +801,12 @@ class ClientSell:
             hide.click()
             time.sleep(.2)
             print(" Hide Report Section successfully.....!!")
-            hide.click()
+            time.sleep(.2)
+            remove_hide_function = WebDriverWait(self.driver, 40).until(
+                EC.element_to_be_clickable(self.remove_hide)
+            )
+            time.sleep(.2)
+            remove_hide_function.click()
             time.sleep(.2)
             print("Again showing Report Section successfully.....!!")
 
@@ -1117,18 +1123,81 @@ class ClientSell:
             time.sleep(0.4)
             save_button.click()
             time.sleep(0.4)
-            print("Save Bad Debts invoice successfully.......")
+            print("Save Bad Debts invoice successfully.......!")
 
+
+    # def Download_Invoice(self):
+    #     try:
+    #         debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
+    #         time.sleep(.2)
+    #         debts .click()
+    #         time.sleep(.5)
+    #         print(" download file successfully.....! ")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
 
     def Download_Invoice(self):
+
+        driver = self.driver
+        wait = WebDriverWait(
+            driver,
+            20,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        download_locator = (
+            By.ID,
+            "btn-btnDownload"
+        )
+
+        overlay_locator = (
+            By.CSS_SELECTOR,
+            ".ms-Overlay.ms-Overlay--dark"
+        )
+
         try:
-            debts = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.click_download_icon))
-            time.sleep(.2)
-            debts .click()
-            time.sleep(.5)
-            print(" download file successfully.....! ")
+
+            # Wait until blocking modal/overlay disappears
+            wait.until(
+                EC.invisibility_of_element_located(
+                    overlay_locator
+                )
+            )
+
+            print("Modal overlay disappeared successfully.")
+
+            # Fresh locate
+            download = wait.until(
+                EC.element_to_be_clickable(
+                    download_locator
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                download
+            )
+
+            # Re-locate after scroll
+            download = wait.until(
+                EC.element_to_be_clickable(
+                    download_locator
+                )
+            )
+
+            download.click()
+
+            print("Download button clicked successfully.")
+
         except Exception as e:
-            print(f"Error on click:{e}")
+
+            print(
+                f"Click_Download FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            raise
 
     def Click_Pound_Icon(self):
         try:

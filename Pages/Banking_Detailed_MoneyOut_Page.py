@@ -1,4 +1,5 @@
 import os
+import string
 
 import pyautogui
 from faker import Faker
@@ -95,7 +96,9 @@ class Banking_detailed_explaination:
         self.enter_eori = (By.XPATH,
                            "//label[normalize-space()='EORI number']/following::input[contains(@class,'ms-TextField-field')][1]")
 
-        self.sort_code = (By.XPATH, "//label[normalize-space()='Sort code']/following::input[@type='text'][1]")
+        self.sort_code = (By.XPATH, "//label[normalize-space()='Sort code (Optional)']/following::input[1]")
+
+
 
         self.account = (By.XPATH, "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Account']]")
 
@@ -220,6 +223,20 @@ class Banking_detailed_explaination:
             "//label[normalize-space()='Select account']"
             "/following::input[@role='combobox'][1]"
         )
+
+
+        self.enter_merchant_id = (By.XPATH, "//label[normalize-space()='Merchant ID']/following-sibling::div//input[@type='text']")
+
+        self.select_saved_wallet = (
+            By.XPATH,"(//div[contains(@class,'p10-210')][.//label[contains(normalize-space(.),'(Wallet)')]]//label[contains(normalize-space(.),'Unexplained transactions')])[last()]"
+        )
+
+        self.entering_manually_click_here =(By.XPATH,"//label[contains(text(),'To import transactions')]/following-sibling::ul//li[contains(text(),'entering manually click')]/button[contains(text(),'here')]" )
+
+        self.click_on_bank_url = (By.XPATH, "//button[contains(@path,'/banking/banks')][.//div[normalize-space()='Banks']]")
+
+
+
 
 
 
@@ -896,6 +913,195 @@ class Banking_detailed_explaination:
             print(f"Error in Select_Account_Type: {type(e).__name__} - {e}")
             raise
 
+    def Select_Account_Type_Wallet(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            account_type_input = wait.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//div[@role='dialog' and .//*[normalize-space()='Add account']]"
+                    "//label[normalize-space()='Account type']"
+                    "/following::input[@role='combobox'][1]"
+                ))
+            )
+
+            account_type_input.click()
+
+            account_type_input.send_keys(Keys.CONTROL, "a")
+            account_type_input.send_keys(Keys.BACKSPACE)
+
+            account_type_input.send_keys("Wallet")
+
+            time.sleep(0.5)
+
+            account_type_input.send_keys(Keys.ARROW_DOWN)
+            account_type_input.send_keys(Keys.ENTER)
+
+            print("Wallet option selected successfully....!!")
+
+        except Exception as e:
+            print(
+                f"Error in Select_Account_Type_Wallet: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
+    def Enter_Merchant_ID(self):
+        try:
+            wait = WebDriverWait(self.driver, 40)
+
+            merchant_id_input = wait.until(
+                EC.presence_of_element_located(
+                    self.enter_merchant_id
+                )
+            )
+
+            # Random Merchant ID
+            random_merchant_id = "MID" + "".join(
+                random.choices(
+                    string.digits,
+                    k=9
+                )
+            )
+
+            merchant_id_input.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
+
+            merchant_id_input.send_keys(
+                Keys.BACKSPACE
+            )
+
+            merchant_id_input.send_keys(
+                random_merchant_id
+            )
+
+            print(
+                f"Merchant ID entered successfully: "
+                f"{random_merchant_id}"
+            )
+
+            return random_merchant_id
+
+        except Exception as e:
+            print(
+                f"Error in Enter_Merchant_ID: {e}"
+            )
+            raise
+
+
+    # def Enter_Merchant_ID(self):
+    #
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #         merchant_id_input = wait.until(EC.presence_of_element_located(self.enter_merchant_id))
+    #         time.sleep(.2)
+    #         merchant_id_input.send_keys(Keys.CONTROL, "a")
+    #         merchant_id_input.send_keys("MID123456789")
+    #         time.sleep(1)
+    #         print("Merchant ID entered successfully....!!")
+    #     except Exception as e:
+    #         print(f"Error in Select_Bank: {e}")
+    #         time.sleep(0.2)
+
+
+    def Sort_Code(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+            code = wait.until(EC.visibility_of_element_located(self.sort_code))
+
+            self.sort_code_value = "112233"
+
+            code.clear()
+            code.send_keys(self.sort_code_value)
+
+            driver.switch_to.active_element.send_keys(Keys.ENTER)
+
+            print("Enter sort code successfully...!!")
+
+        except Exception as e:
+            print(f"Error on Click: {e}")
+            raise
+
+    def Save_Wallet(self):
+
+        try:
+            save_wallet = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.save_account))
+            time.sleep(.2)
+            save_wallet.click()
+            time.sleep(.2)
+
+            print("Test Case  -   Pass: Account as a wallet saved successfully....!")
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+            time.sleep(2)
+
+
+    def Click_Saved_Wallet_Account(self):
+        try:
+            save_wallet = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.select_saved_wallet))
+            time.sleep(.2)
+            save_wallet.click()
+            time.sleep(.2)
+            print("Clicked selected saved wallet account successfully.....!!")
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(2)
+
+
+
+
+
+
+
+
+    def Manually_Click_Here(self):
+        try:
+            click_here = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.entering_manually_click_here))
+            time.sleep(.2)
+            click_here.click()
+            print("Click on add here link successfully....!!")
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(.2)
+
+    def Click_On_Bank_URl(self):
+        try:
+            bank_url = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_on_bank_url))
+            time.sleep(.2)
+            bank_url.click()
+            print("Click on Bank URl successfully....!!")
+        except Exception as e:
+            print(f"Error: {e}")
+            time.sleep(.2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def Enter_Credit_Card(self):
         driver = self.driver
@@ -1143,51 +1349,87 @@ class Banking_detailed_explaination:
 
             time.sleep(2)
 
-
-
     def Enter_Date(self):
         try:
             wait = WebDriverWait(self.driver, 30)
 
-            today_date = datetime.now().strftime("%d/%m/%Y")
-
             date_field = wait.until(
-                EC.presence_of_element_located((
+                EC.element_to_be_clickable((
                     By.XPATH,
-                    # "//input[@name='transactions.0.date']"
-                     "//input[starts-with(@name,'transactions.') and contains(@name,'.date') and @placeholder='DD/MM/YYYY']"
-
+                    "//input[@placeholder='DD/MM/YYYY']"
                 ))
             )
 
             self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+                "arguments[0].scrollIntoView({block:'center'});",
                 date_field
             )
 
-            self.driver.execute_script("""
-                const input = arguments[0];
-                const value = arguments[1];
+            date_field.click()
 
-                input.removeAttribute('readonly');
-                input.focus();
+            date_field.send_keys(Keys.CONTROL, "a")
+            date_field.send_keys(Keys.BACKSPACE)
 
-                input.value = '';
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('change', { bubbles: true }));
+            date_field.send_keys("01/10/2026")
+            date_field.send_keys(Keys.TAB)
 
-                input.value = value;
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                input.dispatchEvent(new Event('change', { bubbles: true }));
-
-                input.blur();
-            """, date_field, today_date)
-
-            print(f"Today's date entered successfully: {today_date}")
+            print(
+                f"Date entered successfully: "
+                f"{date_field.get_attribute('value')}"
+            )
 
         except Exception as e:
-            print(f"Error in Enter_Date: {type(e).__name__} - {e}")
+            print(
+                f"Error in Enter_Date: "
+                f"{type(e).__name__} - {e}"
+            )
             raise
+
+
+
+    # def Enter_Date(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 30)
+    #
+    #         today_date = datetime.now().strftime("%d/%m/%Y")
+    #
+    #         date_field = wait.until(
+    #             EC.presence_of_element_located((
+    #                 By.XPATH,
+    #                 # "//input[@name='transactions.0.date']"
+    #                  "//input[starts-with(@name,'transactions.') and contains(@name,'.date') and @placeholder='DD/MM/YYYY']"
+    #
+    #             ))
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             date_field
+    #         )
+    #
+    #         self.driver.execute_script("""
+    #             const input = arguments[0];
+    #             const value = arguments[1];
+    #
+    #             input.removeAttribute('readonly');
+    #             input.focus();
+    #
+    #             input.value = '';
+    #             input.dispatchEvent(new Event('input', { bubbles: true }));
+    #             input.dispatchEvent(new Event('change', { bubbles: true }));
+    #
+    #             input.value = value;
+    #             input.dispatchEvent(new Event('input', { bubbles: true }));
+    #             input.dispatchEvent(new Event('change', { bubbles: true }));
+    #
+    #             input.blur();
+    #         """, date_field, today_date)
+    #
+    #         print(f"Today's date entered successfully: {today_date}")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Enter_Date: {type(e).__name__} - {e}")
+    #         raise
 
 
     def Enter_Description(self, description="Manual transaction test"):
@@ -1368,7 +1610,7 @@ class Banking_detailed_explaination:
                 time.sleep(0.2)
 
                 active = driver.switch_to.active_element
-                active.send_keys("KM Consultancy Limited (Steven Phillip)")
+                active.send_keys("KM Consultancy Limited ")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
                 # active.send_keys(Keys.ARROW_DOWN)
@@ -1760,71 +2002,143 @@ class Banking_detailed_explaination:
             raise
 
 
+    # def Transfer_Submit_Button(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         transfer_btn_locator = (
+    #             By.XPATH,
+    #             "//div[@role='tabpanel' and @aria-hidden='false']"
+    #             "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Transfer']]"
+    #         )
+    #
+    #         for attempt in range(3):
+    #             try:
+    #                 transfer_btn = wait.until(
+    #                     EC.presence_of_element_located(transfer_btn_locator)
+    #                 )
+    #
+    #                 print("Transfer button displayed:", transfer_btn.is_displayed())
+    #                 print("Transfer button enabled:", transfer_btn.is_enabled())
+    #                 print("Transfer button disabled attr:", transfer_btn.get_attribute("disabled"))
+    #                 print("Transfer button text:", transfer_btn.text)
+    #
+    #                 self.driver.execute_script(
+    #                     "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #                     transfer_btn
+    #                 )
+    #
+    #                 time.sleep(0.5)
+    #
+    #                 # Re-fetch after scroll
+    #                 transfer_btn = wait.until(
+    #                     EC.element_to_be_clickable(transfer_btn_locator)
+    #                 )
+    #
+    #                 self.driver.execute_script("arguments[0].click();", transfer_btn)
+    #
+    #                 print("Clicked on Transfer submit button successfully....!!")
+    #                 return
+    #
+    #             except StaleElementReferenceException:
+    #                 print(f"Stale element retry {attempt + 1}/3")
+    #                 time.sleep(1)
+    #
+    #         raise Exception("Unable to click Transfer submit button after retries")
+    #
+    #     except TimeoutException:
+    #         buttons = self.driver.find_elements(
+    #             By.XPATH,
+    #             "//button[.//span[normalize-space()='Transfer']]"
+    #         )
+    #
+    #         print("Total Transfer buttons found:", len(buttons))
+    #
+    #         for i, btn in enumerate(buttons, start=1):
+    #             print(
+    #                 f"Button {i}: text='{btn.text}', "
+    #                 f"displayed={btn.is_displayed()}, "
+    #                 f"enabled={btn.is_enabled()}, "
+    #                 f"disabled={btn.get_attribute('disabled')}, "
+    #                 f"aria-disabled={btn.get_attribute('aria-disabled')}"
+    #             )
+    #
+    #         raise
+    #
+    #     except Exception as e:
+    #         print(f"Error in Transfer_Submit_Button: {type(e).__name__} - {e}")
+    #         raise
+
     def Transfer_Submit_Button(self):
+
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        transfer_btn_locator = (
+            By.XPATH,
+            "//button[.//span[normalize-space()='Transfer']]"
+        )
+
         try:
-            wait = WebDriverWait(self.driver, 40)
 
-            transfer_btn_locator = (
-                By.XPATH,
-                "//div[@role='tabpanel' and @aria-hidden='false']"
-                "//button[contains(@class,'ms-Button--primary') and .//span[normalize-space()='Transfer']]"
+            print(
+                "Transfer buttons found:",
+                len(driver.find_elements(*transfer_btn_locator))
             )
 
-            for attempt in range(3):
-                try:
-                    transfer_btn = wait.until(
-                        EC.presence_of_element_located(transfer_btn_locator)
-                    )
-
-                    print("Transfer button displayed:", transfer_btn.is_displayed())
-                    print("Transfer button enabled:", transfer_btn.is_enabled())
-                    print("Transfer button disabled attr:", transfer_btn.get_attribute("disabled"))
-                    print("Transfer button text:", transfer_btn.text)
-
-                    self.driver.execute_script(
-                        "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                        transfer_btn
-                    )
-
-                    time.sleep(0.5)
-
-                    # Re-fetch after scroll
-                    transfer_btn = wait.until(
-                        EC.element_to_be_clickable(transfer_btn_locator)
-                    )
-
-                    self.driver.execute_script("arguments[0].click();", transfer_btn)
-
-                    print("Clicked on Transfer submit button successfully....!!")
-                    return
-
-                except StaleElementReferenceException:
-                    print(f"Stale element retry {attempt + 1}/3")
-                    time.sleep(1)
-
-            raise Exception("Unable to click Transfer submit button after retries")
-
-        except TimeoutException:
-            buttons = self.driver.find_elements(
-                By.XPATH,
-                "//button[.//span[normalize-space()='Transfer']]"
+            transfer_btn = wait.until(
+                EC.presence_of_element_located(
+                    transfer_btn_locator
+                )
             )
 
-            print("Total Transfer buttons found:", len(buttons))
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                transfer_btn
+            )
 
-            for i, btn in enumerate(buttons, start=1):
+            transfer_btn = wait.until(
+                EC.visibility_of_element_located(
+                    transfer_btn_locator
+                )
+            )
+
+            transfer_btn = wait.until(
+                EC.element_to_be_clickable(
+                    transfer_btn_locator
+                )
+            )
+
+            try:
+                transfer_btn.click()
+
+            except ElementClickInterceptedException:
+
                 print(
-                    f"Button {i}: text='{btn.text}', "
-                    f"displayed={btn.is_displayed()}, "
-                    f"enabled={btn.is_enabled()}, "
-                    f"disabled={btn.get_attribute('disabled')}, "
-                    f"aria-disabled={btn.get_attribute('aria-disabled')}"
+                    "Normal Transfer click blocked. "
+                    "Trying fresh element..."
                 )
 
-            raise
+                transfer_btn = driver.find_element(
+                    *transfer_btn_locator
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    transfer_btn
+                )
+
+            print(
+                "Transfer button clicked successfully....!!"
+            )
 
         except Exception as e:
-            print(f"Error in Transfer_Submit_Button: {type(e).__name__} - {e}")
+
+            print(
+                f"Transfer_Submit_Button FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
             raise
 
 

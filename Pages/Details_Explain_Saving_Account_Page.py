@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
-from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException, NoSuchElementException
 
 fake = Faker()
 random_first_name = fake.first_name()
@@ -436,52 +436,40 @@ class Detail_Explain_Savingt_Account:
             )
             raise
 
-    def Click_Sales(self):
 
+
+    def Click_Sales(self):
         driver = self.driver
 
         wait = WebDriverWait(
             driver,
             30,
-            poll_frequency=0.2,
-            ignored_exceptions=(StaleElementReferenceException,)
+            poll_frequency=0.3,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+                NoSuchElementException
+            )
         )
 
         try:
-            # =====================================
-            # STEP 1: Make sure Inputs is opened
-            # =====================================
-            for attempt in range(1, 4):
+            print("Current URL before Sales:", driver.current_url)
 
-                input_menu = wait.until(
-                    EC.presence_of_element_located(
-                        self.input_anchor
-                    )
+            # -------------------------
+            # Step 1 - open Inputs menu
+            # -------------------------
+            input_menu = wait.until(
+                EC.presence_of_element_located(
+                    self.input_anchor
                 )
+            )
 
-                expanded = input_menu.get_attribute(
-                    "aria-expanded"
-                )
+            expanded = input_menu.get_attribute("aria-expanded")
 
-                print(
-                    f"Inputs attempt {attempt} - "
-                    f"aria-expanded: {expanded}"
-                )
+            print("Inputs aria-expanded:", expanded)
 
-                if expanded == "true":
-
-                    sales_count = len(
-                        driver.find_elements(
-                            *self.click_sales
-                        )
-                    )
-
-                    if sales_count > 0:
-                        break
-
-                # Fresh arrow
+            if expanded != "true":
                 input_arrow = wait.until(
-                    EC.presence_of_element_located(
+                    EC.element_to_be_clickable(
                         self.input_arrow
                     )
                 )
@@ -491,91 +479,91 @@ class Detail_Explain_Savingt_Account:
                     input_arrow
                 )
 
-                # Re-find immediately before click
-                input_arrow = driver.find_element(
-                    *self.input_arrow
+                driver.execute_script(
+                    "arguments[0].click();",
+                    input_arrow
                 )
 
-                try:
-                    input_arrow.click()
+                print("Inputs dropdown clicked")
 
-                except Exception:
-                    driver.execute_script(
-                        "arguments[0].click();",
-                        input_arrow
-                    )
-
-                print("Inputs dropdown arrow clicked....!!")
-
-                try:
-                    WebDriverWait(
-                        driver,
-                        5,
-                        poll_frequency=0.2,
-                        ignored_exceptions=(
-                            StaleElementReferenceException,
-                        )
-                    ).until(
-                        EC.visibility_of_element_located(
-                            self.click_sales
-                        )
-                    )
-
-                    print(
-                        "Inputs dropdown opened successfully....!!"
-                    )
-
-                    break
-
-                except TimeoutException:
-                    print(
-                        f"Sales not visible after "
-                        f"attempt {attempt}"
-                    )
-
-            else:
-                raise TimeoutException(
-                    "Inputs dropdown did not open "
-                    "after 3 attempts."
-                )
-
-            # =====================================
-            # STEP 2: Click Sales
-            # =====================================
+            # -------------------------
+            # Step 2 - wait for Sales
+            # -------------------------
             sales = wait.until(
-                EC.visibility_of_element_located(
+                EC.presence_of_element_located(
                     self.click_sales
                 )
             )
 
-            print("Sales menu found:", sales.text)
-
-            # Fresh locate just before click
-            sales = driver.find_element(
-                *self.click_sales
-            )
+            print("Sales found:", sales.text)
 
             driver.execute_script(
-                """
-                const el = arguments[0];
-
-                const clickable =
-                    el.closest('a') ||
-                    el.closest('button') ||
-                    el;
-
-                clickable.click();
-                """,
+                "arguments[0].scrollIntoView({block:'center'});",
                 sales
             )
 
-            print("Sales clicked successfully....!!")
+            # Do not re-find it here
+            try:
+                sales.click()
+
+            except Exception:
+                sales = wait.until(
+                    EC.presence_of_element_located(
+                        self.click_sales
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    sales
+                )
+
+            print("Clicked Sales successfully.....!!")
+
+            # -------------------------
+            # Step 3 - verify navigation
+            # -------------------------
+            wait.until(
+                lambda d: "/inputs/sales" in d.current_url
+            )
+
+            print(
+                "Sales page opened successfully:",
+                driver.current_url
+            )
 
         except Exception as e:
             print(
                 f"Error while clicking Sales: "
                 f"{type(e).__name__} - {e}"
             )
+
+            print("Current URL:", driver.current_url)
+
+            # debugging
+            sales_candidates = driver.find_elements(
+                By.XPATH,
+                "//*[normalize-space()='Sales']"
+            )
+
+            print(
+                "Visible Sales text elements:",
+                len(sales_candidates)
+            )
+
+            for index, element in enumerate(
+                    sales_candidates[:10]
+            ):
+                try:
+                    print(
+                        index,
+                        element.tag_name,
+                        element.text,
+                        element.is_displayed()
+                    )
+                except Exception:
+                    pass
+
             raise
 
     def Add_Invoice(self):
@@ -742,48 +730,278 @@ class Detail_Explain_Savingt_Account:
         except Exception as e:
             print(f"Error on Click : {e}")
 
+    # def Click_Save(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         save_button = wait.until(
+    #             EC.element_to_be_clickable((
+    #                 By.XPATH,
+    #                 "//button[.//span[normalize-space()='Save'] and not(@disabled)]"
+    #             ))
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             save_button
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         self.driver.execute_script("arguments[0].click();", save_button)
+    #
+    #         print("Clicked on Save button successfully")
+    #
+    #         # wait for any success toast/message
+    #         success_message = wait.until(
+    #             EC.visibility_of_element_located((
+    #                 By.XPATH,
+    #                 "//*[contains(normalize-space(),'created successfully') "
+    #                 "or contains(normalize-space(),'Invoice created') "
+    #                 "or contains(normalize-space(),'saved successfully') "
+    #                 "or contains(normalize-space(),'Invoice saved')]"
+    #             ))
+    #         )
+    #
+    #         assert success_message.is_displayed(), "Success message not displayed"
+    #         print("Test Case Create Invoice - Pass:")
+    #
+    #         # print("Test Case Create Invoice - Pass:", success_message.text)
+    #
+    #         time.sleep(2)
+    #
+    #     except Exception as e:
+    #         print(f"Error in Click_Save: {type(e).__name__} - {e}")
+    #         raise
+
     def Click_Save(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            20,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        save_locator = (
+            By.XPATH,
+            "//button[normalize-space()='Save' "
+            "or .//span[normalize-space()='Save']]"
+        )
+
         try:
-            wait = WebDriverWait(self.driver, 40)
 
-            save_button = wait.until(
-                EC.element_to_be_clickable((
+            # -----------------------------------
+            # STEP 1: Find and click Save
+            # -----------------------------------
+
+            save_btn = wait.until(
+                EC.element_to_be_clickable(
+                    save_locator
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                save_btn
+            )
+
+            # Fresh element
+            save_btn = wait.until(
+                EC.element_to_be_clickable(
+                    save_locator
+                )
+            )
+
+            try:
+                save_btn.click()
+
+            except ElementClickInterceptedException:
+
+                save_btn = wait.until(
+                    EC.presence_of_element_located(
+                        save_locator
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    save_btn
+                )
+
+            print(
+                "Save button clicked successfully....!!"
+            )
+
+            # -----------------------------------
+            # STEP 2: Wait for loader
+            # -----------------------------------
+
+            try:
+                WebDriverWait(
+                    driver,
+                    10,
+                    poll_frequency=0.2
+                ).until(
+                    EC.invisibility_of_element_located(
+                        (
+                            By.CSS_SELECTOR,
+                            ".ms-Spinner"
+                        )
+                    )
+                )
+            except TimeoutException:
+                pass
+
+            # -----------------------------------
+            # STEP 3: Check success message
+            # -----------------------------------
+
+            success_locators = [
+
+                (
                     By.XPATH,
-                    "//button[.//span[normalize-space()='Save'] and not(@disabled)]"
-                ))
-            )
+                    "//*[@role='alert' and "
+                    "contains(translate(.,"
+                    "'ABCDEFGHIJKLMNOPQRSTUVWXYZ',"
+                    "'abcdefghijklmnopqrstuvwxyz'),"
+                    "'success')]"
+                ),
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
-                save_button
-            )
-
-            time.sleep(0.5)
-
-            self.driver.execute_script("arguments[0].click();", save_button)
-
-            print("Clicked on Save button successfully")
-
-            # wait for any success toast/message
-            success_message = wait.until(
-                EC.visibility_of_element_located((
+                (
                     By.XPATH,
-                    "//*[contains(normalize-space(),'created successfully') "
-                    "or contains(normalize-space(),'Invoice created') "
-                    "or contains(normalize-space(),'saved successfully') "
-                    "or contains(normalize-space(),'Invoice saved')]"
-                ))
+                    "//*[contains("
+                    "translate(normalize-space(.),"
+                    "'ABCDEFGHIJKLMNOPQRSTUVWXYZ',"
+                    "'abcdefghijklmnopqrstuvwxyz'),"
+                    "'successfully')]"
+                ),
+
+                (
+                    By.XPATH,
+                    "//*[contains("
+                    "translate(normalize-space(.),"
+                    "'ABCDEFGHIJKLMNOPQRSTUVWXYZ',"
+                    "'abcdefghijklmnopqrstuvwxyz'),"
+                    "'invoice saved')]"
+                )
+            ]
+
+            for locator in success_locators:
+
+                try:
+
+                    message = WebDriverWait(
+                        driver,
+                        3
+                    ).until(
+                        EC.visibility_of_element_located(
+                            locator
+                        )
+                    )
+
+                    print(
+                        "Success message:",
+                        message.text
+                    )
+
+                    print(
+                        "Invoice saved successfully....!!"
+                    )
+
+                    return
+
+                except TimeoutException:
+                    continue
+
+            # -----------------------------------
+            # STEP 4: Check validation errors
+            # -----------------------------------
+
+            errors = driver.find_elements(
+                By.XPATH,
+                "//*[@role='alert'] | "
+                "//*[contains(@class,'error')]"
             )
 
-            assert success_message.is_displayed(), "Success message not displayed"
-            print("Test Case Create Invoice - Pass:")
+            visible_errors = []
 
-            # print("Test Case Create Invoice - Pass:", success_message.text)
+            for error in errors:
+                try:
+                    if (
+                            error.is_displayed()
+                            and error.text.strip()
+                    ):
+                        visible_errors.append(
+                            error.text.strip()
+                        )
+                except:
+                    pass
 
-            time.sleep(2)
+            if visible_errors:
+                print(
+                    "Validation errors:",
+                    visible_errors
+                )
+
+                raise AssertionError(
+                    "Invoice save failed: "
+                    + " | ".join(visible_errors)
+                )
+
+            # -----------------------------------
+            # STEP 5: Check whether Add Invoice
+            # form/modal disappeared
+            # -----------------------------------
+
+            add_invoice_elements = driver.find_elements(
+                By.XPATH,
+                "//*[contains("
+                "normalize-space(.),"
+                "'Add Invoice')]"
+            )
+
+            add_invoice_visible = any(
+                element.is_displayed()
+                for element in add_invoice_elements
+            )
+
+            if not add_invoice_visible:
+                print(
+                    "Invoice form closed after Save."
+                )
+
+                print(
+                    "Invoice saved successfully....!!"
+                )
+
+                return
+
+            # -----------------------------------
+            # STEP 6: Final failure
+            # -----------------------------------
+
+            driver.save_screenshot(
+                "reports/Invoice_Save_Failed.png"
+            )
+
+            raise TimeoutException(
+                "Save button clicked, but no success "
+                "message, no validation error and "
+                "invoice form is still open."
+            )
 
         except Exception as e:
-            print(f"Error in Click_Save: {type(e).__name__} - {e}")
+
+            print(
+                f"Click_Save FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
             raise
 
     def wait_for_loader_to_disappear(self):
@@ -1723,7 +1941,7 @@ class Detail_Explain_Savingt_Account:
                 time.sleep(0.2)
 
                 active = driver.switch_to.active_element
-                active.send_keys("KM Consultancy Limited (Steven Phillip)")
+                active.send_keys("KM Consultancy Limited")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
                 # active.send_keys(Keys.ARROW_DOWN)

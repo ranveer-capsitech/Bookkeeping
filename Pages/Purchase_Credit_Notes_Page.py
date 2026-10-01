@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 from datetime import datetime, timedelta
+import re
 
 
 fake = Faker()
@@ -543,46 +544,285 @@ class Purchase_CN:
 
 
 
-    def Click_Save_Button(self):
+    # def Click_Save_Button(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 30)
+    #
+    #
+    #     save_btn = wait.until(EC.element_to_be_clickable((
+    #         By.XPATH, "//div[@role='dialog']//button[@title='Save' and .//span[normalize-space()='Save']]"
+    #     )))
+    #
+    #     driver.execute_script("arguments[0].scrollIntoView({block:'center'});", save_btn)
+    #     time.sleep(0.3)
+    #
+    #     try:
+    #         save_btn.click()
+    #     except:
+    #         driver.execute_script("arguments[0].click();", save_btn)
+    #
+    #     time.sleep(1)
+    #
+    #
+    #     toast_xpath = "//div[contains(text(),'Duplicate refund number')]"
+    #
+    #     try:
+    #         toast_msg = WebDriverWait(driver, 30).until(
+    #             EC.visibility_of_element_located((By.XPATH, toast_xpath))
+    #         )
+    #         txt = toast_msg.text.lower()
+    #
+    #         if "duplicate" in txt or "already exists" in txt:
+    #             print(" Duplicate entry detected — stopping further execution.")
+    #
+    #             time.sleep(.2)
+    #             driver.back()
+    #             time.sleep(.5)
+    #
+    #         else:
+    #           print(" Test Case -: Pass : Purchase credit note saved successfully....!")
+    #
+    #     except TimeoutException:
+    #         print(" Duplicate entry is not detected")
+
+    def Save_Purchase_Credit_Note(self):
+
         driver = self.driver
         wait = WebDriverWait(driver, 30)
 
+        main_save_locator = (
+            By.XPATH,
+            "(//button[normalize-space()='Save'])[last()]"
+        )
 
-        save_btn = wait.until(EC.element_to_be_clickable((
-            By.XPATH, "//div[@role='dialog']//button[@title='Save' and .//span[normalize-space()='Save']]"
-        )))
+        duplicate_msg_locator = (
+            By.XPATH,
+            "//*[contains(normalize-space(.),'Duplicate credit note number')]"
+        )
 
-        driver.execute_script("arguments[0].scrollIntoView({block:'center'});", save_btn)
-        time.sleep(0.3)
+        credit_note_no_locator = (
+            By.XPATH,
+            "//*[normalize-space()='Credit note no.']/following::input[1]"
+        )
 
-        try:
-            save_btn.click()
-        except:
-            driver.execute_script("arguments[0].click();", save_btn)
+        close_popup_locator = (
+            By.XPATH,
+            "//button[normalize-space()='Close']"
+        )
 
-        time.sleep(1)
+        # ------------------------------------------------
+        # FIRST SAVE
+        # ------------------------------------------------
+        save_buttons = driver.find_elements(
+            *main_save_locator
+        )
 
+        print(
+            "Save buttons found:",
+            len(save_buttons)
+        )
 
-        toast_xpath = "//div[contains(text(),'Duplicate refund number')]"
-
-        try:
-            toast_msg = WebDriverWait(driver, 30).until(
-                EC.visibility_of_element_located((By.XPATH, toast_xpath))
+        if not save_buttons:
+            driver.save_screenshot(
+                "reports/purchase_cn_save_not_found.png"
             )
-            txt = toast_msg.text.lower()
 
-            if "duplicate" in txt or "already exists" in txt:
-                print(" Duplicate entry detected — stopping further execution.")
+            raise AssertionError(
+                "Purchase Credit Note Save button not found."
+            )
 
-                time.sleep(.2)
-                driver.back()
-                time.sleep(.5)
+        save_button = wait.until(
+            EC.element_to_be_clickable(
+                main_save_locator
+            )
+        )
 
-            else:
-              print(" Test Case -: Pass : Purchase credit note saved successfully....!")
+        driver.execute_script(
+            "arguments[0].scrollIntoView({block:'center'});",
+            save_button
+        )
+
+        driver.execute_script(
+            "arguments[0].click();",
+            save_button
+        )
+
+        print(
+            "Purchase Credit Note Save clicked successfully.....!!"
+        )
+
+        # ------------------------------------------------
+        # CHECK DUPLICATE MESSAGE
+        # ------------------------------------------------
+        try:
+            duplicate_message = WebDriverWait(
+                driver,
+                5
+            ).until(
+                EC.visibility_of_element_located(
+                    duplicate_msg_locator
+                )
+            )
+
+            print(
+                "Duplicate message found:",
+                duplicate_message.text
+            )
 
         except TimeoutException:
-            print(" Duplicate entry is not detected")
+
+            print(
+                "No duplicate Credit Note number found."
+            )
+
+            return
+
+        # ------------------------------------------------
+        # CLOSE ALLOCATION POPUP
+        # ------------------------------------------------
+        close_buttons = driver.find_elements(
+            *close_popup_locator
+        )
+
+        if close_buttons:
+
+            try:
+                close_button = WebDriverWait(
+                    driver,
+                    5
+                ).until(
+                    EC.element_to_be_clickable(
+                        close_popup_locator
+                    )
+                )
+
+                close_button.click()
+
+                print(
+                    "Allocation popup closed successfully.....!!"
+                )
+
+            except Exception as e:
+                print(
+                    "Popup close failed:",
+                    type(e).__name__,
+                    e
+                )
+
+        # ------------------------------------------------
+        # GET CREDIT NOTE NUMBER
+        # ------------------------------------------------
+        credit_note_input = wait.until(
+            EC.visibility_of_element_located(
+                credit_note_no_locator
+            )
+        )
+
+        current_no = (
+                credit_note_input.get_attribute("value")
+                or ""
+        ).strip()
+
+        print(
+            "Current Credit Note No:",
+            current_no
+        )
+
+        # ------------------------------------------------
+        # INCREMENT NUMBER
+        # PCN-0046 -> PCN-0047
+        # ------------------------------------------------
+        match = re.match(
+            r"^(.*?)(\d+)$",
+            current_no
+        )
+
+        if not match:
+            raise AssertionError(
+                f"Unable to increment Credit Note number: {current_no}"
+            )
+
+        prefix = match.group(1)
+        number = match.group(2)
+
+        new_number = str(
+            int(number) + 1
+        ).zfill(len(number))
+
+        new_credit_note_no = (
+                prefix + new_number
+        )
+
+        print(
+            "Updated Credit Note No:",
+            new_credit_note_no
+        )
+
+        # ------------------------------------------------
+        # REPLACE VALUE
+        # ------------------------------------------------
+        credit_note_input.click()
+
+        credit_note_input.send_keys(
+            Keys.CONTROL,
+            "a"
+        )
+
+        credit_note_input.send_keys(
+            Keys.BACKSPACE
+        )
+
+        credit_note_input.send_keys(
+            new_credit_note_no
+        )
+
+        credit_note_input.send_keys(
+            Keys.TAB
+        )
+
+        print(
+            f"Credit Note changed: "
+            f"{current_no} -> {new_credit_note_no}"
+        )
+
+        # ------------------------------------------------
+        # WAIT FOR DUPLICATE TOAST TO DISAPPEAR
+        # ------------------------------------------------
+        try:
+            WebDriverWait(
+                driver,
+                5
+            ).until(
+                EC.invisibility_of_element_located(
+                    duplicate_msg_locator
+                )
+            )
+        except TimeoutException:
+            pass
+
+        # ------------------------------------------------
+        # SAVE AGAIN
+        # ------------------------------------------------
+        save_button = wait.until(
+            EC.element_to_be_clickable(
+                main_save_locator
+            )
+        )
+
+        driver.execute_script(
+            "arguments[0].scrollIntoView({block:'center'});",
+            save_button
+        )
+
+        driver.execute_script(
+            "arguments[0].click();",
+            save_button
+        )
+
+        print(
+            "Purchase Credit Note saved again "
+            "with new Credit Note number.....!!"
+        )
 
 
 

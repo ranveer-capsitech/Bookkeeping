@@ -596,39 +596,84 @@ class Mileage:
             except Exception as e:
                 print(f"Error on click:{e}")
 
+
+
+    # def Select_Rate(self):
+    #             driver = self.driver
+    #
+    #         # try:
+    #             wait = WebDriverWait(self.driver, 30)
+    #
+    #             select_rate = wait.until(EC.element_to_be_clickable(self.rate))
+    #
+    #             self.driver.execute_script(
+    #                 "arguments[0].scrollIntoView({block:'center'});", select_rate
+    #             )
+    #             time.sleep(0.2)
+    #
+    #             select_rate.click()
+    #             time.sleep(0.2)
+    #
+    #             active = driver.switch_to.active_element
+    #             active.send_keys(Keys.ARROW_DOWN)
+    #             time.sleep(0.2)
+    #             active.send_keys(Keys.ENTER)
+    #             time.sleep(0.2)
+    #
+    #             print("Rate entered successfully....!!")
+    #         # except Exception as e:
+    #         #     print(f"Error on click:{e}")
+
     def Select_Rate(self):
-            driver = self.driver
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
 
+        try:
+            # Close previous React Select if still open
             try:
-                wait = WebDriverWait(self.driver, 30)
-
-                select_rate = wait.until(EC.element_to_be_clickable(self.rate))
-
-                self.driver.execute_script(
-                    "arguments[0].scrollIntoView({block:'center'});", select_rate
+                driver.switch_to.active_element.send_keys(
+                    Keys.ESCAPE
                 )
-                time.sleep(0.2)
+            except:
+                pass
 
-                select_rate.click()
-                time.sleep(0.2)
+            print(
+                "Rate elements found:",
+                len(driver.find_elements(*self.rate))
+            )
 
-                active = driver.switch_to.active_element
-                active.send_keys(Keys.ARROW_DOWN)
-                time.sleep(0.2)
-                active.send_keys(Keys.ENTER)
-                time.sleep(0.2)
+            select_rate = wait.until(
+                EC.presence_of_element_located(
+                    self.rate
+                )
+            )
 
-                # select_rate.send_keys(Keys.CONTROL, "a")
-                # time.sleep(0.2)
-                # select_rate.send_keys(Keys.BACK_SPACE)
-                # time.sleep(0.5)
-                #
-                # select_rate.send_keys("100")
-                # time.sleep(0.2)
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                select_rate
+            )
 
-                print("Rate entered successfully....!!")
-            except Exception as e:
-                print(f"Error on click:{e}")
+            select_rate = wait.until(
+                EC.visibility_of_element_located(
+                    self.rate
+                )
+            )
+
+            select_rate.click()
+            select_rate.send_keys(Keys.ARROW_DOWN)
+            select_rate.send_keys(Keys.ENTER)
+
+            print("Rate selected successfully....!!")
+
+        except Exception as e:
+            print(
+                f"Select_Rate FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+            raise
+
+
+
 
     def Save_Mileage(self):
 
@@ -652,15 +697,7 @@ class Mileage:
                     time.sleep(3)
 
                 except Exception:
-                    # print("No popup detected → Checking for success message...")
-                    #
-                    # update_message = WebDriverWait(self.driver, 30).until(
-                    #     EC.visibility_of_element_located(
-                    #         (By.XPATH, "//*[contains(normalize-space(), 'Mileage saved successfully with number')]")
-                    #     )
-                    # )
-                    #
-                    # assert update_message, "Mileage saved successfully"
+
                     print("Test Case : - Pass: Mileage saved successfully.")
 
             except Exception as e:

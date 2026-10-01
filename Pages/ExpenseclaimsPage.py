@@ -231,14 +231,16 @@ class Expenseclaims:
             driver,
             30,
             poll_frequency=0.2,
-            ignored_exceptions=(StaleElementReferenceException,)
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
         )
 
         try:
-            # =========================================
-            # STEP 1 : Open Inputs properly
-            # =========================================
 
+            # =========================================
+            # STEP 1: Open Inputs dropdown
+            # =========================================
             for attempt in range(1, 4):
 
                 input_menu = wait.until(
@@ -256,21 +258,20 @@ class Expenseclaims:
                     f"aria-expanded: {expanded}"
                 )
 
-                # Already opened
+                # Already open and Expense claims exists
                 if expanded == "true":
 
-                    expense_count = len(
-                        driver.find_elements(
+                    if driver.find_elements(
                             *self.expense_claims
+                    ):
+                        print(
+                            "Inputs dropdown already opened."
                         )
-                    )
-
-                    if expense_count > 0:
                         break
 
-                # Locate fresh arrow
+                # Fresh arrow
                 input_arrow = wait.until(
-                    EC.presence_of_element_located(
+                    EC.element_to_be_clickable(
                         self.input_arrow
                     )
                 )
@@ -284,16 +285,27 @@ class Expenseclaims:
                     input_arrow
                 )
 
-                # Re-find immediately
-                input_arrow = driver.find_element(
-                    *self.input_arrow
+                # Re-locate fresh after scroll
+                input_arrow = wait.until(
+                    EC.element_to_be_clickable(
+                        self.input_arrow
+                    )
                 )
 
-                # Real click first
                 try:
                     input_arrow.click()
 
-                except Exception:
+                except (
+                        StaleElementReferenceException,
+                        ElementClickInterceptedException
+                ):
+
+                    input_arrow = wait.until(
+                        EC.presence_of_element_located(
+                            self.input_arrow
+                        )
+                    )
+
                     driver.execute_script(
                         "arguments[0].click();",
                         input_arrow
@@ -303,7 +315,7 @@ class Expenseclaims:
                     "Inputs dropdown arrow clicked....!!"
                 )
 
-                # Wait maximum 5 sec for Expense claims
+                # Wait for Expense claims menu
                 try:
 
                     WebDriverWait(
@@ -314,7 +326,7 @@ class Expenseclaims:
                             StaleElementReferenceException,
                         )
                     ).until(
-                        EC.visibility_of_element_located(
+                        EC.presence_of_element_located(
                             self.expense_claims
                         )
                     )
@@ -328,58 +340,90 @@ class Expenseclaims:
                 except TimeoutException:
 
                     print(
-                        f"Expense claims not visible "
+                        f"Expense claims not found "
                         f"after attempt {attempt}"
                     )
 
-                    # Continue next attempt
-
             else:
+
                 raise TimeoutException(
                     "Inputs dropdown did not open "
                     "after 3 attempts."
                 )
 
             # =========================================
-            # STEP 2 : Click Expense claims
+            # STEP 2: Click Expense claims
             # =========================================
 
-            expense = wait.until(
-                EC.visibility_of_element_located(
-                    self.expense_claims
+            for attempt in range(1, 4):
+
+                try:
+
+                    # IMPORTANT:
+                    # Always locate a fresh element
+                    expense = wait.until(
+                        EC.element_to_be_clickable(
+                            self.expense_claims
+                        )
+                    )
+
+                    driver.execute_script(
+                        """
+                        arguments[0].scrollIntoView({
+                            block:'center'
+                        });
+                        """,
+                        expense
+                    )
+
+                    # Re-find again after scroll
+                    expense = wait.until(
+                        EC.element_to_be_clickable(
+                            self.expense_claims
+                        )
+                    )
+
+                    expense.click()
+
+                    print(
+                        "Expense claims menu clicked "
+                        "successfully....!!"
+                    )
+
+                    break
+
+                except (
+                        StaleElementReferenceException,
+                        ElementClickInterceptedException
+                ):
+
+                    print(
+                        f"Expense claims became stale/intercepted. "
+                        f"Retry {attempt}/3"
+                    )
+
+                    time.sleep(0.3)
+
+            else:
+
+                # Final JS fallback with FRESH element
+                expense = wait.until(
+                    EC.presence_of_element_located(
+                        self.expense_claims
+                    )
                 )
-            )
 
-            print(
-                "Expense claims found:",
-                expense.text
-            )
+                driver.execute_script(
+                    "arguments[0].click();",
+                    expense
+                )
 
-            # Fresh locate immediately before click
-            expense = driver.find_element(
-                *self.expense_claims
-            )
-
-            driver.execute_script(
-                """
-                const el = arguments[0];
-
-                const clickable =
-                    el.closest('a') ||
-                    el.closest('button') ||
-                    el;
-
-                clickable.click();
-                """,
-                expense
-            )
-
-            print(
-                "Expense claims clicked successfully....!!"
-            )
+                print(
+                    "Expense claims clicked using JS....!!"
+                )
 
             # =========================================
-            # STEP 3 : Verify Expense claims page
+            # STEP 3: Verify page navigation
             # =========================================
 
             wait.until(
@@ -393,53 +437,75 @@ class Expenseclaims:
             )
 
             # =========================================
-            # STEP 4 : Wait for expense claims tab
+            # STEP 4: Wait for Expense Claims tab
             # =========================================
 
-            expense = wait.until(
-                EC.visibility_of_element_located(
+            wait.until(
+                EC.presence_of_element_located(
                     self.click_expense_claims
                 )
             )
 
             print(
-                "expense claims tab found....!!"
+                "Expense claims tab found....!!"
             )
 
             # =========================================
-            # STEP 5 : Click expense claims
+            # STEP 5: Click Expense Claims tab
             # =========================================
 
-            expense = wait.until(
-                EC.element_to_be_clickable(
-                    self.click_expense_claims
-                )
-            )
+            for attempt in range(1, 4):
 
-            try:
-                expense.click()
+                try:
 
-            except (
-                    StaleElementReferenceException,
-                    Exception
-            ):
-
-                expense = wait.until(
-                    EC.presence_of_element_located(
-                        self.click_expense_claims
+                    expense_tab = wait.until(
+                        EC.element_to_be_clickable(
+                            self.click_expense_claims
+                        )
                     )
-                )
 
-                driver.execute_script(
-                    "arguments[0].click();",
-                    expense
+                    expense_tab.click()
+
+                    print(
+                        "Expense claims tab clicked "
+                        "successfully....!!"
+                    )
+
+                    return
+
+                except (
+                        StaleElementReferenceException,
+                        ElementClickInterceptedException
+                ):
+
+                    print(
+                        f"Expense claims tab retry "
+                        f"{attempt}/3"
+                    )
+
+                    time.sleep(0.3)
+
+            # JS fallback
+            expense_tab = wait.until(
+                EC.presence_of_element_located(
+                    self.click_expense_claims
                 )
+            )
+
+            driver.execute_script(
+                "arguments[0].click();",
+                expense_tab
+            )
 
             print(
-                "Expense claims clicked successfully....!!"
+                "Expense claims tab clicked using JS....!!"
             )
 
         except Exception as e:
+
+            driver.save_screenshot(
+                "reports/Expense_Claims_Error.png"
+            )
 
             print(
                 f"Error navigating to Expense claims: "
@@ -447,6 +513,231 @@ class Expenseclaims:
             )
 
             raise
+
+    # def Click_Input_Expense(self):
+    #
+    #     driver = self.driver
+    #
+    #     wait = WebDriverWait(
+    #         driver,
+    #         30,
+    #         poll_frequency=0.2,
+    #         ignored_exceptions=(StaleElementReferenceException,)
+    #     )
+    #
+    #     try:
+    #         # =========================================
+    #         # STEP 1 : Open Inputs properly
+    #         # =========================================
+    #
+    #         for attempt in range(1, 4):
+    #
+    #             input_menu = wait.until(
+    #                 EC.presence_of_element_located(
+    #                     self.input_anchor
+    #                 )
+    #             )
+    #
+    #             expanded = input_menu.get_attribute(
+    #                 "aria-expanded"
+    #             )
+    #
+    #             print(
+    #                 f"Inputs attempt {attempt} - "
+    #                 f"aria-expanded: {expanded}"
+    #             )
+    #
+    #             # Already opened
+    #             if expanded == "true":
+    #
+    #                 expense_count = len(
+    #                     driver.find_elements(
+    #                         *self.expense_claims
+    #                     )
+    #                 )
+    #
+    #                 if expense_count > 0:
+    #                     break
+    #
+    #             # Locate fresh arrow
+    #             input_arrow = wait.until(
+    #                 EC.presence_of_element_located(
+    #                     self.input_arrow
+    #                 )
+    #             )
+    #
+    #             driver.execute_script(
+    #                 """
+    #                 arguments[0].scrollIntoView({
+    #                     block:'center'
+    #                 });
+    #                 """,
+    #                 input_arrow
+    #             )
+    #
+    #             # Re-find immediately
+    #             input_arrow = driver.find_element(
+    #                 *self.input_arrow
+    #             )
+    #
+    #             # Real click first
+    #             try:
+    #                 input_arrow.click()
+    #
+    #             except Exception:
+    #                 driver.execute_script(
+    #                     "arguments[0].click();",
+    #                     input_arrow
+    #                 )
+    #
+    #             print(
+    #                 "Inputs dropdown arrow clicked....!!"
+    #             )
+    #
+    #             # Wait maximum 5 sec for Expense claims
+    #             try:
+    #
+    #                 WebDriverWait(
+    #                     driver,
+    #                     5,
+    #                     poll_frequency=0.2,
+    #                     ignored_exceptions=(
+    #                         StaleElementReferenceException,
+    #                     )
+    #                 ).until(
+    #                     EC.visibility_of_element_located(
+    #                         self.expense_claims
+    #                     )
+    #                 )
+    #
+    #                 print(
+    #                     "Inputs dropdown opened successfully....!!"
+    #                 )
+    #
+    #                 break
+    #
+    #             except TimeoutException:
+    #
+    #                 print(
+    #                     f"Expense claims not visible "
+    #                     f"after attempt {attempt}"
+    #                 )
+    #
+    #                 # Continue next attempt
+    #
+    #         else:
+    #             raise TimeoutException(
+    #                 "Inputs dropdown did not open "
+    #                 "after 3 attempts."
+    #             )
+    #
+    #         # =========================================
+    #         # STEP 2 : Click Expense claims
+    #         # =========================================
+    #
+    #         expense = wait.until(
+    #             EC.visibility_of_element_located(
+    #                 self.expense_claims
+    #             )
+    #         )
+    #
+    #         print(
+    #             "Expense claims found:",
+    #             expense.text
+    #         )
+    #
+    #         # Fresh locate immediately before click
+    #         expense = driver.find_element(
+    #             *self.expense_claims
+    #         )
+    #
+    #         driver.execute_script(
+    #             """
+    #             const el = arguments[0];
+    #
+    #             const clickable =
+    #                 el.closest('a') ||
+    #                 el.closest('button') ||
+    #                 el;
+    #
+    #             clickable.click();
+    #             """,
+    #             expense
+    #         )
+    #
+    #         print(
+    #             "Expense claims clicked successfully....!!"
+    #         )
+    #
+    #         # =========================================
+    #         # STEP 3 : Verify Expense claims page
+    #         # =========================================
+    #
+    #         wait.until(
+    #             EC.url_contains(
+    #                 "/inputs/expense-claims"
+    #             )
+    #         )
+    #
+    #         print(
+    #             "Expense claims page opened successfully....!!"
+    #         )
+    #
+    #         # =========================================
+    #         # STEP 4 : Wait for expense claims tab
+    #         # =========================================
+    #
+    #         expense = wait.until(
+    #             EC.visibility_of_element_located(
+    #                 self.click_expense_claims
+    #             )
+    #         )
+    #
+    #         print(
+    #             "expense claims tab found....!!"
+    #         )
+    #
+    #         # =========================================
+    #         # STEP 5 : Click expense claims
+    #         # =========================================
+    #
+    #         expense = wait.until(
+    #             EC.element_to_be_clickable(
+    #                 self.click_expense_claims
+    #             )
+    #         )
+    #
+    #         try:
+    #             expense.click()
+    #
+    #         except (
+    #                 StaleElementReferenceException,
+    #                 Exception
+    #         ):
+    #
+    #             expense = wait.until(
+    #                 EC.presence_of_element_located(
+    #                     self.click_expense_claims
+    #                 )
+    #             )
+    #
+    #             driver.execute_script(
+    #                 "arguments[0].click();",
+    #                 expense
+    #             )
+    #
+    #         print(
+    #             "Expense claims clicked successfully....!!"
+    #         )
+    #
+    #     except Exception as e:
+    #
+    #         print(
+    #             f"Error navigating to Expense claims: "
+    #             f"{type(e).__name__} - {e}"
+    #         )
+    #
+    #         raise
 
 
 

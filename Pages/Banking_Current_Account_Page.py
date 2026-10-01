@@ -71,7 +71,17 @@ class Banking:
         self.upload_import = (By.XPATH, "//div[contains(@class,'ao-modal-container')]//button[.//span[normalize-space()='Import']]")
         self.click_next_button = (By.XPATH, "//span[contains(text(),'Next')]")
         self.click_checkbox_single_element = (By.XPATH, "(//div[contains(@class,'ms-Checkbox-checkbox')]//i[@data-icon-name='CheckMark']/ancestor::label)[2]")
+
+
         self.click_explain_1st = (By.XPATH, "(//button[starts-with(@id,'explain-btn-') and .//span[normalize-space()='Explain']])[1]")
+
+        self.first_transaction_description = (
+            By.XPATH,
+            "(//div[contains(@class,'tr-focus')]"
+            "//div[contains(@class,'td-focus') and string-length(@title) > 0])[1]"
+        )
+
+
         self.click_this_transaction = (By.XPATH, "//div[contains(text(),'This transaction')]")
         self.click_with_all_recommendation = (By.XPATH, "//div[contains(@class,'ms-Callout')]//label[contains(normalize-space(),'Recommendation')]")
         self.click_1st_check_box_of_similar_transaction = (By.XPATH, "(//div[contains(normalize-space(), 'Similar transactions') and not(descendant::*)]/ancestor::div[contains(@class,'tr')][1]//label[contains(@class,'ms-Checkbox-label')])[1]")
@@ -187,9 +197,17 @@ class Banking:
             "//input[@role='searchbox' and @placeholder='Search']"
         )
 
+        self.click_cash_coding = (
+            By.ID,
+            "bank-cashcoding"
+        )
 
+        self.toast_message = (
+            By.CSS_SELECTOR,
+            "div.ao-toast"
+        )
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
 
 
     def Select_Search(self):
@@ -725,6 +743,86 @@ class Banking:
                 print(f"Error while clicking Next: {type(e).__name__} - {e}")
                 raise
 
+    def Click_Cash_Coding(self):
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+            # Wait until toast disappears
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Locate Cash Coding button
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            # Scroll safely
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                cash_coding
+            )
+
+            # Re-check toast after scrolling
+            wait.until(
+                EC.invisibility_of_element_located(
+                    self.toast_message
+                )
+            )
+
+            # Fresh locate before click
+            cash_coding = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_cash_coding
+                )
+            )
+
+            try:
+                cash_coding.click()
+
+            except ElementClickInterceptedException:
+                print(
+                    "Cash Coding click intercepted. "
+                    "Waiting for toast again..."
+                )
+
+                wait.until(
+                    EC.invisibility_of_element_located(
+                        self.toast_message
+                    )
+                )
+
+                cash_coding = wait.until(
+                    EC.element_to_be_clickable(
+                        self.click_cash_coding
+                    )
+                )
+
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    cash_coding
+                )
+
+            print(
+                "Cash Coding button clicked successfully....!!"
+            )
+
+        except Exception as e:
+            print(
+                f"Error while clicking Cash Coding: "
+                f"{type(e).__name__} - {e}"
+            )
+            raise
+
 
 
     def wait_for_loader_to_disappear(self):
@@ -781,10 +879,134 @@ class Banking:
 
             print("Clicked on explain_1st button successfully.....!! ")
 
+
         except Exception as e:
-            print(f"Error: {e}")
+
+            print(
+
+                f"FAILED: {type(e).__name__}: {e}"
+
+            )
+
+            raise
 
             time.sleep(2)
+
+    # def Click_Explain_1st(self):
+    #
+    #     driver = self.driver
+    #
+    #     wait = WebDriverWait(
+    #         driver,
+    #         20,
+    #         poll_frequency=0.2,
+    #         ignored_exceptions=(
+    #             StaleElementReferenceException,
+    #         )
+    #     )
+    #
+    #     try:
+    #
+    #         count = len(
+    #             driver.find_elements(
+    #                 *self.click_explain_1st
+    #             )
+    #         )
+    #
+    #         print(
+    #             f"Explain elements found: {count}"
+    #         )
+    #
+    #         # First check DOM presence
+    #         explain = wait.until(
+    #             EC.presence_of_element_located(
+    #                 self.first_transaction_description
+    #             )
+    #         )
+    #
+    #         driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             explain
+    #         )
+    #
+    #         # Re-locate fresh after scroll
+    #         explain = wait.until(
+    #             EC.visibility_of_element_located(
+    #                 self.click_explain_1st
+    #             )
+    #         )
+    #
+    #         print(
+    #             "Explain element visible successfully....!!"
+    #         )
+    #
+    #         # Try normal clickable wait
+    #         try:
+    #
+    #             explain = wait.until(
+    #                 EC.element_to_be_clickable(
+    #                     self.click_explain_1st
+    #                 )
+    #             )
+    #
+    #             explain.click()
+    #
+    #         except (
+    #                 TimeoutException,
+    #                 ElementClickInterceptedException
+    #         ):
+    #
+    #             print(
+    #                 "Normal Explain click failed, "
+    #                 "using fresh JS click."
+    #             )
+    #
+    #             explain = wait.until(
+    #                 EC.presence_of_element_located(
+    #                     self.click_explain_1st
+    #                 )
+    #             )
+    #
+    #             driver.execute_script(
+    #                 "arguments[0].click();",
+    #                 explain
+    #             )
+    #
+    #         print(
+    #             "Explain clicked successfully....!!"
+    #         )
+    #
+    #     except TimeoutException:
+    #
+    #         print(
+    #             "Explain button not found."
+    #         )
+    #
+    #         print(
+    #             "Elements found:",
+    #             len(
+    #                 driver.find_elements(
+    #                     *self.click_explain_1st
+    #                 )
+    #             )
+    #         )
+    #
+    #         driver.save_screenshot(
+    #             "reports/Explain_Button_Not_Found.png"
+    #         )
+    #
+    #         raise
+    #
+    #     except Exception as e:
+    #
+    #         print(
+    #             f"click_explain_1st FAILED: "
+    #             f"{type(e).__name__}: {e}"
+    #         )
+    #
+    #         raise
+
+
 
     def Click_This_Transaction(self):
         try:

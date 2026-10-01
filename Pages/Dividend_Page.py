@@ -52,7 +52,15 @@ class Dividend:
         self.select_director = (By.XPATH, "//label[normalize-space()='Authorised director']/following::div[contains(@class,'placeholder')][1]")
         self.select_type = (By.XPATH, "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/form[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")
         self.select_class = (By.XPATH,"//div[@id='react-select-8-placeholder' and text()='Select']")
-        self.dividend_per_share = (By.XPATH, "//label[text()='Dividend per share']/following::input[1]")
+        # self.dividend_per_share = (By.XPATH, "//label[text()='Dividend per share']/following::input[1]")
+
+        self.dividend_per_share = (
+            By.XPATH,
+            "//label[normalize-space()='Total dividend']"
+            "/following-sibling::div[1]//input[@type='text']"
+        )
+
+
         self.payment = (By.XPATH, "//label[text()='Payment date']/following::input[1]")
         self.save_dividends = (
             By.XPATH,
@@ -288,30 +296,135 @@ class Dividend:
 
 
 
+    # def Dividend_Per_Share(self, value="100"):
+    #
+    #         try:
+    #
+    #             share = WebDriverWait(self.driver, 30).until(
+    #                 EC.element_to_be_clickable(self.dividend_per_share)
+    #             )
+    #
+    #             share.click()
+    #             time.sleep(0.3)
+    #
+    #             share.send_keys(Keys.CONTROL, "a")
+    #             time.sleep(0.1)
+    #             share.send_keys(Keys.BACK_SPACE)
+    #             time.sleep(0.3)
+    #
+    #             share.send_keys(str(value))
+    #             time.sleep(0.3)
+    #
+    #             print("Enter share value successfully....!!")
+    #
+    #         except Exception as e:
+    #             print(f"Error on Enter_Value: {e}")
+    #             time.sleep(0.2)
+
     def Dividend_Per_Share(self, value="100"):
 
-            try:
+        driver = self.driver
 
-                share = WebDriverWait(self.driver, 30).until(
-                    EC.element_to_be_clickable(self.dividend_per_share)
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
+
+        try:
+
+            print(
+                "Dividend per share elements found:",
+                len(
+                    driver.find_elements(
+                        *self.dividend_per_share
+                    )
+                )
+            )
+
+            # First check element exists
+            share = wait.until(
+                EC.presence_of_element_located(
+                    self.dividend_per_share
+                )
+            )
+
+            # Bring field into view
+            driver.execute_script(
+                "arguments[0].scrollIntoView("
+                "{block:'center'});",
+                share
+            )
+
+            # Re-locate after scrolling
+            share = wait.until(
+                EC.visibility_of_element_located(
+                    self.dividend_per_share
+                )
+            )
+
+            # Click field
+            try:
+                share.click()
+
+            except ElementClickInterceptedException:
+
+                # Re-locate before fallback
+                share = driver.find_element(
+                    *self.dividend_per_share
                 )
 
-                share.click()
-                time.sleep(0.3)
+                driver.execute_script(
+                    "arguments[0].click();",
+                    share
+                )
 
-                share.send_keys(Keys.CONTROL, "a")
-                time.sleep(0.1)
-                share.send_keys(Keys.BACK_SPACE)
-                time.sleep(0.3)
+            # Clear existing value
+            share.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
 
-                share.send_keys(str(value))
-                time.sleep(0.3)
+            share.send_keys(
+                Keys.BACKSPACE
+            )
 
-                print("Enter share value successfully....!!")
+            # Enter new value
+            share.send_keys(
+                str(value)
+            )
 
-            except Exception as e:
-                print(f"Error on Enter_Value: {e}")
-                time.sleep(0.2)
+            # Verify entered value
+            entered_value = share.get_attribute(
+                "value"
+            )
+
+            print(
+                "Dividend per share value:",
+                entered_value
+            )
+
+            if str(value) not in entered_value:
+                raise AssertionError(
+                    f"Expected {value}, "
+                    f"but field contains "
+                    f"{entered_value}"
+                )
+
+            print(
+                "Dividend per share entered "
+                "successfully....!!"
+            )
+
+        except Exception as e:
+
+            print(
+                f"Dividend_Per_Share FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            raise
 
 
 

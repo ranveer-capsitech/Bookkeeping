@@ -188,58 +188,62 @@ class Credit_Notes:
     #     except Exception as e:
     #         print(f"Error on click:{e}")
 
+
     def Click_Input(self):
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(
+            self.driver,
+            30,
+            ignored_exceptions=(StaleElementReferenceException,)
+        )
 
         try:
-            # Find actual Inputs <a> element
+            input_locator = (
+                By.XPATH,
+                "//a[@id='inputs' and @data-value='inputs']"
+            )
+
+            # Always fetch fresh element
             input_menu = wait.until(
-                EC.element_to_be_clickable(
-                    self.click_input_drop_down
+                EC.presence_of_element_located(
+                    input_locator
                 )
             )
 
-            # Check current state
-            expanded = input_menu.get_attribute("aria-expanded")
-            print("Inputs before click aria-expanded:", expanded)
+            expanded = input_menu.get_attribute(
+                "aria-expanded"
+            )
 
-            # Click only when collapsed
+            print(
+                "Inputs before click aria-expanded:",
+                expanded
+            )
+
             if expanded != "true":
-
-                try:
-                    input_menu.click()
-
-                except StaleElementReferenceException:
-                    input_menu = wait.until(
-                        EC.element_to_be_clickable(
-                            self.click_input_drop_down
-                        )
+                # Fresh locate immediately before click
+                input_menu = wait.until(
+                    EC.element_to_be_clickable(
+                        input_locator
                     )
-                    input_menu.click()
+                )
 
-                except Exception:
-                    # Fresh locate before JS click
-                    input_menu = wait.until(
-                        EC.presence_of_element_located(
-                            self.click_input_drop_down
-                        )
-                    )
+                self.driver.execute_script(
+                    "arguments[0].click();",
+                    input_menu
+                )
 
-                    self.driver.execute_script(
-                        "arguments[0].click();",
-                        input_menu
-                    )
-
-            # IMPORTANT:
-            # Re-locate because React may rebuild DOM
+            # Verify Inputs actually expanded
             wait.until(
                 lambda driver:
                 driver.find_element(
-                    *self.click_input_drop_down
-                ).get_attribute("aria-expanded") == "true"
+                    *input_locator
+                ).get_attribute(
+                    "aria-expanded"
+                ) == "true"
             )
 
-            print("Inputs dropdown opened successfully....!!")
+            print(
+                "Inputs dropdown opened successfully....!!"
+            )
 
         except Exception as e:
             print(

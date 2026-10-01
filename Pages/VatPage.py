@@ -100,7 +100,11 @@ class Vat:
 
         self.click_send = (By.XPATH, "//span[normalize-space()='Send']/ancestor::button[1]")
         self.enter_reviewer = (By.XPATH, "//label[normalize-space()='Reviewer']/following::input[@role='combobox'][1]")
-        self.add_attachment = (By.XPATH, "//label[@for='files-input']//span[normalize-space()='Working files']")
+        # self.add_attachment = (By.XPATH, "//label[@for='files-input']//span[normalize-space()='Working files']")
+
+        self.add_attachment = (By.XPATH, "//button[.//i[@data-icon-name='Attachment']]")
+        self.select_form_device = (By.XPATH, "//span[contains(text(),'From Device')]")
+
 
         self.save_request = (By.XPATH, "//div[contains(@class,'modal-footer')]//button[.//span[normalize-space()='Save']]")
 
@@ -1271,6 +1275,10 @@ class Vat:
                 EC.element_to_be_clickable(self.add_attachment)
             )
             import_file.click()
+            time.sleep(2)
+
+            form_device_attachment = wait.until(EC.presence_of_element_located(self.select_form_device))
+            form_device_attachment.click()
             time.sleep(2)
 
             pyautogui.write(r"C:\Users\CT_USER\Desktop\test\Sample.CSV.xlsx")
@@ -2716,7 +2724,8 @@ class Vat:
             time.sleep(.2)
             print("Click on send anyway button successfully....!!")
         except Exception as e:
-            print(f"Error on Click:{e}")
+            # print(f"Error on Click:{e}")
+            print("This button is not showing......!")
             time.sleep(.2)
 
 

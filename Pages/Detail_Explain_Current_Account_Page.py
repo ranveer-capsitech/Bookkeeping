@@ -187,7 +187,15 @@ class Detail_Explain_Current_Account:
 
         self.select_claims = (By.XPATH, "//input[@name='invoices.0']/preceding-sibling::div[contains(@class,'rs-control')][1]")
         self.enter_allocated_amount = (By.XPATH, "//input[@name='invoices.0.amount']")
-        self.click_match = (By.XPATH, "//span[contains(text(),'Match')]")
+        # self.click_match = (By.XPATH, "//span[contains(text(),'Match')]")
+
+        self.click_match = (
+            By.XPATH,
+            "(//button[.//span[normalize-space()='Match'] "
+            "or normalize-space()='Match'])[1]"
+        )
+
+
         self.click_attachment_icon = (By.XPATH, "//label[normalize-space()='Contact']/following::button[.//i[@data-icon-name='attachment']][1]")
         self.drag_drop_file = (By.XPATH, "//span[contains(text(),'Drag & drop files here or ')]")
         self.click_explain = (By.XPATH, "//button[@role='tab']//span[normalize-space()='Explain']/ancestor::button")
@@ -541,48 +549,205 @@ class Detail_Explain_Current_Account:
         except Exception as e:
             print(f"Error on Click : {e}")
 
+    # def Click_Save(self):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         save_button = wait.until(
+    #             EC.element_to_be_clickable((
+    #                 By.XPATH,
+    #                 "//button[.//span[normalize-space()='Save'] and not(@disabled)]"
+    #             ))
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+    #             save_button
+    #         )
+    #
+    #         time.sleep(0.5)
+    #
+    #         self.driver.execute_script("arguments[0].click();", save_button)
+    #
+    #         print("Clicked on Save button successfully")
+    #
+    #         # wait for any success toast/message
+    #         success_message = wait.until(
+    #             EC.visibility_of_element_located((
+    #                 By.XPATH,
+    #                 "//*[contains(normalize-space(),'created successfully') "
+    #                 "or contains(normalize-space(),'Invoice created') "
+    #                 "or contains(normalize-space(),'saved successfully') "
+    #                 "or contains(normalize-space(),'Invoice saved')]"
+    #             ))
+    #         )
+    #
+    #         assert success_message.is_displayed(), "Success message not displayed"
+    #         print("Test Case Create Invoice - Pass:")
+    #
+    #         # print("Test Case Create Invoice - Pass:", success_message.text)
+    #
+    #         time.sleep(2)
+    #
+    #     except Exception as e:
+    #         print(f"Error in Click_Save: {type(e).__name__} - {e}")
+    #         raise
+
     def Click_Save(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            20,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        save_locator = (
+            By.XPATH,
+            "//button[normalize-space()='Save' "
+            "or .//*[normalize-space()='Save']]"
+        )
+
         try:
-            wait = WebDriverWait(self.driver, 40)
 
             save_button = wait.until(
-                EC.element_to_be_clickable((
-                    By.XPATH,
-                    "//button[.//span[normalize-space()='Save'] and not(@disabled)]"
-                ))
+                EC.element_to_be_clickable(
+                    save_locator
+                )
             )
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center', inline:'center'});",
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
                 save_button
             )
 
-            time.sleep(0.5)
-
-            self.driver.execute_script("arguments[0].click();", save_button)
-
-            print("Clicked on Save button successfully")
-
-            # wait for any success toast/message
-            success_message = wait.until(
-                EC.visibility_of_element_located((
-                    By.XPATH,
-                    "//*[contains(normalize-space(),'created successfully') "
-                    "or contains(normalize-space(),'Invoice created') "
-                    "or contains(normalize-space(),'saved successfully') "
-                    "or contains(normalize-space(),'Invoice saved')]"
-                ))
+            # Fresh locate after scrolling
+            save_button = wait.until(
+                EC.element_to_be_clickable(
+                    save_locator
+                )
             )
 
-            assert success_message.is_displayed(), "Success message not displayed"
-            print("Test Case Create Invoice - Pass:")
+            try:
+                save_button.click()
 
-            # print("Test Case Create Invoice - Pass:", success_message.text)
+            except ElementClickInterceptedException:
 
-            time.sleep(2)
+                save_button = wait.until(
+                    EC.presence_of_element_located(
+                        save_locator
+                    )
+                )
+
+                driver.execute_script(
+                    "arguments[0].click();",
+                    save_button
+                )
+
+            print(
+                "Save button clicked successfully....!!"
+            )
+
+            # ---------------------------------------
+            # Wait for one of the valid outcomes
+            # ---------------------------------------
+
+            success_locator = (
+                By.XPATH,
+                "//*[contains("
+                "translate(normalize-space(.),"
+                "'ABCDEFGHIJKLMNOPQRSTUVWXYZ',"
+                "'abcdefghijklmnopqrstuvwxyz'),"
+                "'success')]"
+            )
+
+            validation_locator = (
+                By.XPATH,
+                "//*[contains(@class,'error') "
+                "or @role='alert']"
+            )
+
+            try:
+
+                WebDriverWait(
+                    driver,
+                    10,
+                    poll_frequency=0.2
+                ).until(
+                    EC.visibility_of_element_located(
+                        success_locator
+                    )
+                )
+
+                print(
+                    "Invoice saved successfully....!!"
+                )
+
+                return
+
+            except TimeoutException:
+
+                # Check whether validation error appeared
+                errors = driver.find_elements(
+                    *validation_locator
+                )
+
+                visible_errors = [
+                    e.text.strip()
+                    for e in errors
+                    if e.is_displayed()
+                       and e.text.strip()
+                ]
+
+                if visible_errors:
+                    raise AssertionError(
+                        "Save failed due to validation: "
+                        + " | ".join(visible_errors)
+                    )
+
+                print(
+                    "Success toast not found. "
+                    "Checking whether page changed after Save..."
+                )
+
+                # If Add Invoice form disappeared,
+                # save may still have succeeded.
+                add_form = driver.find_elements(
+                    By.XPATH,
+                    "//*[contains(normalize-space(.),'Add Invoice')]"
+                )
+
+                if not any(
+                        element.is_displayed()
+                        for element in add_form
+                ):
+                    print(
+                        "Save completed - Add Invoice "
+                        "form is no longer visible."
+                    )
+                    return
+
+                driver.save_screenshot(
+                    "reports/Invoice_Save_Failed.png"
+                )
+
+                raise TimeoutException(
+                    "Save clicked, but neither success "
+                    "message nor successful navigation "
+                    "was detected."
+                )
 
         except Exception as e:
-            print(f"Error in Click_Save: {type(e).__name__} - {e}")
+
+            print(
+                f"Error in Click_Save: "
+                f"{type(e).__name__} - {e}"
+            )
+
             raise
 
     def wait_for_loader_to_disappear(self):
@@ -1406,7 +1571,7 @@ class Detail_Explain_Current_Account:
                 time.sleep(0.2)
 
                 active = driver.switch_to.active_element
-                active.send_keys("KM Consultancy Limited (Steven Phillip)")
+                active.send_keys("KM Consultancy Limited")
                 # active.send_keys(Keys.ARROW_DOWN)
                 # time.sleep(0.2)
                 # active.send_keys(Keys.ARROW_DOWN)
@@ -1533,87 +1698,142 @@ class Detail_Explain_Current_Account:
             #     print(f"Error in Enter_Description: {type(e).__name__} - {e}")
             #     raise
 
-    def Click_Match(self):
-        # try:
-            match = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_match))
-            time.sleep(1)
-            match.click()
-            time.sleep(1)
-
-            print("Clicked on match button successfully.....!! ")
-
-        # except Exception as e:
-        #     print(f"Error: {e}")
-
-            time.sleep(2)
-
     # def Click_Match(self):
-    #     driver = self.driver
-    #     wait = WebDriverWait(driver, 40)
+    #     # try:
+    #         match = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.click_match))
+    #         time.sleep(1)
+    #         match.click()
+    #         time.sleep(1)
     #
-    #     match_locator = (
-    #         By.XPATH,
-    #         "//span[normalize-space()='Match']/ancestor::button[1]"
-    #     )
+    #         print("Clicked on match button successfully.....!! ")
     #
-    #     overlay_locator = (
-    #         By.CSS_SELECTOR,
-    #         "div.ms-Overlay.ms-Overlay--dark"
-    #     )
+    #     # except Exception as e:
+    #     #     print(f"Error: {e}")
     #
-    #     try:
-    #         # Wait until the dark Fluent UI overlay disappears
-    #         wait.until(
-    #             EC.invisibility_of_element_located(overlay_locator)
-    #         )
-    #
-    #         # Locate the actual button, not the inner span
-    #         match_button = wait.until(
-    #             EC.presence_of_element_located(match_locator)
-    #         )
-    #
-    #         driver.execute_script(
-    #             "arguments[0].scrollIntoView({block:'center'});",
-    #             match_button
-    #         )
-    #
-    #         time.sleep(0.5)
-    #
-    #         # Re-check overlay after scrolling
-    #         wait.until(
-    #             EC.invisibility_of_element_located(overlay_locator)
-    #         )
-    #
-    #         # Re-find element after DOM changes
-    #         match_button = wait.until(
-    #             EC.element_to_be_clickable(match_locator)
-    #         )
-    #
-    #         try:
-    #             match_button.click()
-    #
-    #         except (ElementClickInterceptedException, StaleElementReferenceException):
-    #             # Re-find and use JS click as fallback
-    #             match_button = wait.until(
-    #                 EC.presence_of_element_located(match_locator)
-    #             )
-    #
-    #             driver.execute_script(
-    #                 "arguments[0].click();",
-    #                 match_button
-    #             )
-    #
-    #         print("Match button clicked successfully.")
-    #
-    #     except TimeoutException:
-    #         driver.save_screenshot("click_match_timeout.png")
-    #         print("Match button could not be clicked because the overlay did not disappear.")
-    #         raise
-    #
-    #     except Exception as e:
-    #         driver.save_screenshot("click_match_error.png")
-    #         print(f"Error while clicking Match button: {e}")
-    #         raise
+    #         time.sleep(2)
+
+    def Click_Match(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            30,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
+        try:
+
+            # -----------------------------------------
+            # STEP 1: Wait until blocking modal closes
+            # -----------------------------------------
+            overlay_locator = (
+                By.CSS_SELECTOR,
+                ".ms-Overlay.ms-Overlay--dark"
+            )
+
+            try:
+
+                WebDriverWait(
+                    driver,
+                    15,
+                    poll_frequency=0.2
+                ).until(
+                    EC.invisibility_of_element_located(
+                        overlay_locator
+                    )
+                )
+
+                print(
+                    "Modal overlay disappeared successfully....!!"
+                )
+
+            except TimeoutException:
+
+                print(
+                    "Modal overlay is still open."
+                )
+
+                # Debug visible dialogs
+                dialogs = driver.find_elements(
+                    By.XPATH,
+                    "//*[@role='dialog']"
+                )
+
+                print(
+                    "Visible dialogs:",
+                    len(
+                        [
+                            d for d in dialogs
+                            if d.is_displayed()
+                        ]
+                    )
+                )
+
+                driver.save_screenshot(
+                    "reports/Match_Modal_Still_Open.png"
+                )
+
+                raise AssertionError(
+                    "Cannot click Match because a modal "
+                    "is still open after Enter_Allocated_Amount()."
+                )
+
+            # -----------------------------------------
+            # STEP 2: Find Match button
+            # -----------------------------------------
+            print(
+                "Match elements found:",
+                len(
+                    driver.find_elements(
+                        *self.click_match
+                    )
+                )
+            )
+
+            match = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_match
+                )
+            )
+
+            driver.execute_script(
+                """
+                arguments[0].scrollIntoView({
+                    block: 'center'
+                });
+                """,
+                match
+            )
+
+            # Fresh element
+            match = wait.until(
+                EC.element_to_be_clickable(
+                    self.click_match
+                )
+            )
+
+            # -----------------------------------------
+            # STEP 3: Click Match
+            # -----------------------------------------
+            match.click()
+
+            print(
+                "Match button clicked successfully....!!"
+            )
+
+        except Exception as e:
+
+            print(
+                f"Click_Match FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            raise
+
 
     def Click_Attachment_Icon(self):
         try:
@@ -1828,41 +2048,111 @@ class Detail_Explain_Current_Account:
 
 
 
-    def Select_Transfer_Account_Dropdown(self, account_name="Monzo - Current"):
-        try:
-            wait = WebDriverWait(self.driver, 40)
+    # def Select_Transfer_Account_Dropdown(self, account_name="Monzo - Current"):
+    #     try:
+    #         wait = WebDriverWait(self.driver, 40)
+    #
+    #         dropdown = wait.until(
+    #             EC.element_to_be_clickable(self.transfer_select_account_dropdown)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             dropdown
+    #         )
+    #
+    #         self.driver.execute_script("arguments[0].click();", dropdown)
+    #
+    #         input_box = wait.until(
+    #             EC.presence_of_element_located(self.transfer_select_account_input)
+    #         )
+    #
+    #         self.driver.execute_script("arguments[0].focus();", input_box)
+    #
+    #         input_box.send_keys(Keys.CONTROL + "a")
+    #         input_box.send_keys(Keys.BACKSPACE)
+    #         input_box.send_keys(account_name)
+    #
+    #         time.sleep(1)
+    #
+    #         # input_box.send_keys(Keys.ARROW_DOWN)
+    #         input_box.send_keys(Keys.ENTER)
+    #         time.sleep(.2)
+    #
+    #         print(f"Transfer account selected successfully: {account_name}")
+    #
+    #     except Exception as e:
+    #         print(f"Error in Select_Transfer_Account_Dropdown: {type(e).__name__} - {e}")
+    #         raise
 
-            dropdown = wait.until(
-                EC.element_to_be_clickable(self.transfer_select_account_dropdown)
+    def Select_Transfer_Account_Dropdown(
+            self,
+            account_name="Monzo - Current"
+    ):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
+        try:
+
+            dropdowns = wait.until(
+                lambda d: [
+                    e for e in d.find_elements(
+                        By.XPATH,
+                        "//input[@role='combobox']"
+                    )
+                    if e.is_displayed()
+                ]
             )
 
-            self.driver.execute_script(
-                "arguments[0].scrollIntoView({block:'center'});",
+            print(
+                "Visible dropdowns:",
+                len(dropdowns)
+            )
+
+            dropdown = dropdowns[-1]
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView("
+                "{block:'center'});",
                 dropdown
             )
 
-            self.driver.execute_script("arguments[0].click();", dropdown)
+            dropdown.click()
 
-            input_box = wait.until(
-                EC.presence_of_element_located(self.transfer_select_account_input)
+            dropdown.send_keys(
+                Keys.CONTROL,
+                "a"
             )
 
-            self.driver.execute_script("arguments[0].focus();", input_box)
+            dropdown.send_keys(
+                account_name
+            )
 
-            input_box.send_keys(Keys.CONTROL + "a")
-            input_box.send_keys(Keys.BACKSPACE)
-            input_box.send_keys(account_name)
+            option = wait.until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//*[contains(@id,'-option-') "
+                        f"and contains(normalize-space(),"
+                        f"'{account_name}')]"
+                    )
+                )
+            )
 
-            time.sleep(1)
+            option.click()
 
-            # input_box.send_keys(Keys.ARROW_DOWN)
-            input_box.send_keys(Keys.ENTER)
-            time.sleep(.2)
-
-            print(f"Transfer account selected successfully: {account_name}")
+            print(
+                f"Transfer account selected: "
+                f"{account_name}"
+            )
 
         except Exception as e:
-            print(f"Error in Select_Transfer_Account_Dropdown: {type(e).__name__} - {e}")
+
+            print(
+                f"Select_Transfer_Account_Dropdown FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
             raise
 
 

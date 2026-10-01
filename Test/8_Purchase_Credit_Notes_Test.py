@@ -8,7 +8,7 @@ from configReader import ConfigReader
 
 from Pages.LoginPage import loginPage
 import pytest
-
+import re
 
 class Login(unittest.TestCase):
     @classmethod
@@ -101,7 +101,7 @@ class Login(unittest.TestCase):
 
         # Save credit note
         client_section.Save_Credit_Notes()
-        client_section.Click_Save_Button()
+        client_section.Save_Purchase_Credit_Note()
         client_section.wait_for_loader_to_disappear()
 
         print("Purchase credit note workflow completed successfully.")

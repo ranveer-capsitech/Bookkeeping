@@ -96,8 +96,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Mileage()
         time.sleep(.2)
-        client_section.Select_Rate()
-        time.sleep(.2)
+        # client_section.Select_Rate()
+        # time.sleep(.2)
 
         # Save mileage
         client_section.Save_Mileage()

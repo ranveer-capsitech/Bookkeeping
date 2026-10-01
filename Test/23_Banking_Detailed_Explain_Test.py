@@ -56,7 +56,6 @@ class Login(unittest.TestCase):
         loginpage.Click_Bookkeeping()
         time.sleep(0.5)
 
-
         if __name__ == "__main__":
             unittest.main()
 
@@ -74,6 +73,8 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Company()
         time.sleep(.2)
+
+
         # client_section.Click_Input()
         # time.sleep(.2)
         #
@@ -130,7 +131,8 @@ class Login(unittest.TestCase):
         # time.sleep(2)
 
 #
-# #---------------------------------------------------------banking-------------------------------------------------------
+# #---------------------------------------------------------banking-----------------------------------------------------
+                                         #--------------added 1st bank------------------------
 
         client_section.Banking_Section()
         time.sleep(.2)
@@ -148,6 +150,75 @@ class Login(unittest.TestCase):
 
         client_section.Save_Credit_card()
         time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+                                       # --------------added 2nd bank------------------------
+
+        client_section.Account()
+        time.sleep(.2)
+
+        client_section.Select_Account_Type_Wallet()
+        time.sleep(.2)
+        client_section.Select_Bank()
+        time.sleep(.2)
+        client_section.Enter_Merchant_ID()
+        time.sleep(.2)
+        client_section.Sort_Code()
+        time.sleep(.2)
+        client_section.Save_Wallet()
+        time.sleep(.2)
+
+
+        #-----------------------------------------select wallet account and directly added manul transactions-------------------------------------------------
+
+        client_section.Click_Saved_Wallet_Account()
+        time.sleep(.2)
+        client_section.Manually_Click_Here()
+        time.sleep(.2)
+        client_section.Enter_Date()
+        time.sleep(1)
+        client_section.Enter_Description()
+        time.sleep(1)
+        client_section.Enter_Money_Out()
+        time.sleep(1)
+        client_section.Click_Save_Manual_Transaction()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+
+
+
+        # client_section.Click_On_Bank_URl()
+        # time.sleep(.2)
+        # client_section.Click_Saved_Wallet_Account()
+        # time.sleep(.2)
+
+
+        # client_section.Manually_Click_Here()
+        # time.sleep(.2)
+
+        client_section.Add_Manual_Transaction()
+        time.sleep(1)
+
+
+        client_section.Enter_Date()
+        time.sleep(1)
+        client_section.Enter_Description()
+        time.sleep(1)
+        client_section.Enter_Money_In()
+        time.sleep(.2)
+        # client_section.Enter_Money_Out()
+        # time.sleep(1)
+        client_section.Click_Save_Manual_Transaction()
+        time.sleep(.2)
+        client_section.wait_for_loader_to_disappear()
+        time.sleep(.2)
+        client_section.Click_On_Bank_URl()
+        time.sleep(.2)
+
+
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -168,11 +239,6 @@ class Login(unittest.TestCase):
         client_section.wait_for_loader_to_disappear()
         time.sleep(.2)
 
-        # client_section.Click_Back_Button()
-        # time.sleep(.2)
-        #
-        # client_section.wait_for_loader_to_disappear()
-        # time.sleep(.2)
 
         client_section.Add_Manual_Transaction()
         time.sleep(1)
@@ -239,7 +305,7 @@ class Login(unittest.TestCase):
 
 
         #------------------------------------------------
-        #
+
         client_section.Click_Explain()
         time.sleep(.2)
         client_section.Contact_Name_Dropdown()
@@ -278,7 +344,6 @@ class Login(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
 
 
 #---------------------------------------------2nd-----------------------------------------------------------------------
@@ -371,6 +436,7 @@ if __name__ == "__main__":
 #         client_section.Click_Next()
 #         time.sleep(.2)
 #
+
 #         client_section.wait_for_loader_to_disappear()
 #         time.sleep(.2)
 #

@@ -26,6 +26,8 @@ class Login(unittest.TestCase):
         # Call login once setup is done
         cls.login()
 
+
+
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -73,6 +75,7 @@ class Login(unittest.TestCase):
         time.sleep(.2)
         client_section.Click_Company()
         time.sleep(.2)
+
 #         client_section.Click_Input()
 #         time.sleep(.2)
 #

@@ -52,7 +52,9 @@ class Asset:
         self.click_fixed = (By.XPATH, "//span[contains(text(),'Fixed asset')]")
         self.enter_asset_name = (By.XPATH, "//label[normalize-space()='Asset name']/following::input[@type='text'][1]")
         self.account = (By.XPATH, "//label[normalize-space()='Account']/following::div[contains(@class,'rs-input-container')][1]")
-        self.purchase_price = (By.XPATH, "//label[normalize-space()='Purchase price (Ex. VAT)']/following::input[@type='text'][1]")
+        # self.purchase_price = (By.XPATH, "//label[normalize-space()='Purchase price (Ex. VAT)']/following::input[@type='text'][1]")
+
+        self.purchase_price = (By.XPATH, "//div[contains(@class,'ms-Modal-scrollableContent')]//input[@name='price']")
 
         self.supplier = (By.XPATH, "//label[normalize-space()='Supplier']/following::div[contains(@class,'rs-input-container')][1]")
         self.rate = (By.XPATH, "//label[normalize-space()='Rate']/following::input[@type='text'][1]")
@@ -63,7 +65,11 @@ class Asset:
         self.dispose_section = (By.XPATH, "//button[@role='tab' and normalize-space()='Disposed']")
         self.add_dispose = (By.XPATH, "//span[normalize-space()='Dispose asset']/ancestor::button")
         self.select_asset = (By.XPATH, "//label[normalize-space()='Asset']/following::input[@type='text'][1]")
-        self.sales_proceeds = (By.XPATH, "//label[normalize-space()='Sales proceeds (Incl. VAT)']/following::input[@type='text'][1]")
+        # self.sales_proceeds = (By.XPATH, "//label[normalize-space()='Sales proceeds (Incl. VAT)']/following::input[@type='text'][1]")
+
+        self.sales_proceeds = (By.XPATH, "//div[contains(@class,'ms-Modal-scrollableContent')]"
+    "//*[normalize-space()='Sales proceeds']"
+    "/following::input[1]")
         self.payment_method = (By.XPATH, "//label[normalize-space()='Payment method']/following::input[@type='text'][1]")
         self.customer = (By.XPATH, "//label[normalize-space(.)='Customer']/following::input[@type='text'][1]")
         self.save_disposed = (By.XPATH, "//span[text()='Save']/ancestor::button")
@@ -205,6 +211,8 @@ class Asset:
         except TimeoutException:
             print("Overlay still visible after wait")
 
+
+
     def Asset_Name(self):
         asset_name = f"Asset_{fake.word().title()}_{fake.random_int(1000, 9999)}"
 
@@ -250,25 +258,95 @@ class Asset:
             self.driver.save_screenshot("asset_name_error.png")
             raise
 
+    # def Purchase(self):
+    #         driver = self.driver
+       # try:
+       #      pur = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.purchase_price))
+       #      time.sleep(.2)
+       #      pur.click()
+       #      actions = ActionChains(driver)
+       #      actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()
+       #
+       #      time.sleep(0.2)
+       #
+       #  # Now enter 100
+       #
+       #      pur.send_keys("100")
+       #
+       #      print("Purchase price cleared and 100 entered successfully!")
+
+       # except Exception as e:
+       #      print(f"Error in Purchase(): {e}")
+
     def Purchase(self):
-       driver = self.driver
-       try:
-            pur = WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(self.purchase_price))
-            time.sleep(.2)
-            pur.click()
-            actions = ActionChains(driver)
-            actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()
 
-            time.sleep(0.2)
+        driver = self.driver
 
-        # Now enter 100
+        wait = WebDriverWait(
+            driver,
+            20,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
 
-            pur.send_keys("100")
+        try:
 
-            print("Purchase price cleared and 100 entered successfully!")
+            purchase = wait.until(
+                EC.element_to_be_clickable(
+                    self.purchase_price
+                )
+            )
 
-       except Exception as e:
-            print(f"Error in Purchase(): {e}")
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                purchase
+            )
+
+            # fresh locate after scroll
+            purchase = wait.until(
+                EC.element_to_be_clickable(
+                    self.purchase_price
+                )
+            )
+
+            purchase.click()
+
+            purchase.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
+
+            purchase.send_keys(
+                Keys.BACKSPACE
+            )
+
+            purchase.send_keys("100")
+
+            purchase.send_keys(Keys.TAB)
+
+            print(
+                "Purchase price entered successfully....!!"
+            )
+
+        except Exception as e:
+
+            print(
+                f"Purchase FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            driver.save_screenshot(
+                "reports/Asset_Purchase_Price_Error.png"
+            )
+
+            raise
+
+
+
+
+
 
     def Select_Account(self):
 
@@ -485,17 +563,100 @@ class Asset:
 
 
 
+    # def Sales_proceeds(self):
+    #     try:
+    #         sales_proceeds = WebDriverWait(self.driver, 30).until(
+    #             EC.visibility_of_element_located(self.sales_proceeds))
+    #         time.sleep(.2)
+    #         sales_proceeds.send_keys("testing")
+    #         time.sleep(.2)
+    #         print("Click on Sales proceeds successfully..... ")
+    #     except Exception as e:
+    #         print(f"Error on click:{e}")
+    #         time.sleep(.2)
+
     def Sales_proceeds(self):
+
+        driver = self.driver
+
+        wait = WebDriverWait(
+            driver,
+            20,
+            poll_frequency=0.2,
+            ignored_exceptions=(
+                StaleElementReferenceException,
+            )
+        )
+
         try:
-            sales_proceeds = WebDriverWait(self.driver, 30).until(
-                EC.visibility_of_element_located(self.sales_proceeds))
-            time.sleep(.2)
-            sales_proceeds.send_keys("testing")
-            time.sleep(.2)
-            print("Click on Sales proceeds successfully..... ")
+
+            # Wait until field is available
+            sales_proceeds = wait.until(
+                EC.element_to_be_clickable(
+                    self.sales_proceeds
+                )
+            )
+
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                sales_proceeds
+            )
+
+            # Re-locate after scroll / possible re-render
+            sales_proceeds = wait.until(
+                EC.element_to_be_clickable(
+                    self.sales_proceeds
+                )
+            )
+
+            sales_proceeds.click()
+
+            sales_proceeds.send_keys(
+                Keys.CONTROL,
+                "a"
+            )
+
+            sales_proceeds.send_keys(
+                Keys.BACKSPACE
+            )
+
+            sales_proceeds.send_keys(
+                "testing"
+            )
+
+            sales_proceeds.send_keys(
+                Keys.TAB
+            )
+
+            print(
+                "Sales proceeds entered successfully.....!!"
+            )
+
+        except TimeoutException as e:
+
+            print(
+                "Sales proceeds field not found/clickable "
+                "within timeout."
+            )
+
+            driver.save_screenshot(
+                "reports/Sales_Proceeds_Timeout.png"
+            )
+
+            raise
+
         except Exception as e:
-            print(f"Error on click:{e}")
-            time.sleep(.2)
+
+            print(
+                f"Sales_proceeds FAILED: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            driver.save_screenshot(
+                "reports/Sales_Proceeds_Error.png"
+            )
+
+            raise
 
 
 

@@ -63,6 +63,7 @@ class Login(unittest.TestCase):
         time.sleep(2)
 
 
+
         if __name__ == "__main__":
             unittest.main()
 
@@ -121,6 +122,9 @@ class Login(unittest.TestCase):
         client_section. Upload_Import()
         time.sleep(.2)
         client_section.Click_Next()
+        time.sleep(.2)
+
+        client_section.Click_Cash_Coding()
         time.sleep(.2)
 
         client_section.wait_for_loader_to_disappear()
