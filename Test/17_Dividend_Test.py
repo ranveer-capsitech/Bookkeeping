@@ -81,6 +81,7 @@ class Login(unittest.TestCase):
 
         client_section.Click_Dividends()
         time.sleep(.2)
+
         client_section.Authorised_director()
         time.sleep(.2)
         client_section.Select_Type()

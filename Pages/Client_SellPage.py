@@ -406,53 +406,166 @@ class ClientSell:
         except Exception as e:
             print(f"Error on Click : {e}")
 
-
-
-
+    # def Select_Customer_Keyboard(self):
+    #     wait = WebDriverWait(
+    #         self.driver,
+    #         30,
+    #         poll_frequency=0.3,
+    #         ignored_exceptions=(StaleElementReferenceException,)
+    #     )
+    #
+    #     # Customer React-Select input
+    #     customer_input_locator = (
+    #         By.XPATH,
+    #         "//label[normalize-space()='Customer']"
+    #         "/following::input[@role='combobox'][1]"
+    #     )
+    #
+    #     try:
+    #         # Wait for invoice form to load
+    #         customer_input = wait.until(
+    #             EC.presence_of_element_located(customer_input_locator)
+    #         )
+    #
+    #         self.driver.execute_script(
+    #             "arguments[0].scrollIntoView({block:'center'});",
+    #             customer_input
+    #         )
+    #
+    #         # Re-find after scroll in case React re-rendered
+    #         customer_input = wait.until(
+    #             EC.element_to_be_clickable(customer_input_locator)
+    #         )
+    #
+    #         customer_input.click()
+    #
+    #         # Select first available customer
+    #         customer_input.send_keys(Keys.ARROW_DOWN)
+    #         customer_input.send_keys(Keys.ENTER)
+    #
+    #         print("Customer selected successfully....!!")
+    #
+    #     except TimeoutException:
+    #         self.driver.save_screenshot(
+    #             "customer_dropdown_timeout.png"
+    #         )
+    #
+    #         print("Customer dropdown not found.")
+    #         print("Current URL:", self.driver.current_url)
+    #
+    #         raise
 
     def Select_Customer_Keyboard(self):
         driver = self.driver
         wait = WebDriverWait(driver, 30)
 
-        control = wait.until(EC.element_to_be_clickable((
-            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-control')][1]"
-        )))
-        control.click()
-
-        input_el = wait.until(EC.presence_of_element_located((
-            By.XPATH,
-            "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-input-container')][1]//input"
-        )))
-        ActionChains(driver).move_to_element(input_el).click(input_el).perform()
-
-        # ensure menu open
-        wait.until(EC.visibility_of_element_located((
-            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
-        )))
-
         try:
-            input_el.send_keys(Keys.ARROW_DOWN)
-            time.sleep(.2)
-            input_el.send_keys(Keys.ARROW_DOWN)
-            time.sleep(.2)
-            input_el.send_keys(Keys.ENTER)
-        except ElementNotInteractableException:
-            # fallback click first option if keyboard fails
-            first_option = wait.until(EC.element_to_be_clickable((
-                By.XPATH,
-                "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
-                "//div[contains(@class,'rs-option')][1]"
-            )))
-            first_option.click()
+            # Step 1: Locate Customer React Select input
+            field = wait.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//input[@role='combobox' and "
+                    "contains(@id,'react-select-') and "
+                    "@aria-autocomplete='list']"
+                ))
+            )
 
-        selected = wait.until(EC.visibility_of_element_located((
-            By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-single-value')][1]"
-        ))).text.strip()
-        print("Customer selected successfully....!!")
+            # Step 2: Scroll to Customer field
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                field
+            )
 
-        print("Selected Customer is :", selected)
-        return selected
+            # Step 3: Open Customer dropdown
+            field.click()
 
+            print("Customer dropdown opened successfully!")
+
+            # Step 4: Get dropdown ID dynamically
+            input_id = field.get_attribute("id")
+            select_prefix = input_id.replace("-input", "")
+
+            # Step 5: Locate second customer option (index 1)
+            second_option_xpath = (
+                f"//div[@id='{select_prefix}-option-1']"
+            )
+
+            second_customer = wait.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    second_option_xpath
+                ))
+            )
+
+            # Step 6: Click second option
+            customer_name = second_customer.text.strip()
+
+            second_customer.click()
+
+            print(f"Second customer selected successfully: {customer_name}")
+
+            # Step 7: Verify the selected customer
+            selected_customer = wait.until(
+                EC.visibility_of_element_located((
+                    By.XPATH,
+                    "//div[contains(@class,'singleValue')]"
+                ))
+            )
+
+            print("Selected customer:", selected_customer.text)
+
+        except Exception as e:
+            print(f"Could not select customer: {e}")
+            raise
+
+
+
+
+
+
+    # def Select_Customer_Keyboard(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(driver, 30)
+    #
+    #     control = wait.until(EC.element_to_be_clickable((
+    #         By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-control')][1]"
+    #     )))
+    #     control.click()
+    #
+    #     input_el = wait.until(EC.presence_of_element_located((
+    #         By.XPATH,
+    #         "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-input-container')][1]//input"
+    #     )))
+    #     ActionChains(driver).move_to_element(input_el).click(input_el).perform()
+    #
+    #     # ensure menu open
+    #     wait.until(EC.visibility_of_element_located((
+    #         By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
+    #     )))
+    #
+    #     try:
+    #         input_el.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(.2)
+    #         input_el.send_keys(Keys.ARROW_DOWN)
+    #         time.sleep(.2)
+    #         input_el.send_keys(Keys.ENTER)
+    #     except ElementNotInteractableException:
+    #         # fallback click first option if keyboard fails
+    #         first_option = wait.until(EC.element_to_be_clickable((
+    #             By.XPATH,
+    #             "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-menu')][1]"
+    #             "//div[contains(@class,'rs-option')][1]"
+    #         )))
+    #         first_option.click()
+    #
+    #     selected = wait.until(EC.visibility_of_element_located((
+    #         By.XPATH, "//label[normalize-space()='Customer']/following::div[contains(@class,'rs-single-value')][1]"
+    #     ))).text.strip()
+    #     print("Customer selected successfully....!!")
+    #
+    #     print("Selected Customer is :", selected)
+    #     return selected
+    #
 
 
     # def Select_Customer(self):
@@ -607,17 +720,18 @@ class ClientSell:
             time.sleep(0.4)
             save_button.click()
             time.sleep(0.4)
+
             # print("Invoice created successfully")
-            #
+
             # update_message = WebDriverWait(self.driver, 10).until(
             # EC.visibility_of_element_located(
             # (By.XPATH, "//*[contains(normalize-space(), 'Invoice created successfully')]"))
             #     )
-            #
+
             # # Assert the presence of the success message
             # assert update_message, "Invoice created successfully"
 
-            print("Test Case 2 - Pass: Invoice created successfully")
+            print("Test Case 2 - Pass: Invoice created successfully....!!")
 
             time.sleep(2)
 

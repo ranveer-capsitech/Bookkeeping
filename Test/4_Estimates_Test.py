@@ -116,7 +116,7 @@ class Login(unittest.TestCase):
             client_section.Save_Direct_Invoice()
             time.sleep(0.5)
             client_section.wait_for_loader_to_disappear()
-            time.sleep(0.5)
+
 
             print(
                 "Estimate workflow completed successfully."

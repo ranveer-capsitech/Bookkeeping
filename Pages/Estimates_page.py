@@ -3,7 +3,8 @@ import re
 
 from faker import Faker
 import time
-from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException
+from selenium.common import StaleElementReferenceException, ElementNotInteractableException, TimeoutException, \
+    ElementClickInterceptedException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -406,39 +407,69 @@ class Estimates:
             print(f"Error on click:{e}")
 
 
+
     def Select_Customer_for_Estimate(self):
+        driver = self.driver
+        wait = WebDriverWait(driver, 30)
+
         try:
-            driver = self.driver
-            wait = WebDriverWait(driver, 30)
+            # Step 1: Locate Customer React Select input
+            field = wait.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//input[@role='combobox' and "
+                    "contains(@id,'react-select-') and "
+                    "@aria-autocomplete='list']"
+                ))
+            )
 
-            #  Click on the dropdown field
-            # field = wait.until(EC.element_to_be_clickable((
-            #     By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
-            # )))
+            # Step 2: Scroll to Customer field
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                field
+            )
 
-            field = wait.until(EC.element_to_be_clickable((
-                By.XPATH,
-                "//*[normalize-space()='Customer']/following::input[@role='combobox'][1]"
-            )))
-
-
-            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", field)
+            # Step 3: Open Customer dropdown
             field.click()
-            time.sleep(0.5)
 
-            # Use keyboard to select first option
-            active = driver.switch_to.active_element
-            active.send_keys(Keys.ARROW_DOWN)
-            time.sleep(0.3)
-            active.send_keys(Keys.ENTER)
-            time.sleep(1)
+            print("Customer dropdown opened successfully!")
 
-            print(" Customer selected successfully for Estimate!")
+            # Step 4: Get dropdown ID dynamically
+            input_id = field.get_attribute("id")
+            select_prefix = input_id.replace("-input", "")
+
+            # Step 5: Locate second customer option (index 1)
+            second_option_xpath = (
+                f"//div[@id='{select_prefix}-option-1']"
+            )
+
+            second_customer = wait.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    second_option_xpath
+                ))
+            )
+
+            # Step 6: Click second option
+            customer_name = second_customer.text.strip()
+
+            second_customer.click()
+
+            print(f"Second customer selected successfully: {customer_name}")
+
+            # Step 7: Verify the selected customer
+            selected_customer = wait.until(
+                EC.visibility_of_element_located((
+                    By.XPATH,
+                    "//div[contains(@class,'singleValue')]"
+                ))
+            )
+
+            print("Selected customer:", selected_customer.text)
 
         except Exception as e:
-            print(f" Could not select customer: {e}")
-
-
+            print(f"Could not select customer: {e}")
+            raise
 
     def Select_item(self, value="test"):
         d = self.driver
@@ -512,19 +543,53 @@ class Estimates:
             print(f"Error on Click : {e}")
 
 
+    # def Click_Enter_Notes(self):
+    #     driver = self.driver
+    #     wait = WebDriverWait(self.driver, 30)
+    #     try:
+    #
+    #         click_for_note = wait.until(EC.element_to_be_clickable(self.click_for_enter_note))
+    #         time.sleep(.2)
+    #         click_for_note.click()
+    #         time.sleep(2)
+    #         print("Click on enter notes  successfully....!!")
+    #     except Exception as e:
+    #
+    #         print(f"Error on Click : {e}")
+
     def Click_Enter_Notes(self):
         driver = self.driver
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(driver, 30)
+
         try:
+            click_for_note = wait.until(
+                EC.visibility_of_element_located(self.click_for_enter_note)
+            )
 
-            click_for_note = wait.until(EC.element_to_be_clickable(self.click_for_enter_note))
-            time.sleep(.2)
-            click_for_note.click()
-            time.sleep(2)
-            print("Click on enter notes  successfully....!!")
+            # Scroll element into visible area
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block: 'center'});",
+                click_for_note
+            )
+
+            try:
+                # Normal Selenium click
+                click_for_note.click()
+
+            except ElementClickInterceptedException:
+                print("Normal click intercepted. Trying JavaScript click...")
+
+                # Fallback click
+                driver.execute_script(
+                    "arguments[0].click();",
+                    click_for_note
+                )
+
+            print("Click on enter notes successfully....!!")
+
         except Exception as e:
-
             print(f"Error on Click : {e}")
+            raise
 
     def Enter_Notes(self):
         driver = self.driver

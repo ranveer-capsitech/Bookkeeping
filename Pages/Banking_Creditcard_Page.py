@@ -417,8 +417,7 @@ class Banking_Credit_card:
             time.sleep(0.2)
             active.send_keys(Keys.ARROW_DOWN)
             time.sleep(0.2)
-            # active.send_keys(Keys.ARROW_DOWN)
-            # time.sleep(0.2)
+
             active.send_keys(Keys.ENTER)
             time.sleep(0.2)
 

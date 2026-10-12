@@ -99,6 +99,7 @@ class Login(unittest.TestCase):
         client_section = ClientSell(driver=self.driver)
 
 
+
         # Create invoice
         client_section.Add_Invoice()
         time.sleep(.2)
@@ -164,7 +165,7 @@ class Login(unittest.TestCase):
         # Download invoice
 
         client_section.Download_Invoice()
-        time.sleep(.2)
+        time.sleep(.5)
 
         print("Invoice workflow completed successfully.")
 

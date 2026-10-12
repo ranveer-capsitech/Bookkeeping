@@ -268,30 +268,88 @@ class Purchase_Payment:
             print(f"Error on click:{e}")
 
 
+    # def Paid_To_Supplier(self):
+    #     d = self.driver
+    #     w = WebDriverWait(d, 30)
+    #
+    #     control = w.until(EC.element_to_be_clickable((
+    #         By.XPATH,
+    #         "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-control')][1]"
+    #     )))
+    #     d.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
+    #     control.click()
+    #     time.sleep(0.2)
+    #
+    #     rs_input = w.until(EC.element_to_be_clickable((
+    #         By.XPATH,
+    #         "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-input-container')]//input"
+    #     )))
+    #     rs_input.click()
+    #     time.sleep(0.2)
+    #     rs_input.send_keys(Keys.ARROW_DOWN)
+    #
+    #     time.sleep(0.2)
+    #     rs_input.send_keys(Keys.ENTER)
+    #     time.sleep(0.5)
+    #     print("Select Supplier successfully!")
+
     def Paid_To_Supplier(self):
         d = self.driver
         w = WebDriverWait(d, 30)
 
-        control = w.until(EC.element_to_be_clickable((
-            By.XPATH,
-            "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-control')][1]"
-        )))
-        d.execute_script("arguments[0].scrollIntoView({block:'center'});", control)
-        control.click()
-        time.sleep(0.2)
+        try:
+            # Step 1: Locate Paid to dropdown
+            rs_input = w.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    "//label[normalize-space()='Paid to']"
+                    "/following::input[@role='combobox'][1]"
+                ))
+            )
 
-        rs_input = w.until(EC.element_to_be_clickable((
-            By.XPATH,
-            "//label[normalize-space()='Paid to']/following::div[contains(@class,'rs-input-container')]//input"
-        )))
-        rs_input.click()
-        time.sleep(0.2)
-        rs_input.send_keys(Keys.ARROW_DOWN)
+            # Step 2: Scroll into view
+            d.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                rs_input
+            )
 
-        time.sleep(0.2)
-        rs_input.send_keys(Keys.ENTER)
-        time.sleep(0.5)
-        print("Select Supplier successfully!")
+            # Step 3: Open dropdown
+            rs_input.click()
+
+            print("Supplier dropdown opened successfully!")
+
+            # Step 4: Get React Select ID dynamically
+            input_id = rs_input.get_attribute("id")
+            select_prefix = input_id.removesuffix("-input")
+
+            # Step 5: Select first supplier
+            first_supplier = w.until(
+                EC.element_to_be_clickable((
+                    By.XPATH,
+                    f"//*[@id='{select_prefix}-option-0']"
+                ))
+            )
+
+            supplier_name = first_supplier.text.strip()
+
+            # Step 6: Click supplier
+            first_supplier.click()
+
+            # Step 7: Verify selected supplier
+            control = rs_input.find_element(
+                By.XPATH,
+                "./ancestor::div[contains(@class,'rs-control')][1]"
+            )
+
+            w.until(
+                lambda driver: supplier_name in control.text
+            )
+
+            print(f"Supplier selected successfully: {supplier_name}")
+
+        except Exception as e:
+            print(f"Could not select supplier: {e}")
+            raise
 
     def Paid_To_Supplier_Main(self):
         try:
