@@ -82,10 +82,18 @@ class Login(unittest.TestCase):
         client_section.Click_Input_Mileage()
         time.sleep(.2)
 
+
+        client_section.Mileages_Section()
+        time.sleep(.2)
+
         client_section.Click_Mileages()
         time.sleep(.2)
 
+        client_section.Click_Add_Mileage_Button()
+        time.sleep(.2)
+
         # Fill mileage details
+
         client_section.Select_Directors()
         time.sleep(.2)
         client_section.Enter_Remark_Mileages()

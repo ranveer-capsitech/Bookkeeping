@@ -78,7 +78,22 @@ class Mileage:
             "//div[contains(@class,'ms-NavItemName') "
             "and normalize-space()='Mileage']"
         )
-        self.click_add_mileages = (By.XPATH, "//button[@aria-label='btnAddMileageClaim']")
+        self.click_add_mileages = (
+            By.XPATH,
+            "//button[@role='tab' and @data-id='mileage-claims']"
+        )
+
+        self.click_add_mileage_button = (
+            By.XPATH,
+            "//button[@role='menuitem' and @name='Mileage' and .//span[normalize-space(.)='Mileage']]"
+        )
+
+
+
+
+
+
+
         self.select_directors_mileages = (By.XPATH,
                                           "//label[normalize-space()='User']/following::div[contains(@class,'rs-placeholder')][1]")
         self.enter_remark_mileages = (By.XPATH, "//label[normalize-space()='Remarks']/following::input[1]")
@@ -454,6 +469,7 @@ class Mileage:
             raise
 
 
+
     def Mileages_Section(self):
             try:
                 mileages_sec = WebDriverWait(self.driver, 30).until(
@@ -475,6 +491,27 @@ class Mileage:
                 print("Click on Mileages successfully....!!")
             except Exception as e:
                 print(f"Error on Click:{e}")
+
+    def Click_Add_Mileage_Button(self):
+        try:
+            wait = WebDriverWait(self.driver, 30)
+
+            add_mileage = wait.until(
+                EC.element_to_be_clickable(self.click_add_mileage_button)
+            )
+
+            self.driver.execute_script(
+                "arguments[0].scrollIntoView({block:'center'});",
+                add_mileage
+            )
+
+            add_mileage.click()
+
+            print("Click on Add Mileage successfully....!!")
+
+        except Exception as e:
+            print(f"Error clicking Add Mileage: {e}")
+            raise
 
     def Select_Directors(self):
 
